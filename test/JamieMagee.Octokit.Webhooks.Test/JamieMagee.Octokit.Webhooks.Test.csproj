@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\Source\Octokit.Webhooks\Octokit.Webhooks.csproj" />
+    <ProjectReference Include="..\..\src\JamieMagee.Octokit.Webhooks\JamieMagee.Octokit.Webhooks.csproj" />
   </ItemGroup>
 
   <ItemGroup>

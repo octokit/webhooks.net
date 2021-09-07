@@ -33,11 +33,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E1B24F25-B
 		test\Directory.Build.props = test\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{26F71F5B-2940-4FB0-9681-A76060CBCEF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{26F71F5B-2940-4FB0-9681-A76060CBCEF9}"
 	ProjectSection(SolutionItems) = preProject
-		Images\Banner.png = Images\Banner.png
-		Images\Hero.png = Images\Hero.png
-		Images\Icon.png = Images\Icon.png
+		images\Banner.png = images\Banner.png
+		images\Hero.png = images\Hero.png
+		images\Icon.png = images\Icon.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{566DF0E2-1288-4083-9B55-4C8B69BB1432}"
