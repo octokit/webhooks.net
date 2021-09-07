@@ -2,8 +2,8 @@
 
 # Project Title
 
-[![GitHub Actions Status](https://github.com/Username/Project/workflows/Build/badge.svg?branch=main)](https://github.com/Username/Project/actions) [![Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/Octokit.Webhooks)](https://www.nuget.org/packages/Octokit.Webhooks)
+[![GitHub Actions Status](https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/workflows/Build/badge.svg?branch=main)](https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/actions) [![Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/Octokit.Webhooks)](https://www.nuget.org/packages/Octokit.Webhooks)
 
-[![GitHub Actions Build History](https://buildstats.info/github/chart/Username/Project?branch=main&includeBuildsFromPullRequest=false)](https://github.com/Username/Project/actions)
+[![GitHub Actions Build History](https://buildstats.info/github/chart/JamieMagee/JamieMagee.Octokit.Webhooks?branch=main&includeBuildsFromPullRequest=false)](https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/actions)
 
 Project Description

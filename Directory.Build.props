@@ -14,11 +14,11 @@
     <Copyright>Copyright © Project Author. All rights Reserved</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Username/Project</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Username/Project.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/Username/Project/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

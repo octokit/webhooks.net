@@ -1,9 +1,9 @@
-﻿namespace Octokit.Webhooks.Test
+﻿namespace JamieMagee.Octokit.Webhooks.Test
 {
     using System.IO;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using Events.PullRequest;
+    using global::Octokit.Webhooks.Events.PullRequest;
     using Xunit;
 
     public class PullRequestTests
