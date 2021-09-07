@@ -47,11 +47,11 @@ jobs:
       - name: 'Dotnet Cake Pack'
         run: dotnet cake --target=Pack
         shell: pwsh
-      - name: 'Publish Artefacts'
+      - name: 'Publish artifacts'
         uses: actions/upload-artifact@v2.2.4
         with:
           name: ${{matrix.os}}
-          path: './Artefacts'
+          path: './artifacts'
 
   push-github-packages:
     name: 'Push GitHub Packages'
@@ -64,7 +64,7 @@ jobs:
       packages: write
     runs-on: windows-latest
     steps:
-      - name: 'Download Artefact'
+      - name: 'Download artifact'
         uses: actions/download-artifact@v2
         with:
           name: 'windows-latest'
@@ -84,7 +84,7 @@ jobs:
       url: https://www.nuget.org/packages/Octokit.Webhooks
     runs-on: windows-latest
     steps:
-      - name: 'Download Artefact'
+      - name: 'Download artifact'
         uses: actions/download-artifact@v2
         with:
           name: 'windows-latest'

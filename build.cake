@@ -4,7 +4,7 @@ var configuration =
     EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
     "Release";
 
-var artefactsDirectory = Directory("./Artefacts");
+var artefactsDirectory = Directory("./artifacts");
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")

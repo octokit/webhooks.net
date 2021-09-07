@@ -53,7 +53,7 @@ nunit-*.xml
 dlldata.c
 
 # Benchmark Results
-BenchmarkDotNet.Artifacts/
+BenchmarkDotNet.artifacts/
 
 # .NET Core
 project.lock.json
@@ -208,7 +208,7 @@ rcf/
 
 # Windows Store app package directories and files
 AppPackages/
-BundleArtifacts/
+Bundleartifacts/
 Package.StoreAssociation.xml
 _pkginfo.txt
 *.appx
@@ -287,10 +287,10 @@ node_modules/
 *.vbw
 
 # Visual Studio LightSwitch build output
-**/*.HTMLClient/GeneratedArtifacts
-**/*.DesktopClient/GeneratedArtifacts
+**/*.HTMLClient/Generatedartifacts
+**/*.DesktopClient/Generatedartifacts
 **/*.DesktopClient/ModelManifest.xml
-**/*.Server/GeneratedArtifacts
+**/*.Server/Generatedartifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
@@ -351,5 +351,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-Artefacts/
+artifacts/
 .idea/
