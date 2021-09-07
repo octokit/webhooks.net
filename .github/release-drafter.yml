@@ -48,5 +48,5 @@ autolabeler:
   - label: 'maintenance'
     files:
       - '.github/**/*'
-      - 'Images/**/*'
-      - 'Tests/**/*'
+      - 'images/**/*'
+      - 'test/**/*'
