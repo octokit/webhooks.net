@@ -4,8 +4,10 @@
 
     public class PullRequestEditedEventChanges
     {
-        [JsonPropertyName("body")] public PullRequestEditedEventChangesBody? Body { get; set; }
+        [JsonPropertyName("body")]
+        public PullRequestEditedEventChangesBody? Body { get; set; }
 
-        [JsonPropertyName("title")] public PullRequestEditedEventChangesTitle? Title { get; set; }
+        [JsonPropertyName("title")]
+        public PullRequestEditedEventChangesTitle? Title { get; set; }
     }
 }

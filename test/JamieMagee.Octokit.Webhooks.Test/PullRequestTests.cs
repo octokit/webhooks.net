@@ -1,18 +1,21 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Test
 {
+    using System;
     using System.IO;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using global::Octokit.Webhooks.Events.PullRequest;
+    using JamieMagee.Octokit.Webhooks.Test.Data;
     using Xunit;
 
     public class PullRequestTests
     {
-        [Fact]
-        public async Task PullRequestEvent_Created()
+        [Theory]
+        [ClassData(typeof(PullRequestData))]
+        public async Task PullRequestEvent(FileStream stream, Type type)
         {
-            var assigned = File.OpenRead("Resources/pull_request/assigned.payload.json");
-            var @event = await JsonSerializer.DeserializeAsync<PullRequestAssignedEvent>(assigned);
+            var @event = await JsonSerializer.DeserializeAsync(stream, type);
+
+            Assert.IsType(type, @event);
             Assert.NotNull(@event);
         }
     }

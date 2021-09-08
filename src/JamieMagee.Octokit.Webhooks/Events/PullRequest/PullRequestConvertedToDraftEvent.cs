@@ -4,6 +4,7 @@
 
     public class PullRequestConvertedToDraftEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "converted_to_draft";
+        [JsonPropertyName("action")]
+        public override string Action => "converted_to_draft";
     }
 }

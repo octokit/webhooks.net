@@ -4,8 +4,10 @@
 
     public class InstallationLite
     {
-        [JsonPropertyName("id")] public int Id { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
 
-        [JsonPropertyName("node_id")] public string NodeId { get; set; } = null!;
+        [JsonPropertyName("node_id")]
+        public string NodeId { get; set; } = null!;
     }
 }

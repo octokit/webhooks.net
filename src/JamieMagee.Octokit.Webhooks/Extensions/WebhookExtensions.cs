@@ -1,6 +1,6 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Extensions
 {
-    using Events;
+    using JamieMagee.Octokit.Webhooks.Events;
 
     public static class WebhookExtensions
     {

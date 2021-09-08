@@ -4,6 +4,7 @@
 
     public class PullRequestReopenedEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "reopened";
+        [JsonPropertyName("action")]
+        public override string Action => "reopened";
     }
 }

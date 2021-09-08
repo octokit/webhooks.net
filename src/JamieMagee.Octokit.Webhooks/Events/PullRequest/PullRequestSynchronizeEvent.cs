@@ -4,10 +4,13 @@
 
     public class PullRequestSynchronizeEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "opened";
+        [JsonPropertyName("action")]
+        public override string Action => "opened";
 
-        [JsonPropertyName("before")] public string Before { get; set; } = null!;
+        [JsonPropertyName("before")]
+        public string Before { get; set; } = null!;
 
-        [JsonPropertyName("after")] public string After { get; set; } = null!;
+        [JsonPropertyName("after")]
+        public string After { get; set; } = null!;
     }
 }

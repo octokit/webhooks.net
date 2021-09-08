@@ -4,6 +4,7 @@
 
     public class PullRequestLockedEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "locked";
+        [JsonPropertyName("action")]
+        public override string Action => "locked";
     }
 }

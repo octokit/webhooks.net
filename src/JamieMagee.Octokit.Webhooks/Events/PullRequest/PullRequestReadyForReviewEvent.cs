@@ -4,6 +4,7 @@
 
     public class PullRequestReadyForReviewEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "ready_for_review";
+        [JsonPropertyName("action")]
+        public override string Action => "ready_for_review";
     }
 }

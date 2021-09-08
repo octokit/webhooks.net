@@ -4,6 +4,7 @@
 
     public class PullRequestAutoMergeEnabledEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "auto_merge_enabled";
+        [JsonPropertyName("action")]
+        public override string Action => "auto_merge_enabled";
     }
 }

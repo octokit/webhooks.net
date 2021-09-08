@@ -4,6 +4,7 @@
 
     public class PullRequestEditedEventChangesBody
     {
-        [JsonPropertyName("from")] public string From { get; set; } = null!;
+        [JsonPropertyName("from")]
+        public string From { get; set; } = null!;
     }
 }

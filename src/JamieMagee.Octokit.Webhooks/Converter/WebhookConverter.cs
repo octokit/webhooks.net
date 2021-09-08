@@ -20,7 +20,7 @@
                 .ToList();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public override T?
             Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -42,7 +42,7 @@
             }
 
             var jsonObject = jsonDocument.RootElement.GetRawText();
-            var result = (T) JsonSerializer.Deserialize(jsonObject, type, options);
+            var result = (T)JsonSerializer.Deserialize(jsonObject, type, options);
 
             return result;
         }

@@ -4,6 +4,7 @@
 
     public class PullRequestClosedEvent : PullRequestEvent
     {
-        [JsonPropertyName("action")] public override string Action => "closed";
+        [JsonPropertyName("action")]
+        public override string Action => "closed";
     }
 }

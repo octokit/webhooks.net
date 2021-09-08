@@ -1,7 +1,7 @@
 ﻿namespace JamieMagee.Octokit.Webhooks
 {
     using System.Text.Json.Serialization;
-    using Converter;
+    using JamieMagee.Octokit.Webhooks.Converter;
     using JetBrains.Annotations;
 
     /// <summary>
