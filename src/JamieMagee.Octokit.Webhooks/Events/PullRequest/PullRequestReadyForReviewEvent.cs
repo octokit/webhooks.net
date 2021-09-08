@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestReadyForReviewEvent : PullRequestEvent
+    public sealed record PullRequestReadyForReviewEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "ready_for_review";

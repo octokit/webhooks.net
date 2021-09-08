@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestConvertedToDraftEvent : PullRequestEvent
+    public sealed record PullRequestConvertedToDraftEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "converted_to_draft";

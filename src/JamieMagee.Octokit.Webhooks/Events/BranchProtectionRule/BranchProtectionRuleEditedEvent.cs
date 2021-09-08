@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class BranchProtectionRuleEditedEvent : BranchProtectionRuleEvent
+    public sealed record BranchProtectionRuleEditedEvent : BranchProtectionRuleEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "edited";

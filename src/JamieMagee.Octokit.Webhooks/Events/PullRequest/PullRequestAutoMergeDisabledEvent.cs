@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestAutoMergeDisabledEvent : PullRequestEvent
+    public sealed record PullRequestAutoMergeDisabledEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "auto_merge_disabled";

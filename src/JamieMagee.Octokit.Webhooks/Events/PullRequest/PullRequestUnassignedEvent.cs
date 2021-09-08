@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
-    public class PullRequestUnassignedEvent : PullRequestEvent
+    public sealed record PullRequestUnassignedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "unassigned";

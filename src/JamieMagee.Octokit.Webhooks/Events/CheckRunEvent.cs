@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
-    public abstract class CheckRunEvent : WebhookEvent
+    public abstract record CheckRunEvent : WebhookEvent
     {
         [JsonPropertyName("check_run")]
         public Models.CheckRun CheckRun { get; set; } = null!;

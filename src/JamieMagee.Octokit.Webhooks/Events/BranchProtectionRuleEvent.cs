@@ -1,6 +1,6 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events
 {
-    public abstract class BranchProtectionRuleEvent : WebhookEvent
+    public abstract record BranchProtectionRuleEvent : WebhookEvent
     {
     }
 }

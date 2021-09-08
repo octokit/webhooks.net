@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public abstract class PullRequestEvent : WebhookEvent
+    public abstract record PullRequestEvent : WebhookEvent
     {
         [JsonPropertyName("number")]
         public int Number { get; set; }

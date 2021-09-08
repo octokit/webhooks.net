@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestReopenedEvent : PullRequestEvent
+    public sealed record PullRequestReopenedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "reopened";

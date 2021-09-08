@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestLockedEvent : PullRequestEvent
+    public sealed record PullRequestLockedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "locked";

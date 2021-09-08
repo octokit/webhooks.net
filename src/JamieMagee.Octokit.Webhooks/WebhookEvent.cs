@@ -9,7 +9,7 @@
     /// </summary>
     [PublicAPI]
     [JsonConverter(typeof(WebhookConverter<WebhookEvent>))]
-    public abstract class WebhookEvent
+    public abstract record WebhookEvent
     {
         /// <summary>
         /// </summary>

@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
-    public class BranchProtectionRuleCreatedEvent : BranchProtectionRuleEvent
+    public sealed record BranchProtectionRuleCreatedEvent : BranchProtectionRuleEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "created";

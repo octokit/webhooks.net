@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CheckRunCreatedEvent : CheckRunEvent
+    public sealed record CheckRunCreatedEvent : CheckRunEvent
     {
         [JsonPropertyName("action")]
         public override string Action => "created";
