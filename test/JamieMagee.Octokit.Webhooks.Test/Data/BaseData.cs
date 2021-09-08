@@ -1,4 +1,4 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Test
+﻿namespace JamieMagee.Octokit.Webhooks.Test.Data
 {
     using System;
     using System.IO;
