@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Extensions
+﻿namespace JamieMagee.Octokit.Webhooks.Extensions
 {
     using Events;
 

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models
+﻿namespace JamieMagee.Octokit.Webhooks.Models
 {
     using System.Text.Json.Serialization;
 

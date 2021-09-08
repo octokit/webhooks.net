@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Converter
+﻿namespace JamieMagee.Octokit.Webhooks.Converter
 {
     using System;
     using System.Collections.Generic;

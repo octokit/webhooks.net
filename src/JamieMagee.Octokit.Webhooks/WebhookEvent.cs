@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks
+﻿namespace JamieMagee.Octokit.Webhooks
 {
     using System.Text.Json.Serialization;
     using Converter;
