@@ -6,7 +6,7 @@
     public sealed record PullRequestLabeledEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "labeled";
+        public override string Action => PullRequestEventAction.Labeled;
 
         [JsonPropertyName("label")]
         public Label Label { get; set; } = null!;

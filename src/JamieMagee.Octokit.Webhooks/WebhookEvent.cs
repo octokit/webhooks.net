@@ -1,5 +1,6 @@
 ﻿namespace JamieMagee.Octokit.Webhooks
 {
+    using System.Text.Json;
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models;
@@ -14,7 +15,7 @@
         /// <summary>
         /// </summary>
         [JsonPropertyName("action")]
-        public abstract string Action { get; }
+        public virtual string Action { get; }
 
         [JsonPropertyName("repository")]
         public Repository Repository { get; set; } = null!;
@@ -27,5 +28,7 @@
 
         [JsonPropertyName("sender")]
         public User Sender { get; set; } = null!;
+
+        public static WebhookEvent? Parse(string json) => JsonSerializer.Deserialize<WebhookEvent>(json);
     }
 }

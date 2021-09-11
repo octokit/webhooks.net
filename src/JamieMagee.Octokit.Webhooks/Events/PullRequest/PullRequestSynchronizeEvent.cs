@@ -5,7 +5,7 @@
     public sealed record PullRequestSynchronizeEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "opened";
+        public override string Action => PullRequestEventAction.Synchronize;
 
         [JsonPropertyName("before")]
         public string Before { get; set; } = null!;

@@ -35,11 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E1B24F25-B
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{26F71F5B-2940-4FB0-9681-A76060CBCEF9}"
-	ProjectSection(SolutionItems) = preProject
-		images\Banner.png = images\Banner.png
-		images\Hero.png = images\Hero.png
-		images\Icon.png = images\Icon.png
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{566DF0E2-1288-4083-9B55-4C8B69BB1432}"
 	ProjectSection(SolutionItems) = preProject

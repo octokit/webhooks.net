@@ -5,7 +5,8 @@
 
     public class PullRequest
     {
-        [JsonPropertyName("body")] public string? Body;
+        [JsonPropertyName("body")]
+        public string? Body { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; } = null!;

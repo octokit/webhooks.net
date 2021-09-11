@@ -5,6 +5,6 @@
     public sealed record PullRequestConvertedToDraftEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "converted_to_draft";
+        public override string Action => PullRequestEventAction.ConvertedToDraft;
     }
 }

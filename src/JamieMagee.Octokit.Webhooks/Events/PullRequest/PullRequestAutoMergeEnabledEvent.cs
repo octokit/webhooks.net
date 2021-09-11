@@ -5,6 +5,6 @@
     public sealed record PullRequestAutoMergeEnabledEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "auto_merge_enabled";
+        public override string Action => PullRequestEventAction.AutoMergeEnabled;
     }
 }

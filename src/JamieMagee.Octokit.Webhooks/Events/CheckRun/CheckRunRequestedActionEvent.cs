@@ -5,6 +5,6 @@
     public sealed record CheckRunRequestedActionEvent : CheckRunEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "requested_action";
+        public override string Action => CheckRunEventAction.RequestedAction;
     }
 }

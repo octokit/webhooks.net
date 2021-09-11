@@ -5,6 +5,6 @@
     public sealed record PullRequestOpenedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "opened";
+        public override string Action => PullRequestEventAction.Opened;
     }
 }

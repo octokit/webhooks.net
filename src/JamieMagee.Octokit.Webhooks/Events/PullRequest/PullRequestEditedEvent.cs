@@ -6,7 +6,7 @@
     public sealed record PullRequestEditedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "edited";
+        public override string Action => PullRequestEventAction.Edited;
 
         [JsonPropertyName("changes")]
         public PullRequestEditedEventChanges Changes { get; set; } = null!;

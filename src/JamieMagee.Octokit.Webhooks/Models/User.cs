@@ -4,7 +4,8 @@
 
     public class User
     {
-        [JsonPropertyName("email")] public string? Email;
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
 
         [JsonPropertyName("login")]
         public string Login { get; set; } = null!;

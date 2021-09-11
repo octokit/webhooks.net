@@ -6,7 +6,7 @@
     public sealed record PullRequestUnassignedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "unassigned";
+        public override string Action => PullRequestEventAction.Unassigned;
 
         [JsonPropertyName("assignee")]
         public User Assignee { get; set; } = null!;

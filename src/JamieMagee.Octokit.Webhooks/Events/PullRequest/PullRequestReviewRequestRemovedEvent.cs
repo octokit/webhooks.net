@@ -6,7 +6,7 @@
     public sealed record PullRequestReviewRequestRemovedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "review_request_removed";
+        public override string Action => PullRequestEventAction.ReviewRequestedRemoved;
 
         [JsonPropertyName("requested_reviewer")]
         public User? RequestedReviewer { get; set; }
