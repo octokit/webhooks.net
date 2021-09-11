@@ -1,12 +1,12 @@
 # JamieMagee.Octokit.Webhooks
 
-[![GitHub Actions Status](https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/workflows/Build/badge.svg?branch=main)](https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/actions)
-[![Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/JamieMagee.Octokit.Webhooks)](https://www.nuget.org/packages/JamieMagee.Octokit.Webhooks)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JamieMagee/JamieMagee.Octokit.Webhooks/Build?style=for-the-badge)
+![JamieMagee.Octokit.Webhooks NuGet Package Version](https://img.shields.io/nuget/v/JamieMagee.Octokit.Webhooks?style=for-the-badge)
+![JamieMagee.Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/JamieMagee.Octokit.Webhooks?style=for-the-badge)
 
-Libraries to handle GitHub Webhooks in .NET applications
+Libraries to handle GitHub Webhooks in .NET applications.
 
 ## Usage in ASP.NET Core
-
 
 1. `dotnet add package JamieMagee.Octokit.Webhooks.AspNetCore`
 2. Create a class that derives from `WebhookEventProcessor` and override any of the virtual methods to handle webhooks from GitHub. For example, to handle Pull Request webhooks:
