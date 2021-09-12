@@ -2,12 +2,12 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestEditedEventChanges
+    public sealed record PullRequestEditedEventChanges
     {
         [JsonPropertyName("body")]
-        public PullRequestEditedEventChangesBody? Body { get; set; }
+        public PullRequestEditedEventChangesBody? Body { get; init; }
 
         [JsonPropertyName("title")]
-        public PullRequestEditedEventChangesTitle? Title { get; set; }
+        public PullRequestEditedEventChangesTitle? Title { get; init; }
     }
 }

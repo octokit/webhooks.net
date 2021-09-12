@@ -6,8 +6,11 @@
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum TeamPrivacy
     {
-        [EnumMember(Value = "Open")] Open,
-        [EnumMember(Value = "Closed")] Closed,
-        [EnumMember(Value = "Secret")] Secret
+        [EnumMember(Value = "Open")]
+        Open,
+        [EnumMember(Value = "Closed")]
+        Closed,
+        [EnumMember(Value = "Secret")]
+        Secret,
     }
 }

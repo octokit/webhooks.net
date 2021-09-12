@@ -6,9 +6,6 @@
     public sealed record BranchProtectionRuleCreatedEvent : BranchProtectionRuleEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "created";
-
-        [JsonPropertyName("rule")]
-        public BranchProtectionRule Rule { get; set; } = null!;
+        public override string Action => BranchProtectionRuleAction.Created;
     }
 }

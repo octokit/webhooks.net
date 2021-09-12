@@ -5,6 +5,6 @@
     public sealed record PullRequestReadyForReviewEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => PullRequestEventAction.ReadyForReview;
+        public override string Action => PullRequestAction.ReadyForReview;
     }
 }

@@ -2,15 +2,15 @@
 {
     using System.Text.Json.Serialization;
 
-    public class RepoRef
+    public sealed record RepoRef
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
     }
 }

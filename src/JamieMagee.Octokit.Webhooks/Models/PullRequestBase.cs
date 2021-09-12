@@ -2,21 +2,21 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestBase
+    public sealed record PullRequestBase
     {
         [JsonPropertyName("label")]
-        public string Label { get; set; } = null!;
+        public string Label { get; init; } = null!;
 
         [JsonPropertyName("ref")]
-        public string Ref { get; set; } = null!;
+        public string Ref { get; init; } = null!;
 
         [JsonPropertyName("sha")]
-        public string Sha { get; set; } = null!;
+        public string Sha { get; init; } = null!;
 
         [JsonPropertyName("user")]
-        public User User { get; set; } = null!;
+        public User User { get; init; } = null!;
 
         [JsonPropertyName("repo")]
-        public Repository Repo { get; set; } = null!;
+        public Repository Repo { get; init; } = null!;
     }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\BranchProtectionRule" />
     <Folder Include="Models\PullRequestEvent" />
   </ItemGroup>
 

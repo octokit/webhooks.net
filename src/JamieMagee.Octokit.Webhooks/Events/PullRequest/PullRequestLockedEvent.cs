@@ -5,6 +5,6 @@
     public sealed record PullRequestLockedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => PullRequestEventAction.Locked;
+        public override string Action => PullRequestAction.Locked;
     }
 }

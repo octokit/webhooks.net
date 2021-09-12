@@ -2,54 +2,54 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Milestone
+    public sealed record Milestone
     {
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; set; } = null!;
+        public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("labels_url")]
-        public string LabelsUrl { get; set; } = null!;
+        public string LabelsUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; set; } = null!;
+        public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; set; }
+        public int Number { get; init; }
 
         [JsonPropertyName("title")]
-        public string Title { get; set; } = null!;
+        public string Title { get; init; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
 
         [JsonPropertyName("creator")]
-        public User Creator { get; set; } = null!;
+        public User Creator { get; init; } = null!;
 
         [JsonPropertyName("open_issues")]
-        public int OpenIssues { get; set; }
+        public int OpenIssues { get; init; }
 
         [JsonPropertyName("closed_issues")]
-        public int ClosedIssues { get; set; }
+        public int ClosedIssues { get; init; }
 
         [JsonPropertyName("state")]
-        public MilestoneState State { get; set; }
+        public MilestoneState State { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; set; } = null!;
+        public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; set; } = null!;
+        public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("due_on")]
-        public string? DueOn { get; set; }
+        public string? DueOn { get; init; }
 
         [JsonPropertyName("closed_at")]
-        public string? ClosedAt { get; set; }
+        public string? ClosedAt { get; init; }
     }
 }

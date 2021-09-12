@@ -5,6 +5,6 @@
     public sealed record BranchProtectionRuleEditedEvent : BranchProtectionRuleEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => "edited";
+        public override string Action => BranchProtectionRuleAction.Edited;
     }
 }

@@ -7,6 +7,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.CheckSuite
         public const string Requested = "requested";
 
         public const string Rerequested = "rerequested";
-
     }
 }

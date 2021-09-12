@@ -2,45 +2,45 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Organization
+    public sealed record Organization
     {
         [JsonPropertyName("login")]
-        public string Login { get; set; } = null!;
+        public string Login { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; set; } = null!;
+        public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string? HtmlUrl { get; set; }
+        public string? HtmlUrl { get; init; }
 
         [JsonPropertyName("repos_url")]
-        public string ReposUrl { get; set; } = null!;
+        public string ReposUrl { get; init; } = null!;
 
         [JsonPropertyName("events_url")]
-        public string EventsUrl { get; set; } = null!;
+        public string EventsUrl { get; init; } = null!;
 
         [JsonPropertyName("hooks_url")]
-        public string HooksUrl { get; set; } = null!;
+        public string HooksUrl { get; init; } = null!;
 
         [JsonPropertyName("issues_url")]
-        public string IssuesUrl { get; set; } = null!;
+        public string IssuesUrl { get; init; } = null!;
 
         [JsonPropertyName("members_url")]
-        public string MembersUrl { get; set; } = null!;
+        public string MembersUrl { get; init; } = null!;
 
         [JsonPropertyName("public_members_url")]
-        public string PublicMembersUrl { get; set; } = null!;
+        public string PublicMembersUrl { get; init; } = null!;
 
         [JsonPropertyName("avatar_url")]
-        public string AvatarUrl { get; set; } = null!;
+        public string AvatarUrl { get; init; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
     }
 }

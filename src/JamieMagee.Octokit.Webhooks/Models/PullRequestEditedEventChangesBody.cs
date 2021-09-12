@@ -2,9 +2,9 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestEditedEventChangesBody
+    public sealed record PullRequestEditedEventChangesBody
     {
         [JsonPropertyName("from")]
-        public string From { get; set; } = null!;
+        public string From { get; init; } = null!;
     }
 }

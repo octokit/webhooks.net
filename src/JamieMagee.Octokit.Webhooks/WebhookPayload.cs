@@ -6,9 +6,9 @@
 
     public class WebhookPayload
     {
-        public WebhookHeaders Headers { get; set; }
+        public WebhookHeaders Headers { get; init; }
 
-        public WebhookEvent Body { get; set; }
+        public WebhookEvent Body { get; init; }
 
         public static WebhookPayload Parse(IDictionary<string, StringValues> headers, string body)
         {

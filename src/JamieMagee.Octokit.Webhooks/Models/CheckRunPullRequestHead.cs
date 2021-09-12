@@ -2,15 +2,15 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CheckRunPullRequestHead
+    public sealed record CheckRunPullRequestHead
     {
         [JsonPropertyName("ref")]
-        public string Ref { get; set; } = null!;
+        public string Ref { get; init; } = null!;
 
         [JsonPropertyName("sha")]
-        public string Sha { get; set; } = null!;
+        public string Sha { get; init; } = null!;
 
         [JsonPropertyName("repo")]
-        public RepoRef Repo { get; set; } = null!;
+        public RepoRef Repo { get; init; } = null!;
     }
 }

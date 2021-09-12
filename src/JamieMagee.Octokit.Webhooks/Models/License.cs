@@ -2,21 +2,21 @@
 {
     using System.Text.Json.Serialization;
 
-    public class License
+    public sealed record License
     {
         [JsonPropertyName("key")]
-        public string Key { get; set; } = null!;
+        public string Key { get; init; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
         [JsonPropertyName("spdx_id")]
-        public string SpdxId { get; set; } = null!;
+        public string SpdxId { get; init; } = null!;
 
         [JsonPropertyName("url")]
-        public string? Url { get; set; }
+        public string? Url { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; set; } = null!;
+        public string NodeId { get; init; } = null!;
     }
 }

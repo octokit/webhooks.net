@@ -6,7 +6,9 @@
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum MilestoneState
     {
-        [EnumMember(Value = "open")] Open,
-        [EnumMember(Value = "closed")] Closed
+        [EnumMember(Value = "open")]
+        Open,
+        [EnumMember(Value = "closed")]
+        Closed,
     }
 }

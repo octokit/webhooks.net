@@ -6,9 +6,9 @@
     public sealed record PullRequestAssignedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]
-        public override string Action => PullRequestEventAction.Assigned;
+        public override string Action => PullRequestAction.Assigned;
 
         [JsonPropertyName("assignee")]
-        public User Assignee { get; set; } = null!;
+        public User Assignee { get; init; } = null!;
     }
 }

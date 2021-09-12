@@ -6,8 +6,11 @@
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum UserType
     {
-        [EnumMember(Value = "Bot")] Bot,
-        [EnumMember(Value = "User")] User,
-        [EnumMember(Value = "Organization")] Organization
+        [EnumMember(Value = "Bot")]
+        Bot,
+        [EnumMember(Value = "User")]
+        User,
+        [EnumMember(Value = "Organization")]
+        Organization,
     }
 }
