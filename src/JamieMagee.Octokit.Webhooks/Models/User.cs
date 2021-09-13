@@ -4,14 +4,20 @@
 
     public sealed record User
     {
-        [JsonPropertyName("email")]
-        public string? Email { get; init; }
-
         [JsonPropertyName("login")]
         public string Login { get; init; } = null!;
 
+        [JsonPropertyName("id")]
+        public int Id { get; init; }
+
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
+
+        [JsonPropertyName("name")]
+        public string? Name { get; init; }
+
+        [JsonPropertyName("email")]
+        public string? Email { get; init; }
 
         [JsonPropertyName("avatar_url")]
         public string AvatarUrl { get; init; } = null!;
@@ -51,12 +57,6 @@
 
         [JsonPropertyName("received_events_url")]
         public string ReceivedEventsUrl { get; init; } = null!;
-
-        [JsonPropertyName("id")]
-        public int Id { get; init; }
-
-        [JsonPropertyName("name")]
-        public string? Name { get; init; }
 
         [JsonPropertyName("type")]
         public UserType Type { get; init; }
