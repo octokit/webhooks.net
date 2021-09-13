@@ -8,18 +8,18 @@
     public abstract record WebhookEvent
     {
         [JsonPropertyName("action")]
-        public virtual string Action { get; set; }
+        public virtual string Action { get; init; }
 
         [JsonPropertyName("repository")]
-        public Repository Repository { get; set; } = null!;
+        public Repository Repository { get; init; } = null!;
 
         [JsonPropertyName("installation")]
-        public InstallationLite? Installation { get; set; }
+        public InstallationLite? Installation { get; init; }
 
         [JsonPropertyName("organization")]
-        public Organization? Organization { get; set; }
+        public Organization? Organization { get; init; }
 
         [JsonPropertyName("sender")]
-        public User Sender { get; set; } = null!;
+        public User Sender { get; init; } = null!;
     }
 }

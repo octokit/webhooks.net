@@ -5,18 +5,18 @@
     public sealed record CheckRunOutput
     {
         [JsonPropertyName("title")]
-        public string? Title { get; set; }
+        public string? Title { get; init; }
 
         [JsonPropertyName("summary")]
-        public string? Summary { get; set; }
+        public string? Summary { get; init; }
 
         [JsonPropertyName("text")]
-        public string? Text { get; set; }
+        public string? Text { get; init; }
 
         [JsonPropertyName("annotations_count")]
-        public int AnnotationsCount { get; set; }
+        public int AnnotationsCount { get; init; }
 
         [JsonPropertyName("annotations_url")]
-        public string AnnotationsUrl { get; set; } = null!;
+        public string AnnotationsUrl { get; init; } = null!;
     }
 }

@@ -5,24 +5,24 @@
     public sealed record Label
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; set; } = null!;
+        public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
 
         [JsonPropertyName("color")]
-        public string Color { get; set; } = null!;
+        public string Color { get; init; } = null!;
 
         [JsonPropertyName("default")]
-        public bool Default { get; set; }
+        public bool Default { get; init; }
     }
 }

@@ -5,21 +5,21 @@
     public sealed record SimpleCommit
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; } = null!;
+        public string Id { get; init; } = null!;
 
         [JsonPropertyName("tree_id")]
-        public string TreeId { get; set; } = null!;
+        public string TreeId { get; init; } = null!;
 
         [JsonPropertyName("message")]
-        public string Message { get; set; } = null!;
+        public string Message { get; init; } = null!;
 
         [JsonPropertyName("timestamp")]
-        public string Timestamp { get; set; } = null!;
+        public string Timestamp { get; init; } = null!;
 
         [JsonPropertyName("author")]
-        public Committer Author { get; set; } = null!;
+        public Committer Author { get; init; } = null!;
 
         [JsonPropertyName("committer")]
-        public Committer Committer { get; set; } = null!;
+        public Committer Committer { get; init; } = null!;
     }
 }

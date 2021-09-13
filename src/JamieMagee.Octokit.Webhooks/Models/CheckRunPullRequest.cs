@@ -6,18 +6,18 @@
     public sealed record CheckRunPullRequest
     {
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("number")]
-        public int Number { get; set; }
+        public int Number { get; init; }
 
         [JsonPropertyName("head")]
-        public CheckRunPullRequestHead Head { get; set; } = null!;
+        public CheckRunPullRequestHead Head { get; init; } = null!;
 
         [JsonPropertyName("base")]
-        public CheckRunPullRequestBase Base { get; set; } = null!;
+        public CheckRunPullRequestBase Base { get; init; } = null!;
     }
 }

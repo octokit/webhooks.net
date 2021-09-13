@@ -5,249 +5,249 @@
     public sealed record Repository
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; set; } = null!;
+        public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; init; } = null!;
 
         [JsonPropertyName("full_name")]
-        public string FullName { get; set; } = null!;
+        public string FullName { get; init; } = null!;
 
         [JsonPropertyName("private")]
-        public bool Private { get; set; }
+        public bool Private { get; init; }
 
         [JsonPropertyName("owner")]
-        public User Owner { get; set; } = null!;
+        public User Owner { get; init; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; set; } = null!;
+        public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        public string? Description { get; init; }
 
         [JsonPropertyName("fork")]
-        public bool Fork { get; set; }
+        public bool Fork { get; init; }
 
         [JsonPropertyName("url")]
-        public string Url { get; set; } = null!;
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("forks_url")]
-        public string ForksUrl { get; set; } = null!;
+        public string ForksUrl { get; init; } = null!;
 
         [JsonPropertyName("keys_url")]
-        public string KeysUrl { get; set; } = null!;
+        public string KeysUrl { get; init; } = null!;
 
         [JsonPropertyName("collaborators_url")]
-        public string CollaboratorsUrl { get; set; } = null!;
+        public string CollaboratorsUrl { get; init; } = null!;
 
         [JsonPropertyName("teams_url")]
-        public string TeamsUrl { get; set; } = null!;
+        public string TeamsUrl { get; init; } = null!;
 
         [JsonPropertyName("hooks_url")]
-        public string HooksUrl { get; set; } = null!;
+        public string HooksUrl { get; init; } = null!;
 
         [JsonPropertyName("issue_events_url")]
-        public string IssueEventsUrl { get; set; } = null!;
+        public string IssueEventsUrl { get; init; } = null!;
 
         [JsonPropertyName("events_url")]
-        public string EventsUrl { get; set; } = null!;
+        public string EventsUrl { get; init; } = null!;
 
         [JsonPropertyName("assignees_url")]
-        public string AssigneesUrl { get; set; } = null!;
+        public string AssigneesUrl { get; init; } = null!;
 
         [JsonPropertyName("branches_url")]
-        public string BranchesUrl { get; set; } = null!;
+        public string BranchesUrl { get; init; } = null!;
 
         [JsonPropertyName("tags_url")]
-        public string TagsUrl { get; set; } = null!;
+        public string TagsUrl { get; init; } = null!;
 
         [JsonPropertyName("blobs_url")]
-        public string BlobsUrl { get; set; } = null!;
+        public string BlobsUrl { get; init; } = null!;
 
         [JsonPropertyName("git_tags_url")]
-        public string GitTagsUrl { get; set; } = null!;
+        public string GitTagsUrl { get; init; } = null!;
 
         [JsonPropertyName("git_refs_url")]
-        public string GitRefsUrl { get; set; } = null!;
+        public string GitRefsUrl { get; init; } = null!;
 
         [JsonPropertyName("trees_url")]
-        public string TreesUrl { get; set; } = null!;
+        public string TreesUrl { get; init; } = null!;
 
         [JsonPropertyName("statuses_url")]
-        public string StatusesUrl { get; set; } = null!;
+        public string StatusesUrl { get; init; } = null!;
 
         [JsonPropertyName("languages_url")]
-        public string LanguagesUrl { get; set; } = null!;
+        public string LanguagesUrl { get; init; } = null!;
 
         [JsonPropertyName("stargazers_url")]
-        public string StargazersUrl { get; set; } = null!;
+        public string StargazersUrl { get; init; } = null!;
 
         [JsonPropertyName("contributors_url")]
-        public string ContributorsUrl { get; set; } = null!;
+        public string ContributorsUrl { get; init; } = null!;
 
         [JsonPropertyName("subscribers_url")]
-        public string SubscribersUrl { get; set; } = null!;
+        public string SubscribersUrl { get; init; } = null!;
 
         [JsonPropertyName("subscription_url")]
-        public string SubscriptionUrl { get; set; } = null!;
+        public string SubscriptionUrl { get; init; } = null!;
 
         [JsonPropertyName("commits_url")]
-        public string CommitsUrl { get; set; } = null!;
+        public string CommitsUrl { get; init; } = null!;
 
         [JsonPropertyName("git_commits_url")]
-        public string GitCommitsUrl { get; set; } = null!;
+        public string GitCommitsUrl { get; init; } = null!;
 
         [JsonPropertyName("comments_url")]
-        public string CommentsUrl { get; set; } = null!;
+        public string CommentsUrl { get; init; } = null!;
 
         [JsonPropertyName("issue_comment_url")]
-        public string IssueCommentUrl { get; set; } = null!;
+        public string IssueCommentUrl { get; init; } = null!;
 
         [JsonPropertyName("contents_url")]
-        public string ContentsUrl { get; set; } = null!;
+        public string ContentsUrl { get; init; } = null!;
 
         [JsonPropertyName("compare_url")]
-        public string CompareUrl { get; set; } = null!;
+        public string CompareUrl { get; init; } = null!;
 
         [JsonPropertyName("merges_url")]
-        public string MergesUrl { get; set; } = null!;
+        public string MergesUrl { get; init; } = null!;
 
         [JsonPropertyName("archive_url")]
-        public string ArchiveUrl { get; set; } = null!;
+        public string ArchiveUrl { get; init; } = null!;
 
         [JsonPropertyName("downloads_url")]
-        public string DownloadsUrl { get; set; } = null!;
+        public string DownloadsUrl { get; init; } = null!;
 
         [JsonPropertyName("issues_url")]
-        public string IssuesUrl { get; set; } = null!;
+        public string IssuesUrl { get; init; } = null!;
 
         [JsonPropertyName("pulls_url")]
-        public string PullsUrl { get; set; } = null!;
+        public string PullsUrl { get; init; } = null!;
 
         [JsonPropertyName("milestones_url")]
-        public string MilestonesUrl { get; set; } = null!;
+        public string MilestonesUrl { get; init; } = null!;
 
         [JsonPropertyName("notifications_url")]
-        public string NotificationsUrl { get; set; } = null!;
+        public string NotificationsUrl { get; init; } = null!;
 
         [JsonPropertyName("labels_url")]
-        public string LabelsUrl { get; set; } = null!;
+        public string LabelsUrl { get; init; } = null!;
 
         [JsonPropertyName("releases_url")]
-        public string ReleasesUrl { get; set; } = null!;
+        public string ReleasesUrl { get; init; } = null!;
 
         [JsonPropertyName("deployments_url")]
-        public string DeploymentsUrl { get; set; } = null!;
+        public string DeploymentsUrl { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string? CreatedAt { get; set; }
+        public string? CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; set; } = null!;
+        public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("pushed_at")]
-        public string? PushedAt { get; set; }
+        public string? PushedAt { get; init; }
 
         [JsonPropertyName("git_url")]
-        public string GitUrl { get; set; } = null!;
+        public string GitUrl { get; init; } = null!;
 
         [JsonPropertyName("ssh_url")]
-        public string SshUrl { get; set; } = null!;
+        public string SshUrl { get; init; } = null!;
 
         [JsonPropertyName("clone_url")]
-        public string CloneUrl { get; set; } = null!;
+        public string CloneUrl { get; init; } = null!;
 
         [JsonPropertyName("svn_url")]
-        public string SvnUrl { get; set; } = null!;
+        public string SvnUrl { get; init; } = null!;
 
         [JsonPropertyName("homepage")]
-        public string? Homepage { get; set; }
+        public string? Homepage { get; init; }
 
         [JsonPropertyName("size")]
-        public int Size { get; set; }
+        public int Size { get; init; }
 
         [JsonPropertyName("stargazers_count")]
-        public int StargazersCount { get; set; }
+        public int StargazersCount { get; init; }
 
         [JsonPropertyName("watchers_count")]
-        public int WatchersCount { get; set; }
+        public int WatchersCount { get; init; }
 
         [JsonPropertyName("language")]
-        public string? Language { get; set; }
+        public string? Language { get; init; }
 
         [JsonPropertyName("has_issues")]
-        public bool HasIssues { get; set; }
+        public bool HasIssues { get; init; }
 
         [JsonPropertyName("has_projects")]
-        public bool HasProjects { get; set; }
+        public bool HasProjects { get; init; }
 
         [JsonPropertyName("has_downloads")]
-        public bool HasDownloads { get; set; }
+        public bool HasDownloads { get; init; }
 
         [JsonPropertyName("has_wiki")]
-        public bool HasWiki { get; set; }
+        public bool HasWiki { get; init; }
 
         [JsonPropertyName("has_pages")]
-        public bool HasPages { get; set; }
+        public bool HasPages { get; init; }
 
         [JsonPropertyName("forks_count")]
-        public int ForksCount { get; set; }
+        public int ForksCount { get; init; }
 
         [JsonPropertyName("mirror_url")]
-        public string? MirrorUrl { get; set; }
+        public string? MirrorUrl { get; init; }
 
         [JsonPropertyName("archived")]
-        public bool Archived { get; set; }
+        public bool Archived { get; init; }
 
         [JsonPropertyName("disabled")]
-        public bool? Disabled { get; set; }
+        public bool? Disabled { get; init; }
 
         [JsonPropertyName("open_issues_count")]
-        public int OpenIssuesCount { get; set; }
+        public int OpenIssuesCount { get; init; }
 
         [JsonPropertyName("license")]
-        public License? License { get; set; }
+        public License? License { get; init; }
 
         [JsonPropertyName("forks")]
-        public int Forks { get; set; }
+        public int Forks { get; init; }
 
         [JsonPropertyName("open_issues")]
-        public int OpenIssues { get; set; }
+        public int OpenIssues { get; init; }
 
         [JsonPropertyName("watchers")]
-        public int Watchers { get; set; }
+        public int Watchers { get; init; }
 
         [JsonPropertyName("stargazers")]
-        public int? Stargazers { get; set; }
+        public int? Stargazers { get; init; }
 
         [JsonPropertyName("default_branch")]
-        public string DefaultBranch { get; set; } = null!;
+        public string DefaultBranch { get; init; } = null!;
 
         [JsonPropertyName("allow_squash_merge")]
-        public bool? AllowSquashMerge { get; set; }
+        public bool? AllowSquashMerge { get; init; }
 
         [JsonPropertyName("allow_merge_commit")]
-        public bool? AllowMergeCommit { get; set; }
+        public bool? AllowMergeCommit { get; init; }
 
         [JsonPropertyName("allow_rebase_merge")]
-        public bool? AllowRebaseMerge { get; set; }
+        public bool? AllowRebaseMerge { get; init; }
 
         [JsonPropertyName("delete_branch_on_merge")]
-        public bool? DeleteBranchOnMerge { get; set; }
+        public bool? DeleteBranchOnMerge { get; init; }
 
         [JsonPropertyName("master_branch")]
-        public string? MasterBranch { get; set; }
+        public string? MasterBranch { get; init; }
 
         [JsonPropertyName("permissions")]
-        public RepositoryPermissions Permissions { get; set; } = null!;
+        public RepositoryPermissions Permissions { get; init; } = null!;
 
         [JsonPropertyName("public")]
-        public bool? Public { get; set; }
+        public bool? Public { get; init; }
 
         [JsonPropertyName("organization")]
-        public string Organization { get; set; } = null!;
+        public string Organization { get; init; } = null!;
     }
 }

@@ -5,6 +5,6 @@
     public sealed record RequestedAction
     {
         [JsonPropertyName("identifier")]
-        public string? Identifier { get; set; }
+        public string? Identifier { get; init; }
     }
 }

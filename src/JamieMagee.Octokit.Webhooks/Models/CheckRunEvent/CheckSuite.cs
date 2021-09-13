@@ -6,45 +6,45 @@
     public sealed record CheckSuite
     {
         [JsonPropertyName("id")]
-        public int Id { get; set; }
+        public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string? NodeId { get; set; }
+        public string? NodeId { get; init; }
 
         [JsonPropertyName("head_branch")]
-        public string? HeadBranch { get; set; }
+        public string? HeadBranch { get; init; }
 
         [JsonPropertyName("head_sha")]
-        public string HeadSha { get; set; } = null!;
+        public string HeadSha { get; init; } = null!;
 
         [JsonPropertyName("status")]
-        public CheckSuiteStatus Status { get; set; }
+        public CheckSuiteStatus Status { get; init; }
 
         [JsonPropertyName("conclusion")]
-        public CheckSuiteConclusion? Conclusion { get; set; }
+        public CheckSuiteConclusion? Conclusion { get; init; }
 
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string Url { get; init; }
 
         [JsonPropertyName("before")]
-        public string? Before { get; set; }
+        public string? Before { get; init; }
 
         [JsonPropertyName("after")]
-        public string? After { get; set; }
+        public string? After { get; init; }
 
         [JsonPropertyName("pull_requests")]
-        public IEnumerable<CheckRunPullRequest> PullRequests { get; set; } = null!;
+        public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
 
         [JsonPropertyName("deployment")]
-        public CheckRunDeployment? Deployment { get; set; }
+        public CheckRunDeployment? Deployment { get; init; }
 
         [JsonPropertyName("app")]
-        public App App { get; set; } = null!;
+        public App App { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; set; }
+        public string CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; set; }
+        public string UpdatedAt { get; init; }
     }
 }

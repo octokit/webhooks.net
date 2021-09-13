@@ -5,27 +5,27 @@
     public sealed record PullRequestLinks
     {
         [JsonPropertyName("self")]
-        public Link Self { get; set; } = null!;
+        public Link Self { get; init; } = null!;
 
         [JsonPropertyName("html")]
-        public Link Html { get; set; } = null!;
+        public Link Html { get; init; } = null!;
 
         [JsonPropertyName("issue")]
-        public Link Issue { get; set; } = null!;
+        public Link Issue { get; init; } = null!;
 
         [JsonPropertyName("comments")]
-        public Link Comments { get; set; } = null!;
+        public Link Comments { get; init; } = null!;
 
         [JsonPropertyName("review_comments")]
-        public Link ReviewComments { get; set; } = null!;
+        public Link ReviewComments { get; init; } = null!;
 
         [JsonPropertyName("review_comment")]
-        public Link ReviewComment { get; set; } = null!;
+        public Link ReviewComment { get; init; } = null!;
 
         [JsonPropertyName("commits")]
-        public Link Commits { get; set; } = null!;
+        public Link Commits { get; init; } = null!;
 
         [JsonPropertyName("statuses")]
-        public Link Statuses { get; set; } = null!;
+        public Link Statuses { get; init; } = null!;
     }
 }

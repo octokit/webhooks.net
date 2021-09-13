@@ -5,6 +5,6 @@
     public sealed record PullRequestEditedEventChangesTitle
     {
         [JsonPropertyName("from")]
-        public string From { get; set; } = null!;
+        public string From { get; init; } = null!;
     }
 }
