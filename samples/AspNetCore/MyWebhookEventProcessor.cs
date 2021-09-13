@@ -1,16 +1,15 @@
 ﻿namespace AspNetCore
 {
-    using System.Text.Json;
     using JamieMagee.Octokit.Webhooks;
     using JamieMagee.Octokit.Webhooks.Events;
     using JamieMagee.Octokit.Webhooks.Events.PullRequest;
     using Microsoft.Extensions.Logging;
 
-    public class MyWebhookProcessor : WebhookProcessor
+    public class MyWebhookEventProcessor : WebhookEventProcessor
     {
-        private readonly ILogger<MyWebhookProcessor> logger;
+        private readonly ILogger<MyWebhookEventProcessor> logger;
 
-        public MyWebhookProcessor(ILogger<MyWebhookProcessor> logger)
+        public MyWebhookEventProcessor(ILogger<MyWebhookEventProcessor> logger)
         {
             this.logger = logger;
         }

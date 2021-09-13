@@ -9,7 +9,7 @@ namespace AspNetCore
 
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services) => services.AddSingleton<WebhookProcessor, MyWebhookProcessor>();
+        public void ConfigureServices(IServiceCollection services) => services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -35,7 +35,7 @@
                 // Process body
                 try
                 {
-                    var service = context.RequestServices.GetRequiredService<WebhookProcessor>();
+                    var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
                     service.ProcessWebhook(context.Request.Headers, body);
                     context.Response.StatusCode = 200;
                 }

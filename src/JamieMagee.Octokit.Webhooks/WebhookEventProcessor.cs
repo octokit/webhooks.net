@@ -50,7 +50,7 @@
     using JetBrains.Annotations;
     using Microsoft.Extensions.Primitives;
 
-    public abstract class WebhookProcessor
+    public abstract class WebhookEventProcessor
     {
         [PublicAPI]
         public virtual void ProcessWebhook(IDictionary<string, StringValues> headers, string body)
