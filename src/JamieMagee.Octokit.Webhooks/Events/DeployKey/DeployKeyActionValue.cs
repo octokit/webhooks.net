@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.DeployKey
         public const string Created = "created";
 
         public const string Deleted = "deleted";
-
     }
 }

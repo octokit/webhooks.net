@@ -7,6 +7,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.SecretScanningAlert
         public const string Reopened = "reopened";
 
         public const string Resolved = "resolved";
-
     }
 }

@@ -7,6 +7,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.IssueComment
         public const string Deleted = "deleted";
 
         public const string Edited = "edited";
-
     }
 }

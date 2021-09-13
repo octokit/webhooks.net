@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Team
         public const string Edited = "edited";
 
         public const string RemovedFromRepository = "removed_from_repository";
-
     }
 }

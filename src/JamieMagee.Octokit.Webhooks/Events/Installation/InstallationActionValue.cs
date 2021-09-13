@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Installation
         public const string Suspend = "suspend";
 
         public const string Unsuspend = "unsuspend";
-
     }
 }

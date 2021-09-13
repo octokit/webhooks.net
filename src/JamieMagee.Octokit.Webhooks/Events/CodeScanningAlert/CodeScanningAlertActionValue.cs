@@ -13,6 +13,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.CodeScanningAlert
         public const string Reopened = "reopened";
 
         public const string ReopenedByUser = "reopened_by_user";
-
     }
 }

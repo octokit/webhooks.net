@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Organization
         public const string MemberRemoved = "member_removed";
 
         public const string Renamed = "renamed";
-
     }
 }

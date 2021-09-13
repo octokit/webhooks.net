@@ -35,6 +35,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.PullRequest
         public const string Unlabeled = "unlabeled";
 
         public const string Unlocked = "unlocked";
-
     }
 }

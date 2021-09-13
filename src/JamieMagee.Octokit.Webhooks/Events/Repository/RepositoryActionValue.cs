@@ -19,6 +19,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Repository
         public const string Transferred = "transferred";
 
         public const string Unarchived = "unarchived";
-
     }
 }

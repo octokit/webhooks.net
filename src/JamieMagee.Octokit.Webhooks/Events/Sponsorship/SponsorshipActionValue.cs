@@ -13,6 +13,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Sponsorship
         public const string PendingTierChange = "pending_tier_change";
 
         public const string TierChanged = "tier_changed";
-
     }
 }

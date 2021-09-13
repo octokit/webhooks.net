@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Project
         public const string Edited = "edited";
 
         public const string Reopened = "reopened";
-
     }
 }

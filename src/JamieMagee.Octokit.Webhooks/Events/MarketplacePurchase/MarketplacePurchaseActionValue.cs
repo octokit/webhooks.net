@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.MarketplacePurchase
         public const string PendingChangeCancelled = "pending_change_cancelled";
 
         public const string Purchased = "purchased";
-
     }
 }

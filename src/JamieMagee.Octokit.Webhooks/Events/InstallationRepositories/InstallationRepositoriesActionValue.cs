@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.InstallationRepositories
         public const string Added = "added";
 
         public const string Removed = "removed";
-
     }
 }

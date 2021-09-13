@@ -7,6 +7,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.PullRequestReview
         public const string Edited = "edited";
 
         public const string Submitted = "submitted";
-
     }
 }

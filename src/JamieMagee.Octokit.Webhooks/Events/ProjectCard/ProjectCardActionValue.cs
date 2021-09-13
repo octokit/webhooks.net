@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.ProjectCard
         public const string Edited = "edited";
 
         public const string Moved = "moved";
-
     }
 }

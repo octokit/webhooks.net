@@ -15,6 +15,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Release
         public const string Released = "released";
 
         public const string Unpublished = "unpublished";
-
     }
 }

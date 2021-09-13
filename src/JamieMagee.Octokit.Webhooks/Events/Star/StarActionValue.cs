@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Star
         public const string Created = "created";
 
         public const string Deleted = "deleted";
-
     }
 }

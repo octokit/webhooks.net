@@ -33,6 +33,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Issues
         public const string Unlocked = "unlocked";
 
         public const string Unpinned = "unpinned";
-
     }
 }

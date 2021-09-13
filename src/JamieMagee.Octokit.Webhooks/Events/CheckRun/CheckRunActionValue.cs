@@ -9,6 +9,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.CheckRun
         public const string RequestedAction = "requested_action";
 
         public const string Rerequested = "rerequested";
-
     }
 }

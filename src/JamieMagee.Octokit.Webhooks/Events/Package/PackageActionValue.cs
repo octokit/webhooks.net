@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Package
         public const string Published = "published";
 
         public const string Updated = "updated";
-
     }
 }

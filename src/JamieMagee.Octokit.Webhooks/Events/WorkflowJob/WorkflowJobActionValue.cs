@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.WorkflowJob
         public const string Completed = "completed";
 
         public const string Started = "started";
-
     }
 }

@@ -9,6 +9,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.SecurityAdvisory
         public const string Updated = "updated";
 
         public const string Withdrawn = "withdrawn";
-
     }
 }

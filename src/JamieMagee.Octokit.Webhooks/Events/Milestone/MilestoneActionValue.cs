@@ -11,6 +11,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.Milestone
         public const string Edited = "edited";
 
         public const string Opened = "opened";
-
     }
 }

@@ -5,6 +5,5 @@ namespace JamieMagee.Octokit.Webhooks.Events.OrgBlock
         public const string Blocked = "blocked";
 
         public const string Unblocked = "unblocked";
-
     }
 }
