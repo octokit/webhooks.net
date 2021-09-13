@@ -5,12 +5,12 @@
     public sealed record RepoRef
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+        public string Url { get; set; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
+        public string Name { get; set; } = null!;
     }
 }

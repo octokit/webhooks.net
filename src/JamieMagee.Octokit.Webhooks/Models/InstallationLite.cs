@@ -5,9 +5,9 @@
     public sealed record InstallationLite
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+        public string NodeId { get; set; } = null!;
     }
 }

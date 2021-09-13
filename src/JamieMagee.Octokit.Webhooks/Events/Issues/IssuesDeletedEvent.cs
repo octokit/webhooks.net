@@ -3,6 +3,7 @@ namespace JamieMagee.Octokit.Webhooks.Events.Issues
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
+    [WebhookActionType(IssuesActionValue.Deleted)]
     public sealed record IssuesDeletedEvent : IssuesEvent
     {
         [JsonPropertyName("action")]

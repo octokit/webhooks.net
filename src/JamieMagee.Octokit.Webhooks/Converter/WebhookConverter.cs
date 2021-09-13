@@ -6,23 +6,24 @@
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
-    public class WebhookConverter<T> : JsonConverter<T>
+    internal class WebhookConverter<T> : JsonConverter<T>
         where T : WebhookEvent
     {
-        private readonly IEnumerable<Type> types;
+        private readonly IDictionary<string, Type> types;
 
         public WebhookConverter()
         {
             var type = typeof(T);
             this.types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p) && p.IsClass && !p.IsAbstract)
-                .ToList();
+                .SelectMany(x => x.GetTypes())
+                .Where(x => type.IsAssignableFrom(x) && x.IsClass && !x.IsAbstract &&
+                            Attribute.GetCustomAttribute(x, typeof(WebhookActionTypeAttribute)) is not null)
+                .ToDictionary(
+                    y => ((WebhookActionTypeAttribute)Attribute.GetCustomAttribute(y, typeof(WebhookActionTypeAttribute))!)!.ActionType,
+                    y => y);
         }
 
-        /// <inheritdoc />
-        public override T?
-            Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -30,26 +31,24 @@
             }
 
             using var jsonDocument = JsonDocument.ParseValue(ref reader);
-            if (!jsonDocument.RootElement.TryGetProperty(nameof(WebhookEvent.Action), out var typeProperty))
+            if (!jsonDocument.RootElement.TryGetProperty(nameof(WebhookEvent.Action).ToLower(), out var action))
             {
                 throw new JsonException();
             }
 
-            var type = this.types.FirstOrDefault(x => x.Name == typeProperty.GetString());
+            var type = this.types.FirstOrDefault(x => x.Key == action.GetString()).Value;
             if (type == null)
             {
                 throw new JsonException();
             }
 
             var jsonObject = jsonDocument.RootElement.GetRawText();
-            var result = (T)JsonSerializer.Deserialize(jsonObject, type, options);
-
-            return result;
+            return (T)JsonSerializer.Deserialize(jsonObject, type, options)!;
         }
 
-        public override bool CanConvert(Type typeToConvert) => typeof(T).IsAssignableFrom(typeToConvert);
+        public override bool CanConvert(Type typeToConvert) => typeof(WebhookEvent).IsAssignableFrom(typeToConvert);
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
-            throw new NotImplementedException();
+            JsonSerializer.Serialize(writer, (object)value, options);
     }
 }

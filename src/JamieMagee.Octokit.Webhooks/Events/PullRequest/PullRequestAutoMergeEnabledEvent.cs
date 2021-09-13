@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(PullRequestActionValue.AutoMergeEnabled)]
     public sealed record PullRequestAutoMergeEnabledEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]

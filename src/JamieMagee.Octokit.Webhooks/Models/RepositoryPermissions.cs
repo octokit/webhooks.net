@@ -5,18 +5,18 @@
     public sealed record RepositoryPermissions
     {
         [JsonPropertyName("pull")]
-        public bool Pull { get; init; }
+        public bool Pull { get; set; }
 
         [JsonPropertyName("push")]
-        public bool Push { get; init; }
+        public bool Push { get; set; }
 
         [JsonPropertyName("admin")]
-        public bool Admin { get; init; }
+        public bool Admin { get; set; }
 
         [JsonPropertyName("maintain")]
-        public bool? Maintain { get; init; }
+        public bool? Maintain { get; set; }
 
         [JsonPropertyName("triage")]
-        public bool? Triage { get; init; }
+        public bool? Triage { get; set; }
     }
 }

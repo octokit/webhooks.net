@@ -5,105 +5,105 @@
     public sealed record AppPermissions
     {
         [JsonPropertyName("actions")]
-        public AppPermissionsLevel? Actions { get; init; }
+        public AppPermissionsLevel? Actions { get; set; }
 
         [JsonPropertyName("administration")]
-        public AppPermissionsLevel? Administration { get; init; }
+        public AppPermissionsLevel? Administration { get; set; }
 
         [JsonPropertyName("checks")]
-        public AppPermissionsLevel? Checks { get; init; }
+        public AppPermissionsLevel? Checks { get; set; }
 
         [JsonPropertyName("content_references")]
-        public AppPermissionsLevel? ContentReferences { get; init; }
+        public AppPermissionsLevel? ContentReferences { get; set; }
 
         [JsonPropertyName("contents")]
-        public AppPermissionsLevel? Contents { get; init; }
+        public AppPermissionsLevel? Contents { get; set; }
 
         [JsonPropertyName("deployments")]
-        public AppPermissionsLevel? Deployments { get; init; }
+        public AppPermissionsLevel? Deployments { get; set; }
 
         [JsonPropertyName("discussions")]
-        public AppPermissionsLevel? Discussions { get; init; }
+        public AppPermissionsLevel? Discussions { get; set; }
 
         [JsonPropertyName("emails")]
-        public AppPermissionsLevel? Emails { get; init; }
+        public AppPermissionsLevel? Emails { get; set; }
 
         [JsonPropertyName("environments")]
-        public AppPermissionsLevel? Environments { get; init; }
+        public AppPermissionsLevel? Environments { get; set; }
 
         [JsonPropertyName("issues")]
-        public AppPermissionsLevel? Issues { get; init; }
+        public AppPermissionsLevel? Issues { get; set; }
 
         [JsonPropertyName("members")]
-        public AppPermissionsLevel? Members { get; init; }
+        public AppPermissionsLevel? Members { get; set; }
 
         [JsonPropertyName("metadata")]
-        public AppPermissionsLevel? Metadata { get; init; }
+        public AppPermissionsLevel? Metadata { get; set; }
 
         [JsonPropertyName("organization_administration")]
-        public AppPermissionsLevel? OrganizationAdministration { get; init; }
+        public AppPermissionsLevel? OrganizationAdministration { get; set; }
 
         [JsonPropertyName("organization_hooks")]
-        public AppPermissionsLevel? OrganizationHooks { get; init; }
+        public AppPermissionsLevel? OrganizationHooks { get; set; }
 
         [JsonPropertyName("organization_packages")]
-        public AppPermissionsLevel? OrganizationPackages { get; init; }
+        public AppPermissionsLevel? OrganizationPackages { get; set; }
 
         [JsonPropertyName("organization_plan")]
-        public AppPermissionsLevel? OrganizationPlan { get; init; }
+        public AppPermissionsLevel? OrganizationPlan { get; set; }
 
         [JsonPropertyName("organization_projects")]
-        public AppPermissionsLevel? OrganizationProjects { get; init; }
+        public AppPermissionsLevel? OrganizationProjects { get; set; }
 
         [JsonPropertyName("organization_secrets")]
-        public AppPermissionsLevel? OrganizationSecrets { get; init; }
+        public AppPermissionsLevel? OrganizationSecrets { get; set; }
 
         [JsonPropertyName("organization_self_hosted_runners")]
-        public AppPermissionsLevel? OrganizationSelfHostedRunners { get; init; }
+        public AppPermissionsLevel? OrganizationSelfHostedRunners { get; set; }
 
         [JsonPropertyName("organization_user_blocking")]
-        public AppPermissionsLevel? OrganizationUserBlocking { get; init; }
+        public AppPermissionsLevel? OrganizationUserBlocking { get; set; }
 
         [JsonPropertyName("packages")]
-        public AppPermissionsLevel? Packages { get; init; }
+        public AppPermissionsLevel? Packages { get; set; }
 
         [JsonPropertyName("pages")]
-        public AppPermissionsLevel? Pages { get; init; }
+        public AppPermissionsLevel? Pages { get; set; }
 
         [JsonPropertyName("pull_requests")]
-        public AppPermissionsLevel? PullRequests { get; init; }
+        public AppPermissionsLevel? PullRequests { get; set; }
 
         [JsonPropertyName("repository_hooks")]
-        public AppPermissionsLevel? RepositoryHooks { get; init; }
+        public AppPermissionsLevel? RepositoryHooks { get; set; }
 
         [JsonPropertyName("repository_projects")]
-        public AppPermissionsLevel? RepositoryProjects { get; init; }
+        public AppPermissionsLevel? RepositoryProjects { get; set; }
 
         [JsonPropertyName("secret_scanning_alerts")]
-        public AppPermissionsLevel? SecretScanningAlerts { get; init; }
+        public AppPermissionsLevel? SecretScanningAlerts { get; set; }
 
         [JsonPropertyName("secrets")]
-        public AppPermissionsLevel? Secrets { get; init; }
+        public AppPermissionsLevel? Secrets { get; set; }
 
         [JsonPropertyName("security_events")]
-        public AppPermissionsLevel? SecurityEvents { get; init; }
+        public AppPermissionsLevel? SecurityEvents { get; set; }
 
         [JsonPropertyName("security_scanning_alert")]
-        public AppPermissionsLevel? SecurityScanningAlert { get; init; }
+        public AppPermissionsLevel? SecurityScanningAlert { get; set; }
 
         [JsonPropertyName("single_file")]
-        public AppPermissionsLevel? SingleFile { get; init; }
+        public AppPermissionsLevel? SingleFile { get; set; }
 
         [JsonPropertyName("statuses")]
-        public AppPermissionsLevel? Statuses { get; init; }
+        public AppPermissionsLevel? Statuses { get; set; }
 
         [JsonPropertyName("team_discussions")]
-        public AppPermissionsLevel? TeamDiscussions { get; init; }
+        public AppPermissionsLevel? TeamDiscussions { get; set; }
 
         [JsonPropertyName("vulnerability_alerts")]
-        public AppPermissionsLevel? VulnerabilityAlerts { get; init; }
+        public AppPermissionsLevel? VulnerabilityAlerts { get; set; }
 
         [JsonPropertyName("workflows")]
-        public AppPermissionsLevel? Workflows { get; init; }
+        public AppPermissionsLevel? Workflows { get; set; }
     }
 }

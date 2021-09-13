@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(PullRequestActionValue.Synchronize)]
     public sealed record PullRequestSynchronizeEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]

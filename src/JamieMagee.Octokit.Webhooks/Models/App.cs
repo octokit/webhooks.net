@@ -6,39 +6,39 @@
     public sealed record App
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("slug")]
-        public string? Slug { get; init; }
+        public string? Slug { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+        public string NodeId { get; set; } = null!;
 
         [JsonPropertyName("owner")]
-        public User Owner { get; init; } = null!;
+        public User Owner { get; set; } = null!;
 
         [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
+        public string Name { get; set; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; init; } = null!;
+        public string? Description { get; set; } = null!;
 
         [JsonPropertyName("external_url")]
-        public string ExternalUrl { get; init; } = null!;
+        public string ExternalUrl { get; set; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; } = null!;
+        public string HtmlUrl { get; set; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        public string CreatedAt { get; set; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        public string UpdatedAt { get; set; } = null!;
 
         [JsonPropertyName("permissions")]
-        public AppPermissions? Permissions { get; init; }
+        public AppPermissions? Permissions { get; set; }
 
         [JsonPropertyName("events")]
-        public IEnumerable<AppEvent>? Events { get; init; }
+        public IEnumerable<AppEvent>? Events { get; set; }
     }
 }

@@ -5,42 +5,42 @@
     public sealed record Organization
     {
         [JsonPropertyName("login")]
-        public string Login { get; init; } = null!;
+        public string Login { get; set; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+        public string NodeId { get; set; } = null!;
 
         [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+        public string Url { get; set; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string? HtmlUrl { get; init; }
+        public string? HtmlUrl { get; set; }
 
         [JsonPropertyName("repos_url")]
-        public string ReposUrl { get; init; } = null!;
+        public string ReposUrl { get; set; } = null!;
 
         [JsonPropertyName("events_url")]
-        public string EventsUrl { get; init; } = null!;
+        public string EventsUrl { get; set; } = null!;
 
         [JsonPropertyName("hooks_url")]
-        public string HooksUrl { get; init; } = null!;
+        public string HooksUrl { get; set; } = null!;
 
         [JsonPropertyName("issues_url")]
-        public string IssuesUrl { get; init; } = null!;
+        public string IssuesUrl { get; set; } = null!;
 
         [JsonPropertyName("members_url")]
-        public string MembersUrl { get; init; } = null!;
+        public string MembersUrl { get; set; } = null!;
 
         [JsonPropertyName("public_members_url")]
-        public string PublicMembersUrl { get; init; } = null!;
+        public string PublicMembersUrl { get; set; } = null!;
 
         [JsonPropertyName("avatar_url")]
-        public string AvatarUrl { get; init; } = null!;
+        public string AvatarUrl { get; set; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; init; }
+        public string? Description { get; set; }
     }
 }

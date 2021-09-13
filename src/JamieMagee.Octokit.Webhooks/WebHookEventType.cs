@@ -1,6 +1,6 @@
 ﻿namespace JamieMagee.Octokit.Webhooks
 {
-    public class WebhookEventType
+    public static class WebhookEventType
     {
         public const string BranchProtectionRule = "branch_protection_rule";
         public const string CheckRun = "check_run";

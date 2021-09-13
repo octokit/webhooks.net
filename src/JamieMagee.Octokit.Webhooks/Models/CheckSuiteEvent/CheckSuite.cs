@@ -6,51 +6,51 @@
     public sealed record CheckSuite
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string? NodeId { get; init; }
+        public string? NodeId { get; set; }
 
         [JsonPropertyName("head_branch")]
-        public string? HeadBranch { get; init; }
+        public string? HeadBranch { get; set; }
 
         [JsonPropertyName("head_sha")]
-        public string HeadSha { get; init; } = null!;
+        public string HeadSha { get; set; } = null!;
 
         [JsonPropertyName("status")]
-        public CheckSuiteStatus? Status { get; init; }
+        public CheckSuiteStatus? Status { get; set; }
 
         [JsonPropertyName("conclusion")]
-        public CheckSuiteConclusion? Conclusion { get; init; }
+        public CheckSuiteConclusion? Conclusion { get; set; }
 
         [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+        public string Url { get; set; } = null!;
 
         [JsonPropertyName("before")]
-        public string? Before { get; init; }
+        public string? Before { get; set; }
 
         [JsonPropertyName("after")]
-        public string After { get; init; } = null!;
+        public string After { get; set; } = null!;
 
         [JsonPropertyName("pull_requests")]
-        public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
+        public IEnumerable<CheckRunPullRequest> PullRequests { get; set; } = null!;
 
         [JsonPropertyName("app")]
-        public App App { get; init; } = null!;
+        public App App { get; set; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        public string CreatedAt { get; set; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        public string UpdatedAt { get; set; } = null!;
 
         [JsonPropertyName("latest_check_runs_count")]
-        public int LatestCheckRunsCount { get; init; }
+        public int LatestCheckRunsCount { get; set; }
 
         [JsonPropertyName("check_runs_url")]
-        public string CheckRunsUrl { get; init; } = null!;
+        public string CheckRunsUrl { get; set; } = null!;
 
         [JsonPropertyName("head_commit")]
-        public SimpleCommit HeadCommit { get; init; } = null!;
+        public SimpleCommit HeadCommit { get; set; } = null!;
     }
 }

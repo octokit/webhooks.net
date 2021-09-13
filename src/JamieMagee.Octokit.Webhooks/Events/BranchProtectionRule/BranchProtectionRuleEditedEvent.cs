@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(BranchProtectionRuleActionValue.Edited)]
     public sealed record BranchProtectionRuleEditedEvent : BranchProtectionRuleEvent
     {
         [JsonPropertyName("action")]

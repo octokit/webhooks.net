@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(PullRequestActionValue.ConvertedToDraft)]
     public sealed record PullRequestConvertedToDraftEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]

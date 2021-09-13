@@ -3,6 +3,7 @@ namespace JamieMagee.Octokit.Webhooks.Events.Repository
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
+    [WebhookActionType(RepositoryActionValue.Deleted)]
     public sealed record RepositoryDeletedEvent : RepositoryEvent
     {
         [JsonPropertyName("action")]

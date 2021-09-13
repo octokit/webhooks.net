@@ -27,7 +27,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     public void ConfigureServices(IServiceCollection services)
     {
         ...
-        services.AddSingleton<GitHubEventProcessor, MyGitHubEventProcessor>();
+        services.AddSingleton<WebhookProcessor, MyWebhookProcessor>();
         ...
     }
     ```

@@ -5,9 +5,9 @@
     public sealed record PullRequestEditedEventChanges
     {
         [JsonPropertyName("body")]
-        public PullRequestEditedEventChangesBody? Body { get; init; }
+        public PullRequestEditedEventChangesBody? Body { get; set; }
 
         [JsonPropertyName("title")]
-        public PullRequestEditedEventChangesTitle? Title { get; init; }
+        public PullRequestEditedEventChangesTitle? Title { get; set; }
     }
 }

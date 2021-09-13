@@ -3,6 +3,7 @@ namespace JamieMagee.Octokit.Webhooks.Events.InstallationRepositories
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
+    [WebhookActionType(InstallationRepositoriesActionValue.Added)]
     public sealed record InstallationRepositoriesAddedEvent : InstallationRepositoriesEvent
     {
         [JsonPropertyName("action")]

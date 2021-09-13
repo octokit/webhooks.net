@@ -6,146 +6,146 @@
     public sealed record PullRequest
     {
         [JsonPropertyName("body")]
-        public string? Body { get; init; }
+        public string? Body { get; set; }
 
         [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+        public string Url { get; set; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+        public string NodeId { get; set; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; } = null!;
+        public string HtmlUrl { get; set; } = null!;
 
         [JsonPropertyName("diff_url")]
-        public string DiffUrl { get; init; } = null!;
+        public string DiffUrl { get; set; } = null!;
 
         [JsonPropertyName("patch_url")]
-        public string PatchUrl { get; init; } = null!;
+        public string PatchUrl { get; set; } = null!;
 
         [JsonPropertyName("issue_url")]
-        public string IssueUrl { get; init; } = null!;
+        public string IssueUrl { get; set; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public int Number { get; set; }
 
         [JsonPropertyName("state")]
-        public PullRequestState State { get; init; }
+        public PullRequestState State { get; set; }
 
         [JsonPropertyName("locked")]
-        public bool Locked { get; init; }
+        public bool Locked { get; set; }
 
         [JsonPropertyName("title")]
-        public string Title { get; init; } = null!;
+        public string Title { get; set; } = null!;
 
         [JsonPropertyName("user")]
-        public User User { get; init; } = null!;
+        public User User { get; set; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        public string CreatedAt { get; set; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        public string UpdatedAt { get; set; } = null!;
 
         [JsonPropertyName("closed_at")]
-        public string? ClosedAt { get; init; }
+        public string? ClosedAt { get; set; }
 
         [JsonPropertyName("merged_at")]
-        public string? MergedAt { get; init; }
+        public string? MergedAt { get; set; }
 
         [JsonPropertyName("merge_commit_sha")]
-        public string? MergeCommitSha { get; init; }
+        public string? MergeCommitSha { get; set; }
 
         [JsonPropertyName("assignee")]
-        public User? Assignee { get; init; }
+        public User? Assignee { get; set; }
 
         [JsonPropertyName("assignees")]
-        public IEnumerable<User> Assignees { get; init; } = null!;
+        public IEnumerable<User> Assignees { get; set; } = null!;
 
         // requested_reviewers: (User | Team)[];
 
         [JsonPropertyName("requested_teams")]
-        public IEnumerable<Team> RequestedTeams { get; init; } = null!;
+        public IEnumerable<Team> RequestedTeams { get; set; } = null!;
 
         [JsonPropertyName("labels")]
-        public IEnumerable<Label> Labels { get; init; } = null!;
+        public IEnumerable<Label> Labels { get; set; } = null!;
 
         [JsonPropertyName("milestone")]
-        public Milestone? Milestone { get; init; }
+        public Milestone? Milestone { get; set; }
 
         [JsonPropertyName("commits_url")]
-        public string CommitsUrl { get; init; } = null!;
+        public string CommitsUrl { get; set; } = null!;
 
         [JsonPropertyName("review_comments_url")]
-        public string ReviewCommentsUrl { get; init; } = null!;
+        public string ReviewCommentsUrl { get; set; } = null!;
 
         [JsonPropertyName("review_comment_url")]
-        public string ReviewCommentUrl { get; init; } = null!;
+        public string ReviewCommentUrl { get; set; } = null!;
 
         [JsonPropertyName("comments_url")]
-        public string CommentsUrl { get; init; } = null!;
+        public string CommentsUrl { get; set; } = null!;
 
         [JsonPropertyName("statuses_url")]
-        public string StatusesUrl { get; init; } = null!;
+        public string StatusesUrl { get; set; } = null!;
 
         [JsonPropertyName("head")]
-        public PullRequestHead Head { get; init; } = null!;
+        public PullRequestHead Head { get; set; } = null!;
 
         [JsonPropertyName("base")]
-        public PullRequestBase Base { get; init; } = null!;
+        public PullRequestBase Base { get; set; } = null!;
 
         [JsonPropertyName("_links")]
-        public PullRequestLinks Links { get; init; } = null!;
+        public PullRequestLinks Links { get; set; } = null!;
 
         [JsonPropertyName("author_association")]
-        public AuthorAssociation AuthorAssociation { get; init; }
+        public AuthorAssociation AuthorAssociation { get; set; }
 
         [JsonPropertyName("auto_merge")]
-        public bool? AutoMerge { get; init; }
+        public bool? AutoMerge { get; set; }
 
         [JsonPropertyName("active_lock_reason")]
-        public PullRequestActiveLockReason? ActiveLockReason { get; init; }
+        public PullRequestActiveLockReason? ActiveLockReason { get; set; }
 
         [JsonPropertyName("draft")]
-        public bool Draft { get; init; }
+        public bool Draft { get; set; }
 
         [JsonPropertyName("merged")]
-        public bool? Merged { get; init; }
+        public bool? Merged { get; set; }
 
         [JsonPropertyName("mergeable")]
-        public bool? Mergeable { get; init; }
+        public bool? Mergeable { get; set; }
 
         [JsonPropertyName("rebaseable")]
-        public bool? Rebaseable { get; init; }
+        public bool? Rebaseable { get; set; }
 
         [JsonPropertyName("mergeable_state")]
-        public string MergeableState { get; init; } = null!;
+        public string MergeableState { get; set; } = null!;
 
         [JsonPropertyName("merged_by")]
-        public User? MergedBy { get; init; }
+        public User? MergedBy { get; set; }
 
         [JsonPropertyName("comments")]
-        public int Comments { get; init; }
+        public int Comments { get; set; }
 
         [JsonPropertyName("review_comments")]
-        public int ReviewComments { get; init; }
+        public int ReviewComments { get; set; }
 
         [JsonPropertyName("maintainer_can_modify")]
-        public bool MaintainerCanModify { get; init; }
+        public bool MaintainerCanModify { get; set; }
 
         [JsonPropertyName("commits")]
-        public int Commits { get; init; }
+        public int Commits { get; set; }
 
         [JsonPropertyName("additions")]
-        public int Additions { get; init; }
+        public int Additions { get; set; }
 
         [JsonPropertyName("deletions")]
-        public int Deletions { get; init; }
+        public int Deletions { get; set; }
 
         [JsonPropertyName("changed_files")]
-        public int ChangedFiles { get; init; }
+        public int ChangedFiles { get; set; }
     }
 }

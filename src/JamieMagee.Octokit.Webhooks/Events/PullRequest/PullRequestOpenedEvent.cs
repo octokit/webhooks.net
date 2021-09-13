@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(PullRequestActionValue.Opened)]
     public sealed record PullRequestOpenedEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]

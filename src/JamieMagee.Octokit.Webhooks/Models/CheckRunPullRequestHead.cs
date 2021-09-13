@@ -5,12 +5,12 @@
     public sealed record CheckRunPullRequestHead
     {
         [JsonPropertyName("ref")]
-        public string Ref { get; init; } = null!;
+        public string Ref { get; set; } = null!;
 
         [JsonPropertyName("sha")]
-        public string Sha { get; init; } = null!;
+        public string Sha { get; set; } = null!;
 
         [JsonPropertyName("repo")]
-        public RepoRef Repo { get; init; } = null!;
+        public RepoRef Repo { get; set; } = null!;
     }
 }

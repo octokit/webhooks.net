@@ -5,15 +5,15 @@
     public sealed record Committer
     {
         [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
+        public string Name { get; set; } = null!;
 
         [JsonPropertyName("email")]
-        public string? Email { get; init; }
+        public string? Email { get; set; }
 
         [JsonPropertyName("date")]
-        public string? Date { get; init; }
+        public string? Date { get; set; }
 
         [JsonPropertyName("username")]
-        public string? Username { get; init; }
+        public string? Username { get; set; }
     }
 }

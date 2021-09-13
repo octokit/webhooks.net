@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
+    [WebhookActionType(CheckRunActionValue.Created)]
     public sealed record CheckRunCreatedEvent : CheckRunEvent
     {
         [JsonPropertyName("action")]

@@ -1,8 +1,8 @@
 namespace JamieMagee.Octokit.Webhooks.Events.CheckSuite
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
 
+    [WebhookActionType(CheckSuiteActionValue.Completed)]
     public sealed record CheckSuiteCompletedEvent : CheckSuiteEvent
     {
         [JsonPropertyName("action")]

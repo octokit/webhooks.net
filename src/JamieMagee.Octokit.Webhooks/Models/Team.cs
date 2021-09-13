@@ -5,39 +5,39 @@
     public sealed record Team
     {
         [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
+        public string Name { get; set; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public int Id { get; set; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+        public string NodeId { get; set; } = null!;
 
         [JsonPropertyName("slug")]
-        public string Slug { get; init; } = null!;
+        public string Slug { get; set; } = null!;
 
         [JsonPropertyName("description")]
-        public string? Description { get; init; }
+        public string? Description { get; set; }
 
         [JsonPropertyName("privacy")]
-        public TeamPrivacy Privacy { get; init; }
+        public TeamPrivacy Privacy { get; set; }
 
         [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+        public string Url { get; set; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; } = null!;
+        public string HtmlUrl { get; set; } = null!;
 
         [JsonPropertyName("members_url")]
-        public string MembersUrl { get; init; } = null!;
+        public string MembersUrl { get; set; } = null!;
 
         [JsonPropertyName("repositories_url")]
-        public string RepositoriesUrl { get; init; } = null!;
+        public string RepositoriesUrl { get; set; } = null!;
 
         [JsonPropertyName("permission")]
-        public string Permission { get; init; } = null!;
+        public string Permission { get; set; } = null!;
 
         [JsonPropertyName("parent")]
-        public TeamParent? Parent { get; init; }
+        public TeamParent? Parent { get; set; }
     }
 }

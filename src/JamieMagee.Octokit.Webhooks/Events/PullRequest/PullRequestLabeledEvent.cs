@@ -3,6 +3,7 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
 
+    [WebhookActionType(PullRequestActionValue.Labeled)]
     public sealed record PullRequestLabeledEvent : PullRequestEvent
     {
         [JsonPropertyName("action")]

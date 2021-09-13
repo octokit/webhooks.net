@@ -5,6 +5,6 @@
     public sealed record Link
     {
         [JsonPropertyName("href")]
-        public string Href { get; init; } = null!;
+        public string Href { get; set; } = null!;
     }
 }
