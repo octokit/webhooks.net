@@ -7,5 +7,10 @@
     [JsonConverter(typeof(WebhookConverter<RepositoryDispatchEvent>))]
     public abstract record RepositoryDispatchEvent : WebhookEvent
     {
+        [JsonPropertyName("branch")]
+        public string branch { get; init; } = null!;
+
+        [JsonPropertyName("client_payload")]
+        public dynamic client_payload { get; init; } = null!;
     }
 }
