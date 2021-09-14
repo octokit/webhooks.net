@@ -8,6 +8,6 @@
     public abstract record DeploymentEvent : WebhookEvent
     {
         [JsonPropertyName("deployment")]
-        public Models.DeploymentCreatedEvent.Deployment Deployment { get; init; }
+        public Models.DeploymentEvent.Deployment Deployment { get; init; }
     }
 }

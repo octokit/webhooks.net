@@ -1,4 +1,4 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models.DeploymentCreatedEvent
+﻿namespace JamieMagee.Octokit.Webhooks.Models.DeploymentStatusEvent
 {
     using System.Text.Json.Serialization;
 
@@ -22,6 +22,7 @@
         [JsonPropertyName("task")]
         public string Task { get; init; } = null!;
 
+        [JsonPropertyName("payload")]
         public dynamic? Payload { get; init; }
 
         [JsonPropertyName("original_environment")]
