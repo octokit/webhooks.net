@@ -7,5 +7,10 @@
     [JsonConverter(typeof(WebhookConverter<DiscussionCommentEvent>))]
     public abstract record DiscussionCommentEvent : WebhookEvent
     {
+        [JsonPropertyName("comment")]
+        public Models.DiscussionCommentEvent.DiscussionComment Comment { get; init; }
+
+        [JsonPropertyName("discussion")]
+        public Models.Discussion Discussion { get; init; }
     }
 }
