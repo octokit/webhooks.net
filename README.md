@@ -52,6 +52,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
 
 - [octokit/webhooks](https://github.com/octokit/webhooks)
 - [terrajobst/Terrajobst.GitHubEvents](https://github.com/terrajobst/Terrajobst.GitHubEvents)
+- [Dotnet-Boxed/Templates](https://github.com/Dotnet-Boxed/Templates)
 
 ## License
 
