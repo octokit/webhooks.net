@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PackageRegistry
+    public sealed record PackageRegistry
     {
         [JsonPropertyName("about_url")]
         public string AboutUrl { get; init; } = null!;

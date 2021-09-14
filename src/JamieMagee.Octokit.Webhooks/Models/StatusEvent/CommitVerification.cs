@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public record CommitVerification
+    public sealed record CommitVerification
     {
         [JsonPropertyName("verified")]
         public bool Verified { get; init; }

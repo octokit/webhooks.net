@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public record MarkplacePurchasePlan
+    public sealed record MarkplacePurchasePlan
     {
         [JsonPropertyName("id")]
         public int Id { get; init; }

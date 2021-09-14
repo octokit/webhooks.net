@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public record MarketplacePurchase
+    public sealed record MarketplacePurchase
     {
         [JsonPropertyName("account")]
         public MarkplacePurchaseAccount Account { get; init; } = null!;

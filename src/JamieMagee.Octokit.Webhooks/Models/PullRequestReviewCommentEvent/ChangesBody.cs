@@ -1,8 +1,8 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models.ProjectEvent
+﻿namespace JamieMagee.Octokit.Webhooks.Models.PullRequestReviewCommentEvent
 {
     using System.Text.Json.Serialization;
 
-    public sealed record ChangesName
+    public sealed record ChangesBody
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

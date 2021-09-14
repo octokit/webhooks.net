@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public record Membership
+    public sealed record Membership
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

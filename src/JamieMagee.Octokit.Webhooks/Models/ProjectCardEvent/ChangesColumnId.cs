@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public record ChangesColumnId
+    public sealed record ChangesColumnId
     {
         [JsonPropertyName("from")]
         public int From { get; init; }

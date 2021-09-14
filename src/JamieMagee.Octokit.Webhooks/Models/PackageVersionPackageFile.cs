@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PackageVersionPackageFile
+    public sealed record PackageVersionPackageFile
     {
         [JsonPropertyName("download_url")]
         public string DownloadUrl { get; init; } = null!;
