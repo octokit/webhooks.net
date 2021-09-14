@@ -8,5 +8,8 @@ namespace JamieMagee.Octokit.Webhooks.Events.Issues
     {
         [JsonPropertyName("action")]
         public override string Action => IssuesAction.Unassigned;
+
+        [JsonPropertyName("assignee")]
+        public User? Assignee { get; init; }
     }
 }

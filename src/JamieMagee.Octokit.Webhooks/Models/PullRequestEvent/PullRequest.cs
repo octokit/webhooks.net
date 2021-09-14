@@ -107,7 +107,7 @@
         public bool? AutoMerge { get; init; }
 
         [JsonPropertyName("active_lock_reason")]
-        public PullRequestActiveLockReason? ActiveLockReason { get; init; }
+        public ActiveLockReason? ActiveLockReason { get; init; }
 
         [JsonPropertyName("draft")]
         public bool Draft { get; init; }
