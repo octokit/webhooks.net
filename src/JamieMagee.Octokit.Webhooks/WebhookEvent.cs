@@ -8,7 +8,7 @@
     public abstract record WebhookEvent
     {
         [JsonPropertyName("action")]
-        public virtual string Action { get; init; }
+        public virtual string? Action { get; init; }
 
         [JsonPropertyName("repository")]
         public Repository? Repository { get; init; }
