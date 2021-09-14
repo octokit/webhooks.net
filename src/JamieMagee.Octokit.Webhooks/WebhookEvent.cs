@@ -11,7 +11,7 @@
         public virtual string Action { get; init; }
 
         [JsonPropertyName("repository")]
-        public Repository Repository { get; init; } = null!;
+        public Repository? Repository { get; init; }
 
         [JsonPropertyName("installation")]
         public InstallationLite? Installation { get; init; }
@@ -20,6 +20,6 @@
         public Organization? Organization { get; init; }
 
         [JsonPropertyName("sender")]
-        public User Sender { get; init; } = null!;
+        public User Sender { get; init; }
     }
 }
