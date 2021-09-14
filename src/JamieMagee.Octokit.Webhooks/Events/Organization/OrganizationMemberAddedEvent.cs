@@ -8,5 +8,8 @@ namespace JamieMagee.Octokit.Webhooks.Events.Organization
     {
         [JsonPropertyName("action")]
         public override string Action => OrganizationAction.MemberAdded;
+
+        [JsonPropertyName("membership")]
+        public Membership Membership { get; init; } = null!;
     }
 }

@@ -7,5 +7,7 @@
     [JsonConverter(typeof(WebhookConverter<ProjectCardEvent>))]
     public abstract record ProjectCardEvent : WebhookEvent
     {
+        [JsonPropertyName("project_card")]
+        public Models.ProjectCard ProjectCard { get; init; }
     }
 }

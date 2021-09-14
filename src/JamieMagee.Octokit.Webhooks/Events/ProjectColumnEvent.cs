@@ -7,5 +7,7 @@
     [JsonConverter(typeof(WebhookConverter<ProjectColumnEvent>))]
     public abstract record ProjectColumnEvent : WebhookEvent
     {
+        [JsonPropertyName("project_column")]
+        public Models.ProjectColumn ProjectColumn { get; init; }
     }
 }
