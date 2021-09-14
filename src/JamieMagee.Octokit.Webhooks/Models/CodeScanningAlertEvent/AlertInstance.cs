@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class AlertInstance
+    public sealed record AlertInstance
     {
         [JsonPropertyName("ref")]
         public string Ref { get; init; }

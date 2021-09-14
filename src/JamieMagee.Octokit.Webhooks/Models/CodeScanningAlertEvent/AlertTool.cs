@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class AlertTool
+    public sealed record AlertTool
     {
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;

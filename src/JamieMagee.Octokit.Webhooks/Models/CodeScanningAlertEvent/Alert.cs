@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class Alert
+    public sealed record Alert
     {
         [JsonPropertyName("number")]
         public int Number { get; init; }

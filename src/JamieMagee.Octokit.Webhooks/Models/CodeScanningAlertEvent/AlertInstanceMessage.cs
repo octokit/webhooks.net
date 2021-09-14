@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class AlertInstanceMessage
+    public sealed record AlertInstanceMessage
     {
         [JsonPropertyName("text")]
         public string? Text { get; init; }

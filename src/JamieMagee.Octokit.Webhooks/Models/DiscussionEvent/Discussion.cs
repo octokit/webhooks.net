@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Discussion
+    public sealed record Discussion
     {
         [JsonPropertyName("repository_url")]
         public string RepositoryUrl { get; init; }

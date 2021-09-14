@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class AlertInstanceLocation
+    public sealed record AlertInstanceLocation
     {
         [JsonPropertyName("path")]
         public string? Path { get; init; }

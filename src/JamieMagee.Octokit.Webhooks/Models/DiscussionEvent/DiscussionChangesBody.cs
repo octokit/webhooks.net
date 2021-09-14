@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public record DiscussionChangesBody
+    public sealed record DiscussionChangesBody
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

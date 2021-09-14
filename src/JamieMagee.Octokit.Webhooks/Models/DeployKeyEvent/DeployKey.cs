@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class DeployKey
+    public sealed record DeployKey
     {
         [JsonPropertyName("id")]
         public int Id { get; init; }

@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Deployment
+    public sealed record Deployment
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;
