@@ -2,10 +2,13 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JamieMagee.Octokit.Webhooks.Models.CommitCommentEvent;
 
     [WebhookEventType(WebhookEventType.CommitComment)]
     [JsonConverter(typeof(WebhookConverter<CommitCommentEvent>))]
     public abstract record CommitCommentEvent : WebhookEvent
     {
+        [JsonPropertyName("comment")]
+        public Comment Comment { get; init; } = null!;
     }
 }
