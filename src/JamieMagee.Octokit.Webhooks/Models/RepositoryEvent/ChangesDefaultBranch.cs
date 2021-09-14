@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class ChangesDefaultBranch
+    public sealed record ChangesDefaultBranch
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

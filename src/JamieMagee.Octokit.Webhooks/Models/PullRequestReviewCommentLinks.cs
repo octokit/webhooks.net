@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestReviewCommentLinks
+    public sealed record PullRequestReviewCommentLinks
     {
         [JsonPropertyName("self")]
         public Link Self { get; init; } = null!;

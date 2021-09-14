@@ -1,8 +1,8 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models.RepositoryEvent
+﻿namespace JamieMagee.Octokit.Webhooks.Models.SponsorshipEvent
 {
     using System.Text.Json.Serialization;
 
-    public sealed record ChangesRepositoryName
+    public sealed record ChangesPrivacyLevel
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

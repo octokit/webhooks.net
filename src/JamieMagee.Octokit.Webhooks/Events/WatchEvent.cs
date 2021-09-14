@@ -5,7 +5,5 @@
 
     [WebhookEventType(WebhookEventType.Watch)]
     [JsonConverter(typeof(WebhookConverter<WatchEvent>))]
-    public abstract record WatchEvent : WebhookEvent
-    {
-    }
+    public abstract record WatchEvent : WebhookEvent;
 }

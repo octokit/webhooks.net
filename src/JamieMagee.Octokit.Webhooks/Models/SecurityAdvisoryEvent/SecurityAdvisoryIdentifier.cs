@@ -1,0 +1,13 @@
+﻿namespace JamieMagee.Octokit.Webhooks.Models.SecurityAdvisoryEvent
+{
+    using System.Text.Json.Serialization;
+
+    public sealed record SecurityAdvisoryIdentifier
+    {
+        [JsonPropertyName("value")]
+        public string Value { get; init; } = null!;
+
+        [JsonPropertyName("type")]
+        public string Type { get; init; } = null!;
+    }
+}

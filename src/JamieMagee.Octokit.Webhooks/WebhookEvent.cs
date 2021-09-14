@@ -20,6 +20,6 @@
         public Organization? Organization { get; init; }
 
         [JsonPropertyName("sender")]
-        public User Sender { get; init; }
+        public User? Sender { get; init; }
     }
 }

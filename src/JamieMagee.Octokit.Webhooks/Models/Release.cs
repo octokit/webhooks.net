@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class Release
+    public sealed record Release
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

@@ -8,5 +8,8 @@ namespace JamieMagee.Octokit.Webhooks.Events.Sponsorship
     {
         [JsonPropertyName("action")]
         public override string Action => SponsorshipAction.PendingTierChange;
+
+        [JsonPropertyName("effective_date")]
+        public string? EffectiveDate { get; init; }
     }
 }

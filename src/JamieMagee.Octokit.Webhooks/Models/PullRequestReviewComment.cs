@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class PullRequestReviewComment
+    public sealed record PullRequestReviewComment
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

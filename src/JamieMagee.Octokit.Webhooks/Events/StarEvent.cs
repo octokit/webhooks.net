@@ -7,5 +7,7 @@
     [JsonConverter(typeof(WebhookConverter<StarEvent>))]
     public abstract record StarEvent : WebhookEvent
     {
+        [JsonPropertyName("starred_at")]
+        public string StarredAt { get; init; } = null!;
     }
 }
