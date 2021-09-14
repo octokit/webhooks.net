@@ -8,5 +8,8 @@ namespace JamieMagee.Octokit.Webhooks.Events.Discussion
     {
         [JsonPropertyName("action")]
         public override string Action => DiscussionAction.Labeled;
+
+        [JsonPropertyName("label")]
+        public Label Label { get; init; } = null!;
     }
 }

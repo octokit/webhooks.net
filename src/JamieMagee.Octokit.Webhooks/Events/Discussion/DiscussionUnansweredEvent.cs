@@ -8,5 +8,8 @@ namespace JamieMagee.Octokit.Webhooks.Events.Discussion
     {
         [JsonPropertyName("action")]
         public override string Action => DiscussionAction.Unanswered;
+
+        [JsonPropertyName("old_answer")]
+        public DiscussionAnswer OldAnswer { get; init; } = null!;
     }
 }
