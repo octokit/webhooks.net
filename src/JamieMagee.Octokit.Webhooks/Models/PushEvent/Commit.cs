@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class Commit
+    public sealed record Commit
     {
         [JsonPropertyName("id")]
         public string Id { get; init; } = null!;

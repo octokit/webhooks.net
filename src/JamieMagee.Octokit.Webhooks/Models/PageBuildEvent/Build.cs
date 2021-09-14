@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Build
+    public sealed record Build
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

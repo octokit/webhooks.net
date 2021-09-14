@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class BuildError
+    public sealed record BuildError
     {
         [JsonPropertyName("message")]
         public string? message { get; init; }

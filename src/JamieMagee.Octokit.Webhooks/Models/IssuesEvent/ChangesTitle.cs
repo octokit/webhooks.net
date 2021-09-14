@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class ChangesTitle
+    public sealed record ChangesTitle
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

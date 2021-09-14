@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class Page
+    public sealed record Page
     {
         [JsonPropertyName("page_name")]
         public string PageName { get; init; } = null!;

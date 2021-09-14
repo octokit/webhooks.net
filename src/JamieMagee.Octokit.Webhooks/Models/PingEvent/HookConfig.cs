@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class HookConfig
+    public sealed record HookConfig
     {
         [JsonPropertyName("secret")]
         public HookConfigContentType ContentType { get; init; }

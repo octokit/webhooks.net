@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CommitDetailsTree
+    public sealed record CommitDetailsTree
     {
         [JsonPropertyName("sha")]
         public string Sha { get; init; } = null!;

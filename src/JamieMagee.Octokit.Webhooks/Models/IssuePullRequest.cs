@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class IssuePullRequest
+    public sealed record IssuePullRequest
     {
         [JsonPropertyName("url")]
         public string? Url { get; init; }

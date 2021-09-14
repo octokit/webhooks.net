@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class HookLastResponse
+    public sealed record HookLastResponse
     {
         [JsonPropertyName("code")]
         public string? Code { get; init; }

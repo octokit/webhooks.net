@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class Hook
+    public sealed record Hook
     {
         [JsonPropertyName("type")]
         public string Type { get; init; } = null!;

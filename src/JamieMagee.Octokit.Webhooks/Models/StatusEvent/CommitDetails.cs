@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CommitDetails
+    public sealed record CommitDetails
     {
         [JsonPropertyName("author")]
         public Committer Author { get; init; } = null!;

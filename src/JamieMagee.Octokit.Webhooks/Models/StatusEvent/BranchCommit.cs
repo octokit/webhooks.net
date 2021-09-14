@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class BranchCommit
+    public sealed record BranchCommit
     {
         [JsonPropertyName("sha")]
         public string Sha { get; init; } = null!;

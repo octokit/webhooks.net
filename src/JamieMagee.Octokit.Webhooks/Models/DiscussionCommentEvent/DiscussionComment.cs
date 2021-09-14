@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class DiscussionComment
+    public sealed record DiscussionComment
     {
         [JsonPropertyName("id")]
         public int Id { get; init; }
