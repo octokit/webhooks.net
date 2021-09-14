@@ -7,5 +7,7 @@
     [JsonConverter(typeof(WebhookConverter<DeploymentEvent>))]
     public abstract record DeploymentEvent : WebhookEvent
     {
+        [JsonPropertyName("deployment")]
+        public Models.DeploymentCreatedEvent.Deployment Deployment { get; init; }
     }
 }
