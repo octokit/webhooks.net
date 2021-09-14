@@ -353,3 +353,4 @@ MigrationBackup/
 
 .idea/
 !src/**/Release
+!test/**/release
