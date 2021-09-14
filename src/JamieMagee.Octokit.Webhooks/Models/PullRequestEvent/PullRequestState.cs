@@ -1,4 +1,4 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models
+﻿namespace JamieMagee.Octokit.Webhooks.Models.PullRequestEvent
 {
     using System.Runtime.Serialization;
     using System.Text.Json.Serialization;

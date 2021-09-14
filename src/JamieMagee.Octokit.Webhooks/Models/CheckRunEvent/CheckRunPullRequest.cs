@@ -1,7 +1,6 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models
+﻿namespace JamieMagee.Octokit.Webhooks.Models.CheckRunEvent
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models.CheckRunEvent;
 
     public sealed record CheckRunPullRequest
     {

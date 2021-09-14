@@ -1,8 +1,8 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models
+﻿namespace JamieMagee.Octokit.Webhooks.Models.PullRequestEvent
 {
     using System.Text.Json.Serialization;
 
-    public sealed record PullRequestEditedEventChangesBody
+    public sealed record PullRequestEditedEventChangesTitle
     {
         [JsonPropertyName("from")]
         public string From { get; init; } = null!;

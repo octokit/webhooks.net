@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
+    using JamieMagee.Octokit.Webhooks.Models.PullRequestEvent;
 
     [WebhookActionType(PullRequestActionValue.Edited)]
     public sealed record PullRequestEditedEvent : PullRequestEvent

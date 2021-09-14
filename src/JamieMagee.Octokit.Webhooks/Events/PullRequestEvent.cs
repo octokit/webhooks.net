@@ -11,6 +11,6 @@
         public int Number { get; init; }
 
         [JsonPropertyName("pull_request")]
-        public Models.PullRequest PullRequest { get; init; } = null!;
+        public Models.PullRequestEvent.PullRequest PullRequest { get; init; } = null!;
     }
 }

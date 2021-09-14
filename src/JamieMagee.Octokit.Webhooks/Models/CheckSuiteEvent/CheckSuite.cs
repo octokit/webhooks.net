@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JamieMagee.Octokit.Webhooks.Models.CheckRunEvent;
 
     public sealed record CheckSuite
     {

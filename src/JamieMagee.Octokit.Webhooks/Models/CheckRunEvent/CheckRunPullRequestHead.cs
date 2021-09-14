@@ -1,8 +1,8 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models
+﻿namespace JamieMagee.Octokit.Webhooks.Models.CheckRunEvent
 {
     using System.Text.Json.Serialization;
 
-    public sealed record CheckRunPullRequestBase
+    public sealed record CheckRunPullRequestHead
     {
         [JsonPropertyName("ref")]
         public string Ref { get; init; } = null!;
