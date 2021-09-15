@@ -3,9 +3,9 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
 
+    // TODO: Undocumented event
+
     [WebhookEventType(WebhookEventType.DeploymentReview)]
     [JsonConverter(typeof(WebhookConverter<DeploymentReviewEvent>))]
-    public abstract record DeploymentReviewEvent : WebhookEvent
-    {
-    }
+    public abstract record DeploymentReviewEvent : WebhookEvent;
 }
