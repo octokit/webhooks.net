@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class WorkflowPullRequest
+    public sealed record WorkflowPullRequest
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

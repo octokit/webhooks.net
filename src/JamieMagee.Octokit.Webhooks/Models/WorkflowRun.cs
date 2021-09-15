@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public record WorkflowRun
+    public sealed record WorkflowRun
     {
         [JsonPropertyName("artifacts_url")]
         public string ArtifactsUrl { get; init; } = null!;

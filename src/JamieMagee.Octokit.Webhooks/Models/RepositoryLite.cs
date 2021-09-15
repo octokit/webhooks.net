@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class RepositoryLite
+    public sealed record RepositoryLite
     {
         [JsonPropertyName("archive_url")]
         public string ArchiveUrl { get; init; } = null!;

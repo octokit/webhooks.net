@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class WorkflowPullRequestBase
+    public sealed record WorkflowPullRequestBase
     {
         [JsonPropertyName("ref")]
         public string Ref { get; init; } = null!;
