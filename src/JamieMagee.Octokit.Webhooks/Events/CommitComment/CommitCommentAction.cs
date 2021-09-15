@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.CommitComment
 {
-    public sealed class CommitCommentAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record CommitCommentAction : WebhookEventAction
     {
         public static readonly CommitCommentAction Created = new(CommitCommentActionValue.Created);
 

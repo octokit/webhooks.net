@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.SecurityAdvisory)]
     [JsonConverter(typeof(WebhookConverter<SecurityAdvisoryEvent>))]
     public abstract record SecurityAdvisoryEvent : WebhookEvent

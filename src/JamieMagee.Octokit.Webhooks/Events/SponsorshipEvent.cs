@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Sponsorship)]
     [JsonConverter(typeof(WebhookConverter<SponsorshipEvent>))]
     public abstract record SponsorshipEvent : WebhookEvent

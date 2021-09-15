@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.PullRequestEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record PullRequestLinks
     {
         [JsonPropertyName("self")]

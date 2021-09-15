@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.RepositoryDispatch
 {
-    public sealed class RepositoryDispatchAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record RepositoryDispatchAction : WebhookEventAction
     {
         public static readonly RepositoryDispatchAction OnDemandTest = new(RepositoryDispatchActionValue.OnDemandTest);
 

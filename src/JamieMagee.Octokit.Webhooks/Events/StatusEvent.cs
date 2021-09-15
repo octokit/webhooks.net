@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models.StatusEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Status)]
     public sealed record StatusEvent : WebhookEvent
     {

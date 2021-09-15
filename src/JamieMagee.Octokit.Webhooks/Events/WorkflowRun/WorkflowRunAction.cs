@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.WorkflowRun
 {
-    public sealed class WorkflowRunAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record WorkflowRunAction : WebhookEventAction
     {
         public static readonly WorkflowRunAction Completed = new(WorkflowRunActionValue.Completed);
 

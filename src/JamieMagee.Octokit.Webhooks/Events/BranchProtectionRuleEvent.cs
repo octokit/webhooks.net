@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.BranchProtectionRule)]
     [JsonConverter(typeof(WebhookConverter<BranchProtectionRuleEvent>))]
     public abstract record BranchProtectionRuleEvent : WebhookEvent

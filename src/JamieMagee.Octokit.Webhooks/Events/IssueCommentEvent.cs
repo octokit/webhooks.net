@@ -3,7 +3,9 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.IssueComment)]
     [JsonConverter(typeof(WebhookConverter<IssueCommentEvent>))]
     public abstract record IssueCommentEvent : WebhookEvent

@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events.PullRequest
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(PullRequestActionValue.Synchronize)]
     public sealed record PullRequestSynchronizeEvent : PullRequestEvent
     {

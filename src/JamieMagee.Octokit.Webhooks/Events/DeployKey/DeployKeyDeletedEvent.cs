@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.DeployKey
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(DeployKeyActionValue.Deleted)]
     public sealed record DeployKeyDeletedEvent : DeployKeyEvent
     {

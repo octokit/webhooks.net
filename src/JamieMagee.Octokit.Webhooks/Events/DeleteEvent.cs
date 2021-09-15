@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Delete)]
     public abstract record DeleteEvent : WebhookEvent
     {

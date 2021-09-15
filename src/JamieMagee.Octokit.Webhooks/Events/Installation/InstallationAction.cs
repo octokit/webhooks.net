@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Installation
 {
-    public sealed class InstallationAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record InstallationAction : WebhookEventAction
     {
         public static readonly InstallationAction Created = new(InstallationActionValue.Created);
 

@@ -2,7 +2,9 @@ namespace JamieMagee.Octokit.Webhooks.Events.Discussion
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models.DiscussionEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(DiscussionActionValue.CategoryChanged)]
     public sealed record DiscussionCategoryChangedEvent : DiscussionEvent
     {
@@ -10,6 +12,6 @@ namespace JamieMagee.Octokit.Webhooks.Events.Discussion
         public override string Action => DiscussionAction.CategoryChanged;
 
         [JsonPropertyName("changes")]
-        public DiscussionChanges Changes { get; init; } = null!;
+        public Changes Changes { get; init; } = null!;
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.SponsorshipEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record Changes
     {
         [JsonPropertyName("privacy_level")]

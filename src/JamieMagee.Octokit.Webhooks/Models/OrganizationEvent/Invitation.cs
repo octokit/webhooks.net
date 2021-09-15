@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.OrganizationEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record Invitation
     {
         [JsonPropertyName("id")]

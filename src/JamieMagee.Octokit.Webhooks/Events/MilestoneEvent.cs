@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Milestone)]
     [JsonConverter(typeof(WebhookConverter<MilestoneEvent>))]
     public abstract record MilestoneEvent : WebhookEvent

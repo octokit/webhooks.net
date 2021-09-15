@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.RepositoryDispatch)]
     [JsonConverter(typeof(WebhookConverter<RepositoryDispatchEvent>))]
     public abstract record RepositoryDispatchEvent : WebhookEvent

@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Star
 {
-    public sealed class StarAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record StarAction : WebhookEventAction
     {
         public static readonly StarAction Created = new(StarActionValue.Created);
 

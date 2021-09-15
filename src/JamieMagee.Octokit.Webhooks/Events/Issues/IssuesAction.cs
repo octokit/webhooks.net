@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Issues
 {
-    public sealed class IssuesAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record IssuesAction : WebhookEventAction
     {
         public static readonly IssuesAction Assigned = new(IssuesActionValue.Assigned);
 

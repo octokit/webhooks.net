@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.GithubAppAuthorization
 {
-    public sealed class GithubAppAuthorizationAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record GithubAppAuthorizationAction : WebhookEventAction
     {
         public static readonly GithubAppAuthorizationAction Revoked = new(GithubAppAuthorizationActionValue.Revoked);
 

@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ProjectColumn
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(ProjectColumnActionValue.Moved)]
     public sealed record ProjectColumnMovedEvent : ProjectColumnEvent
     {

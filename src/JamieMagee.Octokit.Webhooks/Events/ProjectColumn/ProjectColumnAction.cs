@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ProjectColumn
 {
-    public sealed class ProjectColumnAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record ProjectColumnAction : WebhookEventAction
     {
         public static readonly ProjectColumnAction Created = new(ProjectColumnActionValue.Created);
 

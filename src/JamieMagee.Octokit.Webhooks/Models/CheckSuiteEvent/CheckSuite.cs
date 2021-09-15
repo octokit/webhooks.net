@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models.CheckRunEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record CheckSuite
     {
         [JsonPropertyName("id")]

@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.WorkflowRun
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(WorkflowRunActionValue.Completed)]
     public sealed record WorkflowRunCompletedEvent : WorkflowRunEvent
     {

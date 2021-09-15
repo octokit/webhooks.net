@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.DeploymentEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record Deployment
     {
         [JsonPropertyName("url")]

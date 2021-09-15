@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(PullRequestActionValue.Unassigned)]
     public sealed record PullRequestUnassignedEvent : PullRequestEvent
     {

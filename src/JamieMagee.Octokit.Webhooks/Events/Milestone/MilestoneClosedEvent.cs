@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Milestone
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(MilestoneActionValue.Closed)]
     public sealed record MilestoneClosedEvent : MilestoneEvent
     {

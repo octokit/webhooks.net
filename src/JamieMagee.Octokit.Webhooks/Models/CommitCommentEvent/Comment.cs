@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.CommitCommentEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record Comment
     {
         [JsonPropertyName("url")]

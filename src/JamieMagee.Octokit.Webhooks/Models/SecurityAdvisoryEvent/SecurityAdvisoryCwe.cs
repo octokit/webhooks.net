@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.SecurityAdvisoryEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record SecurityAdvisoryCwe
     {
         [JsonPropertyName("cwe_id")]

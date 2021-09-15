@@ -2,7 +2,9 @@
 {
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models.MemberEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     public sealed record Changes
     {
         [JsonPropertyName("description")]

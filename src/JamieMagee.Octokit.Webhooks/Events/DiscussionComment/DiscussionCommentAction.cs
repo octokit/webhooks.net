@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.DiscussionComment
 {
-    public sealed class DiscussionCommentAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record DiscussionCommentAction : WebhookEventAction
     {
         public static readonly DiscussionCommentAction Created = new(DiscussionCommentActionValue.Created);
 

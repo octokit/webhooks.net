@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Project
 {
-    public sealed class ProjectAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record ProjectAction : WebhookEventAction
     {
         public static readonly ProjectAction Closed = new(ProjectActionValue.Closed);
 

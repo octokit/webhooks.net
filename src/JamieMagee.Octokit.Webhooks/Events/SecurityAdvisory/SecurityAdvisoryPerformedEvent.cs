@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.SecurityAdvisory
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(SecurityAdvisoryActionValue.Performed)]
     public sealed record SecurityAdvisoryPerformedEvent : SecurityAdvisoryEvent
     {

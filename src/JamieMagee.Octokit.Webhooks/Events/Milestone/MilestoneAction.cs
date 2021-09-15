@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Milestone
 {
-    public sealed class MilestoneAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record MilestoneAction : WebhookEventAction
     {
         public static readonly MilestoneAction Closed = new(MilestoneActionValue.Closed);
 

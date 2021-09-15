@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Discussion
 {
-    public sealed class DiscussionAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record DiscussionAction : WebhookEventAction
     {
         public static readonly DiscussionAction Answered = new(DiscussionActionValue.Answered);
 

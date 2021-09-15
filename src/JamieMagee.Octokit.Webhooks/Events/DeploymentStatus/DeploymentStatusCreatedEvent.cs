@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.DeploymentStatus
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(DeploymentStatusActionValue.Created)]
     public sealed record DeploymentStatusCreatedEvent : DeploymentStatusEvent
     {

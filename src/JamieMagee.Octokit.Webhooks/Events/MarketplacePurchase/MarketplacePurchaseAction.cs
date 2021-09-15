@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.MarketplacePurchase
 {
-    public sealed class MarketplacePurchaseAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record MarketplacePurchaseAction : WebhookEventAction
     {
         public static readonly MarketplacePurchaseAction Cancelled = new(MarketplacePurchaseActionValue.Cancelled);
 

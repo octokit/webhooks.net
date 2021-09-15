@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Sponsorship
 {
-    public sealed class SponsorshipAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record SponsorshipAction : WebhookEventAction
     {
         public static readonly SponsorshipAction Cancelled = new(SponsorshipActionValue.Cancelled);
 

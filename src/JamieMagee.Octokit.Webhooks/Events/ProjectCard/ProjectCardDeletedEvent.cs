@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ProjectCard
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(ProjectCardActionValue.Deleted)]
     public sealed record ProjectCardDeletedEvent : ProjectCardEvent
     {

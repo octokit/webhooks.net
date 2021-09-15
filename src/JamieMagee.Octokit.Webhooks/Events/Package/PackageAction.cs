@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Package
 {
-    public sealed class PackageAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record PackageAction : WebhookEventAction
     {
         public static readonly PackageAction Published = new(PackageActionValue.Published);
 

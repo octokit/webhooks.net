@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.OrgBlock
 {
-    public sealed class OrgBlockAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record OrgBlockAction : WebhookEventAction
     {
         public static readonly OrgBlockAction Blocked = new(OrgBlockActionValue.Blocked);
 

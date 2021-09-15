@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.WorkflowDispatch)]
     public sealed record WorkflowDispatchEvent : WebhookEvent
     {

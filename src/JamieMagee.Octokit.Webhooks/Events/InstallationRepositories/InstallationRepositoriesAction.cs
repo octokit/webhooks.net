@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.InstallationRepositories
 {
-    public sealed class InstallationRepositoriesAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record InstallationRepositoriesAction : WebhookEventAction
     {
         public static readonly InstallationRepositoriesAction Added = new(InstallationRepositoriesActionValue.Added);
 

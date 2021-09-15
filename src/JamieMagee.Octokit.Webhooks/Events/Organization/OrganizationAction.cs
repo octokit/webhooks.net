@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Organization
 {
-    public sealed class OrganizationAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record OrganizationAction : WebhookEventAction
     {
         public static readonly OrganizationAction Deleted = new(OrganizationActionValue.Deleted);
 

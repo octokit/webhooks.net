@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.PullRequestReview
 {
-    public sealed class PullRequestReviewAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record PullRequestReviewAction : WebhookEventAction
     {
         public static readonly PullRequestReviewAction Dismissed = new(PullRequestReviewActionValue.Dismissed);
 

@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ContentReference
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(ContentReferenceActionValue.Created)]
     public sealed record ContentReferenceCreatedEvent : ContentReferenceEvent
     {

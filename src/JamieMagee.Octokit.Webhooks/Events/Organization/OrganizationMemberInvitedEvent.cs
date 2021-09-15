@@ -3,7 +3,9 @@ namespace JamieMagee.Octokit.Webhooks.Events.Organization
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.OrganizationEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(OrganizationActionValue.MemberInvited)]
     public sealed record OrganizationMemberInvitedEvent : OrganizationEvent
     {

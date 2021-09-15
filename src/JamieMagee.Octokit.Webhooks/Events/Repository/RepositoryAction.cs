@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Repository
 {
-    public sealed class RepositoryAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record RepositoryAction : WebhookEventAction
     {
         public static readonly RepositoryAction Archived = new(RepositoryActionValue.Archived);
 

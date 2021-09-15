@@ -3,7 +3,9 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models.GollumEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Gollum)]
     public sealed record GollumEvent : WebhookEvent
     {

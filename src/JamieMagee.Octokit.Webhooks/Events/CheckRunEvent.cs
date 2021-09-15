@@ -3,7 +3,9 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models.CheckRunEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.CheckRun)]
     [JsonConverter(typeof(WebhookConverter<CheckRunEvent>))]
     public abstract record CheckRunEvent : WebhookEvent

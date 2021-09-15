@@ -4,7 +4,9 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.PushEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Push)]
     public sealed record PushEvent : WebhookEvent
     {

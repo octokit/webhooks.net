@@ -3,7 +3,9 @@
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models.CodeScanningAlertEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.CodeScanningAlert)]
     [JsonConverter(typeof(WebhookConverter<CodeScanningAlertEvent>))]
     public abstract record CodeScanningAlertEvent : WebhookEvent

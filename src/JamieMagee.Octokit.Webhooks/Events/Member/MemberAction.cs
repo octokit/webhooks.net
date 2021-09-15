@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Member
 {
-    public sealed class MemberAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record MemberAction : WebhookEventAction
     {
         public static readonly MemberAction Added = new(MemberActionValue.Added);
 

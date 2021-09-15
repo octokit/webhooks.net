@@ -1,9 +1,10 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Release
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.ReleaseEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(ReleaseActionValue.Edited)]
     public sealed record ReleaseEditedEvent : ReleaseEvent
     {

@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.CheckSuite
 {
-    public sealed class CheckSuiteAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record CheckSuiteAction : WebhookEventAction
     {
         public static readonly CheckSuiteAction Completed = new(CheckSuiteActionValue.Completed);
 

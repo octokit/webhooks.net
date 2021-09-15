@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.PullRequest
 {
-    public sealed class PullRequestAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record PullRequestAction : WebhookEventAction
     {
         public static readonly PullRequestAction Assigned = new(PullRequestActionValue.Assigned);
 

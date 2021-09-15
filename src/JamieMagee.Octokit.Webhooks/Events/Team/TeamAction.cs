@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Team
 {
-    public sealed class TeamAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record TeamAction : WebhookEventAction
     {
         public static readonly TeamAction AddedToRepository = new(TeamActionValue.AddedToRepository);
 

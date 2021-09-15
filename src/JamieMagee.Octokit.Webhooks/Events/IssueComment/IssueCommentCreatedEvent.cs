@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.IssueComment
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(IssueCommentActionValue.Created)]
     public sealed record IssueCommentCreatedEvent : IssueCommentEvent
     {

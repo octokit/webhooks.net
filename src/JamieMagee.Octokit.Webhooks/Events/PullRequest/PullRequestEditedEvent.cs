@@ -1,9 +1,10 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events.PullRequest
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.PullRequestEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(PullRequestActionValue.Edited)]
     public sealed record PullRequestEditedEvent : PullRequestEvent
     {

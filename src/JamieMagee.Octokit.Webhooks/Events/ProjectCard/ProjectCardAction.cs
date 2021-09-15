@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ProjectCard
 {
-    public sealed class ProjectCardAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record ProjectCardAction : WebhookEventAction
     {
         public static readonly ProjectCardAction Converted = new(ProjectCardActionValue.Converted);
 

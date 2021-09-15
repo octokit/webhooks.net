@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.SecurityAdvisory
 {
-    public sealed class SecurityAdvisoryAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record SecurityAdvisoryAction : WebhookEventAction
     {
         public static readonly SecurityAdvisoryAction Performed = new(SecurityAdvisoryActionValue.Performed);
 

@@ -1,4 +1,4 @@
-﻿namespace JamieMagee.Octokit.Webhooks.Models.PullRequestReviewCommentEvent
+﻿namespace JamieMagee.Octokit.Webhooks.Models.DiscussionCommentEvent
 {
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
@@ -7,6 +7,6 @@
     public sealed record Changes
     {
         [JsonPropertyName("body")]
-        public ChangesBody? Body { get; init; }
-    };
+        public Changes? Body { get; init; }
+    }
 }

@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.ContentReference
 {
-    public sealed class ContentReferenceAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record ContentReferenceAction : WebhookEventAction
     {
         public static readonly ContentReferenceAction Created = new(ContentReferenceActionValue.Created);
 

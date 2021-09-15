@@ -1,10 +1,12 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Models.DiscussionEvent
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
-    public sealed record DiscussionChangesCategory
+    [PublicAPI]
+    public sealed record ChangesTitle
     {
         [JsonPropertyName("from")]
-        public DiscussionCategory From { get; init; }
+        public string From { get; init; } = null!;
     }
 }

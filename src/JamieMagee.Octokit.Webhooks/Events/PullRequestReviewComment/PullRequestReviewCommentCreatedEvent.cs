@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.PullRequestReviewComment
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(PullRequestReviewCommentActionValue.Created)]
     public sealed record PullRequestReviewCommentCreatedEvent : PullRequestReviewCommentEvent
     {

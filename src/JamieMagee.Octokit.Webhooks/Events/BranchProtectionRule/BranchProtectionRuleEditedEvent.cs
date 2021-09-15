@@ -1,7 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events.BranchProtectionRule
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(BranchProtectionRuleActionValue.Edited)]
     public sealed record BranchProtectionRuleEditedEvent : BranchProtectionRuleEvent
     {

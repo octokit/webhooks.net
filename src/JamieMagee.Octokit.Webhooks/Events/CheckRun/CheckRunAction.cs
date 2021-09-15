@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.CheckRun
 {
-    public sealed class CheckRunAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record CheckRunAction : WebhookEventAction
     {
         public static readonly CheckRunAction Completed = new(CheckRunActionValue.Completed);
 

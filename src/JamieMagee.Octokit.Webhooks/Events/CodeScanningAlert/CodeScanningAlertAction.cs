@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.CodeScanningAlert
 {
-    public sealed class CodeScanningAlertAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record CodeScanningAlertAction : WebhookEventAction
     {
         public static readonly CodeScanningAlertAction AppearedInBranch = new(CodeScanningAlertActionValue.AppearedInBranch);
 

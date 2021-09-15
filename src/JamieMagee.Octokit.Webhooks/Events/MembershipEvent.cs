@@ -4,7 +4,9 @@
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.MembershipAddedEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Membership)]
     [JsonConverter(typeof(WebhookConverter<MembershipEvent>))]
     public abstract record MembershipEvent : WebhookEvent

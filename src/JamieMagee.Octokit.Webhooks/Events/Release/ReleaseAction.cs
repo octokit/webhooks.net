@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Release
 {
-    public sealed class ReleaseAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record ReleaseAction : WebhookEventAction
     {
         public static readonly ReleaseAction Created = new(ReleaseActionValue.Created);
 

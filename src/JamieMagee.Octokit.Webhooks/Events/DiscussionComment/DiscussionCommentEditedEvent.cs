@@ -1,9 +1,10 @@
 namespace JamieMagee.Octokit.Webhooks.Events.DiscussionComment
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
     using JamieMagee.Octokit.Webhooks.Models.DiscussionCommentEvent;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(DiscussionCommentActionValue.Edited)]
     public sealed record DiscussionCommentEditedEvent : DiscussionCommentEvent
     {
@@ -11,6 +12,6 @@ namespace JamieMagee.Octokit.Webhooks.Events.DiscussionComment
         public override string Action => DiscussionCommentAction.Edited;
 
         [JsonPropertyName("changes")]
-        public DiscussionCommentChanges Changes { get; init; }
+        public Changes Changes { get; init; }
     }
 }

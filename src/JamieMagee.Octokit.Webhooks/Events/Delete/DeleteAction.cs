@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Delete
 {
-    public sealed class DeleteAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record DeleteAction : WebhookEventAction
     {
         public static readonly DeleteAction Event = new(DeleteActionValue.Event);
 

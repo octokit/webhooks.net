@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.DeployKey
 {
-    public sealed class DeployKeyAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record DeployKeyAction : WebhookEventAction
     {
         public static readonly DeployKeyAction Created = new(DeployKeyActionValue.Created);
 

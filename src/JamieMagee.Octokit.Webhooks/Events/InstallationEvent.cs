@@ -4,7 +4,9 @@ namespace JamieMagee.Octokit.Webhooks.Events
     using System.Text.Json.Serialization;
     using JamieMagee.Octokit.Webhooks.Converter;
     using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookEventType(WebhookEventType.Installation)]
     [JsonConverter(typeof(WebhookConverter<InstallationEvent>))]
     public abstract record InstallationEvent : WebhookEvent

@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.SecretScanningAlert
 {
-    public sealed class SecretScanningAlertAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record SecretScanningAlertAction : WebhookEventAction
     {
         public static readonly SecretScanningAlertAction Created = new(SecretScanningAlertActionValue.Created);
 

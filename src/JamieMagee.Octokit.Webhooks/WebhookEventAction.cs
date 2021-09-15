@@ -1,6 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks
 {
-    public abstract class WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public abstract record WebhookEventAction
     {
         private readonly string value;
 

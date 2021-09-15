@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Meta
 {
-    public sealed class MetaAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record MetaAction : WebhookEventAction
     {
         public static readonly MetaAction Deleted = new(MetaActionValue.Deleted);
 

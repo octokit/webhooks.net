@@ -1,8 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.MarketplacePurchase
 {
     using System.Text.Json.Serialization;
-    using JamieMagee.Octokit.Webhooks.Models;
+    using JetBrains.Annotations;
 
+    [PublicAPI]
     [WebhookActionType(MarketplacePurchaseActionValue.Changed)]
     public sealed record MarketplacePurchaseChangedEvent : MarketplacePurchaseEvent
     {

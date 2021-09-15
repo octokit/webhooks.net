@@ -1,6 +1,9 @@
 namespace JamieMagee.Octokit.Webhooks.Events.Label
 {
-    public sealed class LabelAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record LabelAction : WebhookEventAction
     {
         public static readonly LabelAction Created = new(LabelActionValue.Created);
 

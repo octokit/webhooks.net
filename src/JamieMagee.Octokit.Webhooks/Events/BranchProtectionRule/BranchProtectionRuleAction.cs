@@ -1,6 +1,9 @@
 ﻿namespace JamieMagee.Octokit.Webhooks.Events.BranchProtectionRule
 {
-    public sealed class BranchProtectionRuleAction : WebhookEventAction
+    using JetBrains.Annotations;
+
+    [PublicAPI]
+    public sealed record BranchProtectionRuleAction : WebhookEventAction
     {
         public static readonly BranchProtectionRuleAction Created = new(BranchProtectionRuleActionValue.Created);
 
