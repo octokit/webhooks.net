@@ -7,7 +7,7 @@
     public sealed record TeamParent
     {
         [JsonPropertyName("description")]
-        public string? Description;
+        public string? Description { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;
