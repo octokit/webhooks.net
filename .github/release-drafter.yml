@@ -11,26 +11,26 @@ no-changes-template: '- No changes'
 categories:
   - title: '📚 Documentation'
     labels:
-      - 'documentation'
+      - 'type:docs'
   - title: '🚀 New Features'
     labels:
-      - 'enhancement'
+      - 'type:feature'
   - title: '🐛 Bug Fixes'
     labels:
-      - 'bug'
+      - 'type:bug'
   - title: '🧰 Maintenance'
     labels:
-      - 'maintenance'
+      - 'type:refactor'
 version-resolver:
   major:
     labels:
-      - 'major'
+      - 'version:major'
   minor:
     labels:
-      - 'minor'
+      - 'version:minor'
   patch:
     labels:
-      - 'patch'
+      - 'version:patch'
   default: patch
 template: |
   $CHANGES
@@ -44,7 +44,7 @@ autolabeler:
       - '**/*.md'
   - label: 'enhancement'
     files:
-      - 'Source/**/*'
+      - 'src/**/*'
   - label: 'maintenance'
     files:
       - '.github/**/*'
