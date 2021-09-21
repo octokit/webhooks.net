@@ -37,12 +37,12 @@ Libraries to handle GitHub Webhooks in .NET applications.
     app.UseEndpoints(endpoints =>
     {
         ...
-        endpoints.MapGitHubWebhook();
+        endpoints.MapGitHubWebhooks();
         ...
     });
     ```
 
-`MapGitHubWebhook()` takes two optional parameters:
+`MapGitHubWebhooks()` takes two optional parameters:
 
 * `path`. Defaults to `/api/github/webhooks`, the URL of the endpoint to use for GitHub.
 * `secret`. The secret you have configured in GitHub, if you have set this up.

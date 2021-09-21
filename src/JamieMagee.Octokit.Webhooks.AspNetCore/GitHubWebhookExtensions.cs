@@ -14,7 +14,7 @@
 
     public static class GitHubWebhookExtensions
     {
-        public static void MapGitHubWebhook(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
+        public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
             endpoints.MapPost(path, async context =>
             {
                 // Verify content type
