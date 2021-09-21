@@ -59,7 +59,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.event_name == 'release'
     environment:
       name: 'GitHub Packages'
-      url: https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/packages
+      url: https://github.com/JamieMagee/Octokit.Webhooks/packages
     permissions:
       packages: write
     runs-on: windows-latest
@@ -81,7 +81,7 @@ jobs:
     if: github.event_name == 'release'
     environment:
       name: 'NuGet'
-      url: https://www.nuget.org/packages/JamieMagee.Octokit.Webhooks
+      url: https://www.nuget.org/packages/Octokit.Webhooks
     runs-on: windows-latest
     steps:
       - name: 'Download artifact'
