@@ -1,8 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models.MilestoneEvent
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.MemberEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.MemberEvent;
 
     [PublicAPI]
     public sealed record Changes
@@ -15,5 +15,5 @@
 
         [JsonPropertyName("title")]
         public ChangesTitle? Title { get; init; }
-    };
+    }
 }

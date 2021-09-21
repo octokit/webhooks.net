@@ -1,8 +1,8 @@
 ﻿namespace Octokit.Webhooks.Events.PullRequest
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.PullRequestEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.PullRequestEvent;
 
     [PublicAPI]
     [WebhookActionType(PullRequestActionValue.Edited)]

@@ -1,8 +1,8 @@
 ﻿namespace Octokit.Webhooks
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models;
 
     [PublicAPI]
     public abstract record WebhookEvent

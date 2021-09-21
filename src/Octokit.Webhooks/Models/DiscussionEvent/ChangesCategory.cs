@@ -7,6 +7,6 @@
     public sealed record ChangesCategory
     {
         [JsonPropertyName("from")]
-        public DiscussionCategory From { get; init; }
+        public DiscussionCategory From { get; init; } = null!;
     }
 }

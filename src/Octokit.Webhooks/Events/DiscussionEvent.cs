@@ -1,8 +1,8 @@
 ﻿namespace Octokit.Webhooks.Events
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Converter;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.Discussion)]
@@ -10,6 +10,6 @@
     public abstract record DiscussionEvent : WebhookEvent
     {
         [JsonPropertyName("discussion")]
-        public Models.Discussion Discussion { get; init; }
+        public Models.Discussion Discussion { get; init; } = null!;
     }
 }

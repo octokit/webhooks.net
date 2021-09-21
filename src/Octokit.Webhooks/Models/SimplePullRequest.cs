@@ -68,7 +68,6 @@
         public IEnumerable<User> Assignees { get; init; } = null!;
 
         // requested_reviewers: (User | Team)[];
-
         [JsonPropertyName("requested_teams")]
         public IEnumerable<Team> RequestedTeams { get; init; } = null!;
 
@@ -106,13 +105,12 @@
         public SimplePullRequestLinks? Links { get; init; }
 
         [JsonPropertyName("author_association")]
-        public AuthorAssociation author_association { get; init; }
+        public AuthorAssociation AuthorAssociation { get; init; }
 
         [JsonPropertyName("auto_merge")]
-        public bool auto_merge { get; init; }
+        public bool AutoMerge { get; init; }
 
         [JsonPropertyName("active_lock_reason")]
-        public ActiveLockReason? active_lock_reason { get; init; }
-
+        public ActiveLockReason? ActiveLockReason { get; init; }
     }
 }

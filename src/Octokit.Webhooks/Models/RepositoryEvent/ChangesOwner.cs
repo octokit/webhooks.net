@@ -8,5 +8,5 @@
     {
         [JsonPropertyName("from")]
         public ChangesOwnerFrom? From { get; init; }
-    };
+    }
 }

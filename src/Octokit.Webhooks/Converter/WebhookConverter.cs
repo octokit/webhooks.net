@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text.Json;
     using System.Text.Json.Serialization;
@@ -31,7 +32,7 @@
             }
 
             using var jsonDocument = JsonDocument.ParseValue(ref reader);
-            if (!jsonDocument.RootElement.TryGetProperty(nameof(WebhookEvent.Action).ToLower(), out var action))
+            if (!jsonDocument.RootElement.TryGetProperty(nameof(WebhookEvent.Action).ToLower(CultureInfo.InvariantCulture), out var action))
             {
                 throw new JsonException();
             }

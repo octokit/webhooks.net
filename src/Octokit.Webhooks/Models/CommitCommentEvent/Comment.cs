@@ -43,6 +43,6 @@
         public AuthorAssociation AuthorAssociation { get; init; }
 
         [JsonPropertyName("body")]
-        public string Body { get; init; }
+        public string Body { get; init; } = null!;
     }
 }

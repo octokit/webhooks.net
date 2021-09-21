@@ -11,13 +11,13 @@
         public int Number { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; }
+        public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("url")]
-        public string Url { get; init; }
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; }
+        public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("instances")]
         public IEnumerable<AlertInstance> Instances { get; init; } = null!;
@@ -41,6 +41,6 @@
         public AlertRule? Rule { get; init; }
 
         [JsonPropertyName("tool")]
-        public AlertTool Tool { get; init; }
+        public AlertTool Tool { get; init; } = null!;
     }
 }

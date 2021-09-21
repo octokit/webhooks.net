@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Repository
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.RepositoryEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.RepositoryEvent;
 
     [PublicAPI]
     [WebhookActionType(RepositoryActionValue.Edited)]

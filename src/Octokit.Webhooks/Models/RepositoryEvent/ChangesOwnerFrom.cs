@@ -8,5 +8,5 @@
     {
         [JsonPropertyName("user")]
         public User? User { get; init; }
-    };
+    }
 }

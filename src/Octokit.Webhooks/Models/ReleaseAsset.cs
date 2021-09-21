@@ -43,5 +43,6 @@
         public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("uploader")]
-        public User? Uploader { get; init; } }
+        public User? Uploader { get; init; }
+    }
 }

@@ -11,5 +11,5 @@
 
         [JsonPropertyName("column_id")]
         public ChangesColumnId? ColumnId { get; init; } = null!;
-    };
+    }
 }

@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.StatusEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.StatusEvent;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.Status)]
@@ -34,10 +34,10 @@
         public StatusState State { get; init; }
 
         [JsonPropertyName("commit")]
-        public Commit Commit { get; init; }
+        public Commit Commit { get; init; } = null!;
 
         [JsonPropertyName("branch")]
-        public IEnumerable<Branch> Branch { get; init; }
+        public IEnumerable<Branch> Branch { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; init; } = null!;

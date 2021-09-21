@@ -7,6 +7,6 @@
     public sealed record BuildError
     {
         [JsonPropertyName("message")]
-        public string? message { get; init; }
+        public string? Message { get; init; }
     }
 }

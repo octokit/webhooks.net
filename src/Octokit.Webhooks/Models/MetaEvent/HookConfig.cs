@@ -14,5 +14,5 @@
 
         [JsonPropertyName("insecure_ssl")]
         public string InsecureSsl { get; init; } = null!;
-    };
+    }
 }

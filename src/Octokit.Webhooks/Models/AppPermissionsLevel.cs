@@ -9,6 +9,6 @@
         [EnumMember(Value = "read")]
         Read,
         [EnumMember(Value = "write")]
-        Write
+        Write,
     }
 }

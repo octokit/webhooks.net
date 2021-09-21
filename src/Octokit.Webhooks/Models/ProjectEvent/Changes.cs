@@ -11,5 +11,5 @@
 
         [JsonPropertyName("body")]
         public ChangesBody? Body { get; init; }
-    };
+    }
 }

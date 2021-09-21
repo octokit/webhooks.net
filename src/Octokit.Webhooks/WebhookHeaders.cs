@@ -6,17 +6,17 @@
 
     public sealed class WebhookHeaders
     {
-        public string UserAgent { get; init; }
+        public string? UserAgent { get; init; }
 
-        public string Delivery { get; init; }
+        public string? Delivery { get; init; }
 
-        public string Event { get; init; }
+        public string? Event { get; init; }
 
-        public string HookId { get; init; }
+        public string? HookId { get; init; }
 
-        public string HookInstallationTargetId { get; init; }
+        public string? HookInstallationTargetId { get; init; }
 
-        public string HookInstallationTargetType { get; init; }
+        public string? HookInstallationTargetType { get; init; }
 
         public static WebhookHeaders Parse(IDictionary<string, StringValues> headers)
         {

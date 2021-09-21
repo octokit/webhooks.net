@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Discussion
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models;
 
     [PublicAPI]
     [WebhookActionType(DiscussionActionValue.Unlabeled)]

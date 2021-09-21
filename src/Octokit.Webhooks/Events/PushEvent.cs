@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Octokit.Webhooks.Models;
     using Octokit.Webhooks.Models.PushEvent;
-    using JetBrains.Annotations;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.Push)]

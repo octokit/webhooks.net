@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Team
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.TeamEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.TeamEvent;
 
     [PublicAPI]
     [WebhookActionType(TeamActionValue.Edited)]

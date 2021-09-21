@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Label
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.LabelEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.LabelEvent;
 
     [PublicAPI]
     [WebhookActionType(LabelActionValue.Edited)]

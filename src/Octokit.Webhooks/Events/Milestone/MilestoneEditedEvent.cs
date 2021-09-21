@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Milestone
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.MilestoneEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.MilestoneEvent;
 
     [PublicAPI]
     [WebhookActionType(MilestoneActionValue.Edited)]
@@ -12,6 +12,6 @@ namespace Octokit.Webhooks.Events.Milestone
         public override string Action => MilestoneAction.Edited;
 
         [JsonPropertyName("changes")]
-        public Changes Changes { get; init; }
+        public Changes Changes { get; init; } = null!;
     }
 }

@@ -8,6 +8,6 @@
     public sealed record TeamAddEvent : WebhookEvent
     {
         [JsonPropertyName("team")]
-        public Models.Team team { get; init; } = null!;
+        public Models.Team Team { get; init; } = null!;
     }
 }

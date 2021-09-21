@@ -7,6 +7,6 @@
     public sealed record ChangesRepository
     {
         [JsonPropertyName("permissions")]
-        public ChangesRepositoryPermissions Permissions { get; init; }
+        public ChangesRepositoryPermissions Permissions { get; init; } = null!;
     }
 }

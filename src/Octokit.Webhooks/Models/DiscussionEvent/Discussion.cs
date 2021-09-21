@@ -7,10 +7,10 @@
     public sealed record Discussion
     {
         [JsonPropertyName("repository_url")]
-        public string RepositoryUrl { get; init; }
+        public string RepositoryUrl { get; init; } = null!;
 
         [JsonPropertyName("category")]
-        public DiscussionCategory Category { get; init; }
+        public DiscussionCategory Category { get; init; } = null!;
 
         [JsonPropertyName("answer_html_url")]
         public string? AnswerHtmlUrl { get; init; }
@@ -22,22 +22,22 @@
         public User? AnswerChosenBy { get; init; }
 
         [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; }
+        public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
         public int Id { get; init; }
 
         [JsonPropertyName("node_id")]
-        public string NodeId { get; init; }
+        public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
         public int Number { get; init; }
 
         [JsonPropertyName("title")]
-        public string Title { get; init; }
+        public string Title { get; init; } = null!;
 
         [JsonPropertyName("user")]
-        public User User { get; init; }
+        public User User { get; init; } = null!;
 
         [JsonPropertyName("state")]
         public DiscussionState State { get; init; }
@@ -49,10 +49,10 @@
         public int Comments { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; }
+        public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; }
+        public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("author_association")]
         public AuthorAssociation AuthorAssociation { get; init; }
@@ -61,6 +61,6 @@
         public string? ActiveLockReason { get; init; }
 
         [JsonPropertyName("body")]
-        public string Body { get; init; }
+        public string Body { get; init; } = null!;
     }
 }

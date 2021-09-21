@@ -1,8 +1,8 @@
 ﻿namespace Octokit.Webhooks.Events
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Converter;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.RepositoryDispatch)]
@@ -10,9 +10,9 @@
     public abstract record RepositoryDispatchEvent : WebhookEvent
     {
         [JsonPropertyName("branch")]
-        public string branch { get; init; } = null!;
+        public string Branch { get; init; } = null!;
 
         [JsonPropertyName("client_payload")]
-        public dynamic client_payload { get; init; } = null!;
+        public dynamic ClientPayload { get; init; } = null!;
     }
 }

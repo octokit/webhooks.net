@@ -11,6 +11,6 @@
         [EnumMember(Value = "non_admins")]
         NonAdmins,
         [EnumMember(Value = "everyone")]
-        Everyone
+        Everyone,
     }
 }

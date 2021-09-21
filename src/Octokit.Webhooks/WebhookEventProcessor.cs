@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Text.Json;
+    using JetBrains.Annotations;
+    using Microsoft.Extensions.Primitives;
     using Octokit.Webhooks.Events;
     using Octokit.Webhooks.Events.BranchProtectionRule;
     using Octokit.Webhooks.Events.CheckRun;
@@ -47,8 +49,6 @@
     using Octokit.Webhooks.Events.Watch;
     using Octokit.Webhooks.Events.WorkflowJob;
     using Octokit.Webhooks.Events.WorkflowRun;
-    using JetBrains.Annotations;
-    using Microsoft.Extensions.Primitives;
 
     public abstract class WebhookEventProcessor
     {
@@ -1384,6 +1384,5 @@
         protected virtual void ProcessWorkflowRunWebhook(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent, WorkflowRunAction action)
         {
         }
-
     }
 }

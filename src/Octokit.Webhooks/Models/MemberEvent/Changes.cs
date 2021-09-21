@@ -11,5 +11,5 @@
 
         [JsonPropertyName("old_permission")]
         public ChangesPermission? OldPermission { get; init; }
-    };
+    }
 }

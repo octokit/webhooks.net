@@ -1,9 +1,9 @@
 ﻿namespace Octokit.Webhooks.Events
 {
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
     using Octokit.Webhooks.Converter;
     using Octokit.Webhooks.Models.SecretScanningAlertEvent;
-    using JetBrains.Annotations;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.SecretScanningAlert)]

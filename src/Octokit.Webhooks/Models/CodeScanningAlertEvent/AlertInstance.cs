@@ -8,13 +8,13 @@
     public sealed record AlertInstance
     {
         [JsonPropertyName("ref")]
-        public string Ref { get; init; }
+        public string Ref { get; init; } = null!;
 
         [JsonPropertyName("analysis_key")]
-        public string analysis_key { get; init; }
+        public string AnalysisKey { get; init; } = null!;
 
         [JsonPropertyName("environment")]
-        public string environment { get; init; }
+        public string Environment { get; init; } = null!;
 
         [JsonPropertyName("state")]
         public AlertState State { get; init; }

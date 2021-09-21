@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.ProjectColumn
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.ProjectColumnEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.ProjectColumnEvent;
 
     [PublicAPI]
     [WebhookActionType(ProjectColumnActionValue.Edited)]

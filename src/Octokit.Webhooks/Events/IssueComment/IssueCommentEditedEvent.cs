@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.IssueComment
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.IssueCommentEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.IssueCommentEvent;
 
     [PublicAPI]
     [WebhookActionType(IssueCommentActionValue.Edited)]
@@ -12,6 +12,6 @@ namespace Octokit.Webhooks.Events.IssueComment
         public override string Action => IssueCommentAction.Edited;
 
         [JsonPropertyName("changes")]
-        public Changes Changes { get; init; }
+        public Changes Changes { get; init; } = null!;
     }
 }

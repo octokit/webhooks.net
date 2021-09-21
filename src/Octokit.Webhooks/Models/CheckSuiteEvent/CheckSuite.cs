@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.CheckRunEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.CheckRunEvent;
 
     [PublicAPI]
     public sealed record CheckSuite

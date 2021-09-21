@@ -30,5 +30,5 @@
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; init; } = null!;
-    };
+    }
 }

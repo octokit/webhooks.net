@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Release
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.ReleaseEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.ReleaseEvent;
 
     [PublicAPI]
     [WebhookActionType(ReleaseActionValue.Edited)]

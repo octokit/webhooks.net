@@ -8,6 +8,6 @@
     public sealed record ForkEvent : WebhookEvent
     {
         [JsonPropertyName("forkee")]
-        public Models.Repository Forkee { get; init; }
+        public Models.Repository Forkee { get; init; } = null!;
     }
 }

@@ -11,6 +11,6 @@
         [EnumMember(Value = "Closed")]
         Closed,
         [EnumMember(Value = "Secret")]
-        Secret
+        Secret,
     }
 }

@@ -8,5 +8,5 @@
     {
         [JsonPropertyName("name")]
         public ChangesName? Name { get; init; }
-    };
+    }
 }

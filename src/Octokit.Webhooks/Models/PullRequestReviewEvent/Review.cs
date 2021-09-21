@@ -36,5 +36,8 @@
 
         [JsonPropertyName("author_association")]
         public AuthorAssociation AuthorAssociation { get; init; }
+
+        [JsonPropertyName("_links")]
+        public ReviewLinks Links { get; init; } = null!;
     }
 }

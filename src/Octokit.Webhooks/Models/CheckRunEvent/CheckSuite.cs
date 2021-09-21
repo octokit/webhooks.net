@@ -26,7 +26,7 @@
         public CheckSuiteConclusion? Conclusion { get; init; }
 
         [JsonPropertyName("url")]
-        public string Url { get; init; }
+        public string Url { get; init; } = null!;
 
         [JsonPropertyName("before")]
         public string? Before { get; init; }
@@ -38,15 +38,15 @@
         public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
 
         [JsonPropertyName("deployment")]
-        public CheckRunDeployment? Deployment { get; init; }
+        public Deployment? Deployment { get; init; }
 
         [JsonPropertyName("app")]
         public App App { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; }
+        public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; }
+        public string UpdatedAt { get; init; } = null!;
     }
 }

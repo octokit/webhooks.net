@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Issues
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models;
 
     [PublicAPI]
     [WebhookActionType(IssuesActionValue.Milestoned)]
@@ -12,6 +12,6 @@ namespace Octokit.Webhooks.Events.Issues
         public override string Action => IssuesAction.Milestoned;
 
         [JsonPropertyName("milestone")]
-        public Milestone Milestone { get; init; }
+        public Milestone Milestone { get; init; } = null!;
     }
 }

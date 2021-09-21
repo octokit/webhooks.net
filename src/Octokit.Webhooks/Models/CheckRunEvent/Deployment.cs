@@ -4,7 +4,7 @@
     using JetBrains.Annotations;
 
     [PublicAPI]
-    public sealed record CheckRunDeployment
+    public sealed record Deployment
     {
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;

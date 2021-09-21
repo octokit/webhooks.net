@@ -8,5 +8,5 @@
     {
         [JsonPropertyName("from")]
         public string? From { get; init; }
-    };
+    }
 }

@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.Sponsorship
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.SponsorshipEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.SponsorshipEvent;
 
     [PublicAPI]
     [WebhookActionType(SponsorshipActionValue.TierChanged)]

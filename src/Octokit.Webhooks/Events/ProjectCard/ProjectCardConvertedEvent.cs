@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Events.ProjectCard
 {
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.ProjectCardEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.ProjectCardEvent;
 
     [PublicAPI]
     [WebhookActionType(ProjectCardActionValue.Converted)]

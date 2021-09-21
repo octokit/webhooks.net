@@ -14,13 +14,13 @@
         public int RepositoryId { get; init; }
 
         [JsonPropertyName("name")]
-        public string Name { get; init; }
+        public string Name { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; }
+        public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("admin_enforced")]
         public bool AdminEnforced { get; init; }

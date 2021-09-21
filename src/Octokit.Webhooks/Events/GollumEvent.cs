@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-    using Octokit.Webhooks.Models.GollumEvent;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Models.GollumEvent;
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.Gollum)]
