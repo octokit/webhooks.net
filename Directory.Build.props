@@ -9,16 +9,16 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <Authors>Project Author</Authors>
-    <Company>Project Author</Company>
-    <Copyright>Copyright © Project Author. All rights Reserved</Copyright>
+    <Authors>Octokit Contributors</Authors>
+    <Company>GitHub</Company>
+    <Copyright>Copyright © Octokit Contributors</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/JamieMagee/Octokit.Webhooks</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/JamieMagee/Octokit.Webhooks.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/JamieMagee/JamieMagee.Octokit.Webhooks/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/JamieMagee/Octokit.Webhooks/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">

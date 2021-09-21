@@ -1,8 +1,8 @@
 # JamieMagee.Octokit.Webhooks
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JamieMagee/JamieMagee.Octokit.Webhooks/Build?style=for-the-badge)
-![JamieMagee.Octokit.Webhooks NuGet Package Version](https://img.shields.io/nuget/v/JamieMagee.Octokit.Webhooks?style=for-the-badge)
-![JamieMagee.Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/JamieMagee.Octokit.Webhooks?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/JamieMagee/Octokit.Webhooks/Build?style=for-the-badge)
+![JamieMagee.Octokit.Webhooks NuGet Package Version](https://img.shields.io/nuget/v/Octokit.Webhooks?style=for-the-badge)
+![JamieMagee.Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/Octokit.Webhooks?style=for-the-badge)
 ![Stability - Experimental](https://img.shields.io/badge/stability-experimental-orange?style=for-the-badge)
 
 Libraries to handle GitHub Webhooks in .NET applications.
