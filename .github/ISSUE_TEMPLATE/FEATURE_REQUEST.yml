@@ -1,6 +1,8 @@
 name: "Feature Request"
 description: "Suggest an idea for this project"
-labels: [ enhancement ]
+labels:
+  - type:feature
+  - priority-5-triage
 body:
   - type: textarea
     id: describe-the-bug
