@@ -11,7 +11,7 @@ Thank you 💖
 
 Before you create a new Issue:
 
-1. Please make sure there is no [open issue](https://github.com/octokit/Octokit.Webhooks/issues) yet.
+1. Please make sure there is no [open issue](https://github.com/octokit/webhooks.net/issues) yet.
 2. If it is a bug report, include the steps to reproduce the issue, and please create a reproducible test case on [dotnetfiddle.com](https://dotnetfiddle.net/).
 3. If it is a feature request, please share the motivation for the new feature, what alternatives you tried, and how you would implement it.
 4. Please include links to the corresponding GitHub documentation.
@@ -23,8 +23,8 @@ First, fork the repository.
 Set up the repository locally. Replace `<your account name>` with the name of the account you forked to.
 
 ```shell
-git clone https://github.com/<your account name>/Octokit.Webhooks.git
-cd Octokit.Webhooks
+git clone https://github.com/<your account name>/webhooks.net.git
+cd webhooks.net
 dotnet tool restore
 dotnet cake --target=Build
 ```
@@ -39,5 +39,5 @@ dotnet cake --target=Test
 
 - Create a new branch locally.
 - Make your changes in that branch and push them to your fork
-- Submit a pull request from your topic branch to the main branch on the `octokit/Octokit.Webhooks` repository.
+- Submit a pull request from your topic branch to the main branch on the `octokit/webhooks.net` repository.
 - Be sure to tag any issues your pull request is taking care of / contributing to. Adding "Closes #123" to a pull request description will automatically close the issue once the pull request is merged in.

@@ -14,11 +14,11 @@
     <Copyright>Copyright © Octokit Contributors</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/JamieMagee/Octokit.Webhooks</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/octokit/webhooks.net</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/JamieMagee/Octokit.Webhooks.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/octokit/webhooks.net.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/JamieMagee/Octokit.Webhooks/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/octokit/webhooks.net/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
