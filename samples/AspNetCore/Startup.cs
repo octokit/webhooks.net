@@ -1,11 +1,10 @@
 namespace AspNetCore
 {
-    using JamieMagee.Octokit.Webhooks;
-    using JamieMagee.Octokit.Webhooks.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
+    using Octokit.Webhooks;
+    using Octokit.Webhooks.AspNetCore;
 
     public class Startup
     {
@@ -17,11 +16,7 @@ namespace AspNetCore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-                endpoints.MapGitHubWebhook();
+                endpoints.MapGitHubWebhooks();
             });
         }
     }

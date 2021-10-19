@@ -1,9 +1,9 @@
 ﻿namespace AspNetCore
 {
-    using JamieMagee.Octokit.Webhooks;
-    using JamieMagee.Octokit.Webhooks.Events;
-    using JamieMagee.Octokit.Webhooks.Events.PullRequest;
     using Microsoft.Extensions.Logging;
+    using Octokit.Webhooks;
+    using Octokit.Webhooks.Events;
+    using Octokit.Webhooks.Events.PullRequest;
 
     public class MyWebhookEventProcessor : WebhookEventProcessor
     {
