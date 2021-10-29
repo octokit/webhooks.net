@@ -6,8 +6,10 @@
     using System.Linq;
     using System.Text.Json;
     using System.Text.Json.Serialization;
+    using JetBrains.Annotations;
 
-    internal class WebhookConverter<T> : JsonConverter<T>
+    [PublicAPI]
+    public class WebhookConverter<T> : JsonConverter<T>
         where T : WebhookEvent
     {
         private readonly IDictionary<string, Type> types;
