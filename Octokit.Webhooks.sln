@@ -60,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\release-drafter.yml = .github\workflows\release-drafter.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore", "samples\AspNetCore\AspNetCore.csproj", "{2EE1581B-E8B6-409E-8879-6F1EFC8C682B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{E46C1DB5-F21C-46A9-8D17-F08278BC0BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E46C1DB5-F21C-46A9-8D17-F08278BC0BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E46C1DB5-F21C-46A9-8D17-F08278BC0BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE1581B-E8B6-409E-8879-6F1EFC8C682B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE1581B-E8B6-409E-8879-6F1EFC8C682B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE1581B-E8B6-409E-8879-6F1EFC8C682B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE1581B-E8B6-409E-8879-6F1EFC8C682B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
