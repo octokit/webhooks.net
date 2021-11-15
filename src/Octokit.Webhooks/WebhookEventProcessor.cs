@@ -201,6 +201,7 @@
                 case BranchProtectionRuleActionValue.Edited:
                     return this.ProcessBranchProtectionRuleWebhook(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Edited);
             }
+
             return Task.CompletedTask;
         }
 
@@ -221,6 +222,7 @@
                 case CheckRunActionValue.Rerequested:
                     return this.ProcessCheckRunWebhook(headers, checkRunEvent, CheckRunAction.Rerequested);
             }
+
             return Task.CompletedTask;
         }
 
@@ -239,6 +241,7 @@
                 case CheckSuiteActionValue.Rerequested:
                     return this.ProcessCheckSuiteWebhook(headers, checkSuiteEvent, CheckSuiteAction.Rerequested);
             }
+
             return Task.CompletedTask;
         }
 
@@ -263,6 +266,7 @@
                 case CodeScanningAlertActionValue.ReopenedByUser:
                     return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.ReopenedByUser);
             }
+
             return Task.CompletedTask;
         }
 
@@ -276,6 +280,7 @@
             {
                 case CommitCommentActionValue.Created:
                     return this.ProcessCommitCommentWebhook(headers, commitCommentEvent, CommitCommentAction.Created);
+
             }
             return Task.CompletedTask;
         }
@@ -291,6 +296,7 @@
                 case ContentReferenceActionValue.Created:
                     return this.ProcessContentReferenceWebhook(headers, contentReferenceEvent, ContentReferenceAction.Created);
             }
+
             return Task.CompletedTask;
         }
 
@@ -313,6 +319,7 @@
                 case DeployKeyActionValue.Deleted:
                     return this.ProcessDeployKeyWebhook(headers, deployKeyEvent, DeployKeyAction.Deleted);
             }
+
             return Task.CompletedTask;
         }
 
@@ -327,6 +334,7 @@
                 case DeploymentActionValue.Created:
                     return this.ProcessDeploymentWebhook(headers, deploymentEvent, DeploymentAction.Created);
             }
+
             return Task.CompletedTask;
         }
 
@@ -341,6 +349,7 @@
                 case DeploymentStatusActionValue.Created:
                     return this.ProcessDeploymentStatusWebhook(headers, deploymentStatusEvent, DeploymentStatusAction.Created);
             }
+
             return Task.CompletedTask;
         }
 
@@ -379,6 +388,7 @@
                 case DiscussionActionValue.Unpinned:
                     return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Unpinned);
             }
+
             return Task.CompletedTask;
         }
 
@@ -397,6 +407,7 @@
                 case DiscussionCommentActionValue.Edited:
                     return this.ProcessDiscussionCommentWebhook(headers, discussionCommentEvent, DiscussionCommentAction.Edited);
             }
+
             return Task.CompletedTask;
         }
 
@@ -414,6 +425,7 @@
                 case GithubAppAuthorizationActionValue.Revoked:
                     return this.ProcessGithubAppAuthorizationWebhook(headers, githubAppAuthorizationEvent, GithubAppAuthorizationAction.Revoked);
             }
+
             return Task.CompletedTask;
         }
 
@@ -439,6 +451,7 @@
                 case InstallationActionValue.Unsuspend:
                     return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.Unsuspend);
             }
+
             return Task.CompletedTask;
         }
 
@@ -455,6 +468,7 @@
                 case InstallationRepositoriesActionValue.Removed:
                     return this.ProcessInstallationRepositoriesWebhook(headers, installationRepositoriesEvent, InstallationRepositoriesAction.Removed);
             }
+
             return Task.CompletedTask;
         }
 
@@ -473,6 +487,7 @@
                 case IssueCommentActionValue.Edited:
                     return this.ProcessIssueCommentWebhook(headers, issueCommentEvent, IssueCommentAction.Edited);
             }
+
             return Task.CompletedTask;
         }
 
@@ -517,6 +532,7 @@
                 case IssuesActionValue.Unpinned:
                     return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Unpinned);
             }
+
             return Task.CompletedTask;
         }
 
@@ -535,6 +551,7 @@
                 case LabelActionValue.Edited:
                     return this.ProcessLabelWebhook(headers, labelEvent, LabelAction.Edited);
             }
+
             return Task.CompletedTask;
         }
 
@@ -557,6 +574,7 @@
                 case MarketplacePurchaseActionValue.Purchased:
                     return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Purchased);
             }
+
             return Task.CompletedTask;
         }
 
@@ -575,6 +593,7 @@
                 case MemberActionValue.Removed:
                     return this.ProcessMemberWebhook(headers, memberEvent, MemberAction.Removed);
             }
+
             return Task.CompletedTask;
         }
 
@@ -591,6 +610,7 @@
                 case MembershipActionValue.Removed:
                     return this.ProcessMembershipWebhook(headers, membershipEvent, MembershipAction.Removed);
             }
+
             return Task.CompletedTask;
         }
 
@@ -605,6 +625,7 @@
                 case MetaActionValue.Deleted:
                     return this.ProcessMetaWebhook(headers, metaEvent, MetaAction.Deleted);
             }
+
             return Task.CompletedTask;
         }
 
@@ -627,6 +648,7 @@
                 case MilestoneActionValue.Opened:
                     return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Opened);
             }
+
             return Task.CompletedTask;
         }
 
@@ -643,6 +665,7 @@
                 case OrgBlockActionValue.Unblocked:
                     return this.ProcessOrgBlockWebhook(headers, orgBlockEvent, OrgBlockAction.Unblocked);
             }
+
             return Task.CompletedTask;
         }
 
@@ -665,6 +688,7 @@
                 case OrganizationActionValue.Renamed:
                     return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.Renamed);
             }
+
             return Task.CompletedTask;
         }
 
@@ -681,6 +705,7 @@
                 case PackageActionValue.Updated:
                     return this.ProcessPackageWebhook(headers, packageEvent, PackageAction.Updated);
             }
+
             return Task.CompletedTask;
         }
 
@@ -709,6 +734,7 @@
                 case ProjectActionValue.Reopened:
                     return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Reopened);
             }
+
             return Task.CompletedTask;
         }
 
@@ -731,6 +757,7 @@
                 case ProjectCardActionValue.Moved:
                     return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Moved);
             }
+
             return Task.CompletedTask;
         }
 
@@ -751,6 +778,7 @@
                 case ProjectColumnActionValue.Moved:
                     return this.ProcessProjectColumnWebhook(headers, projectColumnEvent, ProjectColumnAction.Moved);
             }
+
             return Task.CompletedTask;
         }
 
@@ -800,6 +828,7 @@
                 case PullRequestActionValue.Unlocked:
                     return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Unlocked);
             }
+
             return Task.CompletedTask;
         }
 
@@ -818,6 +847,7 @@
                 case PullRequestReviewActionValue.Submitted:
                     return this.ProcessPullRequestReviewWebhook(headers, pullRequestReviewEvent, PullRequestReviewAction.Submitted);
             }
+
             return Task.CompletedTask;
         }
 
@@ -836,6 +866,7 @@
                 case PullRequestReviewCommentActionValue.Edited:
                     return this.ProcessPullRequestReviewCommentWebhook(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Edited);
             }
+
             return Task.CompletedTask;
         }
 
@@ -865,6 +896,7 @@
                 case ReleaseActionValue.Unpublished:
                     return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Unpublished);
             }
+
             return Task.CompletedTask;
         }
 
@@ -895,6 +927,7 @@
                 case RepositoryActionValue.Unarchived:
                     return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Unarchived);
             }
+
             return Task.CompletedTask;
         }
 
@@ -909,6 +942,7 @@
                 case RepositoryDispatchActionValue.OnDemandTest:
                     return this.ProcessRepositoryDispatchWebhook(headers, repositoryDispatchEvent, RepositoryDispatchAction.OnDemandTest);
             }
+
             return Task.CompletedTask;
         }
 
@@ -930,6 +964,7 @@
                 case RepositoryVulnerabilityAlertActionValue.Resolve:
                     return this.ProcessRepositoryVulnerabilityAlertWebhook(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Resolve);
             }
+
             return Task.CompletedTask;
         }
 
@@ -948,6 +983,7 @@
                 case SecretScanningAlertActionValue.Resolved:
                     return this.ProcessSecretScanningAlertWebhook(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved);
             }
+
             return Task.CompletedTask;
         }
 
@@ -968,6 +1004,7 @@
                 case SecurityAdvisoryActionValue.Withdrawn:
                     return this.ProcessSecurityAdvisoryWebhook(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Withdrawn);
             }
+
             return Task.CompletedTask;
         }
 
@@ -992,6 +1029,7 @@
                 case SponsorshipActionValue.TierChanged:
                     return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.TierChanged);
             }
+
             return Task.CompletedTask;
         }
 
@@ -1008,6 +1046,7 @@
                 case StarActionValue.Deleted:
                     return this.ProcessStarWebhook(headers, starEvent, StarAction.Deleted);
             }
+
             return Task.CompletedTask;
         }
 
@@ -1033,6 +1072,7 @@
                 case TeamActionValue.RemovedFromRepository:
                     return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.RemovedFromRepository);
             }
+
             return Task.CompletedTask;
         }
 
@@ -1050,6 +1090,7 @@
                 case WatchActionValue.Started:
                     return this.ProcessWatchWebhook(headers, watchEvent, WatchAction.Started);
             }
+
             return Task.CompletedTask;
         }
 
@@ -1069,6 +1110,7 @@
                 case WorkflowJobActionValue.Started:
                     return this.ProcessWorkflowJobWebhook(headers, workflowJobEvent, WorkflowJobAction.Started);
             }
+
             return Task.CompletedTask;
         }
 
@@ -1085,6 +1127,7 @@
                 case WorkflowRunActionValue.Requested:
                     return this.ProcessWorkflowRunWebhook(headers, workflowRunEvent, WorkflowRunAction.Requested);
             }
+
             return Task.CompletedTask;
         }
 
