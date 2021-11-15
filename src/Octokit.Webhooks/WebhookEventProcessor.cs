@@ -75,1063 +75,1063 @@
             switch (headers.Event)
             {
                 case WebhookEventType.BranchProtectionRule:
-                    return this.ProcessBranchProtectionRuleWebhook(headers, body);
+                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, body);
                 case WebhookEventType.CheckRun:
-                    return this.ProcessCheckRunWebhook(headers, body);
+                    return this.ProcessCheckRunWebhookAsync(headers, body);
                 case WebhookEventType.CheckSuite:
-                    return this.ProcessCheckSuiteWebhook(headers, body);
+                    return this.ProcessCheckSuiteWebhookAsync(headers, body);
                 case WebhookEventType.CodeScanningAlert:
-                    return this.ProcessCodeScanningAlertWebhook(headers, body);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, body);
                 case WebhookEventType.CommitComment:
-                    return this.ProcessCommitCommentWebhook(headers, body);
+                    return this.ProcessCommitCommentWebhookAsync(headers, body);
                 case WebhookEventType.ContentReference:
-                    return this.ProcessContentReferenceWebhook(headers, body);
+                    return this.ProcessContentReferenceWebhookAsync(headers, body);
                 case WebhookEventType.Create:
-                    return this.ProcessCreateWebhook(headers, JsonSerializer.Deserialize<CreateEvent>(body)!);
+                    return this.ProcessCreateWebhookAsync(headers, JsonSerializer.Deserialize<CreateEvent>(body)!);
                 case WebhookEventType.Delete:
-                    return this.ProcessDeleteWebhook(headers, JsonSerializer.Deserialize<DeleteEvent>(body)!);
+                    return this.ProcessDeleteWebhookAsync(headers, JsonSerializer.Deserialize<DeleteEvent>(body)!);
                 case WebhookEventType.DeployKey:
-                    return this.ProcessDeployKeyWebhook(headers, body);
+                    return this.ProcessDeployKeyWebhookAsync(headers, body);
                 case WebhookEventType.Deployment:
-                    return this.ProcessDeploymentWebhook(headers, body);
+                    return this.ProcessDeploymentWebhookAsync(headers, body);
                 case WebhookEventType.DeploymentStatus:
-                    return this.ProcessDeploymentStatusWebhook(headers, body);
+                    return this.ProcessDeploymentStatusWebhookAsync(headers, body);
                 case WebhookEventType.Discussion:
-                    return this.ProcessDiscussionWebhook(headers, body);
+                    return this.ProcessDiscussionWebhookAsync(headers, body);
                 case WebhookEventType.DiscussionComment:
-                    return this.ProcessDiscussionCommentWebhook(headers, body);
+                    return this.ProcessDiscussionCommentWebhookAsync(headers, body);
                 case WebhookEventType.Fork:
-                    return this.ProcessForkWebhook(headers, JsonSerializer.Deserialize<ForkEvent>(body)!);
+                    return this.ProcessForkWebhookAsync(headers, JsonSerializer.Deserialize<ForkEvent>(body)!);
                 case WebhookEventType.GithubAppAuthorization:
-                    return this.ProcessGithubAppAuthorizationWebhook(headers, body);
+                    return this.ProcessGithubAppAuthorizationWebhookAsync(headers, body);
                 case WebhookEventType.Gollum:
-                    return this.ProcessGollumWebhook(headers, JsonSerializer.Deserialize<GollumEvent>(body)!);
+                    return this.ProcessGollumWebhookAsync(headers, JsonSerializer.Deserialize<GollumEvent>(body)!);
                 case WebhookEventType.Installation:
-                    return this.ProcessInstallationWebhook(headers, body);
+                    return this.ProcessInstallationWebhookAsync(headers, body);
                 case WebhookEventType.InstallationRepositories:
-                    return this.ProcessInstallationRepositoriesWebhook(headers, body);
+                    return this.ProcessInstallationRepositoriesWebhookAsync(headers, body);
                 case WebhookEventType.IssueComment:
-                    return this.ProcessIssueCommentWebhook(headers, body);
+                    return this.ProcessIssueCommentWebhookAsync(headers, body);
                 case WebhookEventType.Issues:
-                    return this.ProcessIssuesWebhook(headers, body);
+                    return this.ProcessIssuesWebhookAsync(headers, body);
                 case WebhookEventType.Label:
-                    return this.ProcessLabelWebhook(headers, body);
+                    return this.ProcessLabelWebhookAsync(headers, body);
                 case WebhookEventType.MarketplacePurchase:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, body);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, body);
                 case WebhookEventType.Member:
-                    return this.ProcessMemberWebhook(headers, body);
+                    return this.ProcessMemberWebhookAsync(headers, body);
                 case WebhookEventType.Membership:
-                    return this.ProcessMembershipWebhook(headers, body);
+                    return this.ProcessMembershipWebhookAsync(headers, body);
                 case WebhookEventType.Meta:
-                    return this.ProcessMetaWebhook(headers, body);
+                    return this.ProcessMetaWebhookAsync(headers, body);
                 case WebhookEventType.Milestone:
-                    return this.ProcessMilestoneWebhook(headers, body);
+                    return this.ProcessMilestoneWebhookAsync(headers, body);
                 case WebhookEventType.OrgBlock:
-                    return this.ProcessOrgBlockWebhook(headers, body);
+                    return this.ProcessOrgBlockWebhookAsync(headers, body);
                 case WebhookEventType.Organization:
-                    return this.ProcessOrganizationWebhook(headers, body);
+                    return this.ProcessOrganizationWebhookAsync(headers, body);
                 case WebhookEventType.Package:
-                    return this.ProcessPackageWebhook(headers, body);
+                    return this.ProcessPackageWebhookAsync(headers, body);
                 case WebhookEventType.PageBuild:
-                    return this.ProcessPageBuildWebhook(headers, JsonSerializer.Deserialize<PageBuildEvent>(body)!);
+                    return this.ProcessPageBuildWebhookAsync(headers, JsonSerializer.Deserialize<PageBuildEvent>(body)!);
                 case WebhookEventType.Ping:
-                    return this.ProcessPingWebhook(headers, JsonSerializer.Deserialize<PingEvent>(body)!);
+                    return this.ProcessPingWebhookAsync(headers, JsonSerializer.Deserialize<PingEvent>(body)!);
                 case WebhookEventType.Project:
-                    return this.ProcessProjectWebhook(headers, body);
+                    return this.ProcessProjectWebhookAsync(headers, body);
                 case WebhookEventType.ProjectCard:
-                    return this.ProcessProjectCardWebhook(headers, body);
+                    return this.ProcessProjectCardWebhookAsync(headers, body);
                 case WebhookEventType.ProjectColumn:
-                    return this.ProcessProjectColumnWebhook(headers, body);
+                    return this.ProcessProjectColumnWebhookAsync(headers, body);
                 case WebhookEventType.Public:
-                    return this.ProcessPublicWebhook(headers, JsonSerializer.Deserialize<PublicEvent>(body)!);
+                    return this.ProcessPublicWebhookAsync(headers, JsonSerializer.Deserialize<PublicEvent>(body)!);
                 case WebhookEventType.PullRequest:
-                    return this.ProcessPullRequestWebhook(headers, body);
+                    return this.ProcessPullRequestWebhookAsync(headers, body);
                 case WebhookEventType.PullRequestReview:
-                    return this.ProcessPullRequestReviewWebhook(headers, body);
+                    return this.ProcessPullRequestReviewWebhookAsync(headers, body);
                 case WebhookEventType.PullRequestReviewComment:
-                    return this.ProcessPullRequestReviewCommentWebhook(headers, body);
+                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, body);
                 case WebhookEventType.Push:
-                    return this.ProcessPushWebhook(headers, JsonSerializer.Deserialize<PushEvent>(body)!);
+                    return this.ProcessPushWebhookAsync(headers, JsonSerializer.Deserialize<PushEvent>(body)!);
                 case WebhookEventType.Release:
-                    return this.ProcessReleaseWebhook(headers, body);
+                    return this.ProcessReleaseWebhookAsync(headers, body);
                 case WebhookEventType.Repository:
-                    return this.ProcessRepositoryWebhook(headers, body);
+                    return this.ProcessRepositoryWebhookAsync(headers, body);
                 case WebhookEventType.RepositoryDispatch:
-                    return this.ProcessRepositoryDispatchWebhook(headers, body);
+                    return this.ProcessRepositoryDispatchWebhookAsync(headers, body);
                 case WebhookEventType.RepositoryImport:
-                    return this.ProcessRepositoryImportWebhook(headers, JsonSerializer.Deserialize<RepositoryImportEvent>(body)!);
+                    return this.ProcessRepositoryImportWebhookAsync(headers, JsonSerializer.Deserialize<RepositoryImportEvent>(body)!);
                 case WebhookEventType.RepositoryVulnerabilityAlert:
-                    return this.ProcessRepositoryVulnerabilityAlertWebhook(headers, body);
+                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, body);
                 case WebhookEventType.SecretScanningAlert:
-                    return this.ProcessSecretScanningAlertWebhook(headers, body);
+                    return this.ProcessSecretScanningAlertWebhookAsync(headers, body);
                 case WebhookEventType.SecurityAdvisory:
-                    return this.ProcessSecurityAdvisoryWebhook(headers, body);
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, body);
                 case WebhookEventType.Sponsorship:
-                    return this.ProcessSponsorshipWebhook(headers, body);
+                    return this.ProcessSponsorshipWebhookAsync(headers, body);
                 case WebhookEventType.Star:
-                    return this.ProcessStarWebhook(headers, body);
+                    return this.ProcessStarWebhookAsync(headers, body);
                 case WebhookEventType.Status:
-                    return this.ProcessStatusWebhook(headers, JsonSerializer.Deserialize<StatusEvent>(body)!);
+                    return this.ProcessStatusWebhookAsync(headers, JsonSerializer.Deserialize<StatusEvent>(body)!);
                 case WebhookEventType.Team:
-                    return this.ProcessTeamWebhook(headers, body);
+                    return this.ProcessTeamWebhookAsync(headers, body);
                 case WebhookEventType.TeamAdd:
-                    return this.ProcessTeamAddWebhook(headers, JsonSerializer.Deserialize<TeamAddEvent>(body)!);
+                    return this.ProcessTeamAddWebhookAsync(headers, JsonSerializer.Deserialize<TeamAddEvent>(body)!);
                 case WebhookEventType.Watch:
-                    return this.ProcessWatchWebhook(headers, body);
+                    return this.ProcessWatchWebhookAsync(headers, body);
                 case WebhookEventType.WorkflowDispatch:
-                    return this.ProcessWorkflowDispatchWebhook(headers, JsonSerializer.Deserialize<WorkflowDispatchEvent>(body)!);
+                    return this.ProcessWorkflowDispatchWebhookAsync(headers, JsonSerializer.Deserialize<WorkflowDispatchEvent>(body)!);
                 case WebhookEventType.WorkflowJob:
-                    return this.ProcessWorkflowJobWebhook(headers, body);
+                    return this.ProcessWorkflowJobWebhookAsync(headers, body);
                 case WebhookEventType.WorkflowRun:
-                    return this.ProcessWorkflowRunWebhook(headers, body);
+                    return this.ProcessWorkflowRunWebhookAsync(headers, body);
             }
 
             return Task.CompletedTask;
         }
 
-        private Task ProcessBranchProtectionRuleWebhook(WebhookHeaders headers, string body)
+        private Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, string body)
         {
             var branchProtectionRuleEvent = JsonSerializer.Deserialize<BranchProtectionRuleEvent>(body)!;
             switch (branchProtectionRuleEvent.Action)
             {
                 case BranchProtectionRuleActionValue.Created:
-                    return this.ProcessBranchProtectionRuleWebhook(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Created);
+                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Created);
                 case BranchProtectionRuleActionValue.Deleted:
-                    return this.ProcessBranchProtectionRuleWebhook(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Deleted);
+                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Deleted);
                 case BranchProtectionRuleActionValue.Edited:
-                    return this.ProcessBranchProtectionRuleWebhook(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Edited);
+                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Edited);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessBranchProtectionRuleWebhook(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, BranchProtectionRuleAction action) => Task.CompletedTask;
+        protected virtual Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, BranchProtectionRuleAction action) => Task.CompletedTask;
 
-        private Task ProcessCheckRunWebhook(WebhookHeaders headers, string body)
+        private Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, string body)
         {
             var checkRunEvent = JsonSerializer.Deserialize<CheckRunEvent>(body)!;
             switch (checkRunEvent.Action)
             {
                 case CheckRunActionValue.Completed:
-                    return this.ProcessCheckRunWebhook(headers, checkRunEvent, CheckRunAction.Completed);
+                    return this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.Completed);
                 case CheckRunActionValue.Created:
-                    return this.ProcessCheckRunWebhook(headers, checkRunEvent, CheckRunAction.Created);
+                    return this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.Created);
                 case CheckRunActionValue.RequestedAction:
-                    return this.ProcessCheckRunWebhook(headers, checkRunEvent, CheckRunAction.RequestedAction);
+                    return this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.RequestedAction);
                 case CheckRunActionValue.Rerequested:
-                    return this.ProcessCheckRunWebhook(headers, checkRunEvent, CheckRunAction.Rerequested);
+                    return this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.Rerequested);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessCheckRunWebhook(WebhookHeaders headers, CheckRunEvent checkRunEvent, CheckRunAction action) => Task.CompletedTask;
+        protected virtual Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CheckRunAction action) => Task.CompletedTask;
 
-        private Task ProcessCheckSuiteWebhook(WebhookHeaders headers, string body)
+        private Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, string body)
         {
             var checkSuiteEvent = JsonSerializer.Deserialize<CheckSuiteEvent>(body)!;
             switch (checkSuiteEvent.Action)
             {
                 case CheckSuiteActionValue.Completed:
-                    return this.ProcessCheckSuiteWebhook(headers, checkSuiteEvent, CheckSuiteAction.Completed);
+                    return this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Completed);
                 case CheckSuiteActionValue.Requested:
-                    return this.ProcessCheckSuiteWebhook(headers, checkSuiteEvent, CheckSuiteAction.Requested);
+                    return this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Requested);
                 case CheckSuiteActionValue.Rerequested:
-                    return this.ProcessCheckSuiteWebhook(headers, checkSuiteEvent, CheckSuiteAction.Rerequested);
+                    return this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Rerequested);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessCheckSuiteWebhook(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent, CheckSuiteAction action) => Task.CompletedTask;
+        protected virtual Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent, CheckSuiteAction action) => Task.CompletedTask;
 
-        private Task ProcessCodeScanningAlertWebhook(WebhookHeaders headers, string body)
+        private Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, string body)
         {
             var codeScanningAlertEvent = JsonSerializer.Deserialize<CodeScanningAlertEvent>(body)!;
             switch (codeScanningAlertEvent.Action)
             {
                 case CodeScanningAlertActionValue.AppearedInBranch:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.AppearedInBranch);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.AppearedInBranch);
                 case CodeScanningAlertActionValue.ClosedByUser:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.ClosedByUser);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.ClosedByUser);
                 case CodeScanningAlertActionValue.Created:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.Created);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.Created);
                 case CodeScanningAlertActionValue.Fixed:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.Fixed);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.Fixed);
                 case CodeScanningAlertActionValue.Reopened:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.Reopened);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.Reopened);
                 case CodeScanningAlertActionValue.ReopenedByUser:
-                    return this.ProcessCodeScanningAlertWebhook(headers, codeScanningAlertEvent, CodeScanningAlertAction.ReopenedByUser);
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.ReopenedByUser);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessCodeScanningAlertWebhook(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent, CodeScanningAlertAction action) => Task.CompletedTask;
+        protected virtual Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent, CodeScanningAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessCommitCommentWebhook(WebhookHeaders headers, string body)
+        private Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, string body)
         {
             var commitCommentEvent = JsonSerializer.Deserialize<CommitCommentEvent>(body)!;
             switch (commitCommentEvent.Action)
             {
                 case CommitCommentActionValue.Created:
-                    return this.ProcessCommitCommentWebhook(headers, commitCommentEvent, CommitCommentAction.Created);
+                    return this.ProcessCommitCommentWebhookAsync(headers, commitCommentEvent, CommitCommentAction.Created);
 
             }
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessCommitCommentWebhook(WebhookHeaders headers, CommitCommentEvent commitCommentEvent, CommitCommentAction action) => Task.CompletedTask;
+        protected virtual Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, CommitCommentEvent commitCommentEvent, CommitCommentAction action) => Task.CompletedTask;
 
-        private Task ProcessContentReferenceWebhook(WebhookHeaders headers, string body)
+        private Task ProcessContentReferenceWebhookAsync(WebhookHeaders headers, string body)
         {
             var contentReferenceEvent = JsonSerializer.Deserialize<ContentReferenceEvent>(body)!;
             switch (contentReferenceEvent.Action)
             {
                 case ContentReferenceActionValue.Created:
-                    return this.ProcessContentReferenceWebhook(headers, contentReferenceEvent, ContentReferenceAction.Created);
+                    return this.ProcessContentReferenceWebhookAsync(headers, contentReferenceEvent, ContentReferenceAction.Created);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessContentReferenceWebhook(WebhookHeaders headers, ContentReferenceEvent contentReferenceEvent, ContentReferenceAction action) => Task.CompletedTask;
+        protected virtual Task ProcessContentReferenceWebhookAsync(WebhookHeaders headers, ContentReferenceEvent contentReferenceEvent, ContentReferenceAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessCreateWebhook(WebhookHeaders headers, CreateEvent createEvent) => Task.CompletedTask;
+        protected virtual Task ProcessCreateWebhookAsync(WebhookHeaders headers, CreateEvent createEvent) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessDeleteWebhook(WebhookHeaders headers, DeleteEvent deleteEvent) => Task.CompletedTask;
+        protected virtual Task ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent) => Task.CompletedTask;
 
-        private Task ProcessDeployKeyWebhook(WebhookHeaders headers, string body)
+        private Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, string body)
         {
             var deployKeyEvent = JsonSerializer.Deserialize<DeployKeyEvent>(body)!;
             switch (deployKeyEvent.Action)
             {
                 case DeployKeyActionValue.Created:
-                    return this.ProcessDeployKeyWebhook(headers, deployKeyEvent, DeployKeyAction.Created);
+                    return this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent, DeployKeyAction.Created);
                 case DeployKeyActionValue.Deleted:
-                    return this.ProcessDeployKeyWebhook(headers, deployKeyEvent, DeployKeyAction.Deleted);
+                    return this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent, DeployKeyAction.Deleted);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessDeployKeyWebhook(WebhookHeaders headers, DeployKeyEvent deployKeyEvent, DeployKeyAction action) => Task.CompletedTask;
+        protected virtual Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent, DeployKeyAction action) => Task.CompletedTask;
 
-        private Task ProcessDeploymentWebhook(WebhookHeaders headers, string body)
+        private Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, string body)
         {
             var deploymentEvent = JsonSerializer.Deserialize<DeploymentEvent>(body)!;
             switch (deploymentEvent.Action)
             {
                 case DeploymentActionValue.Created:
-                    return this.ProcessDeploymentWebhook(headers, deploymentEvent, DeploymentAction.Created);
+                    return this.ProcessDeploymentWebhookAsync(headers, deploymentEvent, DeploymentAction.Created);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessDeploymentWebhook(WebhookHeaders headers, DeploymentEvent deploymentEvent, DeploymentAction action) => Task.CompletedTask;
+        protected virtual Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, DeploymentEvent deploymentEvent, DeploymentAction action) => Task.CompletedTask;
 
-        private Task ProcessDeploymentStatusWebhook(WebhookHeaders headers, string body)
+        private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, string body)
         {
             var deploymentStatusEvent = JsonSerializer.Deserialize<DeploymentStatusEvent>(body)!;
             switch (deploymentStatusEvent.Action)
             {
                 case DeploymentStatusActionValue.Created:
-                    return this.ProcessDeploymentStatusWebhook(headers, deploymentStatusEvent, DeploymentStatusAction.Created);
+                    return this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent, DeploymentStatusAction.Created);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessDeploymentStatusWebhook(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent, DeploymentStatusAction action) => Task.CompletedTask;
+        protected virtual Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent, DeploymentStatusAction action) => Task.CompletedTask;
 
-        private Task ProcessDiscussionWebhook(WebhookHeaders headers, string body)
+        private Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, string body)
         {
             var discussionEvent = JsonSerializer.Deserialize<DiscussionEvent>(body)!;
             switch (discussionEvent.Action)
             {
                 case DiscussionActionValue.Answered:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Answered);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Answered);
                 case DiscussionActionValue.CategoryChanged:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.CategoryChanged);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.CategoryChanged);
                 case DiscussionActionValue.Created:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Created);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Created);
                 case DiscussionActionValue.Deleted:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Deleted);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Deleted);
                 case DiscussionActionValue.Edited:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Edited);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Edited);
                 case DiscussionActionValue.Labeled:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Labeled);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Labeled);
                 case DiscussionActionValue.Locked:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Locked);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Locked);
                 case DiscussionActionValue.Pinned:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Pinned);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Pinned);
                 case DiscussionActionValue.Transferred:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Transferred);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Transferred);
                 case DiscussionActionValue.Unanswered:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Unanswered);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unanswered);
                 case DiscussionActionValue.Unlabeled:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Unlabeled);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlabeled);
                 case DiscussionActionValue.Unlocked:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Unlocked);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlocked);
                 case DiscussionActionValue.Unpinned:
-                    return this.ProcessDiscussionWebhook(headers, discussionEvent, DiscussionAction.Unpinned);
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unpinned);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessDiscussionWebhook(WebhookHeaders headers, DiscussionEvent discussionEvent, DiscussionAction action) => Task.CompletedTask;
+        protected virtual Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, DiscussionEvent discussionEvent, DiscussionAction action) => Task.CompletedTask;
 
-        private Task ProcessDiscussionCommentWebhook(WebhookHeaders headers, string body)
+        private Task ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, string body)
         {
             var discussionCommentEvent = JsonSerializer.Deserialize<DiscussionCommentEvent>(body)!;
             switch (discussionCommentEvent.Action)
             {
                 case DiscussionCommentActionValue.Created:
-                    return this.ProcessDiscussionCommentWebhook(headers, discussionCommentEvent, DiscussionCommentAction.Created);
+                    return this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent, DiscussionCommentAction.Created);
                 case DiscussionCommentActionValue.Deleted:
-                    return this.ProcessDiscussionCommentWebhook(headers, discussionCommentEvent, DiscussionCommentAction.Deleted);
+                    return this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent, DiscussionCommentAction.Deleted);
                 case DiscussionCommentActionValue.Edited:
-                    return this.ProcessDiscussionCommentWebhook(headers, discussionCommentEvent, DiscussionCommentAction.Edited);
+                    return this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent, DiscussionCommentAction.Edited);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessDiscussionCommentWebhook(WebhookHeaders headers, DiscussionCommentEvent discussionCommentEvent, DiscussionCommentAction action) => Task.CompletedTask;
+        protected virtual Task ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, DiscussionCommentEvent discussionCommentEvent, DiscussionCommentAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessForkWebhook(WebhookHeaders headers, ForkEvent forkEvent) => Task.CompletedTask;
+        protected virtual Task ProcessForkWebhookAsync(WebhookHeaders headers, ForkEvent forkEvent) => Task.CompletedTask;
 
-        private Task ProcessGithubAppAuthorizationWebhook(WebhookHeaders headers, string body)
+        private Task ProcessGithubAppAuthorizationWebhookAsync(WebhookHeaders headers, string body)
         {
             var githubAppAuthorizationEvent = JsonSerializer.Deserialize<GithubAppAuthorizationEvent>(body)!;
             switch (githubAppAuthorizationEvent.Action)
             {
                 case GithubAppAuthorizationActionValue.Revoked:
-                    return this.ProcessGithubAppAuthorizationWebhook(headers, githubAppAuthorizationEvent, GithubAppAuthorizationAction.Revoked);
+                    return this.ProcessGithubAppAuthorizationWebhookAsync(headers, githubAppAuthorizationEvent, GithubAppAuthorizationAction.Revoked);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessGithubAppAuthorizationWebhook(WebhookHeaders headers, GithubAppAuthorizationEvent githubAppAuthorizationEvent, GithubAppAuthorizationAction action) => Task.CompletedTask;
+        protected virtual Task ProcessGithubAppAuthorizationWebhookAsync(WebhookHeaders headers, GithubAppAuthorizationEvent githubAppAuthorizationEvent, GithubAppAuthorizationAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessGollumWebhook(WebhookHeaders headers, GollumEvent gollumEvent) => Task.CompletedTask;
+        protected virtual Task ProcessGollumWebhookAsync(WebhookHeaders headers, GollumEvent gollumEvent) => Task.CompletedTask;
 
-        private Task ProcessInstallationWebhook(WebhookHeaders headers, string body)
+        private Task ProcessInstallationWebhookAsync(WebhookHeaders headers, string body)
         {
             var installationEvent = JsonSerializer.Deserialize<InstallationEvent>(body)!;
             switch (installationEvent.Action)
             {
                 case InstallationActionValue.Created:
-                    return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.Created);
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Created);
                 case InstallationActionValue.Deleted:
-                    return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.Deleted);
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Deleted);
                 case InstallationActionValue.NewPermissionsAccepted:
-                    return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.NewPermissionsAccepted);
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.NewPermissionsAccepted);
                 case InstallationActionValue.Suspend:
-                    return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.Suspend);
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Suspend);
                 case InstallationActionValue.Unsuspend:
-                    return this.ProcessInstallationWebhook(headers, installationEvent, InstallationAction.Unsuspend);
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Unsuspend);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessInstallationWebhook(WebhookHeaders headers, InstallationEvent installationEvent, InstallationAction action) => Task.CompletedTask;
+        protected virtual Task ProcessInstallationWebhookAsync(WebhookHeaders headers, InstallationEvent installationEvent, InstallationAction action) => Task.CompletedTask;
 
-        private Task ProcessInstallationRepositoriesWebhook(WebhookHeaders headers, string body)
+        private Task ProcessInstallationRepositoriesWebhookAsync(WebhookHeaders headers, string body)
         {
             var installationRepositoriesEvent = JsonSerializer.Deserialize<InstallationRepositoriesEvent>(body)!;
             switch (installationRepositoriesEvent.Action)
             {
                 case InstallationRepositoriesActionValue.Added:
-                    return this.ProcessInstallationRepositoriesWebhook(headers, installationRepositoriesEvent, InstallationRepositoriesAction.Added);
+                    return this.ProcessInstallationRepositoriesWebhookAsync(headers, installationRepositoriesEvent, InstallationRepositoriesAction.Added);
                 case InstallationRepositoriesActionValue.Removed:
-                    return this.ProcessInstallationRepositoriesWebhook(headers, installationRepositoriesEvent, InstallationRepositoriesAction.Removed);
+                    return this.ProcessInstallationRepositoriesWebhookAsync(headers, installationRepositoriesEvent, InstallationRepositoriesAction.Removed);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessInstallationRepositoriesWebhook(WebhookHeaders headers, InstallationRepositoriesEvent installationRepositoriesEvent, InstallationRepositoriesAction action) => Task.CompletedTask;
+        protected virtual Task ProcessInstallationRepositoriesWebhookAsync(WebhookHeaders headers, InstallationRepositoriesEvent installationRepositoriesEvent, InstallationRepositoriesAction action) => Task.CompletedTask;
 
-        private Task ProcessIssueCommentWebhook(WebhookHeaders headers, string body)
+        private Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, string body)
         {
             var issueCommentEvent = JsonSerializer.Deserialize<IssueCommentEvent>(body)!;
             switch (issueCommentEvent.Action)
             {
                 case IssueCommentActionValue.Created:
-                    return this.ProcessIssueCommentWebhook(headers, issueCommentEvent, IssueCommentAction.Created);
+                    return this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Created);
                 case IssueCommentActionValue.Deleted:
-                    return this.ProcessIssueCommentWebhook(headers, issueCommentEvent, IssueCommentAction.Deleted);
+                    return this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Deleted);
                 case IssueCommentActionValue.Edited:
-                    return this.ProcessIssueCommentWebhook(headers, issueCommentEvent, IssueCommentAction.Edited);
+                    return this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Edited);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessIssueCommentWebhook(WebhookHeaders headers, IssueCommentEvent issueCommentEvent, IssueCommentAction action) => Task.CompletedTask;
+        protected virtual Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, IssueCommentEvent issueCommentEvent, IssueCommentAction action) => Task.CompletedTask;
 
-        private Task ProcessIssuesWebhook(WebhookHeaders headers, string body)
+        private Task ProcessIssuesWebhookAsync(WebhookHeaders headers, string body)
         {
             var issuesEvent = JsonSerializer.Deserialize<IssuesEvent>(body)!;
             switch (issuesEvent.Action)
             {
                 case IssuesActionValue.Assigned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Assigned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Assigned);
                 case IssuesActionValue.Closed:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Closed);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Closed);
                 case IssuesActionValue.Deleted:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Deleted);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Deleted);
                 case IssuesActionValue.Demilestoned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Demilestoned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Demilestoned);
                 case IssuesActionValue.Edited:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Edited);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Edited);
                 case IssuesActionValue.Labeled:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Labeled);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Labeled);
                 case IssuesActionValue.Locked:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Locked);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Locked);
                 case IssuesActionValue.Milestoned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Milestoned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Milestoned);
                 case IssuesActionValue.Opened:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Opened);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Opened);
                 case IssuesActionValue.Pinned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Pinned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Pinned);
                 case IssuesActionValue.Reopened:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Reopened);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Reopened);
                 case IssuesActionValue.Transferred:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Transferred);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Transferred);
                 case IssuesActionValue.Unassigned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Unassigned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unassigned);
                 case IssuesActionValue.Unlabeled:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Unlabeled);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unlabeled);
                 case IssuesActionValue.Unlocked:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Unlocked);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unlocked);
                 case IssuesActionValue.Unpinned:
-                    return this.ProcessIssuesWebhook(headers, issuesEvent, IssuesAction.Unpinned);
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unpinned);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessIssuesWebhook(WebhookHeaders headers, IssuesEvent issuesEvent, IssuesAction action) => Task.CompletedTask;
+        protected virtual Task ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, IssuesAction action) => Task.CompletedTask;
 
-        private Task ProcessLabelWebhook(WebhookHeaders headers, string body)
+        private Task ProcessLabelWebhookAsync(WebhookHeaders headers, string body)
         {
             var labelEvent = JsonSerializer.Deserialize<LabelEvent>(body)!;
             switch (labelEvent.Action)
             {
                 case LabelActionValue.Created:
-                    return this.ProcessLabelWebhook(headers, labelEvent, LabelAction.Created);
+                    return this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Created);
                 case LabelActionValue.Deleted:
-                    return this.ProcessLabelWebhook(headers, labelEvent, LabelAction.Deleted);
+                    return this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Deleted);
                 case LabelActionValue.Edited:
-                    return this.ProcessLabelWebhook(headers, labelEvent, LabelAction.Edited);
+                    return this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Edited);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessLabelWebhook(WebhookHeaders headers, LabelEvent labelEvent, LabelAction action) => Task.CompletedTask;
+        protected virtual Task ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, LabelAction action) => Task.CompletedTask;
 
-        private Task ProcessMarketplacePurchaseWebhook(WebhookHeaders headers, string body)
+        private Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, string body)
         {
             var marketplacePurchaseEvent = JsonSerializer.Deserialize<MarketplacePurchaseEvent>(body)!;
             switch (marketplacePurchaseEvent.Action)
             {
                 case MarketplacePurchaseActionValue.Cancelled:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Cancelled);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Cancelled);
                 case MarketplacePurchaseActionValue.Changed:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Changed);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Changed);
                 case MarketplacePurchaseActionValue.PendingChange:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.PendingChange);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.PendingChange);
                 case MarketplacePurchaseActionValue.PendingChangeCancelled:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.PendingChangeCancelled);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.PendingChangeCancelled);
                 case MarketplacePurchaseActionValue.Purchased:
-                    return this.ProcessMarketplacePurchaseWebhook(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Purchased);
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Purchased);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessMarketplacePurchaseWebhook(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent, MarketplacePurchaseAction action) => Task.CompletedTask;
+        protected virtual Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent, MarketplacePurchaseAction action) => Task.CompletedTask;
 
-        private Task ProcessMemberWebhook(WebhookHeaders headers, string body)
+        private Task ProcessMemberWebhookAsync(WebhookHeaders headers, string body)
         {
             var memberEvent = JsonSerializer.Deserialize<MemberEvent>(body)!;
             switch (memberEvent.Action)
             {
                 case MemberActionValue.Added:
-                    return this.ProcessMemberWebhook(headers, memberEvent, MemberAction.Added);
+                    return this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Added);
                 case MemberActionValue.Edited:
-                    return this.ProcessMemberWebhook(headers, memberEvent, MemberAction.Edited);
+                    return this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Edited);
                 case MemberActionValue.Removed:
-                    return this.ProcessMemberWebhook(headers, memberEvent, MemberAction.Removed);
+                    return this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Removed);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessMemberWebhook(WebhookHeaders headers, MemberEvent memberEvent, MemberAction action) => Task.CompletedTask;
+        protected virtual Task ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, MemberAction action) => Task.CompletedTask;
 
-        private Task ProcessMembershipWebhook(WebhookHeaders headers, string body)
+        private Task ProcessMembershipWebhookAsync(WebhookHeaders headers, string body)
         {
             var membershipEvent = JsonSerializer.Deserialize<MembershipEvent>(body)!;
             switch (membershipEvent.Action)
             {
                 case MembershipActionValue.Added:
-                    return this.ProcessMembershipWebhook(headers, membershipEvent, MembershipAction.Added);
+                    return this.ProcessMembershipWebhookAsync(headers, membershipEvent, MembershipAction.Added);
                 case MembershipActionValue.Removed:
-                    return this.ProcessMembershipWebhook(headers, membershipEvent, MembershipAction.Removed);
+                    return this.ProcessMembershipWebhookAsync(headers, membershipEvent, MembershipAction.Removed);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessMembershipWebhook(WebhookHeaders headers, MembershipEvent membershipEvent, MembershipAction action) => Task.CompletedTask;
+        protected virtual Task ProcessMembershipWebhookAsync(WebhookHeaders headers, MembershipEvent membershipEvent, MembershipAction action) => Task.CompletedTask;
 
-        private Task ProcessMetaWebhook(WebhookHeaders headers, string body)
+        private Task ProcessMetaWebhookAsync(WebhookHeaders headers, string body)
         {
             var metaEvent = JsonSerializer.Deserialize<MetaEvent>(body)!;
             switch (metaEvent.Action)
             {
                 case MetaActionValue.Deleted:
-                    return this.ProcessMetaWebhook(headers, metaEvent, MetaAction.Deleted);
+                    return this.ProcessMetaWebhookAsync(headers, metaEvent, MetaAction.Deleted);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessMetaWebhook(WebhookHeaders headers, MetaEvent metaEvent, MetaAction action) => Task.CompletedTask;
+        protected virtual Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, MetaAction action) => Task.CompletedTask;
 
-        private Task ProcessMilestoneWebhook(WebhookHeaders headers, string body)
+        private Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, string body)
         {
             var milestoneEvent = JsonSerializer.Deserialize<MilestoneEvent>(body)!;
             switch (milestoneEvent.Action)
             {
                 case MilestoneActionValue.Closed:
-                    return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Closed);
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Closed);
                 case MilestoneActionValue.Created:
-                    return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Created);
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Created);
                 case MilestoneActionValue.Deleted:
-                    return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Deleted);
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Deleted);
                 case MilestoneActionValue.Edited:
-                    return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Edited);
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Edited);
                 case MilestoneActionValue.Opened:
-                    return this.ProcessMilestoneWebhook(headers, milestoneEvent, MilestoneAction.Opened);
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Opened);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessMilestoneWebhook(WebhookHeaders headers, MilestoneEvent milestoneEvent, MilestoneAction action) => Task.CompletedTask;
+        protected virtual Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, MilestoneEvent milestoneEvent, MilestoneAction action) => Task.CompletedTask;
 
-        private Task ProcessOrgBlockWebhook(WebhookHeaders headers, string body)
+        private Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, string body)
         {
             var orgBlockEvent = JsonSerializer.Deserialize<OrgBlockEvent>(body)!;
             switch (orgBlockEvent.Action)
             {
                 case OrgBlockActionValue.Blocked:
-                    return this.ProcessOrgBlockWebhook(headers, orgBlockEvent, OrgBlockAction.Blocked);
+                    return this.ProcessOrgBlockWebhookAsync(headers, orgBlockEvent, OrgBlockAction.Blocked);
                 case OrgBlockActionValue.Unblocked:
-                    return this.ProcessOrgBlockWebhook(headers, orgBlockEvent, OrgBlockAction.Unblocked);
+                    return this.ProcessOrgBlockWebhookAsync(headers, orgBlockEvent, OrgBlockAction.Unblocked);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessOrgBlockWebhook(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, OrgBlockAction action) => Task.CompletedTask;
+        protected virtual Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, OrgBlockAction action) => Task.CompletedTask;
 
-        private Task ProcessOrganizationWebhook(WebhookHeaders headers, string body)
+        private Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, string body)
         {
             var organizationEvent = JsonSerializer.Deserialize<OrganizationEvent>(body)!;
             switch (organizationEvent.Action)
             {
                 case OrganizationActionValue.Deleted:
-                    return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.Deleted);
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.Deleted);
                 case OrganizationActionValue.MemberAdded:
-                    return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.MemberAdded);
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.MemberAdded);
                 case OrganizationActionValue.MemberInvited:
-                    return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.MemberInvited);
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.MemberInvited);
                 case OrganizationActionValue.MemberRemoved:
-                    return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.MemberRemoved);
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.MemberRemoved);
                 case OrganizationActionValue.Renamed:
-                    return this.ProcessOrganizationWebhook(headers, organizationEvent, OrganizationAction.Renamed);
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.Renamed);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessOrganizationWebhook(WebhookHeaders headers, OrganizationEvent organizationEvent, OrganizationAction action) => Task.CompletedTask;
+        protected virtual Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, OrganizationEvent organizationEvent, OrganizationAction action) => Task.CompletedTask;
 
-        private Task ProcessPackageWebhook(WebhookHeaders headers, string body)
+        private Task ProcessPackageWebhookAsync(WebhookHeaders headers, string body)
         {
             var packageEvent = JsonSerializer.Deserialize<PackageEvent>(body)!;
             switch (packageEvent.Action)
             {
                 case PackageActionValue.Published:
-                    return this.ProcessPackageWebhook(headers, packageEvent, PackageAction.Published);
+                    return this.ProcessPackageWebhookAsync(headers, packageEvent, PackageAction.Published);
                 case PackageActionValue.Updated:
-                    return this.ProcessPackageWebhook(headers, packageEvent, PackageAction.Updated);
+                    return this.ProcessPackageWebhookAsync(headers, packageEvent, PackageAction.Updated);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessPackageWebhook(WebhookHeaders headers, PackageEvent packageEvent, PackageAction action) => Task.CompletedTask;
+        protected virtual Task ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent, PackageAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessPageBuildWebhook(WebhookHeaders headers, PageBuildEvent pageBuildEvent) => Task.CompletedTask;
+        protected virtual Task ProcessPageBuildWebhookAsync(WebhookHeaders headers, PageBuildEvent pageBuildEvent) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessPingWebhook(WebhookHeaders headers, PingEvent pingEvent) => Task.CompletedTask;
+        protected virtual Task ProcessPingWebhookAsync(WebhookHeaders headers, PingEvent pingEvent) => Task.CompletedTask;
 
-        private Task ProcessProjectWebhook(WebhookHeaders headers, string body)
+        private Task ProcessProjectWebhookAsync(WebhookHeaders headers, string body)
         {
             var projectEvent = JsonSerializer.Deserialize<ProjectEvent>(body)!;
             switch (projectEvent.Action)
             {
                 case ProjectActionValue.Closed:
-                    return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Closed);
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Closed);
                 case ProjectActionValue.Created:
-                    return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Created);
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Created);
                 case ProjectActionValue.Deleted:
-                    return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Deleted);
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Deleted);
                 case ProjectActionValue.Edited:
-                    return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Edited);
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Edited);
                 case ProjectActionValue.Reopened:
-                    return this.ProcessProjectWebhook(headers, projectEvent, ProjectAction.Reopened);
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Reopened);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessProjectWebhook(WebhookHeaders headers, ProjectEvent projectEvent, ProjectAction action) => Task.CompletedTask;
+        protected virtual Task ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, ProjectAction action) => Task.CompletedTask;
 
-        private Task ProcessProjectCardWebhook(WebhookHeaders headers, string body)
+        private Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, string body)
         {
             var projectCardEvent = JsonSerializer.Deserialize<ProjectCardEvent>(body)!;
             switch (projectCardEvent.Action)
             {
                 case ProjectCardActionValue.Converted:
-                    return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Converted);
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Converted);
                 case ProjectCardActionValue.Created:
-                    return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Created);
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Created);
                 case ProjectCardActionValue.Deleted:
-                    return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Deleted);
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Deleted);
                 case ProjectCardActionValue.Edited:
-                    return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Edited);
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Edited);
                 case ProjectCardActionValue.Moved:
-                    return this.ProcessProjectCardWebhook(headers, projectCardEvent, ProjectCardAction.Moved);
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Moved);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessProjectCardWebhook(WebhookHeaders headers, ProjectCardEvent projectCardEvent, ProjectCardAction action) => Task.CompletedTask;
+        protected virtual Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, ProjectCardEvent projectCardEvent, ProjectCardAction action) => Task.CompletedTask;
 
-        private Task ProcessProjectColumnWebhook(WebhookHeaders headers, string body)
+        private Task ProcessProjectColumnWebhookAsync(WebhookHeaders headers, string body)
         {
             var projectColumnEvent = JsonSerializer.Deserialize<ProjectColumnEvent>(body)!;
             switch (projectColumnEvent.Action)
             {
                 case ProjectColumnActionValue.Created:
-                    return this.ProcessProjectColumnWebhook(headers, projectColumnEvent, ProjectColumnAction.Created);
+                    return this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Created);
                 case ProjectColumnActionValue.Deleted:
-                    return this.ProcessProjectColumnWebhook(headers, projectColumnEvent, ProjectColumnAction.Deleted);
+                    return this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Deleted);
                 case ProjectColumnActionValue.Edited:
-                    return this.ProcessProjectColumnWebhook(headers, projectColumnEvent, ProjectColumnAction.Edited);
+                    return this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Edited);
                 case ProjectColumnActionValue.Moved:
-                    return this.ProcessProjectColumnWebhook(headers, projectColumnEvent, ProjectColumnAction.Moved);
+                    return this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Moved);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessProjectColumnWebhook(WebhookHeaders headers, ProjectColumnEvent projectColumnEvent, ProjectColumnAction action) => Task.CompletedTask;
+        protected virtual Task ProcessProjectColumnWebhookAsync(WebhookHeaders headers, ProjectColumnEvent projectColumnEvent, ProjectColumnAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessPublicWebhook(WebhookHeaders headers, PublicEvent publicEvent) => Task.CompletedTask;
+        protected virtual Task ProcessPublicWebhookAsync(WebhookHeaders headers, PublicEvent publicEvent) => Task.CompletedTask;
 
-        private Task ProcessPullRequestWebhook(WebhookHeaders headers, string body)
+        private Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, string body)
         {
             var pullRequestEvent = JsonSerializer.Deserialize<PullRequestEvent>(body)!;
             switch (pullRequestEvent.Action)
             {
                 case PullRequestActionValue.Assigned:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Assigned);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Assigned);
                 case PullRequestActionValue.AutoMergeDisabled:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.AutoMergeDisabled);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.AutoMergeDisabled);
                 case PullRequestActionValue.AutoMergeEnabled:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.AutoMergeEnabled);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.AutoMergeEnabled);
                 case PullRequestActionValue.Closed:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Closed);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Closed);
                 case PullRequestActionValue.ConvertedToDraft:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.ConvertedToDraft);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ConvertedToDraft);
                 case PullRequestActionValue.Edited:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Edited);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Edited);
                 case PullRequestActionValue.Labeled:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Labeled);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Labeled);
                 case PullRequestActionValue.Locked:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Locked);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Locked);
                 case PullRequestActionValue.Opened:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Opened);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Opened);
                 case PullRequestActionValue.ReadyForReview:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.ReadyForReview);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReadyForReview);
                 case PullRequestActionValue.Reopened:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Reopened);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Reopened);
                 case PullRequestActionValue.ReviewRequestRemoved:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.ReviewRequestRemoved);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReviewRequestRemoved);
                 case PullRequestActionValue.ReviewRequested:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.ReviewRequested);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReviewRequested);
                 case PullRequestActionValue.Synchronize:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Synchronize);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Synchronize);
                 case PullRequestActionValue.Unassigned:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Unassigned);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Unassigned);
                 case PullRequestActionValue.Unlabeled:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Unlabeled);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Unlabeled);
                 case PullRequestActionValue.Unlocked:
-                    return this.ProcessPullRequestWebhook(headers, pullRequestEvent, PullRequestAction.Unlocked);
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Unlocked);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessPullRequestWebhook(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) => Task.CompletedTask;
+        protected virtual Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) => Task.CompletedTask;
 
-        private Task ProcessPullRequestReviewWebhook(WebhookHeaders headers, string body)
+        private Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, string body)
         {
             var pullRequestReviewEvent = JsonSerializer.Deserialize<PullRequestReviewEvent>(body)!;
             switch (pullRequestReviewEvent.Action)
             {
                 case PullRequestReviewActionValue.Dismissed:
-                    return this.ProcessPullRequestReviewWebhook(headers, pullRequestReviewEvent, PullRequestReviewAction.Dismissed);
+                    return this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent, PullRequestReviewAction.Dismissed);
                 case PullRequestReviewActionValue.Edited:
-                    return this.ProcessPullRequestReviewWebhook(headers, pullRequestReviewEvent, PullRequestReviewAction.Edited);
+                    return this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent, PullRequestReviewAction.Edited);
                 case PullRequestReviewActionValue.Submitted:
-                    return this.ProcessPullRequestReviewWebhook(headers, pullRequestReviewEvent, PullRequestReviewAction.Submitted);
+                    return this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent, PullRequestReviewAction.Submitted);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessPullRequestReviewWebhook(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent, PullRequestReviewAction action) => Task.CompletedTask;
+        protected virtual Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent, PullRequestReviewAction action) => Task.CompletedTask;
 
-        private Task ProcessPullRequestReviewCommentWebhook(WebhookHeaders headers, string body)
+        private Task ProcessPullRequestReviewCommentWebhookAsync(WebhookHeaders headers, string body)
         {
             var pullRequestReviewCommentEvent = JsonSerializer.Deserialize<PullRequestReviewCommentEvent>(body)!;
             switch (pullRequestReviewCommentEvent.Action)
             {
                 case PullRequestReviewCommentActionValue.Created:
-                    return this.ProcessPullRequestReviewCommentWebhook(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Created);
+                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Created);
                 case PullRequestReviewCommentActionValue.Deleted:
-                    return this.ProcessPullRequestReviewCommentWebhook(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Deleted);
+                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Deleted);
                 case PullRequestReviewCommentActionValue.Edited:
-                    return this.ProcessPullRequestReviewCommentWebhook(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Edited);
+                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, pullRequestReviewCommentEvent, PullRequestReviewCommentAction.Edited);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessPullRequestReviewCommentWebhook(WebhookHeaders headers, PullRequestReviewCommentEvent pullRequestReviewCommentEvent, PullRequestReviewCommentAction action) => Task.CompletedTask;
+        protected virtual Task ProcessPullRequestReviewCommentWebhookAsync(WebhookHeaders headers, PullRequestReviewCommentEvent pullRequestReviewCommentEvent, PullRequestReviewCommentAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessPushWebhook(WebhookHeaders headers, PushEvent pushEvent) => Task.CompletedTask;
+        protected virtual Task ProcessPushWebhookAsync(WebhookHeaders headers, PushEvent pushEvent) => Task.CompletedTask;
 
-        private Task ProcessReleaseWebhook(WebhookHeaders headers, string body)
+        private Task ProcessReleaseWebhookAsync(WebhookHeaders headers, string body)
         {
             var releaseEvent = JsonSerializer.Deserialize<ReleaseEvent>(body)!;
             switch (releaseEvent.Action)
             {
                 case ReleaseActionValue.Created:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Created);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Created);
                 case ReleaseActionValue.Deleted:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Deleted);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Deleted);
                 case ReleaseActionValue.Edited:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Edited);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Edited);
                 case ReleaseActionValue.Prereleased:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Prereleased);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Prereleased);
                 case ReleaseActionValue.Published:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Published);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Published);
                 case ReleaseActionValue.Released:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Released);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Released);
                 case ReleaseActionValue.Unpublished:
-                    return this.ProcessReleaseWebhook(headers, releaseEvent, ReleaseAction.Unpublished);
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Unpublished);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessReleaseWebhook(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action) => Task.CompletedTask;
+        protected virtual Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action) => Task.CompletedTask;
 
-        private Task ProcessRepositoryWebhook(WebhookHeaders headers, string body)
+        private Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, string body)
         {
             var repositoryEvent = JsonSerializer.Deserialize<RepositoryEvent>(body)!;
             switch (repositoryEvent.Action)
             {
                 case RepositoryActionValue.Archived:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Archived);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Archived);
                 case RepositoryActionValue.Created:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Created);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Created);
                 case RepositoryActionValue.Deleted:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Deleted);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Deleted);
                 case RepositoryActionValue.Edited:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Edited);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Edited);
                 case RepositoryActionValue.Privatized:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Privatized);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Privatized);
                 case RepositoryActionValue.Publicized:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Publicized);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Publicized);
                 case RepositoryActionValue.Renamed:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Renamed);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Renamed);
                 case RepositoryActionValue.Transferred:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Transferred);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Transferred);
                 case RepositoryActionValue.Unarchived:
-                    return this.ProcessRepositoryWebhook(headers, repositoryEvent, RepositoryAction.Unarchived);
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Unarchived);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessRepositoryWebhook(WebhookHeaders headers, RepositoryEvent repositoryEvent, RepositoryAction action) => Task.CompletedTask;
+        protected virtual Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent, RepositoryAction action) => Task.CompletedTask;
 
-        private Task ProcessRepositoryDispatchWebhook(WebhookHeaders headers, string body)
+        private Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, string body)
         {
             var repositoryDispatchEvent = JsonSerializer.Deserialize<RepositoryDispatchEvent>(body)!;
             switch (repositoryDispatchEvent.Action)
             {
                 case RepositoryDispatchActionValue.OnDemandTest:
-                    return this.ProcessRepositoryDispatchWebhook(headers, repositoryDispatchEvent, RepositoryDispatchAction.OnDemandTest);
+                    return this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent, RepositoryDispatchAction.OnDemandTest);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessRepositoryDispatchWebhook(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent, RepositoryDispatchAction action) => Task.CompletedTask;
+        protected virtual Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent, RepositoryDispatchAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessRepositoryImportWebhook(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent) => Task.CompletedTask;
+        protected virtual Task ProcessRepositoryImportWebhookAsync(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent) => Task.CompletedTask;
 
-        private Task ProcessRepositoryVulnerabilityAlertWebhook(WebhookHeaders headers, string body)
+        private Task ProcessRepositoryVulnerabilityAlertWebhookAsync(WebhookHeaders headers, string body)
         {
             var repositoryVulnerabilityAlertEvent = JsonSerializer.Deserialize<RepositoryVulnerabilityAlertEvent>(body)!;
             switch (repositoryVulnerabilityAlertEvent.Action)
             {
                 case RepositoryVulnerabilityAlertActionValue.Create:
-                    return this.ProcessRepositoryVulnerabilityAlertWebhook(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Create);
+                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Create);
                 case RepositoryVulnerabilityAlertActionValue.Dismiss:
-                    return this.ProcessRepositoryVulnerabilityAlertWebhook(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Dismiss);
+                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Dismiss);
                 case RepositoryVulnerabilityAlertActionValue.Resolve:
-                    return this.ProcessRepositoryVulnerabilityAlertWebhook(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Resolve);
+                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Resolve);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessRepositoryVulnerabilityAlertWebhook(WebhookHeaders headers, RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction action) => Task.CompletedTask;
+        protected virtual Task ProcessRepositoryVulnerabilityAlertWebhookAsync(WebhookHeaders headers, RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessSecretScanningAlertWebhook(WebhookHeaders headers, string body)
+        private Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, string body)
         {
             var secretScanningAlertEvent = JsonSerializer.Deserialize<SecretScanningAlertEvent>(body)!;
             switch (secretScanningAlertEvent.Action)
             {
                 case SecretScanningAlertActionValue.Created:
-                    return this.ProcessSecretScanningAlertWebhook(headers, secretScanningAlertEvent, SecretScanningAlertAction.Created);
+                    return this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Created);
                 case SecretScanningAlertActionValue.Reopened:
-                    return this.ProcessSecretScanningAlertWebhook(headers, secretScanningAlertEvent, SecretScanningAlertAction.Reopened);
+                    return this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Reopened);
                 case SecretScanningAlertActionValue.Resolved:
-                    return this.ProcessSecretScanningAlertWebhook(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved);
+                    return this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessSecretScanningAlertWebhook(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent, SecretScanningAlertAction action) => Task.CompletedTask;
+        protected virtual Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent, SecretScanningAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessSecurityAdvisoryWebhook(WebhookHeaders headers, string body)
+        private Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, string body)
         {
             var securityAdvisoryEvent = JsonSerializer.Deserialize<SecurityAdvisoryEvent>(body)!;
             switch (securityAdvisoryEvent.Action)
             {
                 case SecurityAdvisoryActionValue.Performed:
-                    return this.ProcessSecurityAdvisoryWebhook(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Performed);
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Performed);
                 case SecurityAdvisoryActionValue.Published:
-                    return this.ProcessSecurityAdvisoryWebhook(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Published);
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Published);
                 case SecurityAdvisoryActionValue.Updated:
-                    return this.ProcessSecurityAdvisoryWebhook(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Updated);
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Updated);
                 case SecurityAdvisoryActionValue.Withdrawn:
-                    return this.ProcessSecurityAdvisoryWebhook(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Withdrawn);
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Withdrawn);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessSecurityAdvisoryWebhook(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent, SecurityAdvisoryAction action) => Task.CompletedTask;
+        protected virtual Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent, SecurityAdvisoryAction action) => Task.CompletedTask;
 
-        private Task ProcessSponsorshipWebhook(WebhookHeaders headers, string body)
+        private Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, string body)
         {
             var sponsorshipEvent = JsonSerializer.Deserialize<SponsorshipEvent>(body)!;
             switch (sponsorshipEvent.Action)
             {
                 case SponsorshipActionValue.Cancelled:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.Cancelled);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.Cancelled);
                 case SponsorshipActionValue.Created:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.Created);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.Created);
                 case SponsorshipActionValue.Edited:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.Edited);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.Edited);
                 case SponsorshipActionValue.PendingCancellation:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.PendingCancellation);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.PendingCancellation);
                 case SponsorshipActionValue.PendingTierChange:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.PendingTierChange);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.PendingTierChange);
                 case SponsorshipActionValue.TierChanged:
-                    return this.ProcessSponsorshipWebhook(headers, sponsorshipEvent, SponsorshipAction.TierChanged);
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.TierChanged);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessSponsorshipWebhook(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, SponsorshipAction action) => Task.CompletedTask;
+        protected virtual Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, SponsorshipAction action) => Task.CompletedTask;
 
-        private Task ProcessStarWebhook(WebhookHeaders headers, string body)
+        private Task ProcessStarWebhookAsync(WebhookHeaders headers, string body)
         {
             var starEvent = JsonSerializer.Deserialize<StarEvent>(body)!;
             switch (starEvent.Action)
             {
                 case StarActionValue.Created:
-                    return this.ProcessStarWebhook(headers, starEvent, StarAction.Created);
+                    return this.ProcessStarWebhookAsync(headers, starEvent, StarAction.Created);
                 case StarActionValue.Deleted:
-                    return this.ProcessStarWebhook(headers, starEvent, StarAction.Deleted);
+                    return this.ProcessStarWebhookAsync(headers, starEvent, StarAction.Deleted);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessStarWebhook(WebhookHeaders headers, StarEvent starEvent, StarAction action) => Task.CompletedTask;
+        protected virtual Task ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent, StarAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessStatusWebhook(WebhookHeaders headers, StatusEvent statusEvent) => Task.CompletedTask;
+        protected virtual Task ProcessStatusWebhookAsync(WebhookHeaders headers, StatusEvent statusEvent) => Task.CompletedTask;
 
-        private Task ProcessTeamWebhook(WebhookHeaders headers, string body)
+        private Task ProcessTeamWebhookAsync(WebhookHeaders headers, string body)
         {
             var teamEvent = JsonSerializer.Deserialize<TeamEvent>(body)!;
             switch (teamEvent.Action)
             {
                 case TeamActionValue.AddedToRepository:
-                    return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.AddedToRepository);
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.AddedToRepository);
                 case TeamActionValue.Created:
-                    return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.Created);
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.Created);
                 case TeamActionValue.Deleted:
-                    return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.Deleted);
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.Deleted);
                 case TeamActionValue.Edited:
-                    return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.Edited);
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.Edited);
                 case TeamActionValue.RemovedFromRepository:
-                    return this.ProcessTeamWebhook(headers, teamEvent, TeamAction.RemovedFromRepository);
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.RemovedFromRepository);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessTeamWebhook(WebhookHeaders headers, TeamEvent teamEvent, TeamAction action) => Task.CompletedTask;
+        protected virtual Task ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, TeamAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessTeamAddWebhook(WebhookHeaders headers, TeamAddEvent teamAddEvent) => Task.CompletedTask;
+        protected virtual Task ProcessTeamAddWebhookAsync(WebhookHeaders headers, TeamAddEvent teamAddEvent) => Task.CompletedTask;
 
-        private Task ProcessWatchWebhook(WebhookHeaders headers, string body)
+        private Task ProcessWatchWebhookAsync(WebhookHeaders headers, string body)
         {
             var watchEvent = JsonSerializer.Deserialize<WatchEvent>(body)!;
             switch (watchEvent.Action)
             {
                 case WatchActionValue.Started:
-                    return this.ProcessWatchWebhook(headers, watchEvent, WatchAction.Started);
+                    return this.ProcessWatchWebhookAsync(headers, watchEvent, WatchAction.Started);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessWatchWebhook(WebhookHeaders headers, WatchEvent watchEvent, WatchAction action) => Task.CompletedTask;
+        protected virtual Task ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent, WatchAction action) => Task.CompletedTask;
 
         [PublicAPI]
-        protected virtual Task ProcessWorkflowDispatchWebhook(WebhookHeaders headers, WorkflowDispatchEvent workflowDispatchEvent) => Task.CompletedTask;
+        protected virtual Task ProcessWorkflowDispatchWebhookAsync(WebhookHeaders headers, WorkflowDispatchEvent workflowDispatchEvent) => Task.CompletedTask;
 
-        private Task ProcessWorkflowJobWebhook(WebhookHeaders headers, string body)
+        private Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, string body)
         {
             var workflowJobEvent = JsonSerializer.Deserialize<WorkflowJobEvent>(body)!;
             switch (workflowJobEvent.Action)
             {
                 case WorkflowJobActionValue.Completed:
-                    return this.ProcessWorkflowJobWebhook(headers, workflowJobEvent, WorkflowJobAction.Completed);
+                    return this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Completed);
                 case WorkflowJobActionValue.Started:
-                    return this.ProcessWorkflowJobWebhook(headers, workflowJobEvent, WorkflowJobAction.Started);
+                    return this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Started);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessWorkflowJobWebhook(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent, WorkflowJobAction action) => Task.CompletedTask;
+        protected virtual Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent, WorkflowJobAction action) => Task.CompletedTask;
 
-        private Task ProcessWorkflowRunWebhook(WebhookHeaders headers, string body)
+        private Task ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, string body)
         {
             var workflowRunEvent = JsonSerializer.Deserialize<WorkflowRunEvent>(body)!;
             switch (workflowRunEvent.Action)
             {
                 case WorkflowRunActionValue.Completed:
-                    return this.ProcessWorkflowRunWebhook(headers, workflowRunEvent, WorkflowRunAction.Completed);
+                    return this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.Completed);
                 case WorkflowRunActionValue.Requested:
-                    return this.ProcessWorkflowRunWebhook(headers, workflowRunEvent, WorkflowRunAction.Requested);
+                    return this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.Requested);
             }
 
             return Task.CompletedTask;
         }
 
         [PublicAPI]
-        protected virtual Task ProcessWorkflowRunWebhook(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent, WorkflowRunAction action) => Task.CompletedTask;
+        protected virtual Task ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent, WorkflowRunAction action) => Task.CompletedTask;
     }
 }

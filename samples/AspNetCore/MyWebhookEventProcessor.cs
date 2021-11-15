@@ -15,7 +15,7 @@
             this.logger = logger;
         }
 
-        protected override async Task ProcessPullRequestWebhook(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action)
+        protected override async Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action)
         {
             switch (action)
             {
