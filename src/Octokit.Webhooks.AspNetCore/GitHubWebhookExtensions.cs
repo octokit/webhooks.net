@@ -36,7 +36,8 @@
                 try
                 {
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    service.ProcessWebhook(context.Request.Headers, body);
+                    await service.ProcessWebhookAsync(context.Request.Headers, body)
+                        .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
                 catch (Exception)

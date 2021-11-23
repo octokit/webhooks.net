@@ -1,5 +1,6 @@
 ﻿namespace AspNetCore
 {
+    using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
     using Octokit.Webhooks;
     using Octokit.Webhooks.Events;
@@ -14,15 +15,17 @@
             this.logger = logger;
         }
 
-        protected override void ProcessPullRequestWebhook(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action)
+        protected override async Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action)
         {
             switch (action)
             {
                 case PullRequestActionValue.Opened:
                     this.logger.LogInformation("pull request opened");
+                    await Task.Delay(1000);
                     break;
                 default:
                     this.logger.LogInformation("Some other pull request event");
+                    await Task.Delay(1000);
                     break;
             }
         }
