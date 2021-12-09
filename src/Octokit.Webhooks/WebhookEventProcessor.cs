@@ -75,118 +75,118 @@
         [PublicAPI]
         public virtual Task ProcessWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
         {
-            switch (headers.Event)
+            switch (webhookEvent)
             {
-                case WebhookEventType.BranchProtectionRule:
-                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.CheckRun:
-                    return this.ProcessCheckRunWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.CheckSuite:
-                    return this.ProcessCheckSuiteWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.CodeScanningAlert:
-                    return this.ProcessCodeScanningAlertWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.CommitComment:
-                    return this.ProcessCommitCommentWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.ContentReference:
-                    return this.ProcessContentReferenceWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Create:
-                    return this.ProcessCreateWebhookAsync(headers, (CreateEvent)webhookEvent);
-                case WebhookEventType.Delete:
-                    return this.ProcessDeleteWebhookAsync(headers, (DeleteEvent)webhookEvent);
-                case WebhookEventType.DeployKey:
-                    return this.ProcessDeployKeyWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Deployment:
-                    return this.ProcessDeploymentWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.DeploymentStatus:
-                    return this.ProcessDeploymentStatusWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Discussion:
-                    return this.ProcessDiscussionWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.DiscussionComment:
-                    return this.ProcessDiscussionCommentWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Fork:
-                    return this.ProcessForkWebhookAsync(headers, (ForkEvent)webhookEvent);
-                case WebhookEventType.GithubAppAuthorization:
-                    return this.ProcessGithubAppAuthorizationWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Gollum:
-                    return this.ProcessGollumWebhookAsync(headers, (GollumEvent)webhookEvent);
-                case WebhookEventType.Installation:
-                    return this.ProcessInstallationWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.InstallationRepositories:
-                    return this.ProcessInstallationRepositoriesWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.IssueComment:
-                    return this.ProcessIssueCommentWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Issues:
-                    return this.ProcessIssuesWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Label:
-                    return this.ProcessLabelWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.MarketplacePurchase:
-                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Member:
-                    return this.ProcessMemberWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Membership:
-                    return this.ProcessMembershipWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Meta:
-                    return this.ProcessMetaWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Milestone:
-                    return this.ProcessMilestoneWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.OrgBlock:
-                    return this.ProcessOrgBlockWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Organization:
-                    return this.ProcessOrganizationWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Package:
-                    return this.ProcessPackageWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.PageBuild:
-                    return this.ProcessPageBuildWebhookAsync(headers, (PageBuildEvent)webhookEvent);
-                case WebhookEventType.Ping:
-                    return this.ProcessPingWebhookAsync(headers, (PingEvent)webhookEvent);
-                case WebhookEventType.Project:
-                    return this.ProcessProjectWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.ProjectCard:
-                    return this.ProcessProjectCardWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.ProjectColumn:
-                    return this.ProcessProjectColumnWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Public:
-                    return this.ProcessPublicWebhookAsync(headers, (PublicEvent)webhookEvent);
-                case WebhookEventType.PullRequest:
-                    return this.ProcessPullRequestWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.PullRequestReview:
-                    return this.ProcessPullRequestReviewWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.PullRequestReviewComment:
-                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Push:
-                    return this.ProcessPushWebhookAsync(headers, (PushEvent)webhookEvent);
-                case WebhookEventType.Release:
-                    return this.ProcessReleaseWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Repository:
-                    return this.ProcessRepositoryWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.RepositoryDispatch:
-                    return this.ProcessRepositoryDispatchWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.RepositoryImport:
-                    return this.ProcessRepositoryImportWebhookAsync(headers, (RepositoryImportEvent)webhookEvent);
-                case WebhookEventType.RepositoryVulnerabilityAlert:
-                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.SecretScanningAlert:
-                    return this.ProcessSecretScanningAlertWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.SecurityAdvisory:
-                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Sponsorship:
-                    return this.ProcessSponsorshipWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Star:
-                    return this.ProcessStarWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.Status:
-                    return this.ProcessStatusWebhookAsync(headers, (StatusEvent)webhookEvent);
-                case WebhookEventType.Team:
-                    return this.ProcessTeamWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.TeamAdd:
-                    return this.ProcessTeamAddWebhookAsync(headers, (TeamAddEvent)webhookEvent);
-                case WebhookEventType.Watch:
-                    return this.ProcessWatchWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.WorkflowDispatch:
-                    return this.ProcessWorkflowDispatchWebhookAsync(headers, (WorkflowDispatchEvent)webhookEvent);
-                case WebhookEventType.WorkflowJob:
-                    return this.ProcessWorkflowJobWebhookAsync(headers, webhookEvent);
-                case WebhookEventType.WorkflowRun:
-                    return this.ProcessWorkflowRunWebhookAsync(headers, webhookEvent);
+                case BranchProtectionRuleEvent branchProtectionRuleEvent:
+                    return this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent);
+                case CheckRunEvent checkRunEvent:
+                    return this.ProcessCheckRunWebhookAsync(headers, checkRunEvent);
+                case CheckSuiteEvent checkSuiteEvent:
+                    return this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent);
+                case CodeScanningAlertEvent codeScanningAlertEvent:
+                    return this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent);
+                case CommitCommentEvent commitCommentEvent:
+                    return this.ProcessCommitCommentWebhookAsync(headers, commitCommentEvent);
+                case ContentReferenceEvent contentReferenceEvent:
+                    return this.ProcessContentReferenceWebhookAsync(headers, contentReferenceEvent);
+                case CreateEvent createEvent:
+                    return this.ProcessCreateWebhookAsync(headers, createEvent);
+                case DeleteEvent deleteEvent:
+                    return this.ProcessDeleteWebhookAsync(headers, deleteEvent);
+                case DeployKeyEvent deployKeyEvent:
+                    return this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent);
+                case DeploymentEvent deploymentEvent:
+                    return this.ProcessDeploymentWebhookAsync(headers, deploymentEvent);
+                case DeploymentStatusEvent deploymentStatusEvent:
+                    return this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent);
+                case DiscussionEvent discussionEvent:
+                    return this.ProcessDiscussionWebhookAsync(headers, discussionEvent);
+                case DiscussionCommentEvent discussionCommentEvent:
+                    return this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent);
+                case ForkEvent forkEvent:
+                    return this.ProcessForkWebhookAsync(headers, forkEvent);
+                case GithubAppAuthorizationEvent githubAppAuthorizationEvent:
+                    return this.ProcessGithubAppAuthorizationWebhookAsync(headers, githubAppAuthorizationEvent);
+                case GollumEvent gollumEvent:
+                    return this.ProcessGollumWebhookAsync(headers, gollumEvent);
+                case InstallationEvent installationEvent:
+                    return this.ProcessInstallationWebhookAsync(headers, installationEvent);
+                case InstallationRepositoriesEvent installationRepositoriesEvent:
+                    return this.ProcessInstallationRepositoriesWebhookAsync(headers, installationRepositoriesEvent);
+                case IssueCommentEvent issueCommentEvent:
+                    return this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent);
+                case IssuesEvent issuesEvent:
+                    return this.ProcessIssuesWebhookAsync(headers, issuesEvent);
+                case LabelEvent labelEvent:
+                    return this.ProcessLabelWebhookAsync(headers, labelEvent);
+                case MarketplacePurchaseEvent marketplacePurchaseEvent:
+                    return this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent);
+                case MemberEvent memberEvent:
+                    return this.ProcessMemberWebhookAsync(headers, memberEvent);
+                case MembershipEvent membershipEvent:
+                    return this.ProcessMembershipWebhookAsync(headers, membershipEvent);
+                case MetaEvent metaEvent:
+                    return this.ProcessMetaWebhookAsync(headers, metaEvent);
+                case MilestoneEvent milestoneEvent:
+                    return this.ProcessMilestoneWebhookAsync(headers, milestoneEvent);
+                case OrgBlockEvent orgBlockEvent:
+                    return this.ProcessOrgBlockWebhookAsync(headers, orgBlockEvent);
+                case OrganizationEvent organizationEvent:
+                    return this.ProcessOrganizationWebhookAsync(headers, organizationEvent);
+                case PackageEvent packageEvent:
+                    return this.ProcessPackageWebhookAsync(headers, packageEvent);
+                case PageBuildEvent pageBuildEvent:
+                    return this.ProcessPageBuildWebhookAsync(headers, pageBuildEvent);
+                case PingEvent pingEvent:
+                    return this.ProcessPingWebhookAsync(headers, pingEvent);
+                case ProjectEvent projectEvent:
+                    return this.ProcessProjectWebhookAsync(headers, projectEvent);
+                case ProjectCardEvent projectCardEvent:
+                    return this.ProcessProjectCardWebhookAsync(headers, projectCardEvent);
+                case ProjectColumnEvent projectColumnEvent:
+                    return this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent);
+                case PublicEvent publicEvent:
+                    return this.ProcessPublicWebhookAsync(headers, publicEvent);
+                case PullRequestEvent pullRequestEvent:
+                    return this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent);
+                case PullRequestReviewEvent pullRequestReviewEvent:
+                    return this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent);
+                case PullRequestReviewCommentEvent pullRequestReviewCommentEvent:
+                    return this.ProcessPullRequestReviewCommentWebhookAsync(headers, pullRequestReviewCommentEvent);
+                case PushEvent pushEvent:
+                    return this.ProcessPushWebhookAsync(headers, pushEvent);
+                case ReleaseEvent releaseEvent:
+                    return this.ProcessReleaseWebhookAsync(headers, releaseEvent);
+                case RepositoryEvent repositoryEvent:
+                    return this.ProcessRepositoryWebhookAsync(headers, repositoryEvent);
+                case RepositoryDispatchEvent repositoryDispatchEvent:
+                    return this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent);
+                case RepositoryImportEvent repositoryImportEvent:
+                    return this.ProcessRepositoryImportWebhookAsync(headers, repositoryImportEvent);
+                case RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent:
+                    return this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent);
+                case SecretScanningAlertEvent secretScanningAlertEvent:
+                    return this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent);
+                case SecurityAdvisoryEvent securityAdvisoryEvent:
+                    return this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent);
+                case SponsorshipEvent sponsorshipEvent:
+                    return this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent);
+                case StarEvent starEvent:
+                    return this.ProcessStarWebhookAsync(headers, starEvent);
+                case StatusEvent statusEvent:
+                    return this.ProcessStatusWebhookAsync(headers, statusEvent);
+                case TeamEvent teamEvent:
+                    return this.ProcessTeamWebhookAsync(headers, teamEvent);
+                case TeamAddEvent teamAddEvent:
+                    return this.ProcessTeamAddWebhookAsync(headers, teamAddEvent);
+                case WatchEvent watchEvent:
+                    return this.ProcessWatchWebhookAsync(headers, watchEvent);
+                case WorkflowDispatchEvent workflowDispatchEvent:
+                    return this.ProcessWorkflowDispatchWebhookAsync(headers, workflowDispatchEvent);
+                case WorkflowJobEvent workflowJobEvent:
+                    return this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent);
+                case WorkflowRunEvent workflowRunEvent:
+                    return this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent);
             }
 
             return Task.CompletedTask;
@@ -312,9 +312,8 @@
             throw new Exception("Unable to deserialize event");
         }
 
-        private Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent)
         {
-            var branchProtectionRuleEvent = (BranchProtectionRuleEvent)webhookEvent;
             switch (branchProtectionRuleEvent.Action)
             {
                 case BranchProtectionRuleActionValue.Created:
@@ -331,9 +330,8 @@
         [PublicAPI]
         protected virtual Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, BranchProtectionRuleAction action) => Task.CompletedTask;
 
-        private Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent)
         {
-            var checkRunEvent = (CheckRunEvent)webhookEvent;
             switch (checkRunEvent.Action)
             {
                 case CheckRunActionValue.Completed:
@@ -352,9 +350,8 @@
         [PublicAPI]
         protected virtual Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CheckRunAction action) => Task.CompletedTask;
 
-        private Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent)
         {
-            var checkSuiteEvent = (CheckSuiteEvent)webhookEvent;
             switch (checkSuiteEvent.Action)
             {
                 case CheckSuiteActionValue.Completed:
@@ -371,9 +368,8 @@
         [PublicAPI]
         protected virtual Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent, CheckSuiteAction action) => Task.CompletedTask;
 
-        private Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent)
         {
-            var codeScanningAlertEvent = (CodeScanningAlertEvent)webhookEvent;
             switch (codeScanningAlertEvent.Action)
             {
                 case CodeScanningAlertActionValue.AppearedInBranch:
@@ -396,9 +392,8 @@
         [PublicAPI]
         protected virtual Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent, CodeScanningAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, CommitCommentEvent commitCommentEvent)
         {
-            var commitCommentEvent = (CommitCommentEvent)webhookEvent;
             switch (commitCommentEvent.Action)
             {
                 case CommitCommentActionValue.Created:
@@ -411,9 +406,8 @@
         [PublicAPI]
         protected virtual Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, CommitCommentEvent commitCommentEvent, CommitCommentAction action) => Task.CompletedTask;
 
-        private Task ProcessContentReferenceWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessContentReferenceWebhookAsync(WebhookHeaders headers, ContentReferenceEvent contentReferenceEvent)
         {
-            var contentReferenceEvent = (ContentReferenceEvent)webhookEvent;
             switch (contentReferenceEvent.Action)
             {
                 case ContentReferenceActionValue.Created:
@@ -432,9 +426,8 @@
         [PublicAPI]
         protected virtual Task ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent) => Task.CompletedTask;
 
-        private Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent)
         {
-            var deployKeyEvent = (DeployKeyEvent)webhookEvent;
             switch (deployKeyEvent.Action)
             {
                 case DeployKeyActionValue.Created:
@@ -449,9 +442,8 @@
         [PublicAPI]
         protected virtual Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent, DeployKeyAction action) => Task.CompletedTask;
 
-        private Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, DeploymentEvent deploymentEvent)
         {
-            var deploymentEvent = (DeploymentEvent)webhookEvent;
             switch (deploymentEvent.Action)
             {
                 case DeploymentActionValue.Created:
@@ -464,9 +456,8 @@
         [PublicAPI]
         protected virtual Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, DeploymentEvent deploymentEvent, DeploymentAction action) => Task.CompletedTask;
 
-        private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent)
         {
-            var deploymentStatusEvent = (DeploymentStatusEvent)webhookEvent;
             switch (deploymentStatusEvent.Action)
             {
                 case DeploymentStatusActionValue.Created:
@@ -479,9 +470,8 @@
         [PublicAPI]
         protected virtual Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent, DeploymentStatusAction action) => Task.CompletedTask;
 
-        private Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, DiscussionEvent discussionEvent)
         {
-            var discussionEvent = (DiscussionEvent)webhookEvent;
             switch (discussionEvent.Action)
             {
                 case DiscussionActionValue.Answered:
@@ -518,9 +508,8 @@
         [PublicAPI]
         protected virtual Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, DiscussionEvent discussionEvent, DiscussionAction action) => Task.CompletedTask;
 
-        private Task ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, DiscussionCommentEvent discussionCommentEvent)
         {
-            var discussionCommentEvent = (DiscussionCommentEvent)webhookEvent;
             switch (discussionCommentEvent.Action)
             {
                 case DiscussionCommentActionValue.Created:
@@ -540,9 +529,8 @@
         [PublicAPI]
         protected virtual Task ProcessForkWebhookAsync(WebhookHeaders headers, ForkEvent forkEvent) => Task.CompletedTask;
 
-        private Task ProcessGithubAppAuthorizationWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessGithubAppAuthorizationWebhookAsync(WebhookHeaders headers, GithubAppAuthorizationEvent githubAppAuthorizationEvent)
         {
-            var githubAppAuthorizationEvent = (GithubAppAuthorizationEvent)webhookEvent;
             switch (githubAppAuthorizationEvent.Action)
             {
                 case GithubAppAuthorizationActionValue.Revoked:
@@ -558,9 +546,8 @@
         [PublicAPI]
         protected virtual Task ProcessGollumWebhookAsync(WebhookHeaders headers, GollumEvent gollumEvent) => Task.CompletedTask;
 
-        private Task ProcessInstallationWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessInstallationWebhookAsync(WebhookHeaders headers, InstallationEvent installationEvent)
         {
-            var installationEvent = (InstallationEvent)webhookEvent;
             switch (installationEvent.Action)
             {
                 case InstallationActionValue.Created:
@@ -581,9 +568,8 @@
         [PublicAPI]
         protected virtual Task ProcessInstallationWebhookAsync(WebhookHeaders headers, InstallationEvent installationEvent, InstallationAction action) => Task.CompletedTask;
 
-        private Task ProcessInstallationRepositoriesWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessInstallationRepositoriesWebhookAsync(WebhookHeaders headers, InstallationRepositoriesEvent installationRepositoriesEvent)
         {
-            var installationRepositoriesEvent = (InstallationRepositoriesEvent)webhookEvent;
             switch (installationRepositoriesEvent.Action)
             {
                 case InstallationRepositoriesActionValue.Added:
@@ -598,9 +584,8 @@
         [PublicAPI]
         protected virtual Task ProcessInstallationRepositoriesWebhookAsync(WebhookHeaders headers, InstallationRepositoriesEvent installationRepositoriesEvent, InstallationRepositoriesAction action) => Task.CompletedTask;
 
-        private Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, IssueCommentEvent issueCommentEvent)
         {
-            var issueCommentEvent = (IssueCommentEvent)webhookEvent;
             switch (issueCommentEvent.Action)
             {
                 case IssueCommentActionValue.Created:
@@ -617,9 +602,8 @@
         [PublicAPI]
         protected virtual Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, IssueCommentEvent issueCommentEvent, IssueCommentAction action) => Task.CompletedTask;
 
-        private Task ProcessIssuesWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent)
         {
-            var issuesEvent = (IssuesEvent)webhookEvent;
             switch (issuesEvent.Action)
             {
                 case IssuesActionValue.Assigned:
@@ -662,9 +646,8 @@
         [PublicAPI]
         protected virtual Task ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, IssuesAction action) => Task.CompletedTask;
 
-        private Task ProcessLabelWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent)
         {
-            var labelEvent = (LabelEvent)webhookEvent;
             switch (labelEvent.Action)
             {
                 case LabelActionValue.Created:
@@ -681,9 +664,8 @@
         [PublicAPI]
         protected virtual Task ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, LabelAction action) => Task.CompletedTask;
 
-        private Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent)
         {
-            var marketplacePurchaseEvent = (MarketplacePurchaseEvent)webhookEvent;
             switch (marketplacePurchaseEvent.Action)
             {
                 case MarketplacePurchaseActionValue.Cancelled:
@@ -704,9 +686,8 @@
         [PublicAPI]
         protected virtual Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent, MarketplacePurchaseAction action) => Task.CompletedTask;
 
-        private Task ProcessMemberWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent)
         {
-            var memberEvent = (MemberEvent)webhookEvent;
             switch (memberEvent.Action)
             {
                 case MemberActionValue.Added:
@@ -723,9 +704,8 @@
         [PublicAPI]
         protected virtual Task ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, MemberAction action) => Task.CompletedTask;
 
-        private Task ProcessMembershipWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessMembershipWebhookAsync(WebhookHeaders headers, MembershipEvent membershipEvent)
         {
-            var membershipEvent = (MembershipEvent)webhookEvent;
             switch (membershipEvent.Action)
             {
                 case MembershipActionValue.Added:
@@ -740,9 +720,8 @@
         [PublicAPI]
         protected virtual Task ProcessMembershipWebhookAsync(WebhookHeaders headers, MembershipEvent membershipEvent, MembershipAction action) => Task.CompletedTask;
 
-        private Task ProcessMetaWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent)
         {
-            var metaEvent = (MetaEvent)webhookEvent;
             switch (metaEvent.Action)
             {
                 case MetaActionValue.Deleted:
@@ -755,9 +734,8 @@
         [PublicAPI]
         protected virtual Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, MetaAction action) => Task.CompletedTask;
 
-        private Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, MilestoneEvent milestoneEvent)
         {
-            var milestoneEvent = (MilestoneEvent)webhookEvent;
             switch (milestoneEvent.Action)
             {
                 case MilestoneActionValue.Closed:
@@ -778,9 +756,8 @@
         [PublicAPI]
         protected virtual Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, MilestoneEvent milestoneEvent, MilestoneAction action) => Task.CompletedTask;
 
-        private Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent)
         {
-            var orgBlockEvent = (OrgBlockEvent)webhookEvent;
             switch (orgBlockEvent.Action)
             {
                 case OrgBlockActionValue.Blocked:
@@ -795,9 +772,8 @@
         [PublicAPI]
         protected virtual Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, OrgBlockAction action) => Task.CompletedTask;
 
-        private Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, OrganizationEvent organizationEvent)
         {
-            var organizationEvent = (OrganizationEvent)webhookEvent;
             switch (organizationEvent.Action)
             {
                 case OrganizationActionValue.Deleted:
@@ -818,9 +794,8 @@
         [PublicAPI]
         protected virtual Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, OrganizationEvent organizationEvent, OrganizationAction action) => Task.CompletedTask;
 
-        private Task ProcessPackageWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent)
         {
-            var packageEvent = (PackageEvent)webhookEvent;
             switch (packageEvent.Action)
             {
                 case PackageActionValue.Published:
@@ -841,9 +816,8 @@
         [PublicAPI]
         protected virtual Task ProcessPingWebhookAsync(WebhookHeaders headers, PingEvent pingEvent) => Task.CompletedTask;
 
-        private Task ProcessProjectWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent)
         {
-            var projectEvent = (ProjectEvent)webhookEvent;
             switch (projectEvent.Action)
             {
                 case ProjectActionValue.Closed:
@@ -864,9 +838,8 @@
         [PublicAPI]
         protected virtual Task ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, ProjectAction action) => Task.CompletedTask;
 
-        private Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, ProjectCardEvent projectCardEvent)
         {
-            var projectCardEvent = (ProjectCardEvent)webhookEvent;
             switch (projectCardEvent.Action)
             {
                 case ProjectCardActionValue.Converted:
@@ -887,9 +860,8 @@
         [PublicAPI]
         protected virtual Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, ProjectCardEvent projectCardEvent, ProjectCardAction action) => Task.CompletedTask;
 
-        private Task ProcessProjectColumnWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessProjectColumnWebhookAsync(WebhookHeaders headers, ProjectColumnEvent projectColumnEvent)
         {
-            var projectColumnEvent = (ProjectColumnEvent)webhookEvent;
             switch (projectColumnEvent.Action)
             {
                 case ProjectColumnActionValue.Created:
@@ -911,9 +883,8 @@
         [PublicAPI]
         protected virtual Task ProcessPublicWebhookAsync(WebhookHeaders headers, PublicEvent publicEvent) => Task.CompletedTask;
 
-        private Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent)
         {
-            var pullRequestEvent = (PullRequestEvent)webhookEvent;
             switch (pullRequestEvent.Action)
             {
                 case PullRequestActionValue.Assigned:
@@ -958,9 +929,8 @@
         [PublicAPI]
         protected virtual Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) => Task.CompletedTask;
 
-        private Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent)
         {
-            var pullRequestReviewEvent = (PullRequestReviewEvent)webhookEvent;
             switch (pullRequestReviewEvent.Action)
             {
                 case PullRequestReviewActionValue.Dismissed:
@@ -977,9 +947,8 @@
         [PublicAPI]
         protected virtual Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent, PullRequestReviewAction action) => Task.CompletedTask;
 
-        private Task ProcessPullRequestReviewCommentWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessPullRequestReviewCommentWebhookAsync(WebhookHeaders headers, PullRequestReviewCommentEvent pullRequestReviewCommentEvent)
         {
-            var pullRequestReviewCommentEvent = (PullRequestReviewCommentEvent)webhookEvent;
             switch (pullRequestReviewCommentEvent.Action)
             {
                 case PullRequestReviewCommentActionValue.Created:
@@ -999,9 +968,8 @@
         [PublicAPI]
         protected virtual Task ProcessPushWebhookAsync(WebhookHeaders headers, PushEvent pushEvent) => Task.CompletedTask;
 
-        private Task ProcessReleaseWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent)
         {
-            var releaseEvent = (ReleaseEvent)webhookEvent;
             switch (releaseEvent.Action)
             {
                 case ReleaseActionValue.Created:
@@ -1026,9 +994,8 @@
         [PublicAPI]
         protected virtual Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action) => Task.CompletedTask;
 
-        private Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent)
         {
-            var repositoryEvent = (RepositoryEvent)webhookEvent;
             switch (repositoryEvent.Action)
             {
                 case RepositoryActionValue.Archived:
@@ -1057,9 +1024,8 @@
         [PublicAPI]
         protected virtual Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent, RepositoryAction action) => Task.CompletedTask;
 
-        private Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent)
         {
-            var repositoryDispatchEvent = (RepositoryDispatchEvent)webhookEvent;
             switch (repositoryDispatchEvent.Action)
             {
                 case RepositoryDispatchActionValue.OnDemandTest:
@@ -1075,9 +1041,8 @@
         [PublicAPI]
         protected virtual Task ProcessRepositoryImportWebhookAsync(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent) => Task.CompletedTask;
 
-        private Task ProcessRepositoryVulnerabilityAlertWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessRepositoryVulnerabilityAlertWebhookAsync(WebhookHeaders headers, RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent)
         {
-            var repositoryVulnerabilityAlertEvent = (RepositoryVulnerabilityAlertEvent)webhookEvent;
             switch (repositoryVulnerabilityAlertEvent.Action)
             {
                 case RepositoryVulnerabilityAlertActionValue.Create:
@@ -1094,9 +1059,8 @@
         [PublicAPI]
         protected virtual Task ProcessRepositoryVulnerabilityAlertWebhookAsync(WebhookHeaders headers, RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent)
         {
-            var secretScanningAlertEvent = (SecretScanningAlertEvent)webhookEvent;
             switch (secretScanningAlertEvent.Action)
             {
                 case SecretScanningAlertActionValue.Created:
@@ -1113,9 +1077,8 @@
         [PublicAPI]
         protected virtual Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent, SecretScanningAlertAction action) => Task.CompletedTask;
 
-        private Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent)
         {
-            var securityAdvisoryEvent = (SecurityAdvisoryEvent)webhookEvent;
             switch (securityAdvisoryEvent.Action)
             {
                 case SecurityAdvisoryActionValue.Performed:
@@ -1134,9 +1097,8 @@
         [PublicAPI]
         protected virtual Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent, SecurityAdvisoryAction action) => Task.CompletedTask;
 
-        private Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent)
         {
-            var sponsorshipEvent = (SponsorshipEvent)webhookEvent;
             switch (sponsorshipEvent.Action)
             {
                 case SponsorshipActionValue.Cancelled:
@@ -1159,9 +1121,8 @@
         [PublicAPI]
         protected virtual Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, SponsorshipAction action) => Task.CompletedTask;
 
-        private Task ProcessStarWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent)
         {
-            var starEvent = (StarEvent)webhookEvent;
             switch (starEvent.Action)
             {
                 case StarActionValue.Created:
@@ -1179,9 +1140,8 @@
         [PublicAPI]
         protected virtual Task ProcessStatusWebhookAsync(WebhookHeaders headers, StatusEvent statusEvent) => Task.CompletedTask;
 
-        private Task ProcessTeamWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent)
         {
-            var teamEvent = (TeamEvent)webhookEvent;
             switch (teamEvent.Action)
             {
                 case TeamActionValue.AddedToRepository:
@@ -1205,9 +1165,8 @@
         [PublicAPI]
         protected virtual Task ProcessTeamAddWebhookAsync(WebhookHeaders headers, TeamAddEvent teamAddEvent) => Task.CompletedTask;
 
-        private Task ProcessWatchWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent)
         {
-            var watchEvent = (WatchEvent)webhookEvent;
             switch (watchEvent.Action)
             {
                 case WatchActionValue.Started:
@@ -1223,9 +1182,8 @@
         [PublicAPI]
         protected virtual Task ProcessWorkflowDispatchWebhookAsync(WebhookHeaders headers, WorkflowDispatchEvent workflowDispatchEvent) => Task.CompletedTask;
 
-        private Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent)
         {
-            var workflowJobEvent = (WorkflowJobEvent)webhookEvent;
             switch (workflowJobEvent.Action)
             {
                 case WorkflowJobActionValue.Completed:
@@ -1240,9 +1198,8 @@
         [PublicAPI]
         protected virtual Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent, WorkflowJobAction action) => Task.CompletedTask;
 
-        private Task ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent)
+        private Task ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent)
         {
-            var workflowRunEvent = (WorkflowRunEvent)webhookEvent;
             switch (workflowRunEvent.Action)
             {
                 case WorkflowRunActionValue.Completed:
