@@ -1,8 +1,9 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Installation
@@ -44,9 +45,11 @@
         public IEnumerable<AppEvent>? Events { get; init; }
 
         [JsonPropertyName("created_at")]
+        [JsonConverter(typeof(DateTimeStringConverter))]
         public string CreatedAt { get; init; } = null!;
 
         [JsonPropertyName("updated_at")]
+        [JsonConverter(typeof(DateTimeStringConverter))]
         public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("single_file_name")]

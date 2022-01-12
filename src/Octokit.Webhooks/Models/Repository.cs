@@ -2,6 +2,7 @@
 {
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Repository
@@ -145,12 +146,14 @@
         public string DeploymentsUrl { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
+        [JsonConverter(typeof(DateTimeStringConverter))]
         public string? CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
         public string UpdatedAt { get; init; } = null!;
 
         [JsonPropertyName("pushed_at")]
+        [JsonConverter(typeof(DateTimeStringConverter))]
         public string? PushedAt { get; init; }
 
         [JsonPropertyName("git_url")]
