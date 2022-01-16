@@ -267,7 +267,10 @@
     "forks": 11745,
     "open_issues": 1504,
     "watchers": 87864,
-    "default_branch": "master"
+    "default_branch": "master",
+    "is_template": false,
+    "topics": [],
+    "visibility": "public"
   },
   "organization": {
     "login": "electron",
