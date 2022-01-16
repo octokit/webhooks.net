@@ -6,7 +6,7 @@
 
     [PublicAPI]
     [WebhookEventType(WebhookEventType.Delete)]
-    public abstract record DeleteEvent : WebhookEvent
+    public sealed record DeleteEvent : WebhookEvent
     {
         [JsonPropertyName("ref")]
         public string Ref { get; init; } = null!;
