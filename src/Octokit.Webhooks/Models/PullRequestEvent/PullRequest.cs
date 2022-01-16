@@ -67,7 +67,9 @@
         [JsonPropertyName("assignees")]
         public IEnumerable<User> Assignees { get; init; } = null!;
 
-        // requested_reviewers: (User | Team)[];
+        [JsonPropertyName("requested_reviewers")]
+        public IEnumerable<User> RequestedReviewers { get; init; } = null!;
+
         [JsonPropertyName("requested_teams")]
         public IEnumerable<Team> RequestedTeams { get; init; } = null!;
 
