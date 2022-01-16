@@ -257,7 +257,10 @@
         "forks": 0,
         "open_issues": 2,
         "watchers": 0,
-        "default_branch": "master"
+        "default_branch": "master",
+        "is_template": false,
+        "topics": [],
+        "visibility": "public"
       }
     },
     "base": {
@@ -376,7 +379,10 @@
         "forks": 0,
         "open_issues": 2,
         "watchers": 0,
-        "default_branch": "master"
+        "default_branch": "master",
+        "is_template": false,
+        "topics": [],
+        "visibility": "public"
       }
     },
     "_links": {
@@ -499,7 +505,10 @@
     "forks": 0,
     "open_issues": 2,
     "watchers": 0,
-    "default_branch": "master"
+    "default_branch": "master",
+    "is_template": false,
+    "topics": [],
+    "visibility": "public"
   },
   "organization": {
     "login": "Octocoders",

@@ -1036,10 +1036,12 @@
         {
             return workflowJobEvent.Action switch
             {
+                WorkflowJobActionValue.Queued => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent,
+                    WorkflowJobAction.Queued),
+                WorkflowJobActionValue.InProgress => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent,
+                    WorkflowJobAction.InProgress),
                 WorkflowJobActionValue.Completed => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent,
                     WorkflowJobAction.Completed),
-                WorkflowJobActionValue.Started => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent,
-                    WorkflowJobAction.Started),
                 _ => Task.CompletedTask
             };
         }

@@ -92,7 +92,10 @@
     "open_issues": 0,
     "watchers": 0,
     "default_branch": "master",
-    "public": true
+    "public": true,
+    "is_template": false,
+    "topics": [],
+    "visibility": "public"
   },
   "repository": {
     "id": 186853002,
@@ -186,7 +189,10 @@
     "forks": 1,
     "open_issues": 2,
     "watchers": 0,
-    "default_branch": "master"
+    "default_branch": "master",
+    "is_template": false,
+    "topics": [],
+    "visibility": "public"
   },
   "sender": {
     "login": "Octocoders",
