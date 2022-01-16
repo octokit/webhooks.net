@@ -78,6 +78,8 @@
         Repository,
         [EnumMember(Value = "repository_dispatch")]
         RepositoryDispatch,
+        [EnumMember(Value = "repository_vulnerability_alert")]
+        RepositoryVulnerabilityAlert,
         [EnumMember(Value = "secret_scanning_alert")]
         SecretScanningAlert,
         [EnumMember(Value = "star")]
