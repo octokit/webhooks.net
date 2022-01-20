@@ -1,8 +1,10 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Release
@@ -44,10 +46,12 @@
         public bool Prerelease { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string? CreatedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? CreatedAt { get; init; }
 
         [JsonPropertyName("published_at")]
-        public string? PublishedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? PublishedAt { get; init; }
 
         [JsonPropertyName("assets")]
         public IEnumerable<ReleaseAsset> Assets { get; init; } = null!;

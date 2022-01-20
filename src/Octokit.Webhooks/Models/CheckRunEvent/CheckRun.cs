@@ -1,5 +1,6 @@
-﻿namespace Octokit.Webhooks.Models.CheckRunEvent
+namespace Octokit.Webhooks.Models.CheckRunEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
@@ -35,10 +36,12 @@
         public CheckRunConclusion? Conclusion { get; init; }
 
         [JsonPropertyName("started_at")]
-        public string StartedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset StartedAt { get; init; }
 
         [JsonPropertyName("completed_at")]
-        public string CompletedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CompletedAt { get; init; }
 
         [JsonPropertyName("output")]
         public CheckRunOutput Output { get; init; } = null!;

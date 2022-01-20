@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.PullRequestReviewEvent
+namespace Octokit.Webhooks.Models.PullRequestReviewEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Review
@@ -22,7 +24,8 @@
         public string CommitId { get; init; } = null!;
 
         [JsonPropertyName("submitted_at")]
-        public string SubmittedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset SubmittedAt { get; init; }
 
         // TODO: this should probably be an enum
         [JsonPropertyName("state")]

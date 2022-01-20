@@ -1,8 +1,10 @@
-﻿namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent
+namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record SecurityAdvisory
@@ -32,13 +34,16 @@
         public IEnumerable<SecurityAdvisoryReference> References { get; init; } = null!;
 
         [JsonPropertyName("published_at")]
-        public string PublishedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset PublishedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("withdrawn_at")]
-        public string? WithdrawnAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? WithdrawnAt { get; init; }
 
         [JsonPropertyName("vulnerabilities")]
         public IEnumerable<SecurityAdvisoryVulnerability> Vulnerabilities { get; init; } = null!;

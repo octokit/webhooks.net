@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.OrganizationEvent
+namespace Octokit.Webhooks.Models.OrganizationEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Invitation
@@ -22,10 +24,12 @@
         public string Role { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("failed_at")]
-        public string? FailedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? FailedAt { get; init; }
 
         [JsonPropertyName("failed_reason")]
         public string? FailedReason { get; init; }

@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.DeploymentStatusEvent
+namespace Octokit.Webhooks.Models.DeploymentStatusEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record DeploymentStatus
@@ -31,10 +33,12 @@
         public string TargetUrl { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("deployment_url")]
         public string DeploymentUrl { get; init; } = null!;

@@ -1,8 +1,10 @@
-﻿namespace Octokit.Webhooks.Models.PullRequestEvent
+namespace Octokit.Webhooks.Models.PullRequestEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record PullRequest
@@ -47,16 +49,20 @@
         public User User { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("closed_at")]
-        public string? ClosedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? ClosedAt { get; init; }
 
         [JsonPropertyName("merged_at")]
-        public string? MergedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? MergedAt { get; init; }
 
         [JsonPropertyName("merge_commit_sha")]
         public string? MergeCommitSha { get; init; }
