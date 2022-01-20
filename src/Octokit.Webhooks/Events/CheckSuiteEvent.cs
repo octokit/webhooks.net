@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks
+﻿namespace Octokit.Webhooks.Events
 {
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
