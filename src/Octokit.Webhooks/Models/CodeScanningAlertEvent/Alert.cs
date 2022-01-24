@@ -8,7 +8,7 @@
     public sealed record Alert
     {
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; init; } = null!;

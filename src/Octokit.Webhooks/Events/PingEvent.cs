@@ -12,7 +12,7 @@ namespace Octokit.Webhooks.Events
         public string Zen { get; init; } = null!;
 
         [JsonPropertyName("hook_id")]
-        public int HookId { get; init; }
+        public long HookId { get; init; }
 
         [JsonPropertyName("hook")]
         public Hook Hook { get; init; } = null!;

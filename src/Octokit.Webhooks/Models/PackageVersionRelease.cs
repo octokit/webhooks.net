@@ -13,7 +13,7 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("tag_name")]
         public string TagName { get; init; } = null!;

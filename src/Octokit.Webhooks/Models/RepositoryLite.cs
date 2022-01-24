@@ -73,7 +73,7 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("issue_comment_url")]
         public string IssueCommentUrl { get; init; } = null!;

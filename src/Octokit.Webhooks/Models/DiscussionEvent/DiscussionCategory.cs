@@ -7,10 +7,10 @@
     public sealed record DiscussionCategory
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("repository_id")]
-        public int RepositoryId { get; init; }
+        public long RepositoryId { get; init; }
 
         [JsonPropertyName("emoji")]
         public string Emoji { get; init; } = null!;
@@ -31,6 +31,6 @@
         public string Slug { get; init; } = null!;
 
         [JsonPropertyName("is_answerable")]
-        public int IsAnswerable { get; init; }
+        public long IsAnswerable { get; init; }
     }
 }

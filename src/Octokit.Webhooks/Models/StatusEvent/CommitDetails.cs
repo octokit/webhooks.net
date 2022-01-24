@@ -22,6 +22,6 @@
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("comment_count")]
-        public int CommentCount { get; init; }
+        public long CommentCount { get; init; }
     }
 }

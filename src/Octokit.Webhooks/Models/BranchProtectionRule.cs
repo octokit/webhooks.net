@@ -8,10 +8,10 @@
     public sealed record BranchProtectionRule
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("repository_id")]
-        public int RepositoryId { get; init; }
+        public long RepositoryId { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;
@@ -59,7 +59,7 @@
         public bool RequireCodeOwnerReview { get; init; }
 
         [JsonPropertyName("required_approving_review_count")]
-        public int RequiredApprovingReviewCount { get; init; }
+        public long RequiredApprovingReviewCount { get; init; }
 
         [JsonPropertyName("required_conversation_resolution_level")]
         public EnforcementLevel RequiredConversationResolutionLevel { get; init; }

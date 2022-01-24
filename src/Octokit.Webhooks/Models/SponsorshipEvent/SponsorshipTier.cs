@@ -16,10 +16,10 @@
         public string Description { get; init; } = null!;
 
         [JsonPropertyName("monthly_price_in_cents")]
-        public int MonthlyPriceInCents { get; init; }
+        public long MonthlyPriceInCents { get; init; }
 
         [JsonPropertyName("monthly_price_in_dollars")]
-        public int MonthlyPriceInDollars { get; init; }
+        public long MonthlyPriceInDollars { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;

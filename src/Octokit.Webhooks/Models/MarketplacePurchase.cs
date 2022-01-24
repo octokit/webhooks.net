@@ -13,7 +13,7 @@
         public string BillingCycle { get; init; } = null!;
 
         [JsonPropertyName("unit_count")]
-        public int UnitCount { get; init; }
+        public long UnitCount { get; init; }
 
         [JsonPropertyName("on_free_trial")]
         public bool OnFreeTrial { get; init; }

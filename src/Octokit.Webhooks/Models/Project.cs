@@ -19,7 +19,7 @@
         public string ColumnsUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -31,7 +31,7 @@
         public string? Body { get; init; }
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("state")]
         public ProjectState State { get; init; }

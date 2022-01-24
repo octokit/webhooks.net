@@ -8,7 +8,7 @@
     public sealed record MarkplacePurchasePlan
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;
@@ -17,10 +17,10 @@
         public string Description { get; init; } = null!;
 
         [JsonPropertyName("monthly_price_in_cents")]
-        public int MonthlyPriceInCents { get; init; }
+        public long MonthlyPriceInCents { get; init; }
 
         [JsonPropertyName("yearly_price_in_cents")]
-        public int YearlyPriceInCents { get; init; }
+        public long YearlyPriceInCents { get; init; }
 
         [JsonPropertyName("price_model")]
         public string PriceModel { get; init; } = null!;
