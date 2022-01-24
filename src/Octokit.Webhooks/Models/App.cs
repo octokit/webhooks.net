@@ -8,7 +8,7 @@
     public sealed record App
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("slug")]
         public string? Slug { get; init; }

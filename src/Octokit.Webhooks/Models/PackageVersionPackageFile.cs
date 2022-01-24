@@ -10,7 +10,7 @@
         public string DownloadUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;
@@ -31,7 +31,7 @@
         public string State { get; init; } = null!;
 
         [JsonPropertyName("size")]
-        public int Size { get; init; }
+        public long Size { get; init; }
 
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; init; } = null!;

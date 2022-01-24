@@ -7,6 +7,6 @@
     public sealed record ChangesColumnId
     {
         [JsonPropertyName("from")]
-        public int From { get; init; }
+        public long From { get; init; }
     }
 }

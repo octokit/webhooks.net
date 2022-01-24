@@ -9,7 +9,7 @@
     public sealed record PageBuildEvent : WebhookEvent
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("build")]
         public Build Build { get; init; } = null!;

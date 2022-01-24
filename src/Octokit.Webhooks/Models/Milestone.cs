@@ -16,13 +16,13 @@
         public string LabelsUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("title")]
         public string Title { get; init; } = null!;
@@ -34,10 +34,10 @@
         public User Creator { get; init; } = null!;
 
         [JsonPropertyName("open_issues")]
-        public int OpenIssues { get; init; }
+        public long OpenIssues { get; init; }
 
         [JsonPropertyName("closed_issues")]
-        public int ClosedIssues { get; init; }
+        public long ClosedIssues { get; init; }
 
         [JsonPropertyName("state")]
         public MilestoneState State { get; init; }

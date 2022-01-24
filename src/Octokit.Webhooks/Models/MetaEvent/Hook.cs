@@ -11,7 +11,7 @@
         public string Type { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;

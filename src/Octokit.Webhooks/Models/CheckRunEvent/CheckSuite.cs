@@ -8,7 +8,7 @@
     public sealed record CheckSuite
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string? NodeId { get; init; }

@@ -8,7 +8,7 @@
     public sealed record Installation
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("account")]
         public User Account { get; init; } = null!;
@@ -26,13 +26,13 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("app_id")]
-        public int AppId { get; init; }
+        public long AppId { get; init; }
 
         [JsonPropertyName("app_slug")]
         public string? AppSlug { get; init; }
 
         [JsonPropertyName("target_id")]
-        public int TargetId { get; init; }
+        public long TargetId { get; init; }
 
         [JsonPropertyName("target_type")]
         public InstallationTargetType TargetType { get; init; }

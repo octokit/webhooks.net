@@ -10,10 +10,10 @@
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("head")]
         public WorkflowPullRequestHead Head { get; init; } = null!;

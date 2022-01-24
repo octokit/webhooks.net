@@ -16,7 +16,7 @@ namespace Octokit.Webhooks.Models.WorkflowJobEvent
         public WorkflowJobStepConclusion Conclusion { get; init; }
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("started_at")]
         public string StartedAt { get; init; } = null!;
