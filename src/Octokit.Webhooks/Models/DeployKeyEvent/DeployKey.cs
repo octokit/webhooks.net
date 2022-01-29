@@ -9,7 +9,7 @@ namespace Octokit.Webhooks.Models.DeployKeyEvent
     public sealed record DeployKey
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("key")]
         public string Key { get; init; } = null!;

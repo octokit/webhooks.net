@@ -9,7 +9,7 @@ namespace Octokit.Webhooks.Models.DiscussionCommentEvent
     public sealed record DiscussionComment
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -21,13 +21,13 @@ namespace Octokit.Webhooks.Models.DiscussionCommentEvent
         public int? ParentId { get; init; }
 
         [JsonPropertyName("child_comment_count")]
-        public int ChildCommentCount { get; init; }
+        public long ChildCommentCount { get; init; }
 
         [JsonPropertyName("repository_url")]
         public string RepositoryUrl { get; init; } = null!;
 
         [JsonPropertyName("discussion_id")]
-        public int DiscussionId { get; init; }
+        public long DiscussionId { get; init; }
 
         [JsonPropertyName("author_association")]
         public AuthorAssociation AuthorAssociation { get; init; }

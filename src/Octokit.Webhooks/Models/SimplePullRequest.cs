@@ -13,7 +13,7 @@ namespace Octokit.Webhooks.Models
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -31,7 +31,7 @@ namespace Octokit.Webhooks.Models
         public string IssueUrl { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("state")]
         public SimplePullRequestState State { get; init; }

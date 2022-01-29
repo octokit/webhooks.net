@@ -10,7 +10,7 @@ namespace Octokit.Webhooks.Models
     public sealed record PackageVersion
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("version")]
         public string Version { get; init; } = null!;

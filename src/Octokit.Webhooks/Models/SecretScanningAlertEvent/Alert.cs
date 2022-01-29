@@ -9,7 +9,7 @@ namespace Octokit.Webhooks.Models.SecretScanningAlertEvent
     public sealed record Alert
     {
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("secret_type")]
         public string SecretType { get; init; } = null!;

@@ -18,10 +18,10 @@ namespace Octokit.Webhooks.Models
         public string ColumnUrl { get; init; } = null!;
 
         [JsonPropertyName("column_id")]
-        public int ColumnId { get; init; }
+        public long ColumnId { get; init; }
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -30,7 +30,7 @@ namespace Octokit.Webhooks.Models
         public string? Note { get; init; }
 
         [JsonPropertyName("archived")]
-        public int Archived { get; init; }
+        public long Archived { get; init; }
 
         [JsonPropertyName("creator")]
         public User Creator { get; init; } = null!;
@@ -47,6 +47,6 @@ namespace Octokit.Webhooks.Models
         public string? ContentUrl { get; init; }
 
         [JsonPropertyName("after_id")]
-        public int AfterId { get; init; }
+        public long AfterId { get; init; }
     }
 }

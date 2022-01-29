@@ -10,7 +10,7 @@ namespace Octokit.Webhooks.Models.CheckRunEvent
     public sealed record CheckRun
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;

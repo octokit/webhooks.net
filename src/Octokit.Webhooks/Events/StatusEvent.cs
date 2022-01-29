@@ -12,7 +12,7 @@ namespace Octokit.Webhooks.Events
     public sealed record StatusEvent : WebhookEvent
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("sha")]
         public string Sha { get; init; } = null!;

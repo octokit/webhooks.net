@@ -16,7 +16,7 @@
         public string? Text { get; init; }
 
         [JsonPropertyName("annotations_count")]
-        public int AnnotationsCount { get; init; }
+        public long AnnotationsCount { get; init; }
 
         [JsonPropertyName("annotations_url")]
         public string AnnotationsUrl { get; init; } = null!;

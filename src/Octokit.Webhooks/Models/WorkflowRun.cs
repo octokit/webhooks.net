@@ -19,7 +19,7 @@ namespace Octokit.Webhooks.Models
         public string CheckSuiteUrl { get; init; } = null!;
 
         [JsonPropertyName("check_suite_id")]
-        public int CheckSuiteId { get; init; }
+        public long CheckSuiteId { get; init; }
 
         [JsonPropertyName("check_suite_node_id")]
         public string CheckSuiteNodeId { get; init; } = null!;
@@ -50,7 +50,7 @@ namespace Octokit.Webhooks.Models
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("jobs_url")]
         public string JobsUrl { get; init; } = null!;
@@ -74,7 +74,7 @@ namespace Octokit.Webhooks.Models
         public string RerunUrl { get; init; } = null!;
 
         [JsonPropertyName("run_number")]
-        public int RunNumber { get; init; }
+        public long RunNumber { get; init; }
 
         [JsonPropertyName("status")]
         public WorkflowRunStatus Status { get; init; }
@@ -87,7 +87,7 @@ namespace Octokit.Webhooks.Models
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("workflow_id")]
-        public int WorkflowId { get; init; }
+        public long WorkflowId { get; init; }
 
         [JsonPropertyName("workflow_url")]
         public string WorkflowUrl { get; init; } = null!;

@@ -8,13 +8,13 @@ namespace Octokit.Webhooks.Models.WorkflowJobEvent
     public sealed record WorkflowJob
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("run_id")]
-        public int RunId { get; init; }
+        public long RunId { get; init; }
 
         [JsonPropertyName("run_attempt")]
-        public int RunAttempt { get; init; }
+        public long RunAttempt { get; init; }
 
         [JsonPropertyName("run_url")]
         public string RunUrl { get; init; } = null!;

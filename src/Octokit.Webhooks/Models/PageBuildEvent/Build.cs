@@ -24,7 +24,7 @@ namespace Octokit.Webhooks.Models.PageBuildEvent
         public string Commit { get; init; } = null!;
 
         [JsonPropertyName("duration")]
-        public int Duration { get; init; }
+        public long Duration { get; init; }
 
         [JsonPropertyName("created_at")]
         [JsonConverter(typeof(DateTimeOffsetConverter))]

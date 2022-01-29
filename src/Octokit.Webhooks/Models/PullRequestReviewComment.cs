@@ -12,10 +12,10 @@ namespace Octokit.Webhooks.Models
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("pull_request_review_id")]
-        public int PullRequestReviewId { get; init; }
+        public long PullRequestReviewId { get; init; }
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -30,7 +30,7 @@ namespace Octokit.Webhooks.Models
         public int? Position { get; init; }
 
         [JsonPropertyName("original_position")]
-        public int OriginalPosition { get; init; }
+        public long OriginalPosition { get; init; }
 
         [JsonPropertyName("commit_id")]
         public string CommitId { get; init; } = null!;
@@ -77,7 +77,7 @@ namespace Octokit.Webhooks.Models
         public int? Line { get; init; }
 
         [JsonPropertyName("original_line")]
-        public int OriginalLine { get; init; }
+        public long OriginalLine { get; init; }
 
         [JsonPropertyName("side")]
         public Side Side { get; init; }

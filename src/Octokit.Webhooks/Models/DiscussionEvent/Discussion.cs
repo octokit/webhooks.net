@@ -28,13 +28,13 @@ namespace Octokit.Webhooks.Models
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("title")]
         public string Title { get; init; } = null!;
@@ -46,10 +46,10 @@ namespace Octokit.Webhooks.Models
         public DiscussionState State { get; init; }
 
         [JsonPropertyName("locked")]
-        public int Locked { get; init; }
+        public long Locked { get; init; }
 
         [JsonPropertyName("comments")]
-        public int Comments { get; init; }
+        public long Comments { get; init; }
 
         [JsonPropertyName("created_at")]
         [JsonConverter(typeof(DateTimeOffsetConverter))]

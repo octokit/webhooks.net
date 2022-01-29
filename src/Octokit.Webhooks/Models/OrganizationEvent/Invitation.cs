@@ -9,7 +9,7 @@ namespace Octokit.Webhooks.Models.OrganizationEvent
     public sealed record Invitation
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -38,7 +38,7 @@ namespace Octokit.Webhooks.Models.OrganizationEvent
         public User Inviter { get; init; } = null!;
 
         [JsonPropertyName("team_count")]
-        public int TeamCount { get; init; }
+        public long TeamCount { get; init; }
 
         [JsonPropertyName("invitation_teams_url")]
         public string InvitationTeamsUrl { get; init; } = null!;

@@ -11,7 +11,7 @@ namespace Octokit.Webhooks.Models.CheckSuiteEvent
     public sealed record CheckSuite
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string? NodeId { get; init; }
@@ -52,7 +52,7 @@ namespace Octokit.Webhooks.Models.CheckSuiteEvent
         public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("latest_check_runs_count")]
-        public int LatestCheckRunsCount { get; init; }
+        public long LatestCheckRunsCount { get; init; }
 
         [JsonPropertyName("check_runs_url")]
         public string CheckRunsUrl { get; init; } = null!;
