@@ -18,10 +18,12 @@ namespace Octokit.Webhooks.Test.Converter
 
         private readonly DateTimeOffset? expected = new(2019, 05, 15, 15, 20, 40, default);
 
-        [Fact]
-        public void CanConvertString()
+        [Theory]
+        [InlineData(@"""2019-05-15T15:20:40Z""")]
+        [InlineData(@"""2019-05-15T15:20:40.000+00:00""")]
+        public void CanConvertString(string input)
         {
-            var result = JsonSerializer.Deserialize<DateTimeOffset?>(@"""2019-05-15T15:20:40Z""", this.options);
+            var result = JsonSerializer.Deserialize<DateTimeOffset?>(input, this.options);
             result.Should().Be(this.expected);
         }
 
@@ -42,7 +44,7 @@ namespace Octokit.Webhooks.Test.Converter
         [Fact]
         public void ThrowsForWrite()
         {
-            var result = () => JsonSerializer.Serialize(this.expected, this.options);
+            Func<string> result = () => JsonSerializer.Serialize(this.expected, this.options);
             result.Should().Throw<NotImplementedException>();
         }
     }
