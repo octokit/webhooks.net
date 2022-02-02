@@ -6,7 +6,7 @@
     [PublicAPI]
     public sealed record HookConfig
     {
-        [JsonPropertyName("secret")]
+        [JsonPropertyName("content_type")]
         public HookConfigContentType ContentType { get; init; }
 
         [JsonPropertyName("url")]
@@ -14,5 +14,8 @@
 
         [JsonPropertyName("insecure_ssl")]
         public string InsecureSsl { get; init; } = null!;
+
+        [JsonPropertyName("secret")]
+        public string? Secret { get; init; }
     }
 }
