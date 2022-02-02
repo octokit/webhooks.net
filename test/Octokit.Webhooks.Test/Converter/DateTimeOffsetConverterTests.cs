@@ -1,0 +1,49 @@
+namespace Octokit.Webhooks.Test.Converter
+{
+    using System;
+    using System.Text.Json;
+    using FluentAssertions;
+    using Octokit.Webhooks.Converter;
+    using Xunit;
+
+    public class DateTimeOffsetConverterTests
+    {
+        private readonly JsonSerializerOptions options = new()
+        {
+            Converters =
+            {
+                new DateTimeOffsetConverter(),
+            },
+        };
+
+        private readonly DateTimeOffset expected = new(2019, 05, 15, 15, 20, 40, default);
+
+        [Fact]
+        public void CanConvertString()
+        {
+            var result = JsonSerializer.Deserialize<DateTimeOffset>(@"""2019-05-15T15:20:40Z""", this.options);
+            result.Should().Be(this.expected);
+        }
+
+        [Fact]
+        public void CanConvertNumber()
+        {
+            var result = JsonSerializer.Deserialize<DateTimeOffset>(@"1557933640", this.options);
+            result.Should().Be(this.expected);
+        }
+
+        [Fact]
+        public void ThrowsForNull()
+        {
+            var result = () => JsonSerializer.Deserialize<DateTimeOffset>(@"null", this.options);
+            result.Should().Throw<JsonException>();
+        }
+
+        [Fact]
+        public void ThrowsForWrite()
+        {
+            var result = () => JsonSerializer.Serialize(this.expected, this.options);
+            result.Should().Throw<NotImplementedException>();
+        }
+    }
+}
