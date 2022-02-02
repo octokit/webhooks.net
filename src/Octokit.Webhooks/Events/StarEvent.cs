@@ -1,5 +1,6 @@
-﻿namespace Octokit.Webhooks.Events
+namespace Octokit.Webhooks.Events
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
     using Octokit.Webhooks.Converter;
@@ -10,6 +11,7 @@
     public abstract record StarEvent : WebhookEvent
     {
         [JsonPropertyName("starred_at")]
-        public string StarredAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset StarredAt { get; init; }
     }
 }
