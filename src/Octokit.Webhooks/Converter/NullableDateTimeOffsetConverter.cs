@@ -9,7 +9,7 @@ namespace Octokit.Webhooks.Converter
         public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.TokenType switch
         {
             JsonTokenType.Null => null,
-            _ => DateTimeOffsetConverter.HandleReader(ref reader),
+            _ => DateTimeOffsetConverter.ReadInternal(ref reader),
         };
 
         public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options) =>

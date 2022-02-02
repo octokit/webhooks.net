@@ -2,20 +2,18 @@ namespace Octokit.Webhooks.Test
 {
     using System;
     using FluentAssertions;
+    using Octokit.Webhooks.Test.Converter;
     using Xunit;
 
     public class WebhookEventProcessorTests
     {
-        private readonly WebhookEventProcessor webhookEventProcessor;
-
-        public WebhookEventProcessorTests() => this.webhookEventProcessor = new TestWebhookEventProcessor();
+        private readonly WebhookEventProcessor webhookEventProcessor = new TestWebhookEventProcessor();
 
         [Theory]
         [ClassData(typeof(WebhookEventProcessorTestsData))]
         public void CanDeserialize(WebhookHeaders headers, string payload, Type expectedType)
         {
             var result = this.webhookEventProcessor.DeserializeWebhookEvent(headers, payload);
-
             result.Should().BeAssignableTo(expectedType);
         }
     }
