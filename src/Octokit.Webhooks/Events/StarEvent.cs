@@ -11,7 +11,7 @@ namespace Octokit.Webhooks.Events
     public abstract record StarEvent : WebhookEvent
     {
         [JsonPropertyName("starred_at")]
-        [JsonConverter(typeof(DateTimeOffsetConverter))]
-        public DateTimeOffset StarredAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? StarredAt { get; init; }
     }
 }
