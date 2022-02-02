@@ -1,7 +1,9 @@
 namespace Octokit.Webhooks.Models.WorkflowJobEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record WorkflowJobStep
@@ -13,7 +15,7 @@ namespace Octokit.Webhooks.Models.WorkflowJobEvent
         public WorkflowJobStepStatus Status { get; init; }
 
         [JsonPropertyName("conclusion")]
-        public WorkflowJobStepConclusion Conclusion { get; init; }
+        public WorkflowJobStepConclusion? Conclusion { get; init; }
 
         [JsonPropertyName("number")]
         public long Number { get; init; }
@@ -22,6 +24,7 @@ namespace Octokit.Webhooks.Models.WorkflowJobEvent
         public string StartedAt { get; init; } = null!;
 
         [JsonPropertyName("completed_at")]
-        public string? CompletedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? CompletedAt { get; init; }
     }
 }
