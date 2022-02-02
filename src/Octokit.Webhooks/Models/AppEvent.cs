@@ -6,6 +6,8 @@
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
     public enum AppEvent
     {
+        [EnumMember(Value = "*")]
+        All,
         [EnumMember(Value = "check_run")]
         CheckRun,
         [EnumMember(Value = "check_suite")]
@@ -46,6 +48,8 @@
         Member,
         [EnumMember(Value = "membership")]
         Membership,
+        [EnumMember(Value = "meta")]
+        Meta,
         [EnumMember(Value = "milestone")]
         Milestone,
         [EnumMember(Value = "org_block")]
@@ -68,6 +72,8 @@
         PullRequestReview,
         [EnumMember(Value = "pull_request_review_comment")]
         PullRequestReviewComment,
+        [EnumMember(Value = "pull_request_review_thread")]
+        PullRequestReviewThread,
         [EnumMember(Value = "push")]
         Push,
         [EnumMember(Value = "registry_package")]
@@ -78,6 +84,8 @@
         Repository,
         [EnumMember(Value = "repository_dispatch")]
         RepositoryDispatch,
+        [EnumMember(Value = "repository_import")]
+        RepositoryImport,
         [EnumMember(Value = "repository_vulnerability_alert")]
         RepositoryVulnerabilityAlert,
         [EnumMember(Value = "secret_scanning_alert")]

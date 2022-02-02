@@ -1,4 +1,4 @@
-namespace Octokit.Webhooks.Models
+﻿namespace Octokit.Webhooks.Models
 {
     using System;
     using System.Text.Json.Serialization;
@@ -30,7 +30,7 @@ namespace Octokit.Webhooks.Models
         public string? Note { get; init; }
 
         [JsonPropertyName("archived")]
-        public long Archived { get; init; }
+        public bool Archived { get; init; }
 
         [JsonPropertyName("creator")]
         public User Creator { get; init; } = null!;
@@ -47,6 +47,6 @@ namespace Octokit.Webhooks.Models
         public string? ContentUrl { get; init; }
 
         [JsonPropertyName("after_id")]
-        public long AfterId { get; init; }
+        public long? AfterId { get; init; }
     }
 }

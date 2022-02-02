@@ -10,6 +10,6 @@
         public string? VectorString { get; init; }
 
         [JsonPropertyName("score")]
-        public long Score { get; init; }
+        public float Score { get; init; }
     }
 }

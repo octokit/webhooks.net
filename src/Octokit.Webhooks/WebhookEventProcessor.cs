@@ -38,6 +38,7 @@
     using Octokit.Webhooks.Events.PullRequest;
     using Octokit.Webhooks.Events.PullRequestReview;
     using Octokit.Webhooks.Events.PullRequestReviewComment;
+    using Octokit.Webhooks.Events.PullRequestReviewThread;
     using Octokit.Webhooks.Events.Release;
     using Octokit.Webhooks.Events.Repository;
     using Octokit.Webhooks.Events.RepositoryDispatch;
@@ -127,6 +128,8 @@
                     pullRequestReviewEvent),
                 PullRequestReviewCommentEvent pullRequestReviewCommentEvent => this
                     .ProcessPullRequestReviewCommentWebhookAsync(headers, pullRequestReviewCommentEvent),
+                PullRequestReviewThreadEvent pullRequestReviewThreadEvent => this
+                    .ProcessPullRequestReviewThreadWebhookAsync(headers, pullRequestReviewThreadEvent),
                 PushEvent pushEvent => this.ProcessPushWebhookAsync(headers, pushEvent),
                 ReleaseEvent releaseEvent => this.ProcessReleaseWebhookAsync(headers, releaseEvent),
                 RepositoryEvent repositoryEvent => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent),
@@ -200,6 +203,8 @@
                 WebhookEventType.PullRequestReview => JsonSerializer.Deserialize<PullRequestReviewEvent>(body)!,
                 WebhookEventType.PullRequestReviewComment =>
                     JsonSerializer.Deserialize<PullRequestReviewCommentEvent>(body)!,
+                WebhookEventType.PullRequestReviewThread =>
+                    JsonSerializer.Deserialize<PullRequestReviewThreadEvent>(body)!,
                 WebhookEventType.Push => JsonSerializer.Deserialize<PushEvent>(body)!,
                 WebhookEventType.Release => JsonSerializer.Deserialize<ReleaseEvent>(body)!,
                 WebhookEventType.Repository => JsonSerializer.Deserialize<RepositoryEvent>(body)!,
@@ -830,6 +835,21 @@
 
         [PublicAPI]
         protected virtual Task ProcessPullRequestReviewCommentWebhookAsync(WebhookHeaders headers, PullRequestReviewCommentEvent pullRequestReviewCommentEvent, PullRequestReviewCommentAction action) => Task.CompletedTask;
+
+        private Task ProcessPullRequestReviewThreadWebhookAsync(WebhookHeaders headers, PullRequestReviewThreadEvent pullRequestReviewThreadEvent)
+        {
+            return pullRequestReviewThreadEvent.Action switch
+            {
+                PullRequestReviewThreadActionValue.Resolved => this.ProcessPullRequestReviewThreadWebhookAsync(headers,
+                    pullRequestReviewThreadEvent, PullRequestReviewThreadAction.Resolved),
+                PullRequestReviewThreadActionValue.Unresolved => this.ProcessPullRequestReviewThreadWebhookAsync(headers,
+                    pullRequestReviewThreadEvent, PullRequestReviewThreadAction.Unresolved),
+                _ => Task.CompletedTask
+            };
+        }
+
+        [PublicAPI]
+        protected virtual Task ProcessPullRequestReviewThreadWebhookAsync(WebhookHeaders headers, PullRequestReviewThreadEvent pullRequestReviewThreadEvent, PullRequestReviewThreadAction action) => Task.CompletedTask;
 
         [PublicAPI]
         protected virtual Task ProcessPushWebhookAsync(WebhookHeaders headers, PushEvent pushEvent) => Task.CompletedTask;
