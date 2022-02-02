@@ -68,6 +68,8 @@
         PullRequestReview,
         [EnumMember(Value = "pull_request_review_comment")]
         PullRequestReviewComment,
+        [EnumMember(Value = "pull_request_review_thread")]
+        PullRequestReviewThread,
         [EnumMember(Value = "push")]
         Push,
         [EnumMember(Value = "registry_package")]
