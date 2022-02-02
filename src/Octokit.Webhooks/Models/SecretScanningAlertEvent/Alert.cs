@@ -1,13 +1,15 @@
-﻿namespace Octokit.Webhooks.Models.SecretScanningAlertEvent
+namespace Octokit.Webhooks.Models.SecretScanningAlertEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Alert
     {
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("secret_type")]
         public string SecretType { get; init; } = null!;
@@ -19,6 +21,7 @@
         public User? ResolvedBy { get; init; }
 
         [JsonPropertyName("resolved_at")]
-        public string? ResolvedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? ResolvedAt { get; init; }
     }
 }

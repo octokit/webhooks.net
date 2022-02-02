@@ -1,8 +1,10 @@
-﻿namespace Octokit.Webhooks.Events
+namespace Octokit.Webhooks.Events
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
     using Octokit.Webhooks.Models.StatusEvent;
 
     [PublicAPI]
@@ -10,7 +12,7 @@
     public sealed record StatusEvent : WebhookEvent
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("sha")]
         public string Sha { get; init; } = null!;
@@ -40,9 +42,11 @@
         public IEnumerable<Branch> Branch { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
     }
 }

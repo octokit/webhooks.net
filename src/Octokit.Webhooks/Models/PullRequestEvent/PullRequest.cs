@@ -1,8 +1,10 @@
-﻿namespace Octokit.Webhooks.Models.PullRequestEvent
+namespace Octokit.Webhooks.Models.PullRequestEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record PullRequest
@@ -14,7 +16,7 @@
         public string Url { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -32,7 +34,7 @@
         public string IssueUrl { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("state")]
         public PullRequestState State { get; init; }
@@ -47,16 +49,20 @@
         public User User { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("closed_at")]
-        public string? ClosedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? ClosedAt { get; init; }
 
         [JsonPropertyName("merged_at")]
-        public string? MergedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? MergedAt { get; init; }
 
         [JsonPropertyName("merge_commit_sha")]
         public string? MergeCommitSha { get; init; }
@@ -131,24 +137,24 @@
         public User? MergedBy { get; init; }
 
         [JsonPropertyName("comments")]
-        public int Comments { get; init; }
+        public long Comments { get; init; }
 
         [JsonPropertyName("review_comments")]
-        public int ReviewComments { get; init; }
+        public long ReviewComments { get; init; }
 
         [JsonPropertyName("maintainer_can_modify")]
         public bool MaintainerCanModify { get; init; }
 
         [JsonPropertyName("commits")]
-        public int Commits { get; init; }
+        public long Commits { get; init; }
 
         [JsonPropertyName("additions")]
-        public int Additions { get; init; }
+        public long Additions { get; init; }
 
         [JsonPropertyName("deletions")]
-        public int Deletions { get; init; }
+        public long Deletions { get; init; }
 
         [JsonPropertyName("changed_files")]
-        public int ChangedFiles { get; init; }
+        public long ChangedFiles { get; init; }
     }
 }

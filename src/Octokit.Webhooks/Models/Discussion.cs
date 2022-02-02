@@ -1,7 +1,9 @@
 ﻿namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Discussion
@@ -16,7 +18,8 @@
         public string? AnswerHtmlUrl { get; init; }
 
         [JsonPropertyName("answer_chosen_at")]
-        public string? AnswerChosenAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? AnswerChosenAt { get; init; }
 
         [JsonPropertyName("answer_chosen_by")]
         public User? AnswerChosenBy { get; init; }
@@ -25,13 +28,13 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("title")]
         public string Title { get; init; } = null!;
@@ -43,16 +46,18 @@
         public DiscussionState State { get; init; }
 
         [JsonPropertyName("locked")]
-        public int Locked { get; init; }
+        public bool Locked { get; init; }
 
         [JsonPropertyName("comments")]
-        public int Comments { get; init; }
+        public long Comments { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("author_association")]
         public AuthorAssociation AuthorAssociation { get; init; }

@@ -10,7 +10,7 @@
     public abstract record PullRequestEvent : WebhookEvent
     {
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("pull_request")]
         public Models.PullRequestEvent.PullRequest PullRequest { get; init; } = null!;

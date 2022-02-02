@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.SponsorshipEvent
+namespace Octokit.Webhooks.Models.SponsorshipEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Sponsorship
@@ -10,7 +12,8 @@
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("sponsorable")]
         public User Sponsorable { get; init; } = null!;

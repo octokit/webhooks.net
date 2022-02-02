@@ -8,6 +8,8 @@
     {
         [EnumMember(Value = "pending")]
         Pending,
+        [EnumMember(Value = "in_progress")]
+        InProgress,
         [EnumMember(Value = "success")]
         Success,
         [EnumMember(Value = "failure")]

@@ -1,13 +1,15 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Repository
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -145,13 +147,16 @@
         public string DeploymentsUrl { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string? CreatedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("pushed_at")]
-        public string? PushedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? PushedAt { get; init; }
 
         [JsonPropertyName("git_url")]
         public string GitUrl { get; init; } = null!;
@@ -169,13 +174,13 @@
         public string? Homepage { get; init; }
 
         [JsonPropertyName("size")]
-        public int Size { get; init; }
+        public long Size { get; init; }
 
         [JsonPropertyName("stargazers_count")]
-        public int StargazersCount { get; init; }
+        public long StargazersCount { get; init; }
 
         [JsonPropertyName("watchers_count")]
-        public int WatchersCount { get; init; }
+        public long WatchersCount { get; init; }
 
         [JsonPropertyName("language")]
         public string? Language { get; init; }
@@ -196,7 +201,7 @@
         public bool HasPages { get; init; }
 
         [JsonPropertyName("forks_count")]
-        public int ForksCount { get; init; }
+        public long ForksCount { get; init; }
 
         [JsonPropertyName("mirror_url")]
         public string? MirrorUrl { get; init; }
@@ -208,19 +213,19 @@
         public bool? Disabled { get; init; }
 
         [JsonPropertyName("open_issues_count")]
-        public int OpenIssuesCount { get; init; }
+        public long OpenIssuesCount { get; init; }
 
         [JsonPropertyName("license")]
         public License? License { get; init; }
 
         [JsonPropertyName("forks")]
-        public int Forks { get; init; }
+        public long Forks { get; init; }
 
         [JsonPropertyName("open_issues")]
-        public int OpenIssues { get; init; }
+        public long OpenIssues { get; init; }
 
         [JsonPropertyName("watchers")]
-        public int Watchers { get; init; }
+        public long Watchers { get; init; }
 
         [JsonPropertyName("stargazers")]
         public int? Stargazers { get; init; }

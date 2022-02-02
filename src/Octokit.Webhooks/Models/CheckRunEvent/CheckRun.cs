@@ -1,14 +1,16 @@
 ﻿namespace Octokit.Webhooks.Models.CheckRunEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record CheckRun
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -35,10 +37,12 @@
         public CheckRunConclusion? Conclusion { get; init; }
 
         [JsonPropertyName("started_at")]
-        public string StartedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset StartedAt { get; init; }
 
         [JsonPropertyName("completed_at")]
-        public string CompletedAt { get; init; } = null!;
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? CompletedAt { get; init; }
 
         [JsonPropertyName("output")]
         public CheckRunOutput Output { get; init; } = null!;

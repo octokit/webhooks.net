@@ -1,26 +1,30 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record BranchProtectionRule
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("repository_id")]
-        public int RepositoryId { get; init; }
+        public long RepositoryId { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("admin_enforced")]
         public bool AdminEnforced { get; init; }
@@ -59,7 +63,7 @@
         public bool RequireCodeOwnerReview { get; init; }
 
         [JsonPropertyName("required_approving_review_count")]
-        public int RequiredApprovingReviewCount { get; init; }
+        public long RequiredApprovingReviewCount { get; init; }
 
         [JsonPropertyName("required_conversation_resolution_level")]
         public EnforcementLevel RequiredConversationResolutionLevel { get; init; }

@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record PackageVersionRelease
@@ -13,7 +15,7 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("tag_name")]
         public string TagName { get; init; } = null!;
@@ -34,9 +36,11 @@
         public bool Prerelease { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("published_at")]
-        public string PublishedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset PublishedAt { get; init; }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.CommitCommentEvent
+namespace Octokit.Webhooks.Models.CommitCommentEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Comment
@@ -13,7 +15,7 @@
         public string HtmlUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
@@ -34,10 +36,12 @@
         public string CommitId { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("author_association")]
         public AuthorAssociation AuthorAssociation { get; init; }

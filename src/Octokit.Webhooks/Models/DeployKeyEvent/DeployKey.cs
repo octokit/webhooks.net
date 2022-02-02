@@ -1,13 +1,15 @@
-﻿namespace Octokit.Webhooks.Models.DeployKeyEvent
+namespace Octokit.Webhooks.Models.DeployKeyEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record DeployKey
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("key")]
         public string Key { get; init; } = null!;
@@ -22,7 +24,8 @@
         public bool Verified { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("read_only")]
         public bool ReadOnly { get; init; }

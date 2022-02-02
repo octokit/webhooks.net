@@ -11,7 +11,7 @@
     public abstract record MetaEvent : WebhookEvent
     {
         [JsonPropertyName("hook_id")]
-        public int HookId { get; init; }
+        public long HookId { get; init; }
 
         [JsonPropertyName("hook")]
         public Hook Hook { get; init; } = null!;

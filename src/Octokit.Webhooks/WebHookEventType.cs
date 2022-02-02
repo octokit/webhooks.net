@@ -41,6 +41,7 @@
         public const string PullRequest = "pull_request";
         public const string PullRequestReview = "pull_request_review";
         public const string PullRequestReviewComment = "pull_request_review_comment";
+        public const string PullRequestReviewThread = "pull_request_review_thread";
         public const string Push = "push";
         public const string RegistryPackage = "registry_package";
         public const string Release = "release";

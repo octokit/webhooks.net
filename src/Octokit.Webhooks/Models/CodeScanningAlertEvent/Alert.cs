@@ -1,17 +1,20 @@
-﻿namespace Octokit.Webhooks.Models.CodeScanningAlertEvent
+namespace Octokit.Webhooks.Models.CodeScanningAlertEvent
 {
+    using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Alert
     {
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("url")]
         public string Url { get; init; } = null!;
@@ -32,7 +35,8 @@
         public User? DismissedBy { get; init; }
 
         [JsonPropertyName("dismissed_at")]
-        public string? DismissedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? DismissedAt { get; init; }
 
         [JsonPropertyName("dismissed_reason")]
         public DismissedReason? DismissedReason { get; init; }

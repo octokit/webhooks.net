@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models.SponsorshipEvent
+namespace Octokit.Webhooks.Models.SponsorshipEvent
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record SponsorshipTier
@@ -10,16 +12,17 @@
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("description")]
         public string Description { get; init; } = null!;
 
         [JsonPropertyName("monthly_price_in_cents")]
-        public int MonthlyPriceInCents { get; init; }
+        public long MonthlyPriceInCents { get; init; }
 
         [JsonPropertyName("monthly_price_in_dollars")]
-        public int MonthlyPriceInDollars { get; init; }
+        public long MonthlyPriceInDollars { get; init; }
 
         [JsonPropertyName("name")]
         public string Name { get; init; } = null!;

@@ -1,16 +1,18 @@
 ﻿namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record DiscussionCategory
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("repository_id")]
-        public int RepositoryId { get; init; }
+        public long RepositoryId { get; init; }
 
         [JsonPropertyName("emoji")]
         public string Emoji { get; init; } = null!;
@@ -22,15 +24,17 @@
         public string Description { get; init; } = null!;
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("slug")]
         public string Slug { get; init; } = null!;
 
         [JsonPropertyName("is_answerable")]
-        public int IsAnswerable { get; init; }
+        public bool IsAnswerable { get; init; }
     }
 }

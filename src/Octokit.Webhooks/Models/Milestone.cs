@@ -1,7 +1,9 @@
-﻿namespace Octokit.Webhooks.Models
+namespace Octokit.Webhooks.Models
 {
+    using System;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
+    using Octokit.Webhooks.Converter;
 
     [PublicAPI]
     public sealed record Milestone
@@ -16,13 +18,13 @@
         public string LabelsUrl { get; init; } = null!;
 
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("node_id")]
         public string NodeId { get; init; } = null!;
 
         [JsonPropertyName("number")]
-        public int Number { get; init; }
+        public long Number { get; init; }
 
         [JsonPropertyName("title")]
         public string Title { get; init; } = null!;
@@ -34,24 +36,27 @@
         public User Creator { get; init; } = null!;
 
         [JsonPropertyName("open_issues")]
-        public int OpenIssues { get; init; }
+        public long OpenIssues { get; init; }
 
         [JsonPropertyName("closed_issues")]
-        public int ClosedIssues { get; init; }
+        public long ClosedIssues { get; init; }
 
         [JsonPropertyName("state")]
         public MilestoneState State { get; init; }
 
         [JsonPropertyName("created_at")]
-        public string CreatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset CreatedAt { get; init; }
 
         [JsonPropertyName("updated_at")]
-        public string UpdatedAt { get; init; } = null!;
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset UpdatedAt { get; init; }
 
         [JsonPropertyName("due_on")]
         public string? DueOn { get; init; }
 
         [JsonPropertyName("closed_at")]
-        public string? ClosedAt { get; init; }
+        [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+        public DateTimeOffset? ClosedAt { get; init; }
     }
 }
