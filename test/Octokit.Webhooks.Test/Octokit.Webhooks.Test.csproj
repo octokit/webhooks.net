@@ -6,10 +6,7 @@
 
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\src\Octokit.Webhooks\Octokit.Webhooks.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources" />
+    <ProjectReference Include="..\Octokit.Webhooks.TestUtils\Octokit.Webhooks.TestUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
