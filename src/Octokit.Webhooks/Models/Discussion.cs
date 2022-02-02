@@ -1,4 +1,4 @@
-namespace Octokit.Webhooks.Models
+﻿namespace Octokit.Webhooks.Models
 {
     using System;
     using System.Text.Json.Serialization;
@@ -46,7 +46,7 @@ namespace Octokit.Webhooks.Models
         public DiscussionState State { get; init; }
 
         [JsonPropertyName("locked")]
-        public long Locked { get; init; }
+        public bool Locked { get; init; }
 
         [JsonPropertyName("comments")]
         public long Comments { get; init; }
