@@ -1,4 +1,4 @@
-namespace Octokit.Webhooks.Models
+﻿namespace Octokit.Webhooks.Models
 {
     using System;
     using System.Text.Json.Serialization;
@@ -35,6 +35,6 @@ namespace Octokit.Webhooks.Models
         public string Slug { get; init; } = null!;
 
         [JsonPropertyName("is_answerable")]
-        public long IsAnswerable { get; init; }
+        public bool IsAnswerable { get; init; }
     }
 }
