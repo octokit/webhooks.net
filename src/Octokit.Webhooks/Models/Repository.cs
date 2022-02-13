@@ -1,6 +1,7 @@
 namespace Octokit.Webhooks.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using JetBrains.Annotations;
     using Octokit.Webhooks.Converter;
@@ -242,6 +243,24 @@ namespace Octokit.Webhooks.Models
         [JsonPropertyName("allow_rebase_merge")]
         public bool? AllowRebaseMerge { get; init; }
 
+        [JsonPropertyName("allow_auto_merge")]
+        public bool? AllowAutoMerge { get; init; }
+
+        [JsonPropertyName("allow_forking")]
+        public bool? AllowForking { get; init; }
+
+        [JsonPropertyName("allow_update_branch")]
+        public bool? AllowUpdateBranch { get; init; }
+
+        [JsonPropertyName("is_template")]
+        public bool IsTemplate { get; init; }
+
+        [JsonPropertyName("topics")]
+        public IEnumerable<string> Topics { get; init; } = null!;
+
+        [JsonPropertyName("visibility")]
+        public RepositoryVisibility Visibility { get; init; }
+
         [JsonPropertyName("delete_branch_on_merge")]
         public bool? DeleteBranchOnMerge { get; init; }
 
@@ -249,12 +268,12 @@ namespace Octokit.Webhooks.Models
         public string? MasterBranch { get; init; }
 
         [JsonPropertyName("permissions")]
-        public RepositoryPermissions Permissions { get; init; } = null!;
+        public RepositoryPermissions? Permissions { get; init; }
 
         [JsonPropertyName("public")]
         public bool? Public { get; init; }
 
         [JsonPropertyName("organization")]
-        public string Organization { get; init; } = null!;
+        public string? Organization { get; init; }
     }
 }
