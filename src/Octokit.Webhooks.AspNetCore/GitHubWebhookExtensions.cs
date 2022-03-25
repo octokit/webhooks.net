@@ -11,15 +11,20 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     public static class GitHubWebhookExtensions
     {
         public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
             endpoints.MapPost(path, async context =>
             {
+                var loggerFactory = context.RequestServices.GetRequiredService<ILoggerFactory>();
+                var logger = loggerFactory.CreateLogger("Octokit.Webhooks.AspNetCore");
+
                 // Verify content type
                 if (!VerifyContentType(context, MediaTypeNames.Application.Json))
                 {
+                    logger.LogError("GitHub event does not have the correct content type.");
                     return;
                 }
 
@@ -29,6 +34,7 @@
                 // Verify signature
                 if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
                 {
+                    logger.LogError("GitHub event failed signature validation.");
                     return;
                 }
 
@@ -40,8 +46,9 @@
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    logger.LogError(ex, "Exception processing GitHub event.");
                     context.Response.StatusCode = 500;
                 }
             });
