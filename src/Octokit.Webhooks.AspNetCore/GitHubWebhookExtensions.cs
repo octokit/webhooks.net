@@ -18,8 +18,7 @@
         public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
             endpoints.MapPost(path, async context =>
             {
-                var loggerFactory = context.RequestServices.GetRequiredService<ILoggerFactory>();
-                var logger = loggerFactory.CreateLogger("Octokit.Webhooks.AspNetCore");
+                var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
 
                 // Verify content type
                 if (!VerifyContentType(context, MediaTypeNames.Application.Json))
