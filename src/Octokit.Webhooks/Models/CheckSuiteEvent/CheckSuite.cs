@@ -51,6 +51,12 @@ namespace Octokit.Webhooks.Models.CheckSuiteEvent
         [JsonConverter(typeof(DateTimeOffsetConverter))]
         public DateTimeOffset UpdatedAt { get; init; }
 
+        [JsonPropertyName("rerequestable")]
+        public bool Rerequestable { get; init; }
+
+        [JsonPropertyName("runs_rerequestable")]
+        public bool RunsRerequestable { get; init; }
+
         [JsonPropertyName("latest_check_runs_count")]
         public long LatestCheckRunsCount { get; init; }
 
