@@ -8,6 +8,8 @@
     {
         [EnumMember(Value = "*")]
         All,
+        [EnumMember(Value = "branch_protection_rule")]
+        BranchProtectionRule,
         [EnumMember(Value = "check_run")]
         CheckRun,
         [EnumMember(Value = "check_suite")]
