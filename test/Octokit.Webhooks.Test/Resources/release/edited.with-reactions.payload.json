@@ -1,4 +1,4 @@
-﻿{
+{
   "action": "edited",
   "changes": { "name": { "from": "FOO" }, "body": { "from": "" } },
   "release": {
