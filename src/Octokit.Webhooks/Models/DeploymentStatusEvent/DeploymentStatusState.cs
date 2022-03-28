@@ -16,5 +16,7 @@
         Failure,
         [EnumMember(Value = "error")]
         Error,
+        [EnumMember(Value = "waiting")]
+        Waiting,
     }
 }
