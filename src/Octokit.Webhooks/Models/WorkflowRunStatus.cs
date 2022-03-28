@@ -14,5 +14,7 @@
         Completed,
         [EnumMember(Value = "queued")]
         Queued,
+        [EnumMember(Value = "waiting")]
+        Waiting,
     }
 }
