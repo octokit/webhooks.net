@@ -91,5 +91,12 @@ namespace Octokit.Webhooks.Models
 
         [JsonPropertyName("workflow_url")]
         public string WorkflowUrl { get; init; } = null!;
+
+        [JsonPropertyName("run_attempt")]
+        public long RunAttempt { get; init; }
+
+        [JsonPropertyName("run_started_at")]
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset RunStartedAt { get; init; }
     }
 }
