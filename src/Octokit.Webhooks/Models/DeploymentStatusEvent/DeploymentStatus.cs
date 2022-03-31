@@ -29,6 +29,12 @@ namespace Octokit.Webhooks.Models.DeploymentStatusEvent
         [JsonPropertyName("environment")]
         public string Environment { get; init; } = null!;
 
+        [JsonPropertyName("environment_url")]
+        public string? EnvironmentUrl { get; init; }
+
+        [JsonPropertyName("log_url")]
+        public string? LogUrl { get; init; }
+
         [JsonPropertyName("target_url")]
         public string TargetUrl { get; init; } = null!;
 

@@ -14,5 +14,14 @@
 
         [JsonPropertyName("deployment")]
         public Models.DeploymentStatusEvent.Deployment Deployment { get; init; } = null!;
+
+        [JsonPropertyName("check_run")]
+        public Models.DeploymentEvent.DeploymentCheckRun? CheckRun { get; init; }
+
+        [JsonPropertyName("workflow_run")]
+        public Models.DeploymentEvent.DeploymentWorkflowRun? WorkflowRun { get; init; }
+
+        [JsonPropertyName("workflow")]
+        public Models.Workflow? Workflow { get; init; }
     }
 }

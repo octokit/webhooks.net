@@ -91,5 +91,21 @@ namespace Octokit.Webhooks.Models
 
         [JsonPropertyName("workflow_url")]
         public string WorkflowUrl { get; init; } = null!;
+
+        [JsonPropertyName("run_attempt")]
+        public long RunAttempt { get; init; }
+
+        [JsonPropertyName("run_started_at")]
+        [JsonConverter(typeof(DateTimeOffsetConverter))]
+        public DateTimeOffset RunStartedAt { get; init; }
+
+        [JsonPropertyName("previous_attempt_url")]
+        public string? PreviousAttemptUrl { get; init; }
+
+        [JsonPropertyName("actor")]
+        public User Actor { get; init; } = null!;
+
+        [JsonPropertyName("triggering_actor")]
+        public User TriggeringActor { get; init; } = null!;
     }
 }
