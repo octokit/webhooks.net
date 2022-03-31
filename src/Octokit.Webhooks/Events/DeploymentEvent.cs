@@ -11,5 +11,11 @@
     {
         [JsonPropertyName("deployment")]
         public Models.DeploymentEvent.Deployment Deployment { get; init; } = null!;
+
+        [JsonPropertyName("workflow")]
+        public Models.Workflow? Workflow { get; init; } = null!;
+
+        [JsonPropertyName("workflow_run")]
+        public Models.DeploymentEvent.DeploymentWorkflowRun? WorkflowRun { get; init; } = null!;
     }
 }
