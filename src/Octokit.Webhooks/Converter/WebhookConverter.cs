@@ -17,8 +17,7 @@
         public WebhookConverter()
         {
             var type = typeof(T);
-            this.types = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
+            this.types = this.GetType().Assembly.GetTypes()
                 .Where(x => type.IsAssignableFrom(x) && x.IsClass && !x.IsAbstract &&
                             Attribute.GetCustomAttribute(x, typeof(WebhookActionTypeAttribute)) is not null)
                 .ToDictionary(
