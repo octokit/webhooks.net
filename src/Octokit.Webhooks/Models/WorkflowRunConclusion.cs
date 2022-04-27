@@ -20,5 +20,7 @@
         ActionRequired,
         [EnumMember(Value = "stale")]
         Stale,
+        [EnumMember(Value = "skipped")]
+        Skipped,
     }
 }
