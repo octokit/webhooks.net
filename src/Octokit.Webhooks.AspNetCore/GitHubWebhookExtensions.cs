@@ -54,6 +54,11 @@
 
         private static bool VerifyContentType(HttpContext context, string expectedContentType)
         {
+            if (context.Request.ContentType is null)
+            {
+                return false;
+            }
+
             var contentType = new ContentType(context.Request.ContentType);
             if (contentType.MediaType != expectedContentType)
             {
