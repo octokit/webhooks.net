@@ -105,8 +105,7 @@
             var keyBytes = Encoding.UTF8.GetBytes(secret);
             var bodyBytes = Encoding.UTF8.GetBytes(body);
 
-            using var hmac = new HMACSHA256(keyBytes);
-            var hash = hmac.ComputeHash(bodyBytes);
+            var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
             var hashHex = Convert.ToHexString(hash);
             var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
             if (signatureSha256.ToString() != expectedHeader)
