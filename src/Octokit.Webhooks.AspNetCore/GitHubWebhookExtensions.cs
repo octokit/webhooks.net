@@ -81,7 +81,7 @@
 
         private static async Task<bool> VerifySignatureAsync(HttpContext context, string secret, string body)
         {
-            context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
+            _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
 
             var isSigned = signatureSha256.Count > 0;
             var isSignatureExpected = !string.IsNullOrEmpty(secret);
