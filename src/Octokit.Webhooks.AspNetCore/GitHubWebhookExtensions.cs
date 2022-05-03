@@ -13,7 +13,11 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
-    public static class GitHubWebhookExtensions
+    /// <summary>
+    /// A class containing extension methods for <see cref="IEndpointRouteBuilder"/>
+    /// for adding an HTTP endpoint for processing GitHub webhook payloads.
+    /// </summary>
+    public static partial class GitHubWebhookExtensions
     {
         public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
             endpoints.MapPost(path, async context =>
@@ -23,7 +27,7 @@
                 // Verify content type
                 if (!VerifyContentType(context, MediaTypeNames.Application.Json))
                 {
-                    logger.LogError("GitHub event does not have the correct content type.");
+                    Log.IncorrectContentType(logger);
                     return;
                 }
 
@@ -33,7 +37,7 @@
                 // Verify signature
                 if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
                 {
-                    logger.LogError("GitHub event failed signature validation.");
+                    Log.SignatureValidationFailed(logger);
                     return;
                 }
 
@@ -47,7 +51,7 @@
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "Exception processing GitHub event.");
+                    Log.ProcessingFailed(logger, ex);
                     context.Response.StatusCode = 500;
                 }
             });
@@ -115,6 +119,31 @@
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Log messages for the class.
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        internal static partial class Log
+        {
+            [LoggerMessage(
+                EventId = 1,
+                Level = LogLevel.Error,
+                Message = "GitHub event does not have the correct content type.")]
+            public static partial void IncorrectContentType(ILogger logger);
+
+            [LoggerMessage(
+                EventId = 2,
+                Level = LogLevel.Error,
+                Message = "GitHub event failed signature validation.")]
+            public static partial void SignatureValidationFailed(ILogger logger);
+
+            [LoggerMessage(
+                EventId = 3,
+                Level = LogLevel.Error,
+                Message = "Exception processing GitHub event.")]
+            public static partial void ProcessingFailed(ILogger logger, Exception exception);
         }
     }
 }
