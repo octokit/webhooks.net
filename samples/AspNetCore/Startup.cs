@@ -1,7 +1,6 @@
 namespace AspNetCore
 {
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using Octokit.Webhooks;
     using Octokit.Webhooks.AspNetCore;
@@ -10,7 +9,7 @@ namespace AspNetCore
     {
         public void ConfigureServices(IServiceCollection services) => services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
 
