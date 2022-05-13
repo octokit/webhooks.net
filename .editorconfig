@@ -431,10 +431,13 @@ dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1602.severity = none
 
 # Justification: Needs to match GitHub property names
-# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1720
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1711
 dotnet_diagnostic.CA1711.severity = none
 # https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1720
 dotnet_diagnostic.CA1720.severity = none
+
+# Justification: False positive for default case
+dotnet_diagnostic.IDE0072.severity = none
 
 [WebhookEventProcessor.cs]
 # Justification: Ordering is on purpose
