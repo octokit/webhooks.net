@@ -183,6 +183,7 @@
                 WebhookEventType.Project => JsonSerializer.Deserialize<ProjectEvent>(body)!,
                 WebhookEventType.ProjectCard => JsonSerializer.Deserialize<ProjectCardEvent>(body)!,
                 WebhookEventType.ProjectColumn => JsonSerializer.Deserialize<ProjectColumnEvent>(body)!,
+                WebhookEventType.ProjectsV2Item => JsonSerializer.Deserialize<ProjectsV2ItemEvent>(body)!,
                 WebhookEventType.Public => JsonSerializer.Deserialize<PublicEvent>(body)!,
                 WebhookEventType.PullRequest => JsonSerializer.Deserialize<PullRequestEvent>(body)!,
                 WebhookEventType.PullRequestReview => JsonSerializer.Deserialize<PullRequestReviewEvent>(body)!,
