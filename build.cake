@@ -20,7 +20,7 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
+        DotNetRestore();
     });
 
 Task("Build")
@@ -28,9 +28,9 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        DotNetCoreBuild(
+        DotNetBuild(
             ".",
-            new DotNetCoreBuildSettings()
+            new DotNetBuildSettings()
             {
                 Configuration = configuration,
                 NoRestore = true,
@@ -41,9 +41,9 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./test/**/*.csproj"), project =>
     {
-        DotNetCoreTest(
+        DotNetTest(
             project.ToString(),
-            new DotNetCoreTestSettings()
+            new DotNetTestSettings()
             {
                 Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
@@ -63,15 +63,15 @@ Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
-        var buildSettings = new DotNetCoreMSBuildSettings();
+        var buildSettings = new DotNetMSBuildSettings();
         if (!BuildSystem.IsLocalBuild)
         {
             buildSettings.WithProperty("ContinuousIntegrationBuild", "true");
         }
 
-        DotNetCorePack(
+        DotNetPack(
             ".",
-            new DotNetCorePackSettings()
+            new DotNetPackSettings()
             {
                 Configuration = configuration,
                 IncludeSymbols = true,
