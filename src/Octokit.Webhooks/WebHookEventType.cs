@@ -35,6 +35,7 @@
         public const string PageBuild = "page_build";
         public const string Ping = "ping";
         public const string Project = "project";
+        public const string ProjectsV2Item = "projects_v2_item";
         public const string ProjectCard = "project_card";
         public const string ProjectColumn = "project_column";
         public const string Public = "public";
