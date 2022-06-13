@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.RepositoryEvent
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+﻿namespace Octokit.Webhooks.Models.RepositoryEvent;
 
-    [PublicAPI]
-    public sealed record ChangesRepository
-    {
-        [JsonPropertyName("name")]
-        public ChangesRepositoryName? Name { get; init; } = null!;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesRepository
+{
+    [JsonPropertyName("name")]
+    public ChangesRepositoryName? Name { get; init; } = null!;
 }

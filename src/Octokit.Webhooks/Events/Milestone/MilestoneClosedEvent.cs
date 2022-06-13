@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.Milestone
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.Milestone;
 
-    [PublicAPI]
-    [WebhookActionType(MilestoneActionValue.Closed)]
-    public sealed record MilestoneClosedEvent : MilestoneEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => MilestoneAction.Closed;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(MilestoneActionValue.Closed)]
+public sealed record MilestoneClosedEvent : MilestoneEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => MilestoneAction.Closed;
 }

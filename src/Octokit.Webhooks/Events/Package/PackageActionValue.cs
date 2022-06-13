@@ -1,9 +1,8 @@
-namespace Octokit.Webhooks.Events.Package
-{
-    public static class PackageActionValue
-    {
-        public const string Published = "published";
+namespace Octokit.Webhooks.Events.Package;
 
-        public const string Updated = "updated";
-    }
+public static class PackageActionValue
+{
+    public const string Published = "published";
+
+    public const string Updated = "updated";
 }

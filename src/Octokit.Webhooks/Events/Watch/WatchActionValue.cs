@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.Watch
+namespace Octokit.Webhooks.Events.Watch;
+
+public static class WatchActionValue
 {
-    public static class WatchActionValue
-    {
-        public const string Started = "started";
-    }
+    public const string Started = "started";
 }

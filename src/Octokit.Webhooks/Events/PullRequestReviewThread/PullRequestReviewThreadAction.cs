@@ -1,17 +1,16 @@
-namespace Octokit.Webhooks.Events.PullRequestReviewThread
+namespace Octokit.Webhooks.Events.PullRequestReviewThread;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record PullRequestReviewThreadAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly PullRequestReviewThreadAction Resolved = new(PullRequestReviewThreadActionValue.Resolved);
 
-    [PublicAPI]
-    public sealed record PullRequestReviewThreadAction : WebhookEventAction
+    public static readonly PullRequestReviewThreadAction Unresolved = new(PullRequestReviewThreadActionValue.Unresolved);
+
+    private PullRequestReviewThreadAction(string value)
+        : base(value)
     {
-        public static readonly PullRequestReviewThreadAction Resolved = new(PullRequestReviewThreadActionValue.Resolved);
-
-        public static readonly PullRequestReviewThreadAction Unresolved = new(PullRequestReviewThreadActionValue.Unresolved);
-
-        private PullRequestReviewThreadAction(string value)
-            : base(value)
-        {
-        }
     }
 }

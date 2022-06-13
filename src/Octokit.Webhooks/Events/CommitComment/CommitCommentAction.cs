@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.CommitComment
+namespace Octokit.Webhooks.Events.CommitComment;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record CommitCommentAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly CommitCommentAction Created = new(CommitCommentActionValue.Created);
 
-    [PublicAPI]
-    public sealed record CommitCommentAction : WebhookEventAction
+    private CommitCommentAction(string value)
+        : base(value)
     {
-        public static readonly CommitCommentAction Created = new(CommitCommentActionValue.Created);
-
-        private CommitCommentAction(string value)
-            : base(value)
-        {
-        }
     }
 }

@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.RepositoryDispatch
+namespace Octokit.Webhooks.Events.RepositoryDispatch;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record RepositoryDispatchAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly RepositoryDispatchAction OnDemandTest = new(RepositoryDispatchActionValue.OnDemandTest);
 
-    [PublicAPI]
-    public sealed record RepositoryDispatchAction : WebhookEventAction
+    private RepositoryDispatchAction(string value)
+        : base(value)
     {
-        public static readonly RepositoryDispatchAction OnDemandTest = new(RepositoryDispatchActionValue.OnDemandTest);
-
-        private RepositoryDispatchAction(string value)
-            : base(value)
-        {
-        }
     }
 }

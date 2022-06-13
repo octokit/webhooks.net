@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.Membership
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.Membership;
 
-    [PublicAPI]
-    [WebhookActionType(MembershipActionValue.Removed)]
-    public sealed record MembershipRemovedEvent : MembershipEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => MembershipAction.Removed;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(MembershipActionValue.Removed)]
+public sealed record MembershipRemovedEvent : MembershipEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => MembershipAction.Removed;
 }

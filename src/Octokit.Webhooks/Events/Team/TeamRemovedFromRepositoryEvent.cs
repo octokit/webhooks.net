@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.Team
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.Team;
 
-    [PublicAPI]
-    [WebhookActionType(TeamActionValue.RemovedFromRepository)]
-    public sealed record TeamRemovedFromRepositoryEvent : TeamEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => TeamAction.RemovedFromRepository;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(TeamActionValue.RemovedFromRepository)]
+public sealed record TeamRemovedFromRepositoryEvent : TeamEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => TeamAction.RemovedFromRepository;
 }

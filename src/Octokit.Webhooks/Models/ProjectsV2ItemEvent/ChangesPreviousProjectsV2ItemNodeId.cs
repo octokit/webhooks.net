@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent
+namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesPreviousProjectsV2ItemNodeId
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("from")]
+    public string From { get; init; } = null!;
 
-    [PublicAPI]
-    public sealed record ChangesPreviousProjectsV2ItemNodeId
-    {
-        [JsonPropertyName("from")]
-        public string From { get; init; } = null!;
-
-        [JsonPropertyName("to")]
-        public string? To { get; init; }
-    }
+    [JsonPropertyName("to")]
+    public string? To { get; init; }
 }

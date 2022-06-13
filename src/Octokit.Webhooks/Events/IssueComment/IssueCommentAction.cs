@@ -1,19 +1,18 @@
-namespace Octokit.Webhooks.Events.IssueComment
+namespace Octokit.Webhooks.Events.IssueComment;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record IssueCommentAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly IssueCommentAction Created = new(IssueCommentActionValue.Created);
 
-    [PublicAPI]
-    public sealed record IssueCommentAction : WebhookEventAction
+    public static readonly IssueCommentAction Deleted = new(IssueCommentActionValue.Deleted);
+
+    public static readonly IssueCommentAction Edited = new(IssueCommentActionValue.Edited);
+
+    private IssueCommentAction(string value)
+        : base(value)
     {
-        public static readonly IssueCommentAction Created = new(IssueCommentActionValue.Created);
-
-        public static readonly IssueCommentAction Deleted = new(IssueCommentActionValue.Deleted);
-
-        public static readonly IssueCommentAction Edited = new(IssueCommentActionValue.Edited);
-
-        private IssueCommentAction(string value)
-            : base(value)
-        {
-        }
     }
 }

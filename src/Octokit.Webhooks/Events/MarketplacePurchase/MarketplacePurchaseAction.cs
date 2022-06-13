@@ -1,23 +1,22 @@
-namespace Octokit.Webhooks.Events.MarketplacePurchase
+namespace Octokit.Webhooks.Events.MarketplacePurchase;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record MarketplacePurchaseAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly MarketplacePurchaseAction Cancelled = new(MarketplacePurchaseActionValue.Cancelled);
 
-    [PublicAPI]
-    public sealed record MarketplacePurchaseAction : WebhookEventAction
+    public static readonly MarketplacePurchaseAction Changed = new(MarketplacePurchaseActionValue.Changed);
+
+    public static readonly MarketplacePurchaseAction PendingChange = new(MarketplacePurchaseActionValue.PendingChange);
+
+    public static readonly MarketplacePurchaseAction PendingChangeCancelled = new(MarketplacePurchaseActionValue.PendingChangeCancelled);
+
+    public static readonly MarketplacePurchaseAction Purchased = new(MarketplacePurchaseActionValue.Purchased);
+
+    private MarketplacePurchaseAction(string value)
+        : base(value)
     {
-        public static readonly MarketplacePurchaseAction Cancelled = new(MarketplacePurchaseActionValue.Cancelled);
-
-        public static readonly MarketplacePurchaseAction Changed = new(MarketplacePurchaseActionValue.Changed);
-
-        public static readonly MarketplacePurchaseAction PendingChange = new(MarketplacePurchaseActionValue.PendingChange);
-
-        public static readonly MarketplacePurchaseAction PendingChangeCancelled = new(MarketplacePurchaseActionValue.PendingChangeCancelled);
-
-        public static readonly MarketplacePurchaseAction Purchased = new(MarketplacePurchaseActionValue.Purchased);
-
-        private MarketplacePurchaseAction(string value)
-            : base(value)
-        {
-        }
     }
 }

@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.RepositoryDispatch
+namespace Octokit.Webhooks.Events.RepositoryDispatch;
+
+public static class RepositoryDispatchActionValue
 {
-    public static class RepositoryDispatchActionValue
-    {
-        public const string OnDemandTest = "on-demand-test";
-    }
+    public const string OnDemandTest = "on-demand-test";
 }

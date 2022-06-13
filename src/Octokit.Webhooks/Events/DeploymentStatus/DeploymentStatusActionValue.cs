@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.DeploymentStatus
+namespace Octokit.Webhooks.Events.DeploymentStatus;
+
+public static class DeploymentStatusActionValue
 {
-    public static class DeploymentStatusActionValue
-    {
-        public const string Created = "created";
-    }
+    public const string Created = "created";
 }

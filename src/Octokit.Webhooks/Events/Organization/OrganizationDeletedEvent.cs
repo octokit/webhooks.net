@@ -1,17 +1,16 @@
-namespace Octokit.Webhooks.Events.Organization
+namespace Octokit.Webhooks.Events.Organization;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Octokit.Webhooks.Models;
+
+[PublicAPI]
+[WebhookActionType(OrganizationActionValue.Deleted)]
+public sealed record OrganizationDeletedEvent : OrganizationEvent
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
-    using Octokit.Webhooks.Models;
+    [JsonPropertyName("action")]
+    public override string Action => OrganizationAction.Deleted;
 
-    [PublicAPI]
-    [WebhookActionType(OrganizationActionValue.Deleted)]
-    public sealed record OrganizationDeletedEvent : OrganizationEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => OrganizationAction.Deleted;
-
-        [JsonPropertyName("membership")]
-        public Membership Membership { get; init; } = null!;
-    }
+    [JsonPropertyName("membership")]
+    public Membership Membership { get; init; } = null!;
 }

@@ -1,6 +1,5 @@
-namespace Octokit.Webhooks.Test
+namespace Octokit.Webhooks.Test;
+
+public class TestWebhookEventProcessor : WebhookEventProcessor
 {
-    public class TestWebhookEventProcessor : WebhookEventProcessor
-    {
-    }
 }

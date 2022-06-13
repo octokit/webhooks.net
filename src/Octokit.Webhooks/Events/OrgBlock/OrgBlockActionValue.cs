@@ -1,9 +1,8 @@
-namespace Octokit.Webhooks.Events.OrgBlock
-{
-    public static class OrgBlockActionValue
-    {
-        public const string Blocked = "blocked";
+namespace Octokit.Webhooks.Events.OrgBlock;
 
-        public const string Unblocked = "unblocked";
-    }
+public static class OrgBlockActionValue
+{
+    public const string Blocked = "blocked";
+
+    public const string Unblocked = "unblocked";
 }

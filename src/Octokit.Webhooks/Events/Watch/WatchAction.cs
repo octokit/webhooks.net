@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.Watch
+namespace Octokit.Webhooks.Events.Watch;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record WatchAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly WatchAction Started = new(WatchActionValue.Started);
 
-    [PublicAPI]
-    public sealed record WatchAction : WebhookEventAction
+    private WatchAction(string value)
+        : base(value)
     {
-        public static readonly WatchAction Started = new(WatchActionValue.Started);
-
-        private WatchAction(string value)
-            : base(value)
-        {
-        }
     }
 }

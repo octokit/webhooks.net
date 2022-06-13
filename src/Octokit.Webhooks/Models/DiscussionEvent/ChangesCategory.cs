@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.DiscussionEvent
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+﻿namespace Octokit.Webhooks.Models.DiscussionEvent;
 
-    [PublicAPI]
-    public sealed record ChangesCategory
-    {
-        [JsonPropertyName("from")]
-        public DiscussionCategory From { get; init; } = null!;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesCategory
+{
+    [JsonPropertyName("from")]
+    public DiscussionCategory From { get; init; } = null!;
 }

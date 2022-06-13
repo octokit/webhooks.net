@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.TeamEvent
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+﻿namespace Octokit.Webhooks.Models.TeamEvent;
 
-    [PublicAPI]
-    public sealed record ChangesRepository
-    {
-        [JsonPropertyName("permissions")]
-        public ChangesRepositoryPermissions Permissions { get; init; } = null!;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesRepository
+{
+    [JsonPropertyName("permissions")]
+    public ChangesRepositoryPermissions Permissions { get; init; } = null!;
 }

@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.GithubAppAuthorization
+namespace Octokit.Webhooks.Events.GithubAppAuthorization;
+
+public static class GithubAppAuthorizationActionValue
 {
-    public static class GithubAppAuthorizationActionValue
-    {
-        public const string Revoked = "revoked";
-    }
+    public const string Revoked = "revoked";
 }

@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.MemberEvent
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+﻿namespace Octokit.Webhooks.Models.MemberEvent;
 
-    [PublicAPI]
-    public sealed record ChangesOldPermission
-    {
-        [JsonPropertyName("from")]
-        public string From { get; init; } = null!;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesOldPermission
+{
+    [JsonPropertyName("from")]
+    public string From { get; init; } = null!;
 }

@@ -1,45 +1,44 @@
-﻿namespace Octokit.Webhooks.Models
+﻿namespace Octokit.Webhooks.Models;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record Team
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("name")]
+    public string Name { get; init; } = null!;
 
-    [PublicAPI]
-    public sealed record Team
-    {
-        [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
+    [JsonPropertyName("id")]
+    public long Id { get; init; }
 
-        [JsonPropertyName("id")]
-        public long Id { get; init; }
+    [JsonPropertyName("node_id")]
+    public string NodeId { get; init; } = null!;
 
-        [JsonPropertyName("node_id")]
-        public string NodeId { get; init; } = null!;
+    [JsonPropertyName("slug")]
+    public string Slug { get; init; } = null!;
 
-        [JsonPropertyName("slug")]
-        public string Slug { get; init; } = null!;
+    [JsonPropertyName("description")]
+    public string? Description { get; init; }
 
-        [JsonPropertyName("description")]
-        public string? Description { get; init; }
+    [JsonPropertyName("privacy")]
+    public TeamPrivacy Privacy { get; init; }
 
-        [JsonPropertyName("privacy")]
-        public TeamPrivacy Privacy { get; init; }
+    [JsonPropertyName("url")]
+    public string Url { get; init; } = null!;
 
-        [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
+    [JsonPropertyName("html_url")]
+    public string HtmlUrl { get; init; } = null!;
 
-        [JsonPropertyName("html_url")]
-        public string HtmlUrl { get; init; } = null!;
+    [JsonPropertyName("members_url")]
+    public string MembersUrl { get; init; } = null!;
 
-        [JsonPropertyName("members_url")]
-        public string MembersUrl { get; init; } = null!;
+    [JsonPropertyName("repositories_url")]
+    public string RepositoriesUrl { get; init; } = null!;
 
-        [JsonPropertyName("repositories_url")]
-        public string RepositoriesUrl { get; init; } = null!;
+    [JsonPropertyName("permission")]
+    public string Permission { get; init; } = null!;
 
-        [JsonPropertyName("permission")]
-        public string Permission { get; init; } = null!;
-
-        [JsonPropertyName("parent")]
-        public TeamParent? Parent { get; init; }
-    }
+    [JsonPropertyName("parent")]
+    public TeamParent? Parent { get; init; }
 }

@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.ProjectCard
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.ProjectCard;
 
-    [PublicAPI]
-    [WebhookActionType(ProjectCardActionValue.Created)]
-    public sealed record ProjectCardCreatedEvent : ProjectCardEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => ProjectCardAction.Created;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(ProjectCardActionValue.Created)]
+public sealed record ProjectCardCreatedEvent : ProjectCardEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => ProjectCardAction.Created;
 }

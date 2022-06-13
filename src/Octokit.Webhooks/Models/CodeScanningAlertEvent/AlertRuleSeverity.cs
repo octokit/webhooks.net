@@ -1,18 +1,17 @@
-﻿namespace Octokit.Webhooks.Models
-{
-    using System.Runtime.Serialization;
-    using System.Text.Json.Serialization;
+﻿namespace Octokit.Webhooks.Models;
 
-    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum AlertRuleSeverity
-    {
-        [EnumMember(Value = "none")]
-        Open,
-        [EnumMember(Value = "note")]
-        Note,
-        [EnumMember(Value = "warning")]
-        Warning,
-        [EnumMember(Value = "error")]
-        Error,
-    }
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+public enum AlertRuleSeverity
+{
+    [EnumMember(Value = "none")]
+    Open,
+    [EnumMember(Value = "note")]
+    Note,
+    [EnumMember(Value = "warning")]
+    Warning,
+    [EnumMember(Value = "error")]
+    Error,
 }
