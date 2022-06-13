@@ -1,9 +1,8 @@
-namespace Octokit.Webhooks.Events.InstallationRepositories
-{
-    public static class InstallationRepositoriesActionValue
-    {
-        public const string Added = "added";
+namespace Octokit.Webhooks.Events.InstallationRepositories;
 
-        public const string Removed = "removed";
-    }
+public static class InstallationRepositoriesActionValue
+{
+    public const string Added = "added";
+
+    public const string Removed = "removed";
 }

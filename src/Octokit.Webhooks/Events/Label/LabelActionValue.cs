@@ -1,11 +1,10 @@
-namespace Octokit.Webhooks.Events.Label
+namespace Octokit.Webhooks.Events.Label;
+
+public static class LabelActionValue
 {
-    public static class LabelActionValue
-    {
-        public const string Created = "created";
+    public const string Created = "created";
 
-        public const string Deleted = "deleted";
+    public const string Deleted = "deleted";
 
-        public const string Edited = "edited";
-    }
+    public const string Edited = "edited";
 }

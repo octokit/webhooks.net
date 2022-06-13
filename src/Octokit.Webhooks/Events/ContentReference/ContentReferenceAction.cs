@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.ContentReference
+namespace Octokit.Webhooks.Events.ContentReference;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ContentReferenceAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly ContentReferenceAction Created = new(ContentReferenceActionValue.Created);
 
-    [PublicAPI]
-    public sealed record ContentReferenceAction : WebhookEventAction
+    private ContentReferenceAction(string value)
+        : base(value)
     {
-        public static readonly ContentReferenceAction Created = new(ContentReferenceActionValue.Created);
-
-        private ContentReferenceAction(string value)
-            : base(value)
-        {
-        }
     }
 }

@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.Star
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.Star;
 
-    [PublicAPI]
-    [WebhookActionType(StarActionValue.Created)]
-    public sealed record StarCreatedEvent : StarEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => StarAction.Created;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(StarActionValue.Created)]
+public sealed record StarCreatedEvent : StarEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => StarAction.Created;
 }

@@ -1,15 +1,14 @@
-﻿namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent
+﻿namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record SecurityAdvisoryCvss
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("vector_string")]
+    public string? VectorString { get; init; }
 
-    [PublicAPI]
-    public sealed record SecurityAdvisoryCvss
-    {
-        [JsonPropertyName("vector_string")]
-        public string? VectorString { get; init; }
-
-        [JsonPropertyName("score")]
-        public float Score { get; init; }
-    }
+    [JsonPropertyName("score")]
+    public float Score { get; init; }
 }

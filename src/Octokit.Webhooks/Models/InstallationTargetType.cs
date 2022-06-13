@@ -1,14 +1,13 @@
-﻿namespace Octokit.Webhooks.Models
-{
-    using System.Runtime.Serialization;
-    using System.Text.Json.Serialization;
+﻿namespace Octokit.Webhooks.Models;
 
-    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum InstallationTargetType
-    {
-        [EnumMember(Value = "User")]
-        User,
-        [EnumMember(Value = "Organization")]
-        Organization,
-    }
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+public enum InstallationTargetType
+{
+    [EnumMember(Value = "User")]
+    User,
+    [EnumMember(Value = "Organization")]
+    Organization,
 }

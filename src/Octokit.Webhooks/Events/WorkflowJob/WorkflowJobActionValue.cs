@@ -1,11 +1,10 @@
-namespace Octokit.Webhooks.Events.WorkflowJob
+namespace Octokit.Webhooks.Events.WorkflowJob;
+
+public static class WorkflowJobActionValue
 {
-    public static class WorkflowJobActionValue
-    {
-        public const string Queued = "queued";
+    public const string Queued = "queued";
 
-        public const string InProgress = "in_progress";
+    public const string InProgress = "in_progress";
 
-        public const string Completed = "completed";
-    }
+    public const string Completed = "completed";
 }

@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.ContentReference
+namespace Octokit.Webhooks.Events.ContentReference;
+
+public static class ContentReferenceActionValue
 {
-    public static class ContentReferenceActionValue
-    {
-        public const string Created = "created";
-    }
+    public const string Created = "created";
 }

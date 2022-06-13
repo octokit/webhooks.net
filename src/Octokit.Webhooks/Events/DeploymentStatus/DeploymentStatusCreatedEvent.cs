@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.DeploymentStatus
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.DeploymentStatus;
 
-    [PublicAPI]
-    [WebhookActionType(DeploymentStatusActionValue.Created)]
-    public sealed record DeploymentStatusCreatedEvent : DeploymentStatusEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => DeploymentStatusAction.Created;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(DeploymentStatusActionValue.Created)]
+public sealed record DeploymentStatusCreatedEvent : DeploymentStatusEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => DeploymentStatusAction.Created;
 }

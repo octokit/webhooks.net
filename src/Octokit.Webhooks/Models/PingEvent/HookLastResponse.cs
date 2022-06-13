@@ -1,18 +1,17 @@
-﻿namespace Octokit.Webhooks.Models.PingEvent
+﻿namespace Octokit.Webhooks.Models.PingEvent;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record HookLastResponse
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("code")]
+    public string? Code { get; init; }
 
-    [PublicAPI]
-    public sealed record HookLastResponse
-    {
-        [JsonPropertyName("code")]
-        public string? Code { get; init; }
+    [JsonPropertyName("status")]
+    public string Status { get; init; } = null!;
 
-        [JsonPropertyName("status")]
-        public string Status { get; init; } = null!;
-
-        [JsonPropertyName("message")]
-        public string? Message { get; init; }
-    }
+    [JsonPropertyName("message")]
+    public string? Message { get; init; }
 }

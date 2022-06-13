@@ -1,9 +1,8 @@
-namespace Octokit.Webhooks.Events.PullRequestReviewThread
-{
-    public static class PullRequestReviewThreadActionValue
-    {
-        public const string Resolved = "resolved";
+namespace Octokit.Webhooks.Events.PullRequestReviewThread;
 
-        public const string Unresolved = "unresolved";
-    }
+public static class PullRequestReviewThreadActionValue
+{
+    public const string Resolved = "resolved";
+
+    public const string Unresolved = "unresolved";
 }

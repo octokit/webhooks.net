@@ -1,22 +1,21 @@
-namespace AspNetCore
+namespace AspNetCore;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Octokit.Webhooks;
+using Octokit.Webhooks.AspNetCore;
+
+public class Startup
 {
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.Extensions.DependencyInjection;
-    using Octokit.Webhooks;
-    using Octokit.Webhooks.AspNetCore;
+    public void ConfigureServices(IServiceCollection services) => services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
 
-    public class Startup
+    public void Configure(IApplicationBuilder app)
     {
-        public void ConfigureServices(IServiceCollection services) => services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
+        app.UseRouting();
 
-        public void Configure(IApplicationBuilder app)
+        app.UseEndpoints(endpoints =>
         {
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGitHubWebhooks();
-            });
-        }
+            endpoints.MapGitHubWebhooks();
+        });
     }
 }

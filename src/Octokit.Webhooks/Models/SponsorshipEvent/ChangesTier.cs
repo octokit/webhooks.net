@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.SponsorshipEvent
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+﻿namespace Octokit.Webhooks.Models.SponsorshipEvent;
 
-    [PublicAPI]
-    public sealed record ChangesTier
-    {
-        [JsonPropertyName("from")]
-        public SponsorshipTier From { get; init; } = null!;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record ChangesTier
+{
+    [JsonPropertyName("from")]
+    public SponsorshipTier From { get; init; } = null!;
 }

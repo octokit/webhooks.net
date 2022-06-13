@@ -1,14 +1,13 @@
-﻿namespace Octokit.Webhooks.Models.MetaEvent
-{
-    using System.Runtime.Serialization;
-    using System.Text.Json.Serialization;
+﻿namespace Octokit.Webhooks.Models.MetaEvent;
 
-    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum HookConfigContentType
-    {
-        [EnumMember(Value = "json")]
-        Json,
-        [EnumMember(Value = "form")]
-        Form,
-    }
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+public enum HookConfigContentType
+{
+    [EnumMember(Value = "json")]
+    Json,
+    [EnumMember(Value = "form")]
+    Form,
 }

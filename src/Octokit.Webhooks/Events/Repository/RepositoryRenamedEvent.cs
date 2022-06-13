@@ -1,17 +1,16 @@
-namespace Octokit.Webhooks.Events.Repository
+namespace Octokit.Webhooks.Events.Repository;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Octokit.Webhooks.Models.RepositoryEvent;
+
+[PublicAPI]
+[WebhookActionType(RepositoryActionValue.Renamed)]
+public sealed record RepositoryRenamedEvent : RepositoryEvent
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
-    using Octokit.Webhooks.Models.RepositoryEvent;
+    [JsonPropertyName("action")]
+    public override string Action => RepositoryAction.Renamed;
 
-    [PublicAPI]
-    [WebhookActionType(RepositoryActionValue.Renamed)]
-    public sealed record RepositoryRenamedEvent : RepositoryEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => RepositoryAction.Renamed;
-
-        [JsonPropertyName("changes")]
-        public Changes Changes { get; init; } = null!;
-    }
+    [JsonPropertyName("changes")]
+    public Changes Changes { get; init; } = null!;
 }

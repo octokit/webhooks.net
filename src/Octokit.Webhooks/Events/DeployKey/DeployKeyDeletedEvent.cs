@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.DeployKey
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.DeployKey;
 
-    [PublicAPI]
-    [WebhookActionType(DeployKeyActionValue.Deleted)]
-    public sealed record DeployKeyDeletedEvent : DeployKeyEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => DeployKeyAction.Deleted;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(DeployKeyActionValue.Deleted)]
+public sealed record DeployKeyDeletedEvent : DeployKeyEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => DeployKeyAction.Deleted;
 }

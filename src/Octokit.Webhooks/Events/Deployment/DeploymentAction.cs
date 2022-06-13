@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.Deployment
+namespace Octokit.Webhooks.Events.Deployment;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record DeploymentAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly DeploymentAction Created = new(DeploymentActionValue.Created);
 
-    [PublicAPI]
-    public sealed record DeploymentAction : WebhookEventAction
+    private DeploymentAction(string value)
+        : base(value)
     {
-        public static readonly DeploymentAction Created = new(DeploymentActionValue.Created);
-
-        private DeploymentAction(string value)
-            : base(value)
-        {
-        }
     }
 }

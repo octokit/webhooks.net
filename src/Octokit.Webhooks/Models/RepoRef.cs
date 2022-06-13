@@ -1,18 +1,17 @@
-﻿namespace Octokit.Webhooks.Models
+﻿namespace Octokit.Webhooks.Models;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record RepoRef
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("id")]
+    public long Id { get; init; }
 
-    [PublicAPI]
-    public sealed record RepoRef
-    {
-        [JsonPropertyName("id")]
-        public long Id { get; init; }
+    [JsonPropertyName("url")]
+    public string Url { get; init; } = null!;
 
-        [JsonPropertyName("url")]
-        public string Url { get; init; } = null!;
-
-        [JsonPropertyName("name")]
-        public string Name { get; init; } = null!;
-    }
+    [JsonPropertyName("name")]
+    public string Name { get; init; } = null!;
 }

@@ -1,14 +1,13 @@
-﻿namespace Octokit.Webhooks
+﻿namespace Octokit.Webhooks;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public abstract record WebhookEventAction
 {
-    using JetBrains.Annotations;
+    private readonly string value;
 
-    [PublicAPI]
-    public abstract record WebhookEventAction
-    {
-        private readonly string value;
+    private protected WebhookEventAction(string value) => this.value = value;
 
-        private protected WebhookEventAction(string value) => this.value = value;
-
-        public static implicit operator string(WebhookEventAction action) => action.value;
-    }
+    public static implicit operator string(WebhookEventAction action) => action.value;
 }

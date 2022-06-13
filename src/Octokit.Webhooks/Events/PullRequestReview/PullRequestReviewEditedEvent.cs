@@ -1,17 +1,16 @@
-namespace Octokit.Webhooks.Events.PullRequestReview
+namespace Octokit.Webhooks.Events.PullRequestReview;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Octokit.Webhooks.Models.PullRequestReviewEvent;
+
+[PublicAPI]
+[WebhookActionType(PullRequestReviewActionValue.Edited)]
+public sealed record PullRequestReviewEditedEvent : PullRequestReviewEvent
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
-    using Octokit.Webhooks.Models.PullRequestReviewEvent;
+    [JsonPropertyName("action")]
+    public override string Action => PullRequestReviewAction.Edited;
 
-    [PublicAPI]
-    [WebhookActionType(PullRequestReviewActionValue.Edited)]
-    public sealed record PullRequestReviewEditedEvent : PullRequestReviewEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => PullRequestReviewAction.Edited;
-
-        [JsonPropertyName("changes")]
-        public Changes Changes { get; init; } = null!;
-    }
+    [JsonPropertyName("changes")]
+    public Changes Changes { get; init; } = null!;
 }

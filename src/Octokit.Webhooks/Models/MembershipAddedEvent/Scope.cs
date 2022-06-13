@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks.Models.MembershipAddedEvent
-{
-    using System.Runtime.Serialization;
-    using System.Text.Json.Serialization;
+﻿namespace Octokit.Webhooks.Models.MembershipAddedEvent;
 
-    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum Scope
-    {
-        [EnumMember(Value = "team")]
-        Team,
-    }
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+public enum Scope
+{
+    [EnumMember(Value = "team")]
+    Team,
 }

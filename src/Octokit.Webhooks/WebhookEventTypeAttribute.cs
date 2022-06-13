@@ -1,12 +1,11 @@
-﻿namespace Octokit.Webhooks
+﻿namespace Octokit.Webhooks;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Class)]
+internal class WebhookEventTypeAttribute : Attribute
 {
-    using System;
+    public WebhookEventTypeAttribute(string eventType) => this.EventType = eventType;
 
-    [AttributeUsage(AttributeTargets.Class)]
-    internal class WebhookEventTypeAttribute : Attribute
-    {
-        public WebhookEventTypeAttribute(string eventType) => this.EventType = eventType;
-
-        public string EventType { get; }
-    }
+    public string EventType { get; }
 }

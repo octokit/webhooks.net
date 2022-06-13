@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.CheckSuite
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.CheckSuite;
 
-    [PublicAPI]
-    [WebhookActionType(CheckSuiteActionValue.Requested)]
-    public sealed record CheckSuiteRequestedEvent : CheckSuiteEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => CheckSuiteAction.Requested;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(CheckSuiteActionValue.Requested)]
+public sealed record CheckSuiteRequestedEvent : CheckSuiteEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => CheckSuiteAction.Requested;
 }

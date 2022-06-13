@@ -1,9 +1,8 @@
-namespace Octokit.Webhooks.Events.WorkflowRun
-{
-    public static class WorkflowRunActionValue
-    {
-        public const string Completed = "completed";
+namespace Octokit.Webhooks.Events.WorkflowRun;
 
-        public const string Requested = "requested";
-    }
+public static class WorkflowRunActionValue
+{
+    public const string Completed = "completed";
+
+    public const string Requested = "requested";
 }

@@ -1,17 +1,16 @@
-namespace Octokit.Webhooks.Events.Membership
+namespace Octokit.Webhooks.Events.Membership;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record MembershipAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly MembershipAction Added = new(MembershipActionValue.Added);
 
-    [PublicAPI]
-    public sealed record MembershipAction : WebhookEventAction
+    public static readonly MembershipAction Removed = new(MembershipActionValue.Removed);
+
+    private MembershipAction(string value)
+        : base(value)
     {
-        public static readonly MembershipAction Added = new(MembershipActionValue.Added);
-
-        public static readonly MembershipAction Removed = new(MembershipActionValue.Removed);
-
-        private MembershipAction(string value)
-            : base(value)
-        {
-        }
     }
 }

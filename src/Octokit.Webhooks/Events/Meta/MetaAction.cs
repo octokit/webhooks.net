@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.Meta
+namespace Octokit.Webhooks.Events.Meta;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record MetaAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly MetaAction Deleted = new(MetaActionValue.Deleted);
 
-    [PublicAPI]
-    public sealed record MetaAction : WebhookEventAction
+    private MetaAction(string value)
+        : base(value)
     {
-        public static readonly MetaAction Deleted = new(MetaActionValue.Deleted);
-
-        private MetaAction(string value)
-            : base(value)
-        {
-        }
     }
 }

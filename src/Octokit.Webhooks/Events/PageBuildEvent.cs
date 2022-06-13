@@ -1,17 +1,16 @@
-﻿namespace Octokit.Webhooks.Events
+﻿namespace Octokit.Webhooks.Events;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+using Octokit.Webhooks.Models.PageBuildEvent;
+
+[PublicAPI]
+[WebhookEventType(WebhookEventType.PageBuild)]
+public sealed record PageBuildEvent : WebhookEvent
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
-    using Octokit.Webhooks.Models.PageBuildEvent;
+    [JsonPropertyName("id")]
+    public long Id { get; init; }
 
-    [PublicAPI]
-    [WebhookEventType(WebhookEventType.PageBuild)]
-    public sealed record PageBuildEvent : WebhookEvent
-    {
-        [JsonPropertyName("id")]
-        public long Id { get; init; }
-
-        [JsonPropertyName("build")]
-        public Build Build { get; init; } = null!;
-    }
+    [JsonPropertyName("build")]
+    public Build Build { get; init; } = null!;
 }

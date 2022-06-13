@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.PullRequestReviewThread
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.PullRequestReviewThread;
 
-    [PublicAPI]
-    [WebhookActionType(PullRequestReviewThreadActionValue.Unresolved)]
-    public sealed record PullRequestReviewThreadUnresolvedEvent : PullRequestReviewThreadEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => PullRequestReviewThreadActionValue.Unresolved;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(PullRequestReviewThreadActionValue.Unresolved)]
+public sealed record PullRequestReviewThreadUnresolvedEvent : PullRequestReviewThreadEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => PullRequestReviewThreadActionValue.Unresolved;
 }

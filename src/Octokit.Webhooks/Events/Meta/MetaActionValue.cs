@@ -1,7 +1,6 @@
-namespace Octokit.Webhooks.Events.Meta
+namespace Octokit.Webhooks.Events.Meta;
+
+public static class MetaActionValue
 {
-    public static class MetaActionValue
-    {
-        public const string Deleted = "deleted";
-    }
+    public const string Deleted = "deleted";
 }

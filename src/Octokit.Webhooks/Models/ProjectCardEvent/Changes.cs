@@ -1,15 +1,14 @@
-﻿namespace Octokit.Webhooks.Models.ProjectCardEvent
+﻿namespace Octokit.Webhooks.Models.ProjectCardEvent;
+
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record Changes
 {
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+    [JsonPropertyName("note")]
+    public ChangesNote? Note { get; init; } = null!;
 
-    [PublicAPI]
-    public sealed record Changes
-    {
-        [JsonPropertyName("note")]
-        public ChangesNote? Note { get; init; } = null!;
-
-        [JsonPropertyName("column_id")]
-        public ChangesColumnId? ColumnId { get; init; } = null!;
-    }
+    [JsonPropertyName("column_id")]
+    public ChangesColumnId? ColumnId { get; init; } = null!;
 }

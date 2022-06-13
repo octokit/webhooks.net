@@ -1,14 +1,13 @@
-﻿namespace Octokit.Webhooks.Models.GollumEvent
-{
-    using System.Runtime.Serialization;
-    using System.Text.Json.Serialization;
+﻿namespace Octokit.Webhooks.Models.GollumEvent;
 
-    [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum PageAction
-    {
-        [EnumMember(Value = "created")]
-        Created,
-        [EnumMember(Value = "edited")]
-        Edited,
-    }
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+public enum PageAction
+{
+    [EnumMember(Value = "created")]
+    Created,
+    [EnumMember(Value = "edited")]
+    Edited,
 }

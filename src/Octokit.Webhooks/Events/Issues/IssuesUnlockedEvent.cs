@@ -1,13 +1,12 @@
-namespace Octokit.Webhooks.Events.Issues
-{
-    using System.Text.Json.Serialization;
-    using JetBrains.Annotations;
+namespace Octokit.Webhooks.Events.Issues;
 
-    [PublicAPI]
-    [WebhookActionType(IssuesActionValue.Unlocked)]
-    public sealed record IssuesUnlockedEvent : IssuesEvent
-    {
-        [JsonPropertyName("action")]
-        public override string Action => IssuesAction.Unlocked;
-    }
+using System.Text.Json.Serialization;
+using JetBrains.Annotations;
+
+[PublicAPI]
+[WebhookActionType(IssuesActionValue.Unlocked)]
+public sealed record IssuesUnlockedEvent : IssuesEvent
+{
+    [JsonPropertyName("action")]
+    public override string Action => IssuesAction.Unlocked;
 }

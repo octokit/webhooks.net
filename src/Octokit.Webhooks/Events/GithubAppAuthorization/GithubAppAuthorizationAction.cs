@@ -1,15 +1,14 @@
-namespace Octokit.Webhooks.Events.GithubAppAuthorization
+namespace Octokit.Webhooks.Events.GithubAppAuthorization;
+
+using JetBrains.Annotations;
+
+[PublicAPI]
+public sealed record GithubAppAuthorizationAction : WebhookEventAction
 {
-    using JetBrains.Annotations;
+    public static readonly GithubAppAuthorizationAction Revoked = new(GithubAppAuthorizationActionValue.Revoked);
 
-    [PublicAPI]
-    public sealed record GithubAppAuthorizationAction : WebhookEventAction
+    private GithubAppAuthorizationAction(string value)
+        : base(value)
     {
-        public static readonly GithubAppAuthorizationAction Revoked = new(GithubAppAuthorizationActionValue.Revoked);
-
-        private GithubAppAuthorizationAction(string value)
-            : base(value)
-        {
-        }
     }
 }
