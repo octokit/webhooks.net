@@ -50,6 +50,8 @@ public enum AppEvent
     Member,
     [EnumMember(Value = "membership")]
     Membership,
+    [EnumMember(Value = "merge_group")]
+    MergeGroup,
     [EnumMember(Value = "meta")]
     Meta,
     [EnumMember(Value = "milestone")]
