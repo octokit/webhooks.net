@@ -1,16 +1,19 @@
-namespace AspNetCore;
+using AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Octokit.Webhooks;
+using Octokit.Webhooks.AspNetCore;
 
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program
-{
-    public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
+builder.Services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            });
-}
+var app = builder.Build();
+
+app.UseRouting()
+    .UseEndpoints(endpoints =>
+    {
+        endpoints.MapGitHubWebhooks();
+    });
+
+app.Run();
