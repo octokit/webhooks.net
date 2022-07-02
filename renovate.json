@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>octokit/.github"
-  ],
-  "enabled": true
+    "github>octokit/.github",
+    ":dependencyDashboard"
+  ]
 }
