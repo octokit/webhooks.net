@@ -6,7 +6,9 @@
 
 Libraries to handle GitHub Webhooks in .NET applications.
 
-## Usage in ASP.NET Core
+## Usage
+
+### ASP.NET Core
 
 1. `dotnet add package Octokit.Webhooks.AspNetCore`
 2. Create a class that derives from `WebhookEventProcessor` and override any of the virtual methods to handle webhooks from GitHub. For example, to handle Pull Request webhooks:
@@ -20,17 +22,13 @@ Libraries to handle GitHub Webhooks in .NET applications.
     }
     ```
 
-3. Modify your `ConfigureServices()` method to register an implementation for `GitHubEventProcessor`:
+3. Register your implementation of `WebhookEventProcessor`:
 
     ```C#
-    public void ConfigureServices(IServiceCollection services)
-    {
-        ...
-        services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
-        ...
-    }
+    builder.Services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
     ```
-4. Modify your `Configure()` method to map the webhook end point:
+
+4. Map the webhook end point:
 
     ```C#
     app.UseEndpoints(endpoints =>
@@ -45,6 +43,49 @@ Libraries to handle GitHub Webhooks in .NET applications.
 
 * `path`. Defaults to `/api/github/webhooks`, the URL of the endpoint to use for GitHub.
 * `secret`. The secret you have configured in GitHub, if you have set this up.
+
+### Azure Functions
+
+**NOTE**: Support is only provided for isolated process Azure Functions.
+
+1. `dotnet add package Octokit.Webhooks.AzureFunctions`
+2. Create a class that derives from `WebhookEventProcessor` and override any of the virtual methods to handle webhooks from GitHub. For example, to handle Pull Request webhooks:
+
+    ```C#
+    public sealed class MyWebhookEventProcessor : WebhookEventProcessor
+    {
+        protected override Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) {
+            ...
+        }
+    }
+    ```
+
+3. Register your implementation of `WebhookEventProcessor`:
+
+    ```C#
+    .ConfigureServices(collection =>
+    {
+        ...
+        collection.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
+        ...
+    })
+    ```
+
+4. Configure the webhook function:
+
+    ```C#
+    new HostBuilder()
+    ...
+    .ConfigureGitHubWebhooks()
+    ...
+    .Build();
+    ```
+
+`ConfigureGitHubWebhooks()` takes one optional parameter:
+
+* `secret`. The secret you have configured in GitHub, if you have set this up.
+
+The function is available on the `/api/github/webhooks` endpoint.
 
 ## Thanks
 
