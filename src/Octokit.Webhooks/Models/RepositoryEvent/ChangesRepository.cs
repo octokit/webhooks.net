@@ -7,5 +7,5 @@ using JetBrains.Annotations;
 public sealed record ChangesRepository
 {
     [JsonPropertyName("name")]
-    public ChangesRepositoryName? Name { get; init; } = null!;
+    public ChangesRepositoryName? Name { get; init; }
 }

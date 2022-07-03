@@ -22,7 +22,7 @@ public sealed record Hook
     public bool Active { get; init; }
 
     [JsonPropertyName("app_id")]
-    public int? AppId { get; init; } = null!;
+    public int? AppId { get; init; }
 
     [JsonPropertyName("events")]
     public IEnumerable<AppEvent> Events { get; init; } = null!;
@@ -42,7 +42,7 @@ public sealed record Hook
     public string Url { get; init; } = null!;
 
     [JsonPropertyName("test_url")]
-    public string? TestUrl { get; init; } = null!;
+    public string? TestUrl { get; init; }
 
     [JsonPropertyName("ping_url")]
     public string PingUrl { get; init; } = null!;

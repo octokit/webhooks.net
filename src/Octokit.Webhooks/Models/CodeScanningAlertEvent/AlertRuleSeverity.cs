@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models;
+﻿namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;

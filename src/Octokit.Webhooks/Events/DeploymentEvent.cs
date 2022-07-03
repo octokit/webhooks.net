@@ -13,8 +13,8 @@ public abstract record DeploymentEvent : WebhookEvent
     public Models.DeploymentEvent.Deployment Deployment { get; init; } = null!;
 
     [JsonPropertyName("workflow")]
-    public Models.Workflow? Workflow { get; init; } = null!;
+    public Models.Workflow? Workflow { get; init; }
 
     [JsonPropertyName("workflow_run")]
-    public Models.DeploymentEvent.DeploymentWorkflowRun? WorkflowRun { get; init; } = null!;
+    public Models.DeploymentEvent.DeploymentWorkflowRun? WorkflowRun { get; init; }
 }

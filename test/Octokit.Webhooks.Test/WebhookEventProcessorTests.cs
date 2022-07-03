@@ -2,7 +2,6 @@ namespace Octokit.Webhooks.Test;
 
 using System;
 using FluentAssertions;
-using Octokit.Webhooks.Test.Converter;
 using Xunit;
 
 public class WebhookEventProcessorTests

@@ -7,8 +7,8 @@ using JetBrains.Annotations;
 public sealed record Changes
 {
     [JsonPropertyName("note")]
-    public ChangesNote? Note { get; init; } = null!;
+    public ChangesNote? Note { get; init; }
 
     [JsonPropertyName("column_id")]
-    public ChangesColumnId? ColumnId { get; init; } = null!;
+    public ChangesColumnId? ColumnId { get; init; }
 }

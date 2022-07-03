@@ -7,6 +7,4 @@ using Octokit.Webhooks.Converter;
 [PublicAPI]
 [WebhookEventType(WebhookEventType.Organization)]
 [JsonConverter(typeof(WebhookConverter<OrganizationEvent>))]
-public abstract record OrganizationEvent : WebhookEvent
-{
-}
+public abstract record OrganizationEvent : WebhookEvent;
