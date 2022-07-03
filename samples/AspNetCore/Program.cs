@@ -11,9 +11,6 @@ builder.Services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
 var app = builder.Build();
 
 app.UseRouting()
-    .UseEndpoints(endpoints =>
-    {
-        endpoints.MapGitHubWebhooks();
-    });
+    .UseEndpoints(endpoints => endpoints.MapGitHubWebhooks());
 
 app.Run();

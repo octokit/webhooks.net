@@ -44,7 +44,7 @@ public class NullableDateTimeOffsetConverterTests
     [Fact]
     public void ThrowsForWrite()
     {
-        Func<string> result = () => JsonSerializer.Serialize(this.expected, this.options);
+        var result = () => JsonSerializer.Serialize(this.expected, this.options);
         result.Should().Throw<NotImplementedException>();
     }
 }

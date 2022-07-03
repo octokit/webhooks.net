@@ -10,10 +10,7 @@ public class MyWebhookEventProcessor : WebhookEventProcessor
 {
     private readonly ILogger<MyWebhookEventProcessor> logger;
 
-    public MyWebhookEventProcessor(ILogger<MyWebhookEventProcessor> logger)
-    {
-        this.logger = logger;
-    }
+    public MyWebhookEventProcessor(ILogger<MyWebhookEventProcessor> logger) => this.logger = logger;
 
     protected override async Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action)
     {
