@@ -1,6 +1,6 @@
 namespace Octokit.Webhooks.AzureFunctions;
 
-public record GitHubWebhooksOptions
+public sealed record GitHubWebhooksOptions
 {
     public string? Secret { get; set; }
 }

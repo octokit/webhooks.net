@@ -19,7 +19,7 @@ using Microsoft.Extensions.Primitives;
 /// <summary>
 /// A class containing an Azure Function that processes GitHub webhooks.
 /// </summary>
-public partial class GitHubWebhooksHttpFunction
+public sealed partial class GitHubWebhooksHttpFunction
 {
     private readonly IOptions<GitHubWebhooksOptions> options;
 
@@ -77,12 +77,7 @@ public partial class GitHubWebhooksHttpFunction
         }
 
         var contentType = new ContentType(contentHeader);
-        if (contentType.MediaType != expectedContentType)
-        {
-            return false;
-        }
-
-        return true;
+        return contentType.MediaType == expectedContentType;
     }
 
     private static async Task<string> GetBodyAsync(HttpRequestData req)

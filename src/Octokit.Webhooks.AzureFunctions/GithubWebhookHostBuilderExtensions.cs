@@ -13,7 +13,5 @@ public static class GithubWebhookHostBuilderExtensions
     /// <returns>Returns <see cref="IHostBuilder" /> instance.</returns>
     public static IHostBuilder ConfigureGitHubWebhooks(this IHostBuilder hostBuilder, string? secret = null) =>
         hostBuilder.ConfigureServices(services =>
-        {
-            services.AddOptions<GitHubWebhooksOptions>().Configure(options => { options.Secret = secret; });
-        });
+            services.AddOptions<GitHubWebhooksOptions>().Configure(options => { options.Secret = secret; }));
 }
