@@ -23,6 +23,8 @@ env:
 jobs:
   build:
     name: Build-${{matrix.os}}
+    permissions:
+      contents: read
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -82,6 +84,7 @@ jobs:
     environment:
       name: 'NuGet'
       url: https://www.nuget.org/packages/Octokit.Webhooks
+    permissions: {}
     runs-on: windows-latest
     steps:
       - name: 'Download artifact'
