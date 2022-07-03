@@ -28,7 +28,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     builder.Services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
     ```
 
-4. Map the webhook end point:
+4. Map the webhook endpoint:
 
     ```C#
     app.UseEndpoints(endpoints =>

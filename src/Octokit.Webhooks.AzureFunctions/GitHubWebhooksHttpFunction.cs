@@ -30,7 +30,7 @@ public partial class GitHubWebhooksHttpFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = "github/webhooks")] HttpRequestData req,
         FunctionContext ctx)
     {
-        var logger = ctx.InstanceServices.GetService<ILogger<GitHubWebhooksHttpFunction>>()!;
+        var logger = ctx.InstanceServices.GetRequiredService<ILogger<GitHubWebhooksHttpFunction>>();
 
         // Verify content type
         if (!VerifyContentType(req, MediaTypeNames.Application.Json))
@@ -52,7 +52,7 @@ public partial class GitHubWebhooksHttpFunction
         // Process body
         try
         {
-            var service = ctx.InstanceServices.GetService<WebhookEventProcessor>()!;
+            var service = ctx.InstanceServices.GetRequiredService<WebhookEventProcessor>();
             var headers = req.Headers.ToDictionary(
                 kv => kv.Key,
                 kv => new StringValues(kv.Value.ToArray()),
