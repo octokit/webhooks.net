@@ -21,7 +21,7 @@ public class WebhookConverter<T> : JsonConverter<T>
             .Where(x => type.IsAssignableFrom(x) && x.IsClass && !x.IsAbstract &&
                         Attribute.GetCustomAttribute(x, typeof(WebhookActionTypeAttribute)) is not null)
             .ToDictionary(
-                y => ((WebhookActionTypeAttribute)Attribute.GetCustomAttribute(y, typeof(WebhookActionTypeAttribute))!)!.ActionType,
+                y => ((WebhookActionTypeAttribute)Attribute.GetCustomAttribute(y, typeof(WebhookActionTypeAttribute))!).ActionType,
                 y => y);
     }
 

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models;
+﻿namespace Octokit.Webhooks.Models.SecretScanningAlertEvent;
 
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;

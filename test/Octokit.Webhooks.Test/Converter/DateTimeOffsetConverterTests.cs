@@ -37,14 +37,14 @@ public class DateTimeOffsetConverterTests
     [Fact]
     public void ThrowsForNull()
     {
-        Func<DateTimeOffset> result = () => JsonSerializer.Deserialize<DateTimeOffset>(@"null", this.options);
+        var result = () => JsonSerializer.Deserialize<DateTimeOffset>(@"null", this.options);
         result.Should().Throw<JsonException>();
     }
 
     [Fact]
     public void ThrowsForWrite()
     {
-        Func<string> result = () => JsonSerializer.Serialize(this.expected, this.options);
+        var result = () => JsonSerializer.Serialize(this.expected, this.options);
         result.Should().Throw<NotImplementedException>();
     }
 }

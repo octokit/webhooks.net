@@ -25,7 +25,7 @@ public sealed record App
     public string Name { get; init; } = null!;
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; } = null!;
+    public string? Description { get; init; }
 
     [JsonPropertyName("external_url")]
     public string ExternalUrl { get; init; } = null!;

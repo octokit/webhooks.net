@@ -47,7 +47,7 @@ public sealed record Installation
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
-    public DateTimeOffset? CreatedAt { get; init; } = null!;
+    public DateTimeOffset? CreatedAt { get; init; }
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
