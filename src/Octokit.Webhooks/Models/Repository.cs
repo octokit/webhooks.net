@@ -258,6 +258,9 @@ public sealed record Repository
     [JsonPropertyName("is_template")]
     public bool IsTemplate { get; init; }
 
+    [JsonPropertyName("web_commit_signoff_required")]
+    public bool WebCommitSignoffRequired { get; init; }
+
     [JsonPropertyName("topics")]
     public IEnumerable<string> Topics { get; init; } = null!;
 
