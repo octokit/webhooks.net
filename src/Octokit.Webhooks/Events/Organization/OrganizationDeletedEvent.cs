@@ -12,5 +12,5 @@ public sealed record OrganizationDeletedEvent : OrganizationEvent
     public override string Action => OrganizationAction.Deleted;
 
     [JsonPropertyName("membership")]
-    public Membership Membership { get; init; } = null!;
+    public Membership? Membership { get; init; }
 }

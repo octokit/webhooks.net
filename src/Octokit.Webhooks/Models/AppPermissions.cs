@@ -39,6 +39,9 @@ public sealed record AppPermissions
     [JsonPropertyName("members")]
     public AppPermissionsLevel? Members { get; init; }
 
+    [JsonPropertyName("merge_queues")]
+    public AppPermissionsLevel? MergeQueues { get; init; }
+
     [JsonPropertyName("metadata")]
     public AppPermissionsLevel? Metadata { get; init; }
 

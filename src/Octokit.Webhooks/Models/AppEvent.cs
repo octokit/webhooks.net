@@ -52,6 +52,8 @@ public enum AppEvent
     Membership,
     [EnumMember(Value = "merge_group")]
     MergeGroup,
+    [EnumMember(Value = "merge_queue_entry")]
+    MergeQueueEntry,
     [EnumMember(Value = "meta")]
     Meta,
     [EnumMember(Value = "milestone")]
@@ -64,6 +66,8 @@ public enum AppEvent
     PageBuild,
     [EnumMember(Value = "project")]
     Project,
+    [EnumMember(Value = "projects_v2_item")]
+    ProjectsV2Item,
     [EnumMember(Value = "project_card")]
     ProjectCard,
     [EnumMember(Value = "project_column")]
@@ -94,6 +98,10 @@ public enum AppEvent
     RepositoryVulnerabilityAlert,
     [EnumMember(Value = "secret_scanning_alert")]
     SecretScanningAlert,
+    [EnumMember(Value = "secret_scanning_alert_location")]
+    SecretScanningAlertLocation,
+    [EnumMember(Value = "security_and_analysis")]
+    SecurityAndAnalysis,
     [EnumMember(Value = "star")]
     Star,
     [EnumMember(Value = "status")]
@@ -106,6 +114,8 @@ public enum AppEvent
     Watch,
     [EnumMember(Value = "workflow_dispatch")]
     WorkflowDispatch,
+    [EnumMember(Value = "workflow_job")]
+    WorkflowJob,
     [EnumMember(Value = "workflow_run")]
     WorkflowRun,
 }

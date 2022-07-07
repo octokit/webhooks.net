@@ -64,4 +64,13 @@ public sealed record Release
 
     [JsonPropertyName("body")]
     public string Body { get; init; } = null!;
+
+    [JsonPropertyName("mentions_count")]
+    public long? MentionsCount { get; init; }
+
+    [JsonPropertyName("reactions")]
+    public Reactions? Reactions { get; init; }
+
+    [JsonPropertyName("discussion_url")]
+    public string? DiscussionUrl { get; init; }
 }

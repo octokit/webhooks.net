@@ -16,6 +16,9 @@ public sealed record DeploymentWorkflowRun
     [JsonPropertyName("name")]
     public string Name { get; init; } = null!;
 
+    [JsonPropertyName("path")]
+    public string? Path { get; init; }
+
     [JsonPropertyName("node_id")]
     public string NodeId { get; init; } = null!;
 
@@ -75,4 +78,7 @@ public sealed record DeploymentWorkflowRun
     [JsonPropertyName("run_started_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset RunStartedAt { get; init; }
+
+    [JsonPropertyName("referenced_workflows")]
+    public IEnumerable<ReferencedWorkflow> ReferencedWorkflows { get; init; } = null!;
 }

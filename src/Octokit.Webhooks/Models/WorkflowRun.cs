@@ -107,4 +107,7 @@ public sealed record WorkflowRun
 
     [JsonPropertyName("triggering_actor")]
     public User TriggeringActor { get; init; } = null!;
+
+    [JsonPropertyName("referenced_workflows")]
+    public IEnumerable<ReferencedWorkflow> ReferencedWorkflows { get; init; } = null!;
 }

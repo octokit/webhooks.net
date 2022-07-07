@@ -40,6 +40,9 @@ public sealed record IssueComment
     [JsonPropertyName("body")]
     public string Body { get; init; } = null!;
 
+    [JsonPropertyName("reactions")]
+    public Reactions? Reactions { get; init; }
+
     [JsonPropertyName("performed_via_github_app")]
     public App? PerformedViaGithubApp { get; init; }
 }
