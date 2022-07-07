@@ -1,7 +1,9 @@
 ﻿namespace Octokit.Webhooks.Models;
 
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
+[PublicAPI]
 public sealed record PullRequestAutoMerge
 {
     [JsonPropertyName("enabled_by")]

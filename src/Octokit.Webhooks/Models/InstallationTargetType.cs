@@ -2,7 +2,9 @@
 
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
+[PublicAPI]
 [JsonConverter(typeof(JsonStringEnumMemberConverter))]
 public enum InstallationTargetType
 {
