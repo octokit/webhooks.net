@@ -78,4 +78,7 @@ public sealed record DeploymentWorkflowRun
     [JsonPropertyName("run_started_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset RunStartedAt { get; init; }
+
+    [JsonPropertyName("referenced_workflows")]
+    public IEnumerable<ReferencedWorkflow> ReferencedWorkflows { get; init; } = null!;
 }
