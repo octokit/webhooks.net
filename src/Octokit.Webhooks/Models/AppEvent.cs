@@ -106,6 +106,8 @@ public enum AppEvent
     Watch,
     [EnumMember(Value = "workflow_dispatch")]
     WorkflowDispatch,
+    [EnumMember(Value = "workflow_job")]
+    WorkflowJob,
     [EnumMember(Value = "workflow_run")]
     WorkflowRun,
 }
