@@ -27,6 +27,8 @@ public static class WebhookEventType
     public const string MarketplacePurchase = "marketplace_purchase";
     public const string Member = "member";
     public const string Membership = "membership";
+    public const string MergeGroup = "merge_group";
+    public const string MergeQueueEntry = "merge_queue_entry";
     public const string Meta = "meta";
     public const string Milestone = "milestone";
     public const string Organization = "organization";
@@ -51,6 +53,8 @@ public static class WebhookEventType
     public const string RepositoryImport = "repository_import";
     public const string RepositoryVulnerabilityAlert = "repository_vulnerability_alert";
     public const string SecretScanningAlert = "secret_scanning_alert";
+    public const string SecretScanningAlertLocation = "secret_scanning_alert_location";
+    public const string SecurityAndAnalysis = "security_and_analysis";
     public const string SecurityAdvisory = "security_advisory";
     public const string Sponsorship = "sponsorship";
     public const string Star = "star";
