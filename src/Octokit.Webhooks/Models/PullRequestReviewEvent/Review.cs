@@ -27,9 +27,8 @@ public sealed record Review
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset SubmittedAt { get; init; }
 
-    // TODO: this should probably be an enum
     [JsonPropertyName("state")]
-    public string State { get; init; } = null!;
+    public ReviewState? State { get; init; }
 
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; init; } = null!;
