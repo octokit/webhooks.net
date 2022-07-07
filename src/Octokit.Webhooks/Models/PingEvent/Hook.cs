@@ -10,7 +10,7 @@ using Octokit.Webhooks.Converter;
 public sealed record Hook
 {
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public HookType Type { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
