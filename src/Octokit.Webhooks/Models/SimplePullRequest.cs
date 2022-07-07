@@ -46,7 +46,7 @@ public sealed record SimplePullRequest
     public User User { get; init; } = null!;
 
     [JsonPropertyName("body")]
-    public string? Body { get; init; } = null!;
+    public string? Body { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
