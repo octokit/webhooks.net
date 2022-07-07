@@ -29,6 +29,9 @@ public sealed record BranchProtectionRule
     [JsonPropertyName("admin_enforced")]
     public bool AdminEnforced { get; init; }
 
+    [JsonPropertyName("create_protected")]
+    public bool? CreateProtected { get; init; }
+
     [JsonPropertyName("allow_deletions_enforcement_level")]
     public EnforcementLevel AllowDeletionsEnforcementLevel { get; init; }
 
