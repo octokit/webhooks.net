@@ -10,4 +10,6 @@ public enum WorkflowJobConclusion
     Success,
     [EnumMember(Value = "failure")]
     Failure,
+    [EnumMember(Value = "cancelled")]
+    Cancelled,
 }
