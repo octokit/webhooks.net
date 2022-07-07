@@ -17,7 +17,7 @@ public sealed record DeploymentWorkflowRun
     public string Name { get; init; } = null!;
 
     [JsonPropertyName("path")]
-    public string? path { get; init; }
+    public string? Path { get; init; }
 
     [JsonPropertyName("node_id")]
     public string NodeId { get; init; } = null!;

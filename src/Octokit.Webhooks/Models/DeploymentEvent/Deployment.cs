@@ -36,10 +36,10 @@ public sealed record Deployment
     public string Environment { get; init; } = null!;
 
     [JsonPropertyName("transient_environment")]
-    public bool? transient_environment { get; init; }
+    public bool? TransientEnvironment { get; init; }
 
     [JsonPropertyName("production_environment")]
-    public bool? production_environment { get; init; }
+    public bool? ProductionEnvironment { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
