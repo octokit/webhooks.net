@@ -12,4 +12,6 @@ public enum HookType
     Repository,
     [EnumMember(Value = "Organization")]
     Organization,
+    [EnumMember(Value = "App")]
+    App,
 }
