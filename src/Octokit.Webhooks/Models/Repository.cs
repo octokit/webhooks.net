@@ -252,6 +252,9 @@ public sealed record Repository
     [JsonPropertyName("allow_update_branch")]
     public bool? AllowUpdateBranch { get; init; }
 
+    [JsonPropertyName("use_squash_pr_title_as_default")]
+    public bool? UseSquashPrTitleAsDefault { get; init; }
+
     [JsonPropertyName("is_template")]
     public bool IsTemplate { get; init; }
 
