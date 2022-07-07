@@ -12,4 +12,6 @@ public enum WorkflowJobConclusion
     Failure,
     [EnumMember(Value = "cancelled")]
     Cancelled,
+    [EnumMember(Value = "skipped")]
+    Skipped,
 }
