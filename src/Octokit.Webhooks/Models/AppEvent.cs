@@ -64,6 +64,8 @@ public enum AppEvent
     PageBuild,
     [EnumMember(Value = "project")]
     Project,
+    [EnumMember(Value = "projects_v2_item")]
+    ProjectsV2Item,
     [EnumMember(Value = "project_card")]
     ProjectCard,
     [EnumMember(Value = "project_column")]
@@ -94,6 +96,8 @@ public enum AppEvent
     RepositoryVulnerabilityAlert,
     [EnumMember(Value = "secret_scanning_alert")]
     SecretScanningAlert,
+    [EnumMember(Value = "secret_scanning_alert_location")]
+    SecretScanningAlertLocation,
     [EnumMember(Value = "star")]
     Star,
     [EnumMember(Value = "status")]
