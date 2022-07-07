@@ -47,6 +47,9 @@ public sealed record Hook
     [JsonPropertyName("ping_url")]
     public string PingUrl { get; init; } = null!;
 
+    [JsonPropertyName("deliveries_url")]
+    public string DeliveriesUrl { get; init; } = null!;
+
     [JsonPropertyName("last_response")]
     public HookLastResponse LastResponse { get; init; } = null!;
 }
