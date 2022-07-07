@@ -64,4 +64,7 @@ public sealed record Release
 
     [JsonPropertyName("body")]
     public string Body { get; init; } = null!;
+
+    [JsonPropertyName("reactions")]
+    public Reactions? Reactions { get; init; }
 }

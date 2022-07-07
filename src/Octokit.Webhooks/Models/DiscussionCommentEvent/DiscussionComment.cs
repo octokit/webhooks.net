@@ -45,4 +45,7 @@ public sealed record DiscussionComment
 
     [JsonPropertyName("body")]
     public string Body { get; init; } = null!;
+
+    [JsonPropertyName("reactions")]
+    public Reactions Reactions { get; init; } = null!;
 }

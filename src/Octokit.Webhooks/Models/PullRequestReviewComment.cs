@@ -64,6 +64,9 @@ public sealed record PullRequestReviewComment
     [JsonPropertyName("_links")]
     public PullRequestReviewCommentLinks Links { get; init; } = null!;
 
+    [JsonPropertyName("reactions")]
+    public Reactions Reactions { get; init; } = null!;
+
     [JsonPropertyName("start_line")]
     public int? StartLine { get; init; }
 

@@ -89,4 +89,7 @@ public sealed record Issue
 
     [JsonPropertyName("body")]
     public string? Body { get; init; }
+
+    [JsonPropertyName("reactions")]
+    public Reactions Reactions { get; init; } = null!;
 }
