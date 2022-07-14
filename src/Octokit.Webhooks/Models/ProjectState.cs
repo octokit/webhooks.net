@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum ProjectState
 {
+    Unknown = -1,
     [EnumMember(Value = "open")]
     Open,
     [EnumMember(Value = "closed")]

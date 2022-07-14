@@ -20,7 +20,7 @@ public class JsonStringEnumMemberConverterWithFallbackTests
     [InlineData(@"""App""", HookType.App)]
     [InlineData(@"""Organization""", HookType.Organization)]
     [InlineData(@"""Repository""", HookType.Repository)]
-    [InlineData(@"""Foo""", HookType.Repository)]
+    [InlineData(@"""Foo""", HookType.Unknown)]
     public void CanConvertString(string input, HookType expected)
     {
         var actual = JsonSerializer.Deserialize<HookType>(input, this.options);

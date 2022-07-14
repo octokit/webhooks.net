@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum SimplePullRequestState
 {
+    Unknown = -1,
     [EnumMember(Value = "open")]
     Open,
     [EnumMember(Value = "closed")]

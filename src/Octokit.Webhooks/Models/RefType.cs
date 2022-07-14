@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum RefType
 {
+    Unknown = -1,
     [EnumMember(Value = "tag")]
     Tag,
     [EnumMember(Value = "branch")]

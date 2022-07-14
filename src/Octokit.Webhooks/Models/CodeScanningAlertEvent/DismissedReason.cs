@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum DismissedReason
 {
+    Unknown = -1,
     [EnumMember(Value = "false positive")]
     FalsePositive,
     [EnumMember(Value = "won't fix")]

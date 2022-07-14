@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum InstallationTargetType
 {
+    Unknown = -1,
     [EnumMember(Value = "User")]
     User,
     [EnumMember(Value = "Organization")]

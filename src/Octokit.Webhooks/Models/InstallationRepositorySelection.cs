@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum InstallationRepositorySelection
 {
+    Unknown = -1,
     [EnumMember(Value = "all")]
     All,
     [EnumMember(Value = "selected")]

@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum WorkflowRunConclusion
 {
+    Unknown = -1,
     [EnumMember(Value = "success")]
     Success,
     [EnumMember(Value = "failure")]

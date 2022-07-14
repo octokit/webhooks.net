@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum Scope
 {
+    Unknown = -1,
     [EnumMember(Value = "team")]
     Team,
 }

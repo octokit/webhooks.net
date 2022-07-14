@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum RepositoryVisibility
 {
+    Unknown = -1,
     [EnumMember(Value = "public")]
     Public,
     [EnumMember(Value = "private")]

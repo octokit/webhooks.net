@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum ActiveLockReason
 {
+    Unknown = -1,
     [EnumMember(Value = "resolved")]
     Resolved,
     [EnumMember(Value = "off-topic")]

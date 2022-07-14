@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum Status
 {
+    Unknown = -1,
     [EnumMember(Value = "success")]
     Success,
     [EnumMember(Value = "cancelled")]

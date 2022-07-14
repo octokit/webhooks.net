@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum HookType
 {
+    Unknown = -1,
     [EnumMember(Value = "Repository")]
     Repository,
     [EnumMember(Value = "Organization")]

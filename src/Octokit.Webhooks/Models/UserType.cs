@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum UserType
 {
+    Unknown = -1,
     [EnumMember(Value = "Bot")]
     Bot,
     [EnumMember(Value = "User")]

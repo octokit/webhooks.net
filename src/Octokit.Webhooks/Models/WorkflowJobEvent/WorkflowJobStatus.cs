@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum WorkflowJobStatus
 {
+    Unknown = -1,
     [EnumMember(Value = "queued")]
     Queued,
     [EnumMember(Value = "in_progress")]

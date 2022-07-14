@@ -8,6 +8,7 @@ using JetBrains.Annotations;
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AlertRuleSeverity
 {
+    Unknown = -1,
     [EnumMember(Value = "none")]
     Open,
     [EnumMember(Value = "note")]
