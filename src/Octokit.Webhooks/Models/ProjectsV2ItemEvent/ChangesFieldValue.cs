@@ -4,7 +4,8 @@ namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 public sealed record ChangesFieldValue
 {
     [JsonPropertyName("field_type")]
-    public FieldType FieldType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<FieldType>))]
+    public StringEnum<FieldType> FieldType { get; init; } = null!;
 
     [JsonPropertyName("field_node_id")]
     public string FieldNodeId { get; init; } = null!;

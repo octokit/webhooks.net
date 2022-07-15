@@ -40,7 +40,8 @@ public sealed record Issue
     public IEnumerable<Label> Labels { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public IssueState? State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<IssueState>))]
+    public StringEnum<IssueState>? State { get; init; }
 
     [JsonPropertyName("locked")]
     public bool? Locked { get; init; }
@@ -70,10 +71,12 @@ public sealed record Issue
     public DateTimeOffset? ClosedAt { get; init; }
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("active_lock_reason")]
-    public ActiveLockReason? ActiveLockReason { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ActiveLockReason>))]
+    public StringEnum<ActiveLockReason>? ActiveLockReason { get; init; }
 
     [JsonPropertyName("performed_via_github_app")]
     public App? PerformedViaGithubApp { get; init; }

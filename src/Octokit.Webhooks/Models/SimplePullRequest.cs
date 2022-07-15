@@ -28,7 +28,8 @@ public sealed record SimplePullRequest
     public long Number { get; init; }
 
     [JsonPropertyName("state")]
-    public SimplePullRequestState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<SimplePullRequestState>))]
+    public StringEnum<SimplePullRequestState> State { get; init; } = null!;
 
     [JsonPropertyName("locked")]
     public bool Locked { get; init; }
@@ -107,11 +108,13 @@ public sealed record SimplePullRequest
     public SimplePullRequestLinks? Links { get; init; }
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("auto_merge")]
     public PullRequestAutoMerge? AutoMerge { get; init; }
 
     [JsonPropertyName("active_lock_reason")]
-    public ActiveLockReason? ActiveLockReason { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ActiveLockReason>))]
+    public StringEnum<ActiveLockReason>? ActiveLockReason { get; init; }
 }

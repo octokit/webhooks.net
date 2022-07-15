@@ -16,10 +16,12 @@ public sealed record CheckSuite
     public string HeadSha { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public CheckSuiteStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<CheckSuiteStatus>))]
+    public StringEnum<CheckSuiteStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public CheckSuiteConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<CheckSuiteConclusion>))]
+    public StringEnum<CheckSuiteConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("url")]
     public string Url { get; init; } = null!;

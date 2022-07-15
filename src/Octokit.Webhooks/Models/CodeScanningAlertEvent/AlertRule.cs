@@ -7,7 +7,8 @@ public sealed record AlertRule
     public string Id { get; init; } = null!;
 
     [JsonPropertyName("severity")]
-    public AlertRuleSeverity? Severity { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AlertRuleSeverity>))]
+    public StringEnum<AlertRuleSeverity>? Severity { get; init; }
 
     [JsonPropertyName("description")]
     public string Description { get; init; } = null!;

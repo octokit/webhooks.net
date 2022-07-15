@@ -39,5 +39,6 @@ public sealed record App
     public AppPermissions? Permissions { get; init; }
 
     [JsonPropertyName("events")]
-    public IEnumerable<AppEvent>? Events { get; init; }
+    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
+    public IEnumerable<StringEnum<AppEvent>>? Events { get; init; }
 }

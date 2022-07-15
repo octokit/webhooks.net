@@ -4,7 +4,8 @@ namespace Octokit.Webhooks.Models.SecretScanningAlertLocationEvent;
 public sealed record SecretScanningLocation
 {
     [JsonPropertyName("type")]
-    public SecretScanningLocationType Type { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<SecretScanningLocationType>))]
+    public StringEnum<SecretScanningLocationType> Type { get; init; } = null!;
 
     // TODO: type union with SecretScanningLocationCommit, SecretScanningLocationIssueBody, etc.
     [JsonPropertyName("details")]

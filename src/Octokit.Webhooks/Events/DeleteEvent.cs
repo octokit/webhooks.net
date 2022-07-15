@@ -8,7 +8,8 @@ public sealed record DeleteEvent : WebhookEvent
     public string Ref { get; init; } = null!;
 
     [JsonPropertyName("ref_type")]
-    public RefType RefType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<RefType>))]
+    public StringEnum<RefType> RefType { get; init; } = null!;
 
     [JsonPropertyName("pusher_type")]
     public string PusherType { get; init; } = null!;

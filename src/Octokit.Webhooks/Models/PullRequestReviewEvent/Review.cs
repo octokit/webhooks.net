@@ -23,7 +23,8 @@ public sealed record Review
     public DateTimeOffset? SubmittedAt { get; init; }
 
     [JsonPropertyName("state")]
-    public ReviewState? State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ReviewState>))]
+    public StringEnum<ReviewState>? State { get; init; }
 
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; init; } = null!;
@@ -32,7 +33,8 @@ public sealed record Review
     public string PullRequestUrl { get; init; } = null!;
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("_links")]
     public ReviewLinks Links { get; init; } = null!;

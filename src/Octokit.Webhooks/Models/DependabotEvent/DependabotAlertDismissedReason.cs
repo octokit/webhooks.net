@@ -1,10 +1,8 @@
 namespace Octokit.Webhooks.Models.DependabotEvent;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum DependabotAlertDismissedReason
 {
-    Unknown = -1,
     [EnumMember(Value = "fix_started")]
     FixStarted,
     [EnumMember(Value = "inaccurate")]

@@ -1,10 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AuthorAssociation
 {
-    Unknown = -1,
     [EnumMember(Value = "COLLABORATOR")]
     Collaborator,
     [EnumMember(Value = "CONTRIBUTOR")]

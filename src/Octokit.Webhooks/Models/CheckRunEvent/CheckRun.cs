@@ -25,10 +25,12 @@ public sealed record CheckRun
     public string DetailsUrl { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public CheckRunStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<CheckRunStatus>))]
+    public StringEnum<CheckRunStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public CheckRunConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<CheckRunConclusion>))]
+    public StringEnum<CheckRunConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("started_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

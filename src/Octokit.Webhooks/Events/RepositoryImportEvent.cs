@@ -7,5 +7,6 @@ using Octokit.Webhooks.Models.RepositoryImportEvent;
 public sealed record RepositoryImportEvent : WebhookEvent
 {
     [JsonPropertyName("status")]
-    public Status Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<Status>))]
+    public StringEnum<Status> Status { get; init; } = null!;
 }

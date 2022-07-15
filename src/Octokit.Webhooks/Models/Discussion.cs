@@ -38,7 +38,8 @@ public sealed record Discussion
     public User User { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public DiscussionState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DiscussionState>))]
+    public StringEnum<DiscussionState> State { get; init; } = null!;
 
     [JsonPropertyName("locked")]
     public bool Locked { get; init; }
@@ -55,7 +56,8 @@ public sealed record Discussion
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("active_lock_reason")]
     public string? ActiveLockReason { get; init; }

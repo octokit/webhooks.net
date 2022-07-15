@@ -9,7 +9,8 @@ public abstract record InstallationRepositoriesEvent : WebhookEvent
     public new Models.Installation Installation { get; init; } = null!;
 
     [JsonPropertyName("repository_selection")]
-    public InstallationRepositorySelection RepositorySelection { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<InstallationRepositorySelection>))]
+    public StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; } = null!;
 
     [JsonPropertyName("repositories_added")]
     public IEnumerable<Models.InstallationRepositoriesEvent.Repository> RepositoriesAdded { get; init; } = null!;

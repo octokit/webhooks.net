@@ -13,7 +13,8 @@ public sealed record DeploymentStatus
     public string NodeId { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public DeploymentStatusState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DeploymentStatusState>))]
+    public StringEnum<DeploymentStatusState> State { get; init; } = null!;
 
     [JsonPropertyName("creator")]
     public User Creator { get; init; } = null!;

@@ -1,10 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models.SecretScanningAlertEvent;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AlertResolution
 {
-    Unknown = -1,
     [EnumMember(Value = "false_positive")]
     FalsePositive,
     [EnumMember(Value = "wontfix")]

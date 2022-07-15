@@ -1,10 +1,8 @@
 namespace Octokit.Webhooks.Models.SecretScanningAlertLocationEvent;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum SecretScanningLocationType
 {
-    Unknown = -1,
     [EnumMember(Value = "commit")]
     Commit,
     [EnumMember(Value = "issue_title")]

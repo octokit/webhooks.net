@@ -58,7 +58,8 @@ public sealed record User
     public string ReceivedEventsUrl { get; init; } = null!;
 
     [JsonPropertyName("type")]
-    public UserType Type { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<UserType>))]
+    public StringEnum<UserType> Type { get; init; } = null!;
 
     [JsonPropertyName("site_admin")]
     public bool SiteAdmin { get; init; }

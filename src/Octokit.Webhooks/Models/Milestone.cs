@@ -37,7 +37,8 @@ public sealed record Milestone
     public long ClosedIssues { get; init; }
 
     [JsonPropertyName("state")]
-    public MilestoneState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<MilestoneState>))]
+    public StringEnum<MilestoneState> State { get; init; } = null!;
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

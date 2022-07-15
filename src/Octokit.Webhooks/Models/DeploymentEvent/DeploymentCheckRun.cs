@@ -28,10 +28,12 @@ public sealed record DeploymentCheckRun
     public string DetailsUrl { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public DeploymentCheckRunStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DeploymentCheckRunStatus>))]
+    public StringEnum<DeploymentCheckRunStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public DeploymentCheckRunConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DeploymentCheckRunConclusion>))]
+    public StringEnum<DeploymentCheckRunConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("started_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

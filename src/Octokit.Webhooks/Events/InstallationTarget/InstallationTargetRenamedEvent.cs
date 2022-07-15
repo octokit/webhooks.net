@@ -16,5 +16,6 @@ public sealed record InstallationTargetRenamedEvent : InstallationTargetEvent
     public Changes Changes { get; init; } = null!;
 
     [JsonPropertyName("target_type")]
-    public InstallationTargetType TargetType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<InstallationTargetType>))]
+    public StringEnum<InstallationTargetType> TargetType { get; init; } = null!;
 }

@@ -7,7 +7,8 @@ public sealed record DependabotAlert
     public long Number { get; init; }
 
     [JsonPropertyName("state")]
-    public DependabotAlertState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DependabotAlertState>))]
+    public StringEnum<DependabotAlertState> State { get; init; } = null!;
 
     [JsonPropertyName("dependency")]
     public DependabotAlertDependency Dependency { get; init; } = null!;
@@ -40,7 +41,8 @@ public sealed record DependabotAlert
     public User? DismissedBy { get; init; }
 
     [JsonPropertyName("dismissed_reason")]
-    public DependabotAlertDismissedReason? DismissedReason { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DependabotAlertDismissedReason>))]
+    public StringEnum<DependabotAlertDismissedReason>? DismissedReason { get; init; }
 
     [JsonPropertyName("dismissed_comment")]
     public string? DismissedComment { get; init; }

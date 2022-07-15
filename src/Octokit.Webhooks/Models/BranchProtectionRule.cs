@@ -27,10 +27,12 @@ public sealed record BranchProtectionRule
     public bool? CreateProtected { get; init; }
 
     [JsonPropertyName("allow_deletions_enforcement_level")]
-    public EnforcementLevel AllowDeletionsEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> AllowDeletionsEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("allow_force_pushes_enforcement_level")]
-    public EnforcementLevel AllowForcePushesEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> AllowForcePushesEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("authorized_actor_names")]
     public IEnumerable<string> AuthorizedActorNames { get; init; } = null!;
@@ -48,13 +50,16 @@ public sealed record BranchProtectionRule
     public bool IgnoreApprovalsFromContributors { get; init; }
 
     [JsonPropertyName("linear_history_requirement_enforcement_level")]
-    public EnforcementLevel LinearHistoryRequirementEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> LinearHistoryRequirementEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("merge_queue_enforcement_level")]
-    public EnforcementLevel MergeQueueEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> MergeQueueEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("pull_request_reviews_enforcement_level")]
-    public EnforcementLevel PullRequestReviewsEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> PullRequestReviewsEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("require_code_owner_review")]
     public bool RequireCodeOwnerReview { get; init; }
@@ -66,19 +71,23 @@ public sealed record BranchProtectionRule
     public long RequiredApprovingReviewCount { get; init; }
 
     [JsonPropertyName("required_conversation_resolution_level")]
-    public EnforcementLevel RequiredConversationResolutionLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> RequiredConversationResolutionLevel { get; init; } = null!;
 
     [JsonPropertyName("required_deployments_enforcement_level")]
-    public EnforcementLevel RequiredDeploymentsEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> RequiredDeploymentsEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("required_status_checks")]
     public IEnumerable<string> RequiredStatusChecks { get; init; } = null!;
 
     [JsonPropertyName("required_status_checks_enforcement_level")]
-    public EnforcementLevel RequiredStatusChecksEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> RequiredStatusChecksEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("signature_requirement_enforcement_level")]
-    public EnforcementLevel SignatureRequirementEnforcementLevel { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel> SignatureRequirementEnforcementLevel { get; init; } = null!;
 
     [JsonPropertyName("strict_required_status_checks_policy")]
     public bool StrictRequiredStatusChecksPolicy { get; init; }

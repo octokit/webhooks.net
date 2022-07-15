@@ -1,10 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AppEvent
 {
-    Unknown = -1,
     [EnumMember(Value = "*")]
     All,
     [EnumMember(Value = "branch_protection_rule")]

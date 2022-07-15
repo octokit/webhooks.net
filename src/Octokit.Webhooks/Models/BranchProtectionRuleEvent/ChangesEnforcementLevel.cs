@@ -4,5 +4,6 @@ namespace Octokit.Webhooks.Models.BranchProtectionRuleEvent;
 public sealed record ChangesEnforcementLevel
 {
     [JsonPropertyName("from")]
-    public EnforcementLevel? From { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<EnforcementLevel>))]
+    public StringEnum<EnforcementLevel>? From { get; init; }
 }

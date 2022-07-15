@@ -13,7 +13,8 @@ public sealed record AlertInstance
     public string Environment { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public AlertState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AlertState>))]
+    public StringEnum<AlertState> State { get; init; } = null!;
 
     [JsonPropertyName("commit_sha")]
     public string? CommitSha { get; init; }
