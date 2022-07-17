@@ -65,4 +65,7 @@ public sealed record User
 
     [JsonPropertyName("site_admin")]
     public bool SiteAdmin { get; init; }
+
+    [JsonPropertyName("is_bot")]
+    public bool IsBot => this.Type == UserType.Bot;
 }
