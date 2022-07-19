@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum FieldType
 {
+    Unknown = -1,
     [EnumMember(Value = "single_select")]
     SingleSelect,
     [EnumMember(Value = "date")]

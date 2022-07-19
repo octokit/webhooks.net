@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum ProjectsV2ItemContentType
 {
+    Unknown = -1,
     [EnumMember(Value = "DraftIssue")]
     DraftIssue,
     [EnumMember(Value = "Issue")]

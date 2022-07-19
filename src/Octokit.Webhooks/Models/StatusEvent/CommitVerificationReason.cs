@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum CommitVerificationReason
 {
+    Unknown = -1,
     [EnumMember(Value = "expired_key")]
     ExpiredKey,
     [EnumMember(Value = "not_signing_key")]

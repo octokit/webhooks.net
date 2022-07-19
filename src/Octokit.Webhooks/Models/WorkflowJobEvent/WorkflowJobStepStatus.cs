@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum WorkflowJobStepStatus
 {
+    Unknown = -1,
     [EnumMember(Value = "in_progress")]
     InProgress,
     [EnumMember(Value = "completed")]

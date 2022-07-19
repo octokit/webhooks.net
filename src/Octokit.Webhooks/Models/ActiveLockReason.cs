@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum ActiveLockReason
 {
+    Unknown = -1,
     [EnumMember(Value = "resolved")]
     Resolved,
     [EnumMember(Value = "off-topic")]

@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum DismissedReason
 {
+    Unknown = -1,
     [EnumMember(Value = "false positive")]
     FalsePositive,
     [EnumMember(Value = "won't fix")]
