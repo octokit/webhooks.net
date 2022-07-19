@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AppEvent
 {
+    Unknown = -1,
     [EnumMember(Value = "*")]
     All,
     [EnumMember(Value = "branch_protection_rule")]

@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum CheckSuiteStatus
 {
+    Unknown = -1,
     [EnumMember(Value = "queued")]
     Queued,
     [EnumMember(Value = "in_progress")]

@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum AlertResolution
 {
+    Unknown = -1,
     [EnumMember(Value = "false_positive")]
     FalsePositive,
     [EnumMember(Value = "wontfix")]

@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum TeamParentPrivacy
 {
+    Unknown = -1,
     [EnumMember(Value = "Open")]
     Open,
     [EnumMember(Value = "Closed")]
