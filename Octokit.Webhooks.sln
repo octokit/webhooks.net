@@ -66,6 +66,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{174C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octokit.Webhooks.TestUtils", "test\Octokit.Webhooks.TestUtils\Octokit.Webhooks.TestUtils.csproj", "{48EB4752-1A23-4DD2-AF86-21ED12475F8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions", "samples\AzureFunctions\AzureFunctions.csproj", "{8731AAA1-8F8D-441A-BD61-6CA3A16A805B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octokit.Webhooks.AzureFunctions", "src\Octokit.Webhooks.AzureFunctions\Octokit.Webhooks.AzureFunctions.csproj", "{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,14 @@ Global
 		{48EB4752-1A23-4DD2-AF86-21ED12475F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48EB4752-1A23-4DD2-AF86-21ED12475F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48EB4752-1A23-4DD2-AF86-21ED12475F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +117,8 @@ Global
 		{566DF0E2-1288-4083-9B55-4C8B69BB1432} = {EFE1E5ED-D337-4874-82EC-D9FA0BC7D3AB}
 		{2EE1581B-E8B6-409E-8879-6F1EFC8C682B} = {174C8B3B-E8D3-4845-AE7C-8C0DEC43354F}
 		{48EB4752-1A23-4DD2-AF86-21ED12475F8B} = {E1B24F25-B8A4-46EE-B7EB-7803DCFC543F}
+		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B} = {174C8B3B-E8D3-4845-AE7C-8C0DEC43354F}
+		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA} = {719809C2-A551-4C4A-9EFD-B10FB5E35BC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73F36209-F8D6-4066-8951-D97729F773CF}
