@@ -30,7 +30,7 @@ public sealed partial class GitHubWebhooksHttpFunction
         [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = "github/webhooks")] HttpRequestData req,
         FunctionContext ctx)
     {
-        var logger = ctx.InstanceServices.GetRequiredService<ILogger<GitHubWebhooksHttpFunction>>();
+        var logger = ctx.GetLogger(nameof(GitHubWebhooksHttpFunction));
 
         // Verify content type
         if (!VerifyContentType(req, MediaTypeNames.Application.Json))
