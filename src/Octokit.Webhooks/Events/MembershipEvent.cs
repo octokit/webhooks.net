@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Converter;
-using Octokit.Webhooks.Models;
 using Octokit.Webhooks.Models.MembershipAddedEvent;
 
 [PublicAPI]

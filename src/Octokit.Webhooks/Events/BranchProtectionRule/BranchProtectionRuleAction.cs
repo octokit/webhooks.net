@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events.BranchProtectionRule;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record BranchProtectionRuleAction : WebhookEventAction
 {

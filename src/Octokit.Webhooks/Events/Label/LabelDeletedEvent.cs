@@ -1,8 +1,5 @@
 namespace Octokit.Webhooks.Events.Label;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-
 [PublicAPI]
 [WebhookActionType(LabelActionValue.Deleted)]
 public sealed record LabelDeletedEvent : LabelEvent

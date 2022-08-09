@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookEventType(WebhookEventType.Delete)]
 public sealed record DeleteEvent : WebhookEvent

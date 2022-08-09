@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.ProjectsV2Item;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 [PublicAPI]

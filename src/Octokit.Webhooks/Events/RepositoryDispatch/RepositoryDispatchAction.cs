@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.RepositoryDispatch;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record RepositoryDispatchAction : WebhookEventAction
 {

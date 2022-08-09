@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.ProjectColumn;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record ProjectColumnAction : WebhookEventAction
 {

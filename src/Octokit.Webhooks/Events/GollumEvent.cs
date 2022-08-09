@@ -1,8 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events;
 
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Octokit.Webhooks.Models.GollumEvent;
 
 [PublicAPI]

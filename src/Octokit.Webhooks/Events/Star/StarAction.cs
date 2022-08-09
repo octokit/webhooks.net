@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Star;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record StarAction : WebhookEventAction
 {

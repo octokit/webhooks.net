@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Organization;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record OrganizationAction : WebhookEventAction
 {

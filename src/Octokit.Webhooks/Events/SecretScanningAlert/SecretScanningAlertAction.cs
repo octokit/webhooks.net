@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.SecretScanningAlert;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record SecretScanningAlertAction : WebhookEventAction
 {

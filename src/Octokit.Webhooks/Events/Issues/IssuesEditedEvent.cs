@@ -1,8 +1,5 @@
 namespace Octokit.Webhooks.Events.Issues;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
 using Octokit.Webhooks.Models.IssuesEvent;
 
 [PublicAPI]

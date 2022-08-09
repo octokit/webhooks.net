@@ -1,9 +1,5 @@
 namespace Octokit.Webhooks.Events.Issues;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookActionType(IssuesActionValue.Milestoned)]
 public sealed record IssuesMilestonedEvent : IssuesEvent

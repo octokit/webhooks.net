@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.SecurityAdvisory;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record SecurityAdvisoryAction : WebhookEventAction
 {

@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks.Models.MilestoneEvent;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Octokit.Webhooks.Models.MemberEvent;
 
 [PublicAPI]

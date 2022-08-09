@@ -1,8 +1,5 @@
 namespace Octokit.Webhooks.Models.MergeGroupEvent;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record MergeGroup
 {

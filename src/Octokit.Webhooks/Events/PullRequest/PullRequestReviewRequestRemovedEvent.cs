@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events.PullRequest;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookActionType(PullRequestActionValue.ReviewRequestRemoved)]
 public sealed record PullRequestReviewRequestRemovedEvent : PullRequestEvent

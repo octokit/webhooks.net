@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Sponsorship;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record SponsorshipAction : WebhookEventAction
 {

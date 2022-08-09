@@ -1,11 +1,5 @@
 ﻿namespace Octokit.Webhooks.Models.CheckRunEvent;
 
-using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Converter;
-
 [PublicAPI]
 public sealed record CheckRun
 {

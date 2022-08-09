@@ -1,9 +1,5 @@
 namespace Octokit.Webhooks.Converter;
 
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 public class NullableDateTimeOffsetConverter : JsonConverter<DateTimeOffset?>
 {
     public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.TokenType switch
