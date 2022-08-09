@@ -8,5 +8,5 @@ public sealed record OrganizationDeletedEvent : OrganizationEvent
     public override string Action => OrganizationAction.Deleted;
 
     [JsonPropertyName("membership")]
-    public Membership? Membership { get; init; }
+    public Octokit.Webhooks.Models.Membership? Membership { get; init; }
 }

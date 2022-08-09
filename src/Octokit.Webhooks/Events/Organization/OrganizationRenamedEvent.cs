@@ -8,5 +8,5 @@ public sealed record OrganizationRenamedEvent : OrganizationEvent
     public override string Action => OrganizationAction.Renamed;
 
     [JsonPropertyName("membership")]
-    public Membership Membership { get; init; } = null!;
+    public Octokit.Webhooks.Models.Membership Membership { get; init; } = null!;
 }

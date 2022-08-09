@@ -11,5 +11,5 @@ public sealed record PullRequestReviewRequestedEvent : PullRequestEvent
     public User? RequestedReviewer { get; init; }
 
     [JsonPropertyName("requested_team")]
-    public Team? RequestedTeam { get; init; }
+    public Octokit.Webhooks.Models.Team? RequestedTeam { get; init; }
 }

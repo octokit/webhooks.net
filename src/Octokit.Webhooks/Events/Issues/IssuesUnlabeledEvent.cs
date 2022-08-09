@@ -8,5 +8,5 @@ public sealed record IssuesUnlabeledEvent : IssuesEvent
     public override string Action => IssuesAction.Unlabeled;
 
     [JsonPropertyName("label")]
-    public Label? Label { get; init; }
+    public Octokit.Webhooks.Models.Label? Label { get; init; }
 }

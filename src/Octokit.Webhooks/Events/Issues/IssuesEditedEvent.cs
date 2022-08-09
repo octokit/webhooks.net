@@ -10,7 +10,7 @@ public sealed record IssuesEditedEvent : IssuesEvent
     public override string Action => IssuesAction.Edited;
 
     [JsonPropertyName("label")]
-    public Label? Label { get; init; }
+    public Octokit.Webhooks.Models.Label? Label { get; init; }
 
     [JsonPropertyName("changes")]
     public Changes? Changes { get; init; }

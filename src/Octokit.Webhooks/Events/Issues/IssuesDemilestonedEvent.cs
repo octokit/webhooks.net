@@ -8,5 +8,5 @@ public sealed record IssuesDemilestonedEvent : IssuesEvent
     public override string Action => IssuesAction.Demilestoned;
 
     [JsonPropertyName("milestone")]
-    public Milestone Milestone { get; init; } = null!;
+    public Octokit.Webhooks.Models.Milestone Milestone { get; init; } = null!;
 }
