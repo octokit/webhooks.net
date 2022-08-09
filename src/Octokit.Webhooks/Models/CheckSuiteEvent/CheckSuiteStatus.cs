@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Models.CheckSuiteEvent;
 
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-
 [PublicAPI]
 [JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum CheckSuiteStatus

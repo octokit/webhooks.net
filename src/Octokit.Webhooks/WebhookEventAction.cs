@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public abstract record WebhookEventAction
 {

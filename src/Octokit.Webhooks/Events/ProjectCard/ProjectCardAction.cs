@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.ProjectCard;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record ProjectCardAction : WebhookEventAction
 {

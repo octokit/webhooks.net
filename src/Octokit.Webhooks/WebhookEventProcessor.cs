@@ -1,10 +1,6 @@
 ﻿namespace Octokit.Webhooks;
 
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Primitives;
 using Octokit.Webhooks.Events;
 using Octokit.Webhooks.Events.BranchProtectionRule;

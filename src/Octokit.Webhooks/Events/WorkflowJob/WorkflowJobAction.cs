@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.WorkflowJob;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record WorkflowJobAction : WebhookEventAction
 {

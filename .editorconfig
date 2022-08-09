@@ -441,6 +441,12 @@ dotnet_diagnostic.CA1720.severity = none
 # Justification: False positive for default case
 dotnet_diagnostic.IDE0072.severity = none
 
+# Justification: Doesn't understand global usings
+dotnet_diagnostic.IDE0065.severity = none
+dotnet_diagnostic.SA1200.severity = none
+dotnet_diagnostic.IDE0005.severity = none
+
+
 [WebhookEventProcessor.cs]
 # Justification: Ordering is on purpose
 dotnet_diagnostic.SA1202.severity = none

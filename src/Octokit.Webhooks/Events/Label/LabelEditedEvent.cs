@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Label;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Octokit.Webhooks.Models.LabelEvent;
 
 [PublicAPI]

@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Membership;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record MembershipAction : WebhookEventAction
 {

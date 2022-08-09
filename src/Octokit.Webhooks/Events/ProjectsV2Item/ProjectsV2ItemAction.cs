@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.ProjectsV2Item;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record ProjectsV2ItemAction : WebhookEventAction
 {

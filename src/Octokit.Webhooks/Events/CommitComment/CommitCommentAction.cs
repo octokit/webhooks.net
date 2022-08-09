@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.CommitComment;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record CommitCommentAction : WebhookEventAction
 {

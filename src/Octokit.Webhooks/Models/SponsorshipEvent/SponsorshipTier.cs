@@ -1,10 +1,5 @@
 namespace Octokit.Webhooks.Models.SponsorshipEvent;
 
-using System;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Converter;
-
 [PublicAPI]
 public sealed record SponsorshipTier
 {

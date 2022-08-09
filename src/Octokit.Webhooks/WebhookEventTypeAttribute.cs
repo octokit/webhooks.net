@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Class)]
 internal class WebhookEventTypeAttribute : Attribute
 {

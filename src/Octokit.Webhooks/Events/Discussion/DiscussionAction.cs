@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Discussion;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record DiscussionAction : WebhookEventAction
 {

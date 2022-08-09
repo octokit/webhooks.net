@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.OrgBlock;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record OrgBlockAction : WebhookEventAction
 {

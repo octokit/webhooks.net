@@ -1,12 +1,6 @@
 ﻿namespace Octokit.Webhooks.Converter;
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 
 [PublicAPI]
 public class WebhookConverter<T> : JsonConverter<T>

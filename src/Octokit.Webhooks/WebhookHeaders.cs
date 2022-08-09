@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks;
 
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
 
 public sealed class WebhookHeaders

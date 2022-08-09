@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.ContentReference;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record ContentReferenceAction : WebhookEventAction
 {

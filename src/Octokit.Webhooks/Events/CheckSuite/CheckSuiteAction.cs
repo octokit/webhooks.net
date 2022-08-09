@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.CheckSuite;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record CheckSuiteAction : WebhookEventAction
 {

@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Release;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record ReleaseAction : WebhookEventAction
 {

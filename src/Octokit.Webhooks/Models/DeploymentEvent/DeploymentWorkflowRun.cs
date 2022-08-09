@@ -1,10 +1,5 @@
 namespace Octokit.Webhooks.Models.DeploymentEvent;
 
-using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Converter;
 using Octokit.Webhooks.Models.CheckRunEvent;
 
 [PublicAPI]

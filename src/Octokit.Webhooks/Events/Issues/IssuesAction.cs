@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Issues;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record IssuesAction : WebhookEventAction
 {

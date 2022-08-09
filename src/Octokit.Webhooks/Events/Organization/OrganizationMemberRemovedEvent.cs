@@ -1,9 +1,5 @@
 namespace Octokit.Webhooks.Events.Organization;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookActionType(OrganizationActionValue.MemberRemoved)]
 public sealed record OrganizationMemberRemovedEvent : OrganizationEvent
@@ -12,5 +8,5 @@ public sealed record OrganizationMemberRemovedEvent : OrganizationEvent
     public override string Action => OrganizationAction.MemberRemoved;
 
     [JsonPropertyName("membership")]
-    public Membership Membership { get; init; } = null!;
+    public Octokit.Webhooks.Models.Membership Membership { get; init; } = null!;
 }

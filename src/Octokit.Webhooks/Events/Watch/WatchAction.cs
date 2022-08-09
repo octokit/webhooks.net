@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.Watch;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record WatchAction : WebhookEventAction
 {

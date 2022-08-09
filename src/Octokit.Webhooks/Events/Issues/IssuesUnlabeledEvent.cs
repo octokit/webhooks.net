@@ -1,9 +1,5 @@
 namespace Octokit.Webhooks.Events.Issues;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookActionType(IssuesActionValue.Unlabeled)]
 public sealed record IssuesUnlabeledEvent : IssuesEvent
@@ -12,5 +8,5 @@ public sealed record IssuesUnlabeledEvent : IssuesEvent
     public override string Action => IssuesAction.Unlabeled;
 
     [JsonPropertyName("label")]
-    public Label? Label { get; init; }
+    public Octokit.Webhooks.Models.Label? Label { get; init; }
 }

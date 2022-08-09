@@ -1,7 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 using Octokit.Webhooks.Models.PageBuildEvent;
 
 [PublicAPI]

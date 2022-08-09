@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Models;
 
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record MarkplacePurchasePlan
 {

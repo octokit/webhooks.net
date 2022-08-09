@@ -1,9 +1,5 @@
 ﻿namespace Octokit.Webhooks.Events.PullRequest;
 
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
-using Octokit.Webhooks.Models;
-
 [PublicAPI]
 [WebhookActionType(PullRequestActionValue.Labeled)]
 public sealed record PullRequestLabeledEvent : PullRequestEvent
@@ -12,5 +8,5 @@ public sealed record PullRequestLabeledEvent : PullRequestEvent
     public override string Action => PullRequestAction.Labeled;
 
     [JsonPropertyName("label")]
-    public Label Label { get; init; } = null!;
+    public Octokit.Webhooks.Models.Label Label { get; init; } = null!;
 }

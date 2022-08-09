@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.CheckRun;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record CheckRunAction : WebhookEventAction
 {

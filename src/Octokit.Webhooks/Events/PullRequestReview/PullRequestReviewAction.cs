@@ -1,7 +1,5 @@
 namespace Octokit.Webhooks.Events.PullRequestReview;
 
-using JetBrains.Annotations;
-
 [PublicAPI]
 public sealed record PullRequestReviewAction : WebhookEventAction
 {
