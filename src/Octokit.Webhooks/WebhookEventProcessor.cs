@@ -27,6 +27,7 @@ using Octokit.Webhooks.Events.Label;
 using Octokit.Webhooks.Events.MarketplacePurchase;
 using Octokit.Webhooks.Events.Member;
 using Octokit.Webhooks.Events.Membership;
+using Octokit.Webhooks.Events.MergeGroup;
 using Octokit.Webhooks.Events.Meta;
 using Octokit.Webhooks.Events.Milestone;
 using Octokit.Webhooks.Events.Organization;
@@ -104,6 +105,7 @@ public abstract class WebhookEventProcessor
             MarketplacePurchaseEvent marketplacePurchaseEvent
                 => this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent),
             MemberEvent memberEvent => this.ProcessMemberWebhookAsync(headers, memberEvent),
+            MergeGroupEvent mergeGroupEvent => this.ProcessMergeGroupWebhookAsync(headers, mergeGroupEvent),
             MembershipEvent membershipEvent => this.ProcessMembershipWebhookAsync(headers, membershipEvent),
             MetaEvent metaEvent => this.ProcessMetaWebhookAsync(headers, metaEvent),
             MilestoneEvent milestoneEvent => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent),
@@ -173,6 +175,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.MarketplacePurchase => JsonSerializer.Deserialize<MarketplacePurchaseEvent>(body)!,
             WebhookEventType.Member => JsonSerializer.Deserialize<MemberEvent>(body)!,
             WebhookEventType.Membership => JsonSerializer.Deserialize<MembershipEvent>(body)!,
+            WebhookEventType.MergeGroup => JsonSerializer.Deserialize<MergeGroupEvent>(body)!,
             WebhookEventType.Meta => JsonSerializer.Deserialize<MetaEvent>(body)!,
             WebhookEventType.Milestone => JsonSerializer.Deserialize<MilestoneEvent>(body)!,
             WebhookEventType.OrgBlock => JsonSerializer.Deserialize<OrgBlockEvent>(body)!,
@@ -585,6 +588,19 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         MembershipEvent membershipEvent,
         MembershipAction action) => Task.CompletedTask;
+
+    private Task ProcessMergeGroupWebhookAsync(WebhookHeaders headers, MergeGroupEvent mergeGroupEvent) =>
+        mergeGroupEvent.Action switch
+        {
+            MergeGroupActionValue.ChecksRequested => this.ProcessMergeGroupWebhookAsync(headers, mergeGroupEvent, MergeGroupAction.ChecksRequested),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessMergeGroupWebhookAsync(
+        WebhookHeaders headers,
+        MergeGroupEvent mergeGroupEvent,
+        MergeGroupAction action) => Task.CompletedTask;
 
     private Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent) =>
         metaEvent.Action switch
