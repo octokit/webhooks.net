@@ -9,6 +9,9 @@ public sealed record AppPermissions
     [JsonPropertyName("administration")]
     public AppPermissionsLevel? Administration { get; init; }
 
+    [JsonPropertyName("blocking")]
+    public AppPermissionsLevel? Blocking { get; init; }
+
     [JsonPropertyName("checks")]
     public AppPermissionsLevel? Checks { get; init; }
 
