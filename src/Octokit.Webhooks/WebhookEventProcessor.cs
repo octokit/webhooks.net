@@ -746,10 +746,14 @@ public abstract class WebhookEventProcessor
             PullRequestActionValue.Closed => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Closed),
             PullRequestActionValue.ConvertedToDraft
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ConvertedToDraft),
+            PullRequestActionValue.Dequeued =>
+                this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Dequeued),
             PullRequestActionValue.Edited => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Edited),
             PullRequestActionValue.Labeled => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Labeled),
             PullRequestActionValue.Locked => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Locked),
             PullRequestActionValue.Opened => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Opened),
+            PullRequestActionValue.Queued
+                => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Queued),
             PullRequestActionValue.ReadyForReview
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReadyForReview),
             PullRequestActionValue.Reopened

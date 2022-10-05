@@ -13,6 +13,8 @@ public sealed record PullRequestAction : WebhookEventAction
 
     public static readonly PullRequestAction ConvertedToDraft = new(PullRequestActionValue.ConvertedToDraft);
 
+    public static readonly PullRequestAction Dequeued = new(PullRequestActionValue.Dequeued);
+
     public static readonly PullRequestAction Edited = new(PullRequestActionValue.Edited);
 
     public static readonly PullRequestAction Labeled = new(PullRequestActionValue.Labeled);
@@ -20,6 +22,8 @@ public sealed record PullRequestAction : WebhookEventAction
     public static readonly PullRequestAction Locked = new(PullRequestActionValue.Locked);
 
     public static readonly PullRequestAction Opened = new(PullRequestActionValue.Opened);
+
+    public static readonly PullRequestAction Queued = new(PullRequestActionValue.Queued);
 
     public static readonly PullRequestAction ReadyForReview = new(PullRequestActionValue.ReadyForReview);
 
