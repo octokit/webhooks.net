@@ -10,6 +10,7 @@ public static class WebhookEventType
     public const string ContentReference = "content_reference";
     public const string Create = "create";
     public const string Delete = "delete";
+    public const string DependabotAlert = "dependabot_alert";
     public const string Deployment = "deployment";
     public const string DeploymentReview = "deployment_review";
     public const string DeploymentStatus = "deployment_status";

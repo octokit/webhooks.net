@@ -9,6 +9,7 @@ using Octokit.Webhooks.Events.CheckSuite;
 using Octokit.Webhooks.Events.CodeScanningAlert;
 using Octokit.Webhooks.Events.CommitComment;
 using Octokit.Webhooks.Events.ContentReference;
+using Octokit.Webhooks.Events.DependabotAlert;
 using Octokit.Webhooks.Events.DeployKey;
 using Octokit.Webhooks.Events.Deployment;
 using Octokit.Webhooks.Events.DeploymentStatus;
@@ -83,6 +84,7 @@ public abstract class WebhookEventProcessor
             ContentReferenceEvent contentReferenceEvent => this.ProcessContentReferenceWebhookAsync(headers, contentReferenceEvent),
             CreateEvent createEvent => this.ProcessCreateWebhookAsync(headers, createEvent),
             DeleteEvent deleteEvent => this.ProcessDeleteWebhookAsync(headers, deleteEvent),
+            DependabotAlertEvent dependabotAlertEvent => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent),
             DeployKeyEvent deployKeyEvent => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent),
             DeploymentEvent deploymentEvent => this.ProcessDeploymentWebhookAsync(headers, deploymentEvent),
             DeploymentStatusEvent deploymentStatusEvent => this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent),
@@ -155,6 +157,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.ContentReference => JsonSerializer.Deserialize<ContentReferenceEvent>(body)!,
             WebhookEventType.Create => JsonSerializer.Deserialize<CreateEvent>(body)!,
             WebhookEventType.Delete => JsonSerializer.Deserialize<DeleteEvent>(body)!,
+            WebhookEventType.DependabotAlert => JsonSerializer.Deserialize<DependabotAlertEvent>(body)!,
             WebhookEventType.DeployKey => JsonSerializer.Deserialize<DeployKeyEvent>(body)!,
             WebhookEventType.Deployment => JsonSerializer.Deserialize<DeploymentEvent>(body)!,
             WebhookEventType.DeploymentStatus => JsonSerializer.Deserialize<DeploymentStatusEvent>(body)!,
@@ -314,6 +317,28 @@ public abstract class WebhookEventProcessor
 
     [PublicAPI]
     protected virtual Task ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent) => Task.CompletedTask;
+
+    private Task ProcessDependabotAlertWebhookAsync(WebhookHeaders headers, DependabotAlertEvent dependabotAlertEvent) =>
+        dependabotAlertEvent.Action switch
+        {
+            DependabotAlertActionValue.Created
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Created),
+            DependabotAlertActionValue.Dismissed
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Dismissed),
+            DependabotAlertActionValue.Fixed
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Fixed),
+            DependabotAlertActionValue.Reintroduced
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reintroduced),
+            DependabotAlertActionValue.Reopened
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reopened),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessDependabotAlertWebhookAsync(
+        WebhookHeaders headers,
+        DependabotAlertEvent dependabotAlertEvent,
+        DependabotAlertAction action) => Task.CompletedTask;
 
     private Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent) =>
         deployKeyEvent.Action switch
