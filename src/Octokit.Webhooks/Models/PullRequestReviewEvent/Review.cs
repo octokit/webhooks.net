@@ -19,8 +19,8 @@ public sealed record Review
     public string CommitId { get; init; } = null!;
 
     [JsonPropertyName("submitted_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
-    public DateTimeOffset SubmittedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? SubmittedAt { get; init; }
 
     [JsonPropertyName("state")]
     public ReviewState? State { get; init; }
