@@ -1,7 +1,7 @@
 ﻿namespace Octokit.Webhooks;
 
 [AttributeUsage(AttributeTargets.Class)]
-internal class WebhookActionTypeAttribute : Attribute
+internal sealed class WebhookActionTypeAttribute : Attribute
 {
     public WebhookActionTypeAttribute(string actionType) => this.ActionType = actionType;
 
