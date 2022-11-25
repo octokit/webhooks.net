@@ -11,4 +11,8 @@ public enum WorkflowJobStepConclusion
     Skipped,
     [EnumMember(Value = "success")]
     Success,
+    [EnumMember(Value = "in_progress")]
+    InProgress,
+    [EnumMember(Value = "queued")]
+    Queued,
 }
