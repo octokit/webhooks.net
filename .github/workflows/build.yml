@@ -31,7 +31,7 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macOS-latest ]
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           lfs: true
           fetch-depth: 0
@@ -50,7 +50,7 @@ jobs:
         run: dotnet cake --target=Pack
         shell: pwsh
       - name: 'Publish artifacts'
-        uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # tag=v3.1.1
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: ${{matrix.os}}
           path: './artifacts'
@@ -67,7 +67,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Download artifact'
-        uses: actions/download-artifact@9782bd6a9848b53b110e712e20e42d89988822b7 # tag=v3.0.1
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Add Source'
@@ -88,7 +88,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Download artifact'
-        uses: actions/download-artifact@9782bd6a9848b53b110e712e20e42d89988822b7 # tag=v3.0.1
+        uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
         with:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Push'
