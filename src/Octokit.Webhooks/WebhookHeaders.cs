@@ -18,10 +18,7 @@ public sealed class WebhookHeaders
 
     public static WebhookHeaders Parse(IDictionary<string, StringValues> headers)
     {
-        if (headers is null)
-        {
-            throw new ArgumentNullException(nameof(headers));
-        }
+        ArgumentNullException.ThrowIfNull(headers);
 
         headers.TryGetValue("User-Agent", out var userAgent);
         headers.TryGetValue("X-GitHub-Delivery", out var delivery);

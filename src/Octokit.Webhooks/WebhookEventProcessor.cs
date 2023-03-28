@@ -55,15 +55,8 @@ public abstract class WebhookEventProcessor
     [PublicAPI]
     public virtual Task ProcessWebhookAsync(IDictionary<string, StringValues> headers, string body)
     {
-        if (headers is null)
-        {
-            throw new ArgumentNullException(nameof(headers));
-        }
-
-        if (body is null)
-        {
-            throw new ArgumentNullException(nameof(body));
-        }
+        ArgumentNullException.ThrowIfNull(headers);
+        ArgumentNullException.ThrowIfNull(body);
 
         var webhookHeaders = WebhookHeaders.Parse(headers);
         var webhookEvent = this.DeserializeWebhookEvent(webhookHeaders, body);
