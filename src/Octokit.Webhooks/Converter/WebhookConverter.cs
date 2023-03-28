@@ -32,11 +32,7 @@ public class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var type = this.types.FirstOrDefault(x => x.Key == action.GetString()).Value;
-        if (type == null)
-        {
-            throw new JsonException();
-        }
+        var type = this.types.FirstOrDefault(x => x.Key == action.GetString()).Value ?? throw new JsonException();
 
         var jsonObject = jsonDocument.RootElement.GetRawText();
         return (T)JsonSerializer.Deserialize(jsonObject, type, options)!;
