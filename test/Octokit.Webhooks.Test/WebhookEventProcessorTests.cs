@@ -6,7 +6,7 @@ using Xunit;
 
 public class WebhookEventProcessorTests
 {
-    private readonly WebhookEventProcessor webhookEventProcessor = new TestWebhookEventProcessor();
+    private readonly TestWebhookEventProcessor webhookEventProcessor = new();
 
     [Theory]
     [ClassData(typeof(WebhookEventProcessorTestsData))]
