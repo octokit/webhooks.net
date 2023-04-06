@@ -17,12 +17,7 @@ public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
 
     private static DateTimeOffset HandleString(Utf8JsonReader reader)
     {
-        var stringValue = reader.GetString();
-
-        if (stringValue == null)
-        {
-            throw new InvalidOperationException("Cannot parse a String JsonToken with a null value");
-        }
+        var stringValue = reader.GetString() ?? throw new InvalidOperationException("Cannot parse a String JsonToken with a null value");
 
         return DateTimeOffset.Parse(stringValue, CultureInfo.InvariantCulture);
     }
