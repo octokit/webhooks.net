@@ -22,6 +22,7 @@ public static class WebhookEventType
     public const string Gollum = "gollum";
     public const string Installation = "installation";
     public const string InstallationRepositories = "installation_repositories";
+    public const string InstallationTarget = "installation_target";
     public const string Issues = "issues";
     public const string IssueComment = "issue_comment";
     public const string Label = "label";
