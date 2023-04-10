@@ -18,6 +18,7 @@ using Octokit.Webhooks.Events.DiscussionComment;
 using Octokit.Webhooks.Events.GithubAppAuthorization;
 using Octokit.Webhooks.Events.Installation;
 using Octokit.Webhooks.Events.InstallationRepositories;
+using Octokit.Webhooks.Events.InstallationTarget;
 using Octokit.Webhooks.Events.IssueComment;
 using Octokit.Webhooks.Events.Issues;
 using Octokit.Webhooks.Events.Label;
@@ -90,6 +91,8 @@ public abstract class WebhookEventProcessor
             InstallationEvent installationEvent => this.ProcessInstallationWebhookAsync(headers, installationEvent),
             InstallationRepositoriesEvent installationRepositoriesEvent
                 => this.ProcessInstallationRepositoriesWebhookAsync(headers, installationRepositoriesEvent),
+            InstallationTargetEvent installationTargetEvent
+                => this.ProcessInstallationTargetWebhookAsync(headers, installationTargetEvent),
             IssueCommentEvent issueCommentEvent => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent),
             IssuesEvent issuesEvent => this.ProcessIssuesWebhookAsync(headers, issuesEvent),
             LabelEvent labelEvent => this.ProcessLabelWebhookAsync(headers, labelEvent),
@@ -161,6 +164,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.Gollum => JsonSerializer.Deserialize<GollumEvent>(body)!,
             WebhookEventType.Installation => JsonSerializer.Deserialize<InstallationEvent>(body)!,
             WebhookEventType.InstallationRepositories => JsonSerializer.Deserialize<InstallationRepositoriesEvent>(body)!,
+            WebhookEventType.InstallationTarget => JsonSerializer.Deserialize<InstallationTargetEvent>(body)!,
             WebhookEventType.IssueComment => JsonSerializer.Deserialize<IssueCommentEvent>(body)!,
             WebhookEventType.Issues => JsonSerializer.Deserialize<IssuesEvent>(body)!,
             WebhookEventType.Label => JsonSerializer.Deserialize<LabelEvent>(body)!,
@@ -482,6 +486,25 @@ public abstract class WebhookEventProcessor
                     headers,
                     installationRepositoriesEvent,
                     InstallationRepositoriesAction.Removed),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessInstallationTargetWebhookAsync(
+        WebhookHeaders headers,
+        InstallationTargetEvent installationTargetEvent,
+        InstallationTargetAction action) => Task.CompletedTask;
+
+    private Task ProcessInstallationTargetWebhookAsync(
+        WebhookHeaders headers,
+        InstallationTargetEvent installationTargetEvent) =>
+        installationTargetEvent.Action switch
+        {
+            InstallationTargetActionValue.Renamed
+                => this.ProcessInstallationTargetWebhookAsync(
+                    headers,
+                    installationTargetEvent,
+                    InstallationTargetAction.Renamed),
             _ => Task.CompletedTask,
         };
 
