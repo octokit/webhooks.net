@@ -15,11 +15,15 @@ public sealed record PullRequestAction : WebhookEventAction
 
     public static readonly PullRequestAction Dequeued = new(PullRequestActionValue.Dequeued);
 
+    public static readonly PullRequestAction Demilestoned = new(PullRequestActionValue.Demilestoned);
+
     public static readonly PullRequestAction Edited = new(PullRequestActionValue.Edited);
 
     public static readonly PullRequestAction Labeled = new(PullRequestActionValue.Labeled);
 
     public static readonly PullRequestAction Locked = new(PullRequestActionValue.Locked);
+
+    public static readonly PullRequestAction Milestoned = new(PullRequestActionValue.Milestoned);
 
     public static readonly PullRequestAction Opened = new(PullRequestActionValue.Opened);
 

@@ -789,9 +789,12 @@ public abstract class WebhookEventProcessor
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ConvertedToDraft),
             PullRequestActionValue.Dequeued =>
                 this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Dequeued),
+            PullRequestActionValue.Demilestoned =>
+                this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Demilestoned),
             PullRequestActionValue.Edited => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Edited),
             PullRequestActionValue.Labeled => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Labeled),
             PullRequestActionValue.Locked => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Locked),
+            PullRequestActionValue.Milestoned => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Milestoned),
             PullRequestActionValue.Opened => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Opened),
             PullRequestActionValue.Queued
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Queued),

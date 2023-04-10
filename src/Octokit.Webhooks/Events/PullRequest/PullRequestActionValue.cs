@@ -12,6 +12,8 @@ public static class PullRequestActionValue
 
     public const string ConvertedToDraft = "converted_to_draft";
 
+    public const string Demilestoned = "demilestoned";
+
     public const string Dequeued = "dequeued";
 
     public const string Edited = "edited";
@@ -19,6 +21,8 @@ public static class PullRequestActionValue
     public const string Labeled = "labeled";
 
     public const string Locked = "locked";
+
+    public const string Milestoned = "milestoned";
 
     public const string Opened = "opened";
 
