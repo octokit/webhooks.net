@@ -17,4 +17,6 @@ public enum DeploymentStatusState
     Error,
     [EnumMember(Value = "waiting")]
     Waiting,
+    [EnumMember(Value = "queued")]
+    Queued,
 }
