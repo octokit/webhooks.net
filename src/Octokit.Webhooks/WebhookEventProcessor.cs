@@ -156,6 +156,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.DependabotAlert => JsonSerializer.Deserialize<DependabotAlertEvent>(body)!,
             WebhookEventType.DeployKey => JsonSerializer.Deserialize<DeployKeyEvent>(body)!,
             WebhookEventType.Deployment => JsonSerializer.Deserialize<DeploymentEvent>(body)!,
+            WebhookEventType.DeploymentProtectionRule => JsonSerializer.Deserialize<DeploymentProtectionRuleEvent>(body)!,
             WebhookEventType.DeploymentStatus => JsonSerializer.Deserialize<DeploymentStatusEvent>(body)!,
             WebhookEventType.Discussion => JsonSerializer.Deserialize<DiscussionEvent>(body)!,
             WebhookEventType.DiscussionComment => JsonSerializer.Deserialize<DiscussionCommentEvent>(body)!,
