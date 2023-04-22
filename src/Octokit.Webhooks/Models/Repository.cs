@@ -195,6 +195,9 @@ public sealed record Repository
     [JsonPropertyName("has_pages")]
     public bool HasPages { get; init; }
 
+    [JsonPropertyName("has_pages")]
+    public bool? HasDiscussions { get; init; }
+
     [JsonPropertyName("forks_count")]
     public long ForksCount { get; init; }
 
