@@ -12,6 +12,7 @@ public static class WebhookEventType
     public const string Delete = "delete";
     public const string DependabotAlert = "dependabot_alert";
     public const string Deployment = "deployment";
+    public const string DeploymentProtectionRule = "deployment_protection_rule";
     public const string DeploymentReview = "deployment_review";
     public const string DeploymentStatus = "deployment_status";
     public const string DeployKey = "deploy_key";

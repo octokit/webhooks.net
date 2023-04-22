@@ -12,6 +12,7 @@ using Octokit.Webhooks.Events.ContentReference;
 using Octokit.Webhooks.Events.DependabotAlert;
 using Octokit.Webhooks.Events.DeployKey;
 using Octokit.Webhooks.Events.Deployment;
+using Octokit.Webhooks.Events.DeploymentProtectionRule;
 using Octokit.Webhooks.Events.DeploymentStatus;
 using Octokit.Webhooks.Events.Discussion;
 using Octokit.Webhooks.Events.DiscussionComment;
@@ -81,6 +82,7 @@ public abstract class WebhookEventProcessor
             DependabotAlertEvent dependabotAlertEvent => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent),
             DeployKeyEvent deployKeyEvent => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent),
             DeploymentEvent deploymentEvent => this.ProcessDeploymentWebhookAsync(headers, deploymentEvent),
+            DeploymentProtectionRuleEvent deploymentProtectionRuleEvent => this.ProcessDeploymentProtectionRuleWebhookAsync(headers, deploymentProtectionRuleEvent),
             DeploymentStatusEvent deploymentStatusEvent => this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent),
             DiscussionEvent discussionEvent => this.ProcessDiscussionWebhookAsync(headers, discussionEvent),
             DiscussionCommentEvent discussionCommentEvent => this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent),
@@ -156,6 +158,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.DependabotAlert => JsonSerializer.Deserialize<DependabotAlertEvent>(body)!,
             WebhookEventType.DeployKey => JsonSerializer.Deserialize<DeployKeyEvent>(body)!,
             WebhookEventType.Deployment => JsonSerializer.Deserialize<DeploymentEvent>(body)!,
+            WebhookEventType.DeploymentProtectionRule => JsonSerializer.Deserialize<DeploymentProtectionRuleEvent>(body)!,
             WebhookEventType.DeploymentStatus => JsonSerializer.Deserialize<DeploymentStatusEvent>(body)!,
             WebhookEventType.Discussion => JsonSerializer.Deserialize<DiscussionEvent>(body)!,
             WebhookEventType.DiscussionComment => JsonSerializer.Deserialize<DiscussionCommentEvent>(body)!,
@@ -363,6 +366,19 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         DeploymentEvent deploymentEvent,
         DeploymentAction action) => Task.CompletedTask;
+
+    private Task ProcessDeploymentProtectionRuleWebhookAsync(WebhookHeaders headers, DeploymentProtectionRuleEvent deploymentProtectionRuleEvent) =>
+        deploymentProtectionRuleEvent.Action switch
+        {
+            DeploymentProtectionRuleActionValue.Requested => this.ProcessDeployProtectionRuleWebhookAsync(headers, deploymentProtectionRuleEvent, DeploymentProtectionRuleAction.Requested),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessDeployProtectionRuleWebhookAsync(
+        WebhookHeaders headers,
+        DeploymentProtectionRuleEvent deploymentProtectionRuleEvent,
+        DeploymentProtectionRuleAction action) => Task.CompletedTask;
 
     private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent) =>
         deploymentStatusEvent.Action switch
