@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Octokit.Webhooks;
 using Octokit.Webhooks.AspNetCore;
 
-#pragma warning disable CA1852
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<WebhookEventProcessor, MyWebhookEventProcessor>();
