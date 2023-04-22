@@ -1,5 +1,7 @@
 namespace Octokit.Webhooks.Events.Organization;
 
+using Octokit.Webhooks.Models.OrganizationEvent;
+
 [PublicAPI]
 [WebhookActionType(OrganizationActionValue.Renamed)]
 public sealed record OrganizationRenamedEvent : OrganizationEvent
@@ -7,6 +9,6 @@ public sealed record OrganizationRenamedEvent : OrganizationEvent
     [JsonPropertyName("action")]
     public override string Action => OrganizationAction.Renamed;
 
-    [JsonPropertyName("membership")]
-    public Octokit.Webhooks.Models.Membership Membership { get; init; } = null!;
+    [JsonPropertyName("changes")]
+    public Changes Changes { get; init; } = null!;
 }
