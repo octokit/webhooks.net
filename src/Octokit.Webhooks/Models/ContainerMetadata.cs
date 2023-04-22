@@ -6,7 +6,7 @@ public sealed record ContainerMetadata
     [JsonPropertyName("labels")]
     public IDictionary<string, dynamic>? Labels { get; init; }
 
-    [JsonPropertyName("labels")]
+    [JsonPropertyName("manifest")]
     public IDictionary<string, dynamic>? Manifest { get; init; }
 
     [JsonPropertyName("tag")]

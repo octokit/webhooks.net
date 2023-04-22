@@ -38,6 +38,7 @@ using Octokit.Webhooks.Events.PullRequest;
 using Octokit.Webhooks.Events.PullRequestReview;
 using Octokit.Webhooks.Events.PullRequestReviewComment;
 using Octokit.Webhooks.Events.PullRequestReviewThread;
+using Octokit.Webhooks.Events.RegistryPackage;
 using Octokit.Webhooks.Events.Release;
 using Octokit.Webhooks.Events.Repository;
 using Octokit.Webhooks.Events.RepositoryDispatch;
@@ -120,6 +121,7 @@ public abstract class WebhookEventProcessor
                 => this.ProcessPullRequestReviewThreadWebhookAsync(headers, pullRequestReviewThreadEvent),
             PushEvent pushEvent => this.ProcessPushWebhookAsync(headers, pushEvent),
             ReleaseEvent releaseEvent => this.ProcessReleaseWebhookAsync(headers, releaseEvent),
+            RegistryPackageEvent registryPackageEvent => this.ProcessRegistryPackageWebhookAsync(headers, registryPackageEvent),
             RepositoryEvent repositoryEvent => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent),
             RepositoryDispatchEvent repositoryDispatchEvent
                 => this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent),
@@ -190,6 +192,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.PullRequestReviewThread => JsonSerializer.Deserialize<PullRequestReviewThreadEvent>(body)!,
             WebhookEventType.Push => JsonSerializer.Deserialize<PushEvent>(body)!,
             WebhookEventType.Release => JsonSerializer.Deserialize<ReleaseEvent>(body)!,
+            WebhookEventType.RegistryPackage => JsonSerializer.Deserialize<RegistryPackageEvent>(body)!,
             WebhookEventType.Repository => JsonSerializer.Deserialize<RepositoryEvent>(body)!,
             WebhookEventType.RepositoryDispatch => JsonSerializer.Deserialize<RepositoryDispatchEvent>(body)!,
             WebhookEventType.RepositoryImport => JsonSerializer.Deserialize<RepositoryImportEvent>(body)!,
@@ -913,6 +916,26 @@ public abstract class WebhookEventProcessor
     [PublicAPI]
     protected virtual Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action) =>
         Task.CompletedTask;
+
+    private Task ProcessRegistryPackageWebhookAsync(WebhookHeaders headers, RegistryPackageEvent registryPackageEvent) =>
+        registryPackageEvent.Action switch
+        {
+            RegistryPackageActionValue.Published => this.ProcessRegistryPackageWebhookAsync(
+                headers,
+                registryPackageEvent,
+                RegistryPackageAction.Published),
+            RegistryPackageActionValue.Updated => this.ProcessRegistryPackageWebhookAsync(
+                headers,
+                registryPackageEvent,
+                RegistryPackageAction.Published),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessRegistryPackageWebhookAsync(
+        WebhookHeaders headers,
+        RegistryPackageEvent registryPackageEvent,
+        RegistryPackageAction action) => Task.CompletedTask;
 
     private Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent) =>
         repositoryEvent.Action switch
