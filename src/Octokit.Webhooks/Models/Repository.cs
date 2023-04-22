@@ -252,6 +252,18 @@ public sealed record Repository
     [JsonPropertyName("use_squash_pr_title_as_default")]
     public bool? UseSquashPrTitleAsDefault { get; init; }
 
+    [JsonPropertyName("squash_merge_commit_message")]
+    public string? SquashMergeCommitMessage { get; init; }
+
+    [JsonPropertyName("squash_merge_commit_title")]
+    public string? SquashMergeCommitTitle { get; init; }
+
+    [JsonPropertyName("merge_commit_message")]
+    public string? MergeCommitMessage { get; init; }
+
+    [JsonPropertyName("merge_commit_title")]
+    public string? MergeCommitTitle { get; init; }
+
     [JsonPropertyName("is_template")]
     public bool IsTemplate { get; init; }
 
