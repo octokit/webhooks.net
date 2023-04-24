@@ -62,4 +62,13 @@ public sealed record WorkflowJob
 
     [JsonPropertyName("completed_at")]
     public string? CompletedAt { get; init; }
+
+    [JsonPropertyName("workflow_name")]
+    public string? WorkflowName { get; init; }
+
+    [JsonPropertyName("head_branch")]
+    public string? HeadBranch { get; init; }
+
+    [JsonPropertyName("created_at")]
+    public string CreatedAt { get; init; } = null!;
 }

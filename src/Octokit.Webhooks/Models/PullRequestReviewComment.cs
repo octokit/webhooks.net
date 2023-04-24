@@ -82,4 +82,7 @@ public sealed record PullRequestReviewComment
 
     [JsonPropertyName("in_reply_to_id")]
     public int? InReplyToId { get; init; }
+
+    [JsonPropertyName("subject_type")]
+    public PullRequestReviewCommentSubjectType? SubjectType { get; init; }
 }

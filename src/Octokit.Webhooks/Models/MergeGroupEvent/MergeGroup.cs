@@ -11,4 +11,10 @@ public sealed record MergeGroup
 
     [JsonPropertyName("base_ref")]
     public string BaseRef { get; init; } = null!;
+
+    [JsonPropertyName("base_sha")]
+    public string BaseSha { get; init; } = null!;
+
+    [JsonPropertyName("head_commit")]
+    public SimpleCommit HeadCommit { get; init; } = null!;
 }

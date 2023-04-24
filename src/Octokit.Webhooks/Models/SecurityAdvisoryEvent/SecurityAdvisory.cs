@@ -12,6 +12,9 @@ public sealed record SecurityAdvisory
     [JsonPropertyName("ghsa_id")]
     public string GhsaId { get; init; } = null!;
 
+    [JsonPropertyName("cve_id")]
+    public string? CveId { get; init; }
+
     [JsonPropertyName("summary")]
     public string Summary { get; init; } = null!;
 

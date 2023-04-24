@@ -33,8 +33,20 @@ public sealed record AppPermissions
     [JsonPropertyName("environments")]
     public AppPermissionsLevel? Environments { get; init; }
 
+    [JsonPropertyName("followers")]
+    public AppPermissionsLevel? Followers { get; init; }
+
+    [JsonPropertyName("gpg_keys")]
+    public AppPermissionsLevel? GpgKeys { get; init; }
+
+    [JsonPropertyName("interaction_limits")]
+    public AppPermissionsLevel? InteractionLimits { get; init; }
+
     [JsonPropertyName("issues")]
     public AppPermissionsLevel? Issues { get; init; }
+
+    [JsonPropertyName("keys")]
+    public AppPermissionsLevel? Keys { get; init; }
 
     [JsonPropertyName("members")]
     public AppPermissionsLevel? Members { get; init; }
@@ -75,6 +87,9 @@ public sealed record AppPermissions
     [JsonPropertyName("pages")]
     public AppPermissionsLevel? Pages { get; init; }
 
+    [JsonPropertyName("plan")]
+    public AppPermissionsLevel? Plan { get; init; }
+
     [JsonPropertyName("pull_requests")]
     public AppPermissionsLevel? PullRequests { get; init; }
 
@@ -99,6 +114,9 @@ public sealed record AppPermissions
     [JsonPropertyName("single_file")]
     public AppPermissionsLevel? SingleFile { get; init; }
 
+    [JsonPropertyName("starring")]
+    public AppPermissionsLevel? Starring { get; init; }
+
     [JsonPropertyName("statuses")]
     public AppPermissionsLevel? Statuses { get; init; }
 
@@ -107,6 +125,9 @@ public sealed record AppPermissions
 
     [JsonPropertyName("vulnerability_alerts")]
     public AppPermissionsLevel? VulnerabilityAlerts { get; init; }
+
+    [JsonPropertyName("watching")]
+    public AppPermissionsLevel? Watching { get; init; }
 
     [JsonPropertyName("workflows")]
     public AppPermissionsLevel? Workflows { get; init; }

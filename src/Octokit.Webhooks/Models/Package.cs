@@ -19,7 +19,7 @@ public sealed record Package
     public string Ecosystem { get; init; } = null!;
 
     [JsonPropertyName("package_type")]
-    public string PackageType { get; init; } = null!;
+    public PackageType PackageType { get; init; }
 
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; init; } = null!;
@@ -36,7 +36,7 @@ public sealed record Package
     public User Owner { get; init; } = null!;
 
     [JsonPropertyName("package_version")]
-    public PackageVersion PackageVersion { get; init; } = null!;
+    public PackageVersion? PackageVersion { get; init; }
 
     [JsonPropertyName("registry")]
     public PackageRegistry Registry { get; init; } = null!;
