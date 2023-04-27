@@ -7,4 +7,7 @@ public abstract record WorkflowJobEvent : WebhookEvent
 {
     [JsonPropertyName("workflow_job")]
     public Models.WorkflowJobEvent.WorkflowJob WorkflowJob { get; init; } = null!;
+
+    [JsonPropertyName("deployment")]
+    public Models.DeploymentEvent.Deployment? Deployment { get; init; }
 }
