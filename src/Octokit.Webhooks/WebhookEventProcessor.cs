@@ -1136,11 +1136,14 @@ public abstract class WebhookEventProcessor
     private Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent) =>
         workflowJobEvent.Action switch
         {
-            WorkflowJobActionValue.Queued => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Queued),
+            WorkflowJobActionValue.Queued
+                => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Queued),
             WorkflowJobActionValue.InProgress
                 => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.InProgress),
             WorkflowJobActionValue.Completed
                 => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Completed),
+            WorkflowJobActionValue.Waiting
+                => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Waiting),
             _ => Task.CompletedTask,
         };
 

@@ -7,4 +7,6 @@ public static class WorkflowJobActionValue
     public const string InProgress = "in_progress";
 
     public const string Completed = "completed";
+
+    public const string Waiting = "waiting";
 }
