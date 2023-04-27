@@ -8,6 +8,16 @@ public class NullableDateTimeOffsetConverter : JsonConverter<DateTimeOffset?>
         _ => DateTimeOffsetConverter.ReadInternal(ref reader),
     };
 
-    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options) =>
-        throw new NotImplementedException($"The {nameof(NullableDateTimeOffsetConverter)} does not support serializing to JSON");
+    public override void Write(Utf8JsonWriter writer, DateTimeOffset? value, JsonSerializerOptions options)
+    {
+        switch (value)
+        {
+            case null:
+                writer.WriteNullValue();
+                break;
+            default:
+                DateTimeOffsetConverter.WriteInternal(writer, (DateTimeOffset)value);
+                break;
+        }
+    }
 }
