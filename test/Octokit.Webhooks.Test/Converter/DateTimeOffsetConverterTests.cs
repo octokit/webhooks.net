@@ -21,30 +21,30 @@ public class DateTimeOffsetConverterTests
     [Theory]
     [InlineData(@"""2019-05-15T15:20:40Z""")]
     [InlineData(@"""2019-05-15T15:20:40.000+00:00""")]
-    public void CanConvertString(string input)
+    public void CanDeserializeString(string input)
     {
         var result = JsonSerializer.Deserialize<DateTimeOffset>(input, this.options);
         result.Should().Be(this.expected);
     }
 
     [Fact]
-    public void CanConvertNumber()
+    public void CanDeserializeNumber()
     {
         var result = JsonSerializer.Deserialize<DateTimeOffset>(@"1557933640", this.options);
         result.Should().Be(this.expected);
     }
 
     [Fact]
-    public void ThrowsForNull()
+    public void DeserializeThrowsForNull()
     {
         var result = () => JsonSerializer.Deserialize<DateTimeOffset>(@"null", this.options);
         result.Should().Throw<JsonException>();
     }
 
     [Fact]
-    public void ThrowsForWrite()
+    public void CanSerialize()
     {
-        var result = () => JsonSerializer.Serialize(this.expected, this.options);
-        result.Should().Throw<NotImplementedException>();
+        var result = JsonSerializer.Serialize(this.expected, this.options);
+        result.Should().Be(@"""2019-05-15T15:20:40.0000000\u002B00:00""");
     }
 }
