@@ -6,7 +6,7 @@ public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
         ReadInternal(ref reader);
 
     public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options) =>
-        throw new NotImplementedException($"The {nameof(DateTimeOffsetConverter)} does not support serializing to JSON");
+        WriteInternal(writer, value);
 
     internal static DateTimeOffset ReadInternal(ref Utf8JsonReader reader) => reader.TokenType switch
     {
@@ -14,6 +14,9 @@ public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
         JsonTokenType.Number => HandleNumber(reader),
         _ => throw new JsonException($"'{reader.TokenType}' is not an allowed token type for the {nameof(DateTimeOffsetConverter)}"),
     };
+
+    internal static void WriteInternal(Utf8JsonWriter writer, DateTimeOffset value) =>
+        writer.WriteStringValue(value.ToString("o"));
 
     private static DateTimeOffset HandleString(Utf8JsonReader reader)
     {
