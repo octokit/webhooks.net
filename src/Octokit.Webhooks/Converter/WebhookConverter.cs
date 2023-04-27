@@ -12,7 +12,7 @@ public class WebhookConverter<T> : JsonConverter<T>
     {
         var type = typeof(T);
         this.types = this.GetType().Assembly.GetTypes()
-            .Where(x => type.IsAssignableFrom(x) && x.IsClass && !x.IsAbstract &&
+            .Where(x => type.IsAssignableFrom(x) && x is { IsClass: true, IsAbstract: false } &&
                         Attribute.GetCustomAttribute(x, typeof(WebhookActionTypeAttribute)) is not null)
             .ToDictionary(
                 y => ((WebhookActionTypeAttribute)Attribute.GetCustomAttribute(y, typeof(WebhookActionTypeAttribute))!).ActionType,
@@ -41,5 +41,5 @@ public class WebhookConverter<T> : JsonConverter<T>
     public override bool CanConvert(Type typeToConvert) => typeof(WebhookEvent).IsAssignableFrom(typeToConvert);
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
-        JsonSerializer.Serialize(writer, (object)value, options);
+        JsonSerializer.Serialize(writer, value, options);
 }
