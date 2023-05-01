@@ -1,5 +1,9 @@
 ﻿namespace Octokit.Webhooks;
 
+using System.IO;
+using System.Net.Mime;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
 using Octokit.Webhooks.Events;
@@ -55,6 +59,113 @@ using Octokit.Webhooks.Events.WorkflowRun;
 
 public abstract class WebhookEventProcessor
 {
+    /// <summary>
+    /// Validates that a webhook request is valid.
+    /// </summary>
+    /// <param name="headers">The request headers.</param>
+    /// <param name="body">The body of the request.</param>
+    /// <param name="secrets">A list of secrets to validate the signature of the request.</param>
+    /// <returns>The body text of the validated request.</returns>
+    /// <exception cref="WebhookValidationException">Thrown if the request is invalid.</exception>
+    /// <remarks>
+    /// <para>
+    /// If the <paramref name="secrets"/> parameter is non-null, then the request must contain a
+    /// signature, and that signature must be valid according to one of the specified secrets. If
+    /// the list of secrets is empty, then any message will fail signature validation.
+    /// </para>
+    /// <para>
+    /// If the <paramref name="secrets"/> parameter is null, then the request must not contain a
+    /// signature.
+    /// </para>
+    /// </remarks>
+    [PublicAPI]
+    public static async Task<string> ValidateWebhookRequestAsync(IDictionary<string, StringValues> headers, Stream body, IEnumerable<string>? secrets)
+    {
+        ArgumentNullException.ThrowIfNull(headers);
+        ArgumentNullException.ThrowIfNull(body);
+
+        headers.TryGetValue("Content-Type", out var contentType);
+        ValidateContentType(contentType);
+
+        headers.TryGetValue("X-Hub-Signature-256", out var signature);
+        var bodyText = await ReadBodyAsync(body).ConfigureAwait(false);
+        ValidateSignature(signature, bodyText, secrets);
+
+        return bodyText;
+    }
+
+    private static async Task<string> ReadBodyAsync(Stream body)
+    {
+        // We should consider limiting how large of a payload we're willing to read.
+        using var reader = new StreamReader(body);
+        return await reader.ReadToEndAsync().ConfigureAwait(false);
+    }
+
+    private static void ValidateContentType(string? contentTypeHeader)
+    {
+        if (!string.IsNullOrEmpty(contentTypeHeader))
+        {
+            var contentType = new ContentType(contentTypeHeader);
+            if (contentType.MediaType == MediaTypeNames.Application.Json)
+            {
+                return;
+            }
+        }
+
+        throw new WebhookValidationException(WebhookValidationError.IncorrectContentType);
+    }
+
+    private static void ValidateSignature(string? signatureHeader, string body, IEnumerable<string>? secrets)
+    {
+        if (secrets == null)
+        {
+            // No signature expected.
+            if (string.IsNullOrEmpty(signatureHeader))
+            {
+                // Nothing to do.
+                return;
+            }
+            else
+            {
+                // Didn't expect a signed payload.
+                throw new WebhookValidationException(WebhookValidationError.UnexpectedSignature);
+            }
+        }
+        else
+        {
+            // Require a signature that can be verified by one of the secrets in the list.
+            if (string.IsNullOrEmpty(signatureHeader))
+            {
+                // Missing required signature.
+                throw new WebhookValidationException(WebhookValidationError.MissingSignature);
+            }
+            else
+            {
+                // The client can configure multiple secrets. This is typically used to support
+                // rotating the webhook secret, where the client will enable a second secret, update
+                // the webhook URL of their app, wait a bit for in-flight webhooks to be processed
+                // with the old secret, and finally remove the original secret from their list.
+                foreach (var secret in secrets)
+                {
+                    var keyBytes = Encoding.UTF8.GetBytes(secret);
+                    var bodyBytes = Encoding.UTF8.GetBytes(body);
+
+                    var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
+                    var hashHex = Convert.ToHexString(hash);
+                    var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
+                    if (signatureHeader == expectedHeader)
+                    {
+                        // The signature matches this secret, so the request is valid.
+                        return;
+                    }
+                }
+
+                // None of the signatures in the list match, or the list was empty.
+                throw new WebhookValidationException(WebhookValidationError.InvalidSignature);
+            }
+        }
+    }
+
     [PublicAPI]
     public virtual Task ProcessWebhookAsync(IDictionary<string, StringValues> headers, string body)
     {

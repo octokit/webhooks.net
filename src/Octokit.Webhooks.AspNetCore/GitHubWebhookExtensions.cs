@@ -1,11 +1,8 @@
 ﻿namespace Octokit.Webhooks.AspNetCore;
 
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -19,25 +16,84 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public static partial class GitHubWebhookExtensions
 {
-    public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
+    /// <inheritdoc cref="MapGitHubWebhooks(IEndpointRouteBuilder,string,Func{Task{IEnumerable{string}?}})"/>
+    /// <param name="endpoints">
+    /// The <c>Microsoft.AspNetCore.Routing.IEndpointRouteBuilder</c> to add the route to.
+    /// </param>
+    /// <param name="path">The path of the webhook endpoint.</param>
+    /// <param name="secret">
+    /// The secret to use to validate each webhook request's signature, or null if no signature is
+    /// to be expected.
+    /// </param>
+    public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!)
+    {
+        var secrets = string.IsNullOrEmpty(secret) ? null : new string[] { secret };
+        MapGitHubWebhooks(endpoints, path, () => Task.FromResult<IEnumerable<string>?>(secrets));
+    }
+
+    /// <summary>
+    /// Adds an endpoint for processing GitHub webhook payloads.
+    /// </summary>
+    /// <param name="endpoints">
+    /// The <c>Microsoft.AspNetCore.Routing.IEndpointRouteBuilder</c> to add the route to.
+    /// </param>
+    /// <param name="path">The path of the webhook endpoint.</param>
+    /// <param name="secrets">
+    /// A callback delegate that will return the list of secrets to use to validate a request's
+    /// signature.
+    /// </param>
+    /// <remarks>
+    /// <para>
+    /// The <paramref name="secrets"/> delegate will be invoked once for each request. If the
+    /// delegate returns null, then no signature will be expected. If the delegate returns a list of
+    /// one or more secrets, then the request's signature must match one of those secrets. If the
+    /// delegate returns an empty list, then the request's signature will be considered invalid.
+    /// </para>
+    /// <para>
+    /// Because the delegate is invoked separately for each request, the webhook secret can be
+    /// changed without modifying the route. Returning bpth the old and the new secrets for some
+    /// time will allow any webhook requests already in flight to validate against the old secret
+    /// while any new requests will validate against the new secret.
+    /// </para>
+    /// </remarks>
+    public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path, Func<Task<IEnumerable<string>?>> secrets) =>
         endpoints.MapPost(path, async context =>
         {
             var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
 
-            // Verify content type
-            if (!VerifyContentType(context, MediaTypeNames.Application.Json))
+            // Validate request
+            string body;
+            try
             {
-                Log.IncorrectContentType(logger);
-                return;
+                var secretsList = await secrets().ConfigureAwait(false);
+                body = await WebhookEventProcessor.ValidateWebhookRequestAsync(context.Request.Headers, context.Request.Body, secretsList).ConfigureAwait(false);
             }
-
-            // Get body
-            var body = await GetBodyAsync(context).ConfigureAwait(false);
-
-            // Verify signature
-            if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
+            catch (WebhookValidationException e)
             {
-                Log.SignatureValidationFailed(logger);
+                context.Response.StatusCode = (int)e.StatusCode;
+                switch (e.Error)
+                {
+                    case WebhookValidationError.IncorrectContentType:
+                        Log.IncorrectContentType(logger);
+                        break;
+
+                    case WebhookValidationError.InvalidSignature:
+                    case WebhookValidationError.MissingSignature:
+                    case WebhookValidationError.UnexpectedSignature:
+                        Log.SignatureValidationFailed(logger);
+                        if (e.Error == WebhookValidationError.UnexpectedSignature)
+                        {
+                            // Add error response content to help with debugging webhook failure.
+                            await context.Response.WriteAsync("Payload includes a secret, so the webhook receiver must configure a secret.")
+                                .ConfigureAwait(false);
+                        }
+
+                        break;
+
+                    default:
+                        break;
+                }
+
                 return;
             }
 
@@ -55,71 +111,6 @@ public static partial class GitHubWebhookExtensions
                 context.Response.StatusCode = 500;
             }
         });
-
-    private static bool VerifyContentType(HttpContext context, string expectedContentType)
-    {
-        if (context.Request.ContentType is null)
-        {
-            return false;
-        }
-
-        var contentType = new ContentType(context.Request.ContentType);
-        if (contentType.MediaType != expectedContentType)
-        {
-            context.Response.StatusCode = 400;
-            return false;
-        }
-
-        return true;
-    }
-
-    private static async Task<string> GetBodyAsync(HttpContext context)
-    {
-        using var reader = new StreamReader(context.Request.Body);
-        return await reader.ReadToEndAsync().ConfigureAwait(false);
-    }
-
-    private static async Task<bool> VerifySignatureAsync(HttpContext context, string secret, string body)
-    {
-        _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
-
-        var isSigned = signatureSha256.Count > 0;
-        var isSignatureExpected = !string.IsNullOrEmpty(secret);
-
-        if (!isSigned && !isSignatureExpected)
-        {
-            // Nothing to do.
-            return true;
-        }
-
-        if (!isSigned && isSignatureExpected)
-        {
-            context.Response.StatusCode = 400;
-            return false;
-        }
-
-        if (isSigned && !isSignatureExpected)
-        {
-            context.Response.StatusCode = 400;
-            await context.Response.WriteAsync("Payload includes a secret, so the webhook receiver must configure a secret.")
-                .ConfigureAwait(false);
-            return false;
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(secret);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-        if (signatureSha256.ToString() != expectedHeader)
-        {
-            context.Response.StatusCode = 400;
-            return false;
-        }
-
-        return true;
-    }
 
     /// <summary>
     /// Log messages for the class.
