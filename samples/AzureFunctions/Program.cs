@@ -1,3 +1,4 @@
+#pragma warning disable CA1852
 using AzureFunctions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
