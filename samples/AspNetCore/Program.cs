@@ -1,3 +1,4 @@
+#pragma warning disable CA1852
 using AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
