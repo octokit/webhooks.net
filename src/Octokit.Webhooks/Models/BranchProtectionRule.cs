@@ -59,6 +59,9 @@ public sealed record BranchProtectionRule
     [JsonPropertyName("require_code_owner_review")]
     public bool RequireCodeOwnerReview { get; init; }
 
+    [JsonPropertyName("require_last_push_approval")]
+    public bool RequireLastPushApproval { get; init; }
+
     [JsonPropertyName("required_approving_review_count")]
     public long RequiredApprovingReviewCount { get; init; }
 

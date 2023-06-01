@@ -19,10 +19,7 @@
     "name": "test",
     "steps": [],
     "check_run_url": "https://api.github.com/repos/lineville/elastic-machines-testing/check-runs/12877621891",
-    "labels": [
-      "self-hosted",
-      "k8s"
-    ],
+    "labels": ["self-hosted", "k8s"],
     "runner_id": null,
     "runner_name": null,
     "runner_group_id": null,

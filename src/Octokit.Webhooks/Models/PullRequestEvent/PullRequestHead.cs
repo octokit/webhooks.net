@@ -16,5 +16,5 @@ public sealed record PullRequestHead
     public User User { get; init; } = null!;
 
     [JsonPropertyName("repo")]
-    public Repository Repo { get; init; } = null!;
+    public Repository? Repo { get; init; }
 }

@@ -7,4 +7,6 @@ public static class SecretScanningAlertActionValue
     public const string Reopened = "reopened";
 
     public const string Resolved = "resolved";
+
+    public const string Revoked = "revoked";
 }
