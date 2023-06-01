@@ -45,6 +45,7 @@ using Octokit.Webhooks.Events.Repository;
 using Octokit.Webhooks.Events.RepositoryDispatch;
 using Octokit.Webhooks.Events.RepositoryVulnerabilityAlert;
 using Octokit.Webhooks.Events.SecretScanningAlert;
+using Octokit.Webhooks.Events.SecretScanningAlertLocation;
 using Octokit.Webhooks.Events.SecurityAdvisory;
 using Octokit.Webhooks.Events.Sponsorship;
 using Octokit.Webhooks.Events.Star;
@@ -132,6 +133,8 @@ public abstract class WebhookEventProcessor
                 => this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent),
             SecretScanningAlertEvent secretScanningAlertEvent
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent),
+            SecretScanningAlertLocationEvent secretScanningAlertLocationEvent
+                => this.ProcessSecretScanningAlertLocationWebhookAsync(headers, secretScanningAlertLocationEvent),
             SecurityAdvisoryEvent securityAdvisoryEvent => this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent),
             SponsorshipEvent sponsorshipEvent => this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent),
             StarEvent starEvent => this.ProcessStarWebhookAsync(headers, starEvent),
@@ -1044,6 +1047,20 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         SecretScanningAlertEvent secretScanningAlertEvent,
         SecretScanningAlertAction action) => Task.CompletedTask;
+
+    private Task ProcessSecretScanningAlertLocationWebhookAsync(WebhookHeaders headers, SecretScanningAlertLocationEvent secretScanningAlertLocationEvent) =>
+        secretScanningAlertLocationEvent.Action switch
+        {
+            SecretScanningAlertLocationActionValue.Created
+                => this.ProcessSecretScanningAlertLocationWebhookAsync(headers, secretScanningAlertLocationEvent, SecretScanningAlertLocationAction.Created),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessSecretScanningAlertLocationWebhookAsync(
+        WebhookHeaders headers,
+        SecretScanningAlertLocationEvent secretScanningAlertLocationEvent,
+        SecretScanningAlertLocationAction action) => Task.CompletedTask;
 
     private Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent) =>
         securityAdvisoryEvent.Action switch
