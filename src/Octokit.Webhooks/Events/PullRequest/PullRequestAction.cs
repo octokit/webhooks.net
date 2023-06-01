@@ -27,7 +27,7 @@ public sealed record PullRequestAction : WebhookEventAction
 
     public static readonly PullRequestAction Opened = new(PullRequestActionValue.Opened);
 
-    public static readonly PullRequestAction Queued = new(PullRequestActionValue.Queued);
+    public static readonly PullRequestAction Enqueued = new(PullRequestActionValue.Enqueued);
 
     public static readonly PullRequestAction ReadyForReview = new(PullRequestActionValue.ReadyForReview);
 

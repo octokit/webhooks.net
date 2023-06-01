@@ -26,7 +26,7 @@ public static class PullRequestActionValue
 
     public const string Opened = "opened";
 
-    public const string Queued = "queued";
+    public const string Enqueued = "enqueued";
 
     public const string ReadyForReview = "ready_for_review";
 
