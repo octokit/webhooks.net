@@ -1034,6 +1034,8 @@ public abstract class WebhookEventProcessor
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Reopened),
             SecretScanningAlertActionValue.Resolved
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved),
+            SecretScanningAlertActionValue.Revoked
+                => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Revoked),
             _ => Task.CompletedTask,
         };
 
