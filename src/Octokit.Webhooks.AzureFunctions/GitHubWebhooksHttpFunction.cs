@@ -1,13 +1,10 @@
 namespace Octokit.Webhooks.AzureFunctions;
 
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Mime;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -22,8 +19,28 @@ using Microsoft.Extensions.Primitives;
 public sealed partial class GitHubWebhooksHttpFunction
 {
     private readonly IOptions<GitHubWebhooksOptions> options;
+    private readonly Func<Task<IEnumerable<string>?>> secretsCallback;
 
-    public GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOptions> options) => this.options = options;
+    public GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOptions> options)
+    {
+        this.options = options;
+
+        if ((options.Value.Secret != null) && (options.Value.SecretsCallback != null))
+        {
+            throw new ArgumentException($"The '{nameof(options.Value.Secret)}' and '{nameof(options.Value.SecretsCallback)}' properties are mutually exclusive.");
+        }
+
+        if (options.Value.SecretsCallback != null)
+        {
+            this.secretsCallback = options.Value.SecretsCallback;
+        }
+        else
+        {
+            var secret = options.Value.Secret;
+            var secrets = (secret != null) ? new string[] { secret } : null;
+            this.secretsCallback = () => Task.FromResult<IEnumerable<string>?>(secrets);
+        }
+    }
 
     [Function(nameof(MapGitHubWebhooksAsync))]
     public async Task<HttpResponseData?> MapGitHubWebhooksAsync(
@@ -32,31 +49,44 @@ public sealed partial class GitHubWebhooksHttpFunction
     {
         var logger = ctx.GetLogger(nameof(GitHubWebhooksHttpFunction));
 
-        // Verify content type
-        if (!VerifyContentType(req, MediaTypeNames.Application.Json))
+        var secrets = await this.secretsCallback().ConfigureAwait(false);
+
+        var headers = req.Headers.ToDictionary(
+            kv => kv.Key,
+            kv => new StringValues(kv.Value.ToArray()),
+            StringComparer.OrdinalIgnoreCase);
+
+        // Validate the request.
+        string body;
+        try
         {
-            Log.IncorrectContentType(logger);
-            return req.CreateResponse(HttpStatusCode.BadRequest);
+            body = await WebhookEventProcessor.ValidateWebhookRequestAsync(headers, req.Body, secrets).ConfigureAwait(false);
         }
-
-        // Get body
-        var body = await GetBodyAsync(req).ConfigureAwait(false);
-
-        // Verify signature
-        if (!VerifySignature(req, this.options.Value.Secret, body))
+        catch (WebhookValidationException e)
         {
-            Log.SignatureValidationFailed(logger);
-            return req.CreateResponse(HttpStatusCode.BadRequest);
+            switch (e.Error)
+            {
+                case WebhookValidationError.IncorrectContentType:
+                    Log.IncorrectContentType(logger);
+                    break;
+
+                case WebhookValidationError.InvalidSignature:
+                case WebhookValidationError.MissingSignature:
+                case WebhookValidationError.UnexpectedSignature:
+                    Log.SignatureValidationFailed(logger);
+                    break;
+
+                default:
+                    break;
+            }
+
+            return req.CreateResponse(e.StatusCode);
         }
 
         // Process body
         try
         {
             var service = ctx.InstanceServices.GetRequiredService<WebhookEventProcessor>();
-            var headers = req.Headers.ToDictionary(
-                kv => kv.Key,
-                kv => new StringValues(kv.Value.ToArray()),
-                StringComparer.OrdinalIgnoreCase);
             await service.ProcessWebhookAsync(headers, body)
                 .ConfigureAwait(false);
             return req.CreateResponse(HttpStatusCode.OK);
@@ -68,54 +98,10 @@ public sealed partial class GitHubWebhooksHttpFunction
         }
     }
 
-    private static bool VerifyContentType(HttpRequestData req, string expectedContentType)
-    {
-        var contentHeader = req.Headers.GetValues("Content-Type").FirstOrDefault();
-        if (contentHeader is null)
-        {
-            return false;
-        }
-
-        var contentType = new ContentType(contentHeader);
-        return contentType.MediaType == expectedContentType;
-    }
-
     private static async Task<string> GetBodyAsync(HttpRequestData req)
     {
         using var reader = new StreamReader(req.Body);
         return await reader.ReadToEndAsync().ConfigureAwait(false);
-    }
-
-    private static bool VerifySignature(HttpRequestData req, string? secret, string body)
-    {
-        var isSigned = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
-        var signature = signatureHeader?.FirstOrDefault();
-
-        var isSignatureExpected = !string.IsNullOrEmpty(secret);
-
-        if (!isSigned && !isSignatureExpected)
-        {
-            // Nothing to do.
-            return true;
-        }
-
-        if (!isSigned && isSignatureExpected)
-        {
-            return false;
-        }
-
-        if (isSigned && !isSignatureExpected)
-        {
-            return false;
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(secret!);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-        return signature == expectedHeader;
     }
 
     /// <summary>

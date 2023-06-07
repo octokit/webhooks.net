@@ -34,7 +34,7 @@ public class JsonStringEnumMemberConverterWithFallbackTests
     public void AllEnumerationsUseJsonStringEnumMemberConverterForJsonConverter()
     {
         var assembly = typeof(WebhookEvent).Assembly;
-        var types = assembly.GetTypes().ThatDeriveFrom<Enum>();
+        var types = assembly.GetTypes().ThatDeriveFrom<Enum>().ThatSatisfy(t => !IgnoreType(t));
 
         foreach (var type in types)
         {
@@ -50,7 +50,7 @@ public class JsonStringEnumMemberConverterWithFallbackTests
     public void AllEnumerationsHaveUnknownMemberWithValueOfMinusOne()
     {
         var assembly = typeof(WebhookEvent).Assembly;
-        var types = assembly.GetTypes().ThatDeriveFrom<Enum>();
+        var types = assembly.GetTypes().ThatDeriveFrom<Enum>().ThatSatisfy(t => !IgnoreType(t));
 
         foreach (var type in types)
         {
@@ -62,4 +62,10 @@ public class JsonStringEnumMemberConverterWithFallbackTests
             intValue.Should().Be(-1, $"the Unknown value of the {type.Name} enumeration must have a value of -1");
         }
     }
+
+    private static bool IgnoreType(Type type) =>
+
+        // This type isn't part of the JSON serialization. It's only used in-process for handling
+        // validation errors.
+        type.Name == "WebhookValidationError";
 }
