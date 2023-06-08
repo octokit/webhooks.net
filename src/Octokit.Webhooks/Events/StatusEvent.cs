@@ -28,7 +28,8 @@ public sealed record StatusEvent : WebhookEvent
     public string? Description { get; init; }
 
     [JsonPropertyName("state")]
-    public StatusState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<StatusState>))]
+    public StringEnum<StatusState> State { get; init; } = null!;
 
     [JsonPropertyName("commit")]
     public Commit Commit { get; init; } = null!;

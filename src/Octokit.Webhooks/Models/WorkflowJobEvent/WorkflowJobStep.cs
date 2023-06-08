@@ -7,10 +7,12 @@ public sealed record WorkflowJobStep
     public string Name { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public WorkflowJobStepStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowJobStepStatus>))]
+    public StringEnum<WorkflowJobStepStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public WorkflowJobStepConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowJobStepConclusion>))]
+    public StringEnum<WorkflowJobStepConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }

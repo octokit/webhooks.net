@@ -22,7 +22,8 @@ public sealed record ReleaseAsset
     public string? Label { get; init; }
 
     [JsonPropertyName("state")]
-    public ReleaseAssetState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ReleaseAssetState>))]
+    public StringEnum<ReleaseAssetState> State { get; init; } = null!;
 
     [JsonPropertyName("content_type")]
     public string ContentType { get; init; } = null!;

@@ -34,13 +34,15 @@ public sealed record WorkflowJob
     public string Url { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public WorkflowJobStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowJobStatus>))]
+    public StringEnum<WorkflowJobStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("steps")]
     public IEnumerable<WorkflowJobStep> Steps { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public WorkflowJobConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowJobConclusion>))]
+    public StringEnum<WorkflowJobConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("labels")]
     public IEnumerable<string> Labels { get; init; } = null!;

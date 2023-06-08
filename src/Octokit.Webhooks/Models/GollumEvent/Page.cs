@@ -13,7 +13,8 @@ public sealed record Page
     public string? Summary { get; init; }
 
     [JsonPropertyName("action")]
-    public PageAction Action { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<PageAction>))]
+    public StringEnum<PageAction> Action { get; init; } = null!;
 
     [JsonPropertyName("sha")]
     public string Sha { get; init; } = null!;

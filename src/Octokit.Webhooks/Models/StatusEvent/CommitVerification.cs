@@ -7,7 +7,8 @@ public sealed record CommitVerification
     public bool Verified { get; init; }
 
     [JsonPropertyName("reason")]
-    public CommitVerificationReason Reason { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<CommitVerificationReason>))]
+    public StringEnum<CommitVerificationReason> Reason { get; init; } = null!;
 
     [JsonPropertyName("signature")]
     public string? Signature { get; init; }

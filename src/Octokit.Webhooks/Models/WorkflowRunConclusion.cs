@@ -1,10 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum WorkflowRunConclusion
 {
-    Unknown = -1,
     [EnumMember(Value = "success")]
     Success,
     [EnumMember(Value = "failure")]

@@ -10,7 +10,8 @@ public sealed record Installation
     public User Account { get; init; } = null!;
 
     [JsonPropertyName("repository_selection")]
-    public InstallationRepositorySelection RepositorySelection { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<InstallationRepositorySelection>))]
+    public StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; } = null!;
 
     [JsonPropertyName("access_tokens_url")]
     public string AccessTokensUrl { get; init; } = null!;
@@ -31,13 +32,15 @@ public sealed record Installation
     public long TargetId { get; init; }
 
     [JsonPropertyName("target_type")]
-    public InstallationTargetType TargetType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<InstallationTargetType>))]
+    public StringEnum<InstallationTargetType> TargetType { get; init; } = null!;
 
     [JsonPropertyName("permissions")]
     public AppPermissions? Permissions { get; init; }
 
     [JsonPropertyName("events")]
-    public IEnumerable<AppEvent>? Events { get; init; }
+    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
+    public IEnumerable<StringEnum<AppEvent>>? Events { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(NullableDateTimeOffsetConverter))]

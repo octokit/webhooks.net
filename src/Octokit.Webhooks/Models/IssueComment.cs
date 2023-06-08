@@ -30,7 +30,8 @@ public sealed record IssueComment
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("body")]
     public string Body { get; init; } = null!;

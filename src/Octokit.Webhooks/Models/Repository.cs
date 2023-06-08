@@ -274,7 +274,8 @@ public sealed record Repository
     public IEnumerable<string> Topics { get; init; } = null!;
 
     [JsonPropertyName("visibility")]
-    public RepositoryVisibility Visibility { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<RepositoryVisibility>))]
+    public StringEnum<RepositoryVisibility> Visibility { get; init; } = null!;
 
     [JsonPropertyName("delete_branch_on_merge")]
     public bool? DeleteBranchOnMerge { get; init; }

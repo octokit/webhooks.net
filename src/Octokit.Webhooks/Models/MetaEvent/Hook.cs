@@ -16,7 +16,8 @@ public sealed record Hook
     public bool Active { get; init; }
 
     [JsonPropertyName("events")]
-    public IEnumerable<AppEvent> Events { get; init; } = null!;
+    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
+    public IEnumerable<StringEnum<AppEvent>> Events { get; init; } = null!;
 
     [JsonPropertyName("config")]
     public HookConfig Config { get; init; } = null!;

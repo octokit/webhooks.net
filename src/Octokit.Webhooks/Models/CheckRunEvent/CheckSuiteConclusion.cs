@@ -1,10 +1,8 @@
 ﻿namespace Octokit.Webhooks.Models.CheckRunEvent;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum CheckSuiteConclusion
 {
-    Unknown = -1,
     [EnumMember(Value = "success")]
     Success,
     [EnumMember(Value = "failure")]

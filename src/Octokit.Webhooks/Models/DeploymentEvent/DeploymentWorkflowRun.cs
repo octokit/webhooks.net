@@ -30,10 +30,12 @@ public sealed record DeploymentWorkflowRun
     public string Event { get; init; } = null!;
 
     [JsonPropertyName("status")]
-    public DeploymentWorkflowRunStatus? Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DeploymentWorkflowRunStatus>))]
+    public StringEnum<DeploymentWorkflowRunStatus>? Status { get; init; }
 
     [JsonPropertyName("conclusion")]
-    public DeploymentWorkflowRunConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DeploymentWorkflowRunConclusion>))]
+    public StringEnum<DeploymentWorkflowRunConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("workflow_id")]
     public long WorkflowId { get; init; }

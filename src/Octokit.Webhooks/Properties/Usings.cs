@@ -6,4 +6,5 @@ global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using JetBrains.Annotations;
 global using Octokit.Webhooks.Converter;
+global using Octokit.Webhooks.Extensions;
 global using Octokit.Webhooks.Models;

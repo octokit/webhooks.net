@@ -8,7 +8,8 @@ using Octokit.Webhooks.Models.MembershipAddedEvent;
 public abstract record MembershipEvent : WebhookEvent
 {
     [JsonPropertyName("scope")]
-    public Scope Scope { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<Scope>))]
+    public StringEnum<Scope> Scope { get; init; } = null!;
 
     [JsonPropertyName("member")]
     public User Member { get; init; } = null!;

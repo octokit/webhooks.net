@@ -54,7 +54,8 @@ public sealed record PullRequestReviewComment
     public string PullRequestUrl { get; init; } = null!;
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("_links")]
     public PullRequestReviewCommentLinks Links { get; init; } = null!;
@@ -69,7 +70,8 @@ public sealed record PullRequestReviewComment
     public int? OriginalStartLine { get; init; }
 
     [JsonPropertyName("start_side")]
-    public Side? StartSide { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<Side>))]
+    public StringEnum<Side>? StartSide { get; init; }
 
     [JsonPropertyName("line")]
     public int? Line { get; init; }
@@ -78,11 +80,13 @@ public sealed record PullRequestReviewComment
     public long OriginalLine { get; init; }
 
     [JsonPropertyName("side")]
-    public Side Side { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<Side>))]
+    public StringEnum<Side> Side { get; init; } = null!;
 
     [JsonPropertyName("in_reply_to_id")]
     public int? InReplyToId { get; init; }
 
     [JsonPropertyName("subject_type")]
-    public PullRequestReviewCommentSubjectType? SubjectType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<PullRequestReviewCommentSubjectType>))]
+    public StringEnum<PullRequestReviewCommentSubjectType>? SubjectType { get; init; }
 }

@@ -4,7 +4,8 @@ namespace Octokit.Webhooks.Models.PingEvent;
 public sealed record Hook
 {
     [JsonPropertyName("type")]
-    public HookType Type { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<HookType>))]
+    public StringEnum<HookType> Type { get; init; } = null!;
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
@@ -19,7 +20,8 @@ public sealed record Hook
     public int? AppId { get; init; }
 
     [JsonPropertyName("events")]
-    public IEnumerable<AppEvent> Events { get; init; } = null!;
+    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
+    public IEnumerable<StringEnum<AppEvent>> Events { get; init; } = null!;
 
     [JsonPropertyName("config")]
     public HookConfig Config { get; init; } = null!;

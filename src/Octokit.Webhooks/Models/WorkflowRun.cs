@@ -19,7 +19,8 @@ public sealed record WorkflowRun
     public string CheckSuiteNodeId { get; init; } = null!;
 
     [JsonPropertyName("conclusion")]
-    public WorkflowRunConclusion? Conclusion { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowRunConclusion>))]
+    public StringEnum<WorkflowRunConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -71,7 +72,8 @@ public sealed record WorkflowRun
     public long RunNumber { get; init; }
 
     [JsonPropertyName("status")]
-    public WorkflowRunStatus Status { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<WorkflowRunStatus>))]
+    public StringEnum<WorkflowRunStatus> Status { get; init; } = null!;
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

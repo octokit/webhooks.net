@@ -10,7 +10,8 @@ public sealed record Alert
     public string SecretType { get; init; } = null!;
 
     [JsonPropertyName("resolution")]
-    public AlertResolution? Resolution { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AlertResolution>))]
+    public StringEnum<AlertResolution>? Resolution { get; init; }
 
     [JsonPropertyName("resolved_by")]
     public User? ResolvedBy { get; init; }

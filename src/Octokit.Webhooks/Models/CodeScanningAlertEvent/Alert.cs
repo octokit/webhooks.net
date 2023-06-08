@@ -23,7 +23,8 @@ public sealed record Alert
     public AlertInstance AlertInstance { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public AlertState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AlertState>))]
+    public StringEnum<AlertState> State { get; init; } = null!;
 
     [JsonPropertyName("dismissed_by")]
     public User? DismissedBy { get; init; }
@@ -33,7 +34,8 @@ public sealed record Alert
     public DateTimeOffset? DismissedAt { get; init; }
 
     [JsonPropertyName("dismissed_reason")]
-    public DismissedReason? DismissedReason { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DismissedReason>))]
+    public StringEnum<DismissedReason>? DismissedReason { get; init; }
 
     [JsonPropertyName("rule")]
     public AlertRule? Rule { get; init; }

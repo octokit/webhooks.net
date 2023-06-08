@@ -19,7 +19,8 @@ public sealed record Package
     public string Ecosystem { get; init; } = null!;
 
     [JsonPropertyName("package_type")]
-    public PackageType PackageType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<PackageType>))]
+    public StringEnum<PackageType> PackageType { get; init; } = null!;
 
     [JsonPropertyName("html_url")]
     public string HtmlUrl { get; init; } = null!;

@@ -1,10 +1,8 @@
 namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum PackageType
 {
-    Unknown = -1,
     [EnumMember(Value = "npm")]
     Npm,
     [EnumMember(Value = "maven")]

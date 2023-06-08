@@ -1,10 +1,8 @@
 namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 [PublicAPI]
-[JsonConverter(typeof(JsonStringEnumMemberConverterWithFallback))]
 public enum FieldType
 {
-    Unknown = -1,
     [EnumMember(Value = "single_select")]
     SingleSelect,
     [EnumMember(Value = "date")]

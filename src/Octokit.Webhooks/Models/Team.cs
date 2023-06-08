@@ -19,7 +19,8 @@ public sealed record Team
     public string? Description { get; init; }
 
     [JsonPropertyName("privacy")]
-    public TeamPrivacy Privacy { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<TeamPrivacy>))]
+    public StringEnum<TeamPrivacy> Privacy { get; init; } = null!;
 
     [JsonPropertyName("url")]
     public string Url { get; init; } = null!;

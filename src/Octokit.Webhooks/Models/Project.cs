@@ -31,7 +31,8 @@ public sealed record Project
     public long Number { get; init; }
 
     [JsonPropertyName("state")]
-    public ProjectState State { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ProjectState>))]
+    public StringEnum<ProjectState> State { get; init; } = null!;
 
     [JsonPropertyName("creator")]
     public User Creator { get; init; } = null!;

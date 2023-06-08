@@ -19,7 +19,8 @@ public sealed record TeamParent
     public string Slug { get; init; } = null!;
 
     [JsonPropertyName("privacy")]
-    public TeamParentPrivacy Privacy { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<TeamParentPrivacy>))]
+    public StringEnum<TeamParentPrivacy> Privacy { get; init; } = null!;
 
     [JsonPropertyName("url")]
     public string Url { get; init; } = null!;

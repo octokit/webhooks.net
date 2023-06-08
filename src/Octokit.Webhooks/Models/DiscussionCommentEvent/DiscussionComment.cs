@@ -25,7 +25,8 @@ public sealed record DiscussionComment
     public long DiscussionId { get; init; }
 
     [JsonPropertyName("author_association")]
-    public AuthorAssociation AuthorAssociation { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
+    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
 
     [JsonPropertyName("user")]
     public User User { get; init; } = null!;

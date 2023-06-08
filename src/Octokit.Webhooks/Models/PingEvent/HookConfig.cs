@@ -4,7 +4,8 @@
 public sealed record HookConfig
 {
     [JsonPropertyName("content_type")]
-    public HookConfigContentType ContentType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<HookConfigContentType>))]
+    public StringEnum<HookConfigContentType> ContentType { get; init; } = null!;
 
     [JsonPropertyName("secret")]
     public string? Secret { get; init; }

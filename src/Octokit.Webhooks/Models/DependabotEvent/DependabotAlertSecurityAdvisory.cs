@@ -19,7 +19,8 @@ public sealed record DependabotAlertSecurityAdvisory
     public IEnumerable<DependabotAlertVulnerability> Vulnerabilities { get; init; } = null!;
 
     [JsonPropertyName("severity")]
-    public DependabotAlertSeverity Severity { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DependabotAlertSeverity>))]
+    public StringEnum<DependabotAlertSeverity> Severity { get; init; } = null!;
 
     [JsonPropertyName("cvss")]
     public DependabotAlertCvss Cvss { get; init; } = null!;

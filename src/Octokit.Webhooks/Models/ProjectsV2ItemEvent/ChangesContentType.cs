@@ -4,8 +4,10 @@ namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 public sealed record ChangesContentType
 {
     [JsonPropertyName("from")]
-    public ProjectsV2ItemContentType From { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
+    public StringEnum<ProjectsV2ItemContentType> From { get; init; } = null!;
 
     [JsonPropertyName("to")]
-    public ProjectsV2ItemContentType To { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
+    public StringEnum<ProjectsV2ItemContentType> To { get; init; } = null!;
 }

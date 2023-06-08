@@ -10,5 +10,6 @@ public sealed record DependabotAlertDependency
     public string ManifestPath { get; init; } = null!;
 
     [JsonPropertyName("scope")]
-    public DependabotAlertDependencyScope? Scope { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<DependabotAlertDependencyScope>))]
+    public StringEnum<DependabotAlertDependencyScope>? Scope { get; init; }
 }

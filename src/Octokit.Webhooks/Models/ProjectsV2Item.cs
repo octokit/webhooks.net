@@ -16,7 +16,8 @@ public sealed record ProjectsV2Item
     public string ContentNodeId { get; init; } = null!;
 
     [JsonPropertyName("content_type")]
-    public ProjectsV2ItemContentType ContentType { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
+    public StringEnum<ProjectsV2ItemContentType> ContentType { get; init; } = null!;
 
     [JsonPropertyName("creator")]
     public User Creator { get; init; } = null!;
