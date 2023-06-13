@@ -13,8 +13,12 @@ public enum CheckSuiteConclusion
     Cancelled,
     [EnumMember(Value = "timed_out")]
     TimedOut,
-    [EnumMember(Value = "actionRequired")]
+    [EnumMember(Value = "action_required")]
     ActionRequired,
     [EnumMember(Value = "stale")]
     Stale,
+    [EnumMember(Value = "skipped")]
+    Skipped,
+    [EnumMember(Value = "startup_failure")]
+    StartupFailure,
 }
