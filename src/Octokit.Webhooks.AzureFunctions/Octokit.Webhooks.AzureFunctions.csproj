@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Core" Version="1.12.1" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Abstractions" Version="1.2.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
   </ItemGroup>
 
