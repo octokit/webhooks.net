@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.11.0" OutputItemType="Analyzer" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.14.1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.16.0" />
   </ItemGroup>
 
   <ItemGroup>
