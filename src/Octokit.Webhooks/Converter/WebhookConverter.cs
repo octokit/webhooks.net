@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Converter;
+namespace Octokit.Webhooks.Converter;
 
 using System.Linq;
 
@@ -11,9 +11,9 @@ public class WebhookConverter<T> : JsonConverter<T>
     public WebhookConverter()
     {
         var type = typeof(T);
-        this.types = this.GetType().Assembly.GetTypes()
+        this.types = type.Assembly.GetTypes()
             .Where(x => type.IsAssignableFrom(x) && x is { IsClass: true, IsAbstract: false } &&
-                        Attribute.GetCustomAttribute(x, typeof(WebhookActionTypeAttribute)) is not null)
+                        Attribute.IsDefined(x, typeof(WebhookActionTypeAttribute)))
             .ToDictionary(
                 y => ((WebhookActionTypeAttribute)Attribute.GetCustomAttribute(y, typeof(WebhookActionTypeAttribute))!).ActionType,
                 y => y);

@@ -1,7 +1,8 @@
-﻿namespace Octokit.Webhooks;
+namespace Octokit.Webhooks;
 
+[PublicAPI]
 [AttributeUsage(AttributeTargets.Class)]
-internal sealed class WebhookEventTypeAttribute : Attribute
+public sealed class WebhookEventTypeAttribute : Attribute
 {
     public WebhookEventTypeAttribute(string eventType) => this.EventType = eventType;
 
