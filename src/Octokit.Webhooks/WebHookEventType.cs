@@ -54,6 +54,7 @@ public static class WebhookEventType
     public const string Repository = "repository";
     public const string RepositoryDispatch = "repository_dispatch";
     public const string RepositoryImport = "repository_import";
+    public const string RepositoryRuleset = "repository_ruleset";
     public const string RepositoryVulnerabilityAlert = "repository_vulnerability_alert";
     public const string SecretScanningAlert = "secret_scanning_alert";
     public const string SecretScanningAlertLocation = "secret_scanning_alert_location";

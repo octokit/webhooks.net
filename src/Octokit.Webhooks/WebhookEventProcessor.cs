@@ -13,6 +13,7 @@ using Octokit.Webhooks.Events.DependabotAlert;
 using Octokit.Webhooks.Events.DeployKey;
 using Octokit.Webhooks.Events.Deployment;
 using Octokit.Webhooks.Events.DeploymentProtectionRule;
+using Octokit.Webhooks.Events.DeploymentReview;
 using Octokit.Webhooks.Events.DeploymentStatus;
 using Octokit.Webhooks.Events.Discussion;
 using Octokit.Webhooks.Events.DiscussionComment;
@@ -27,6 +28,7 @@ using Octokit.Webhooks.Events.MarketplacePurchase;
 using Octokit.Webhooks.Events.Member;
 using Octokit.Webhooks.Events.Membership;
 using Octokit.Webhooks.Events.MergeGroup;
+using Octokit.Webhooks.Events.MergeQueueEntry;
 using Octokit.Webhooks.Events.Meta;
 using Octokit.Webhooks.Events.Milestone;
 using Octokit.Webhooks.Events.Organization;
@@ -43,6 +45,7 @@ using Octokit.Webhooks.Events.RegistryPackage;
 using Octokit.Webhooks.Events.Release;
 using Octokit.Webhooks.Events.Repository;
 using Octokit.Webhooks.Events.RepositoryDispatch;
+using Octokit.Webhooks.Events.RepositoryRuleset;
 using Octokit.Webhooks.Events.RepositoryVulnerabilityAlert;
 using Octokit.Webhooks.Events.SecretScanningAlert;
 using Octokit.Webhooks.Events.SecretScanningAlertLocation;
@@ -85,6 +88,7 @@ public abstract class WebhookEventProcessor
             DeployKeyEvent deployKeyEvent => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent),
             DeploymentEvent deploymentEvent => this.ProcessDeploymentWebhookAsync(headers, deploymentEvent),
             DeploymentProtectionRuleEvent deploymentProtectionRuleEvent => this.ProcessDeploymentProtectionRuleWebhookAsync(headers, deploymentProtectionRuleEvent),
+            DeploymentReviewEvent deploymentReviewEvent => this.ProcessDeploymentReviewWebhookAsync(headers, deploymentReviewEvent),
             DeploymentStatusEvent deploymentStatusEvent => this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent),
             DiscussionEvent discussionEvent => this.ProcessDiscussionWebhookAsync(headers, discussionEvent),
             DiscussionCommentEvent discussionCommentEvent => this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent),
@@ -104,6 +108,7 @@ public abstract class WebhookEventProcessor
                 => this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent),
             MemberEvent memberEvent => this.ProcessMemberWebhookAsync(headers, memberEvent),
             MergeGroupEvent mergeGroupEvent => this.ProcessMergeGroupWebhookAsync(headers, mergeGroupEvent),
+            MergeQueueEntryEvent mergeQueueEntryEvent => this.ProcessMergeQueueEntryWebhookAsync(headers, mergeQueueEntryEvent),
             MembershipEvent membershipEvent => this.ProcessMembershipWebhookAsync(headers, membershipEvent),
             MetaEvent metaEvent => this.ProcessMetaWebhookAsync(headers, metaEvent),
             MilestoneEvent milestoneEvent => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent),
@@ -129,6 +134,7 @@ public abstract class WebhookEventProcessor
             RepositoryDispatchEvent repositoryDispatchEvent
                 => this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent),
             RepositoryImportEvent repositoryImportEvent => this.ProcessRepositoryImportWebhookAsync(headers, repositoryImportEvent),
+            RepositoryRulesetEvent repositoryRulesetEvent => this.ProcessRepositoryRulesetWebhookAsync(headers, repositoryRulesetEvent),
             RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent
                 => this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent),
             SecretScanningAlertEvent secretScanningAlertEvent
@@ -164,6 +170,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.DeployKey => JsonSerializer.Deserialize<DeployKeyEvent>(body)!,
             WebhookEventType.Deployment => JsonSerializer.Deserialize<DeploymentEvent>(body)!,
             WebhookEventType.DeploymentProtectionRule => JsonSerializer.Deserialize<DeploymentProtectionRuleEvent>(body)!,
+            WebhookEventType.DeploymentReview => JsonSerializer.Deserialize<DeploymentReviewEvent>(body)!,
             WebhookEventType.DeploymentStatus => JsonSerializer.Deserialize<DeploymentStatusEvent>(body)!,
             WebhookEventType.Discussion => JsonSerializer.Deserialize<DiscussionEvent>(body)!,
             WebhookEventType.DiscussionComment => JsonSerializer.Deserialize<DiscussionCommentEvent>(body)!,
@@ -180,6 +187,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.Member => JsonSerializer.Deserialize<MemberEvent>(body)!,
             WebhookEventType.Membership => JsonSerializer.Deserialize<MembershipEvent>(body)!,
             WebhookEventType.MergeGroup => JsonSerializer.Deserialize<MergeGroupEvent>(body)!,
+            WebhookEventType.MergeQueueEntry => JsonSerializer.Deserialize<MergeQueueEntryEvent>(body)!,
             WebhookEventType.Meta => JsonSerializer.Deserialize<MetaEvent>(body)!,
             WebhookEventType.Milestone => JsonSerializer.Deserialize<MilestoneEvent>(body)!,
             WebhookEventType.OrgBlock => JsonSerializer.Deserialize<OrgBlockEvent>(body)!,
@@ -202,6 +210,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.Repository => JsonSerializer.Deserialize<RepositoryEvent>(body)!,
             WebhookEventType.RepositoryDispatch => JsonSerializer.Deserialize<RepositoryDispatchEvent>(body)!,
             WebhookEventType.RepositoryImport => JsonSerializer.Deserialize<RepositoryImportEvent>(body)!,
+            WebhookEventType.RepositoryRuleset => JsonSerializer.Deserialize<RepositoryRulesetEvent>(body)!,
             WebhookEventType.RepositoryVulnerabilityAlert => JsonSerializer.Deserialize<RepositoryVulnerabilityAlertEvent>(body)!,
             WebhookEventType.SecretScanningAlert => JsonSerializer.Deserialize<SecretScanningAlertEvent>(body)!,
             WebhookEventType.SecurityAdvisory => JsonSerializer.Deserialize<SecurityAdvisoryEvent>(body)!,
@@ -385,6 +394,30 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         DeploymentProtectionRuleEvent deploymentProtectionRuleEvent,
         DeploymentProtectionRuleAction action) => Task.CompletedTask;
+
+    private Task ProcessDeploymentReviewWebhookAsync(WebhookHeaders headers, DeploymentReviewEvent deploymentReviewEvent) =>
+        deploymentReviewEvent.Action switch
+        {
+            DeploymentReviewActionValue.Approved => this.ProcessDeploymentReviewWebhookAsync(
+                headers,
+                deploymentReviewEvent,
+                DeploymentReviewAction.Approved),
+            DeploymentReviewActionValue.Rejected => this.ProcessDeploymentReviewWebhookAsync(
+                headers,
+                deploymentReviewEvent,
+                DeploymentReviewAction.Rejected),
+            DeploymentReviewActionValue.Requested => this.ProcessDeploymentReviewWebhookAsync(
+                headers,
+                deploymentReviewEvent,
+                DeploymentReviewAction.Requested),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessDeploymentReviewWebhookAsync(
+        WebhookHeaders headers,
+        DeploymentReviewEvent deploymentReviewEvent,
+        DeploymentReviewAction action) => Task.CompletedTask;
 
     private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent) =>
         deploymentStatusEvent.Action switch
@@ -660,6 +693,26 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         MergeGroupEvent mergeGroupEvent,
         MergeGroupAction action) => Task.CompletedTask;
+
+    private Task ProcessMergeQueueEntryWebhookAsync(WebhookHeaders headers, MergeQueueEntryEvent mergeQueueEntryEvent) =>
+        mergeQueueEntryEvent.Action switch
+        {
+            MergeQueueEntryActionValue.Created => this.ProcessMergeQueueEntryWebhookAsync(
+                headers,
+                mergeQueueEntryEvent,
+                MergeQueueEntryAction.Created),
+            MergeQueueEntryActionValue.Deleted => this.ProcessMergeQueueEntryWebhookAsync(
+                headers,
+                mergeQueueEntryEvent,
+                MergeQueueEntryAction.Deleted),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessMergeQueueEntryWebhookAsync(
+        WebhookHeaders headers,
+        MergeQueueEntryEvent mergeQueueEntryEvent,
+        MergeQueueEntryAction action) => Task.CompletedTask;
 
     private Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent) =>
         metaEvent.Action switch
@@ -998,6 +1051,30 @@ public abstract class WebhookEventProcessor
     [PublicAPI]
     protected virtual Task ProcessRepositoryImportWebhookAsync(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent) =>
         Task.CompletedTask;
+
+    private Task ProcessRepositoryRulesetWebhookAsync(WebhookHeaders headers, RepositoryRulesetEvent repositoryRulesetEvent) =>
+        repositoryRulesetEvent.Action switch
+        {
+            RepositoryRulesetActionValue.Created => this.ProcessRepositoryRulesetWebhookAsync(
+                headers,
+                repositoryRulesetEvent,
+                RepositoryRulesetAction.Created),
+            RepositoryRulesetActionValue.Deleted => this.ProcessRepositoryRulesetWebhookAsync(
+                headers,
+                repositoryRulesetEvent,
+                RepositoryRulesetAction.Deleted),
+            RepositoryRulesetActionValue.Edited => this.ProcessRepositoryRulesetWebhookAsync(
+                headers,
+                repositoryRulesetEvent,
+                RepositoryRulesetAction.Edited),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessRepositoryRulesetWebhookAsync(
+        WebhookHeaders headers,
+        RepositoryRulesetEvent repositoryRulesetEvent,
+        RepositoryRulesetAction action) => Task.CompletedTask;
 
     private Task ProcessRepositoryVulnerabilityAlertWebhookAsync(
         WebhookHeaders headers,
