@@ -91,6 +91,8 @@ public enum AppEvent
     RepositoryDispatch,
     [EnumMember(Value = "repository_import")]
     RepositoryImport,
+    [EnumMember(Value = "repository_ruleset")]
+    RepositoryRuleset,
     [EnumMember(Value = "repository_vulnerability_alert")]
     RepositoryVulnerabilityAlert,
     [EnumMember(Value = "secret_scanning_alert")]
