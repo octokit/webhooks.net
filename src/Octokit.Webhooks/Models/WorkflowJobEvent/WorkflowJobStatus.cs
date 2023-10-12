@@ -10,5 +10,5 @@ public enum WorkflowJobStatus
     [EnumMember(Value = "completed")]
     Completed,
     [EnumMember(Value = "waiting")]
-    Waiting,    
+    Waiting,
 }
