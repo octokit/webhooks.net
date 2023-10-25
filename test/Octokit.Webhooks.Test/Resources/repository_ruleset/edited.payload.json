@@ -1,0 +1,269 @@
+﻿{
+  "action": "edited",
+  "repository_ruleset": {
+    "id": 164067,
+    "name": "_hello_world_",
+    "target": "branch",
+    "source_type": "Repository",
+    "source": "Laxynium/webhooks.net",
+    "enforcement": "active",
+    "conditions": {
+      "ref_name": {
+        "exclude": [],
+        "include": [
+          "~DEFAULT_BRANCH",
+          "refs/heads/feature/",
+          "refs/heads/pattern/"
+        ]
+      }
+    },
+    "rules": [
+      {
+        "type": "deletion"
+      },
+      {
+        "type": "non_fast_forward"
+      },
+      {
+        "type": "creation"
+      },
+      {
+        "type": "required_deployments",
+        "parameters": {
+          "required_deployment_environments": []
+        }
+      },
+      {
+        "type": "required_signatures"
+      },
+      {
+        "type": "pull_request",
+        "parameters": {
+          "require_code_owner_review": false,
+          "require_last_push_approval": false,
+          "dismiss_stale_reviews_on_push": true,
+          "required_approving_review_count": 4,
+          "required_review_thread_resolution": true
+        }
+      }
+    ],
+    "node_id": "RRS_lACqUmVwb3NpdG9yec4qUCuczgACgOM",
+    "created_at": "2023-10-25T16:17:50.546Z",
+    "updated_at": "2023-10-25T16:19:00.989Z",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/Laxynium/webhooks.net/rulesets/164067"
+      },
+      "html": {
+        "href": "https://github.com/Laxynium/webhooks.net/rules/164067"
+      }
+    }
+  },
+  "changes": {
+    "name": {
+      "from": "hello-world"
+    },
+    "rules": {
+      "updated": [
+        {
+          "rule": {
+            "type": "required_deployments",
+            "parameters": {
+              "required_deployment_environments": []
+            }
+          },
+          "changes": {
+            "configuration": {
+              "from": "{\"required_deployment_environments\":[\"dev\"]}"
+            }
+          }
+        },
+        {
+          "rule": {
+            "type": "pull_request",
+            "parameters": {
+              "require_code_owner_review": false,
+              "require_last_push_approval": false,
+              "dismiss_stale_reviews_on_push": true,
+              "required_approving_review_count": 4,
+              "required_review_thread_resolution": true
+            }
+          },
+          "changes": {
+            "configuration": {
+              "from": "{\"require_code_owner_review\":true,\"require_last_push_approval\":true,\"dismiss_stale_reviews_on_push\":true,\"required_approving_review_count\":2,\"authorized_dismissal_actors_only\":false,\"required_review_thread_resolution\":true,\"ignore_approvals_from_contributors\":false}"
+            }
+          }
+        }
+      ],
+      "deleted": [
+        {
+          "type": "update",
+          "parameters": {
+            "update_allows_fetch_and_merge": true
+          }
+        },
+        {
+          "type": "required_linear_history"
+        }
+      ]
+    },
+    "conditions": {
+      "updated": [
+        {
+          "condition": {
+            "ref_name": {
+              "exclude": [],
+              "include": [
+                "~DEFAULT_BRANCH",
+                "refs/heads/feature/",
+                "refs/heads/pattern/"
+              ]
+            }
+          },
+          "changes": {
+            "include": {
+              "from": [
+                "~DEFAULT_BRANCH",
+                "~ALL",
+                "refs/heads/feature/"
+              ]
+            },
+            "exclude": {
+              "from": [
+                "refs/heads/main"
+              ]
+            }
+          }
+        }
+      ],
+      "deleted": []
+    }
+  },
+  "repository": {
+    "id": 709897116,
+    "node_id": "R_kgDOKlArnA",
+    "name": "webhooks.net",
+    "full_name": "Laxynium/webhooks.net",
+    "private": false,
+    "owner": {
+      "login": "Laxynium",
+      "id": 22114978,
+      "node_id": "MDQ6VXNlcjIyMTE0OTc4",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22114978?v\u003d4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Laxynium",
+      "html_url": "https://github.com/Laxynium",
+      "followers_url": "https://api.github.com/users/Laxynium/followers",
+      "following_url": "https://api.github.com/users/Laxynium/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Laxynium/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Laxynium/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Laxynium/subscriptions",
+      "organizations_url": "https://api.github.com/users/Laxynium/orgs",
+      "repos_url": "https://api.github.com/users/Laxynium/repos",
+      "events_url": "https://api.github.com/users/Laxynium/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Laxynium/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/Laxynium/webhooks.net",
+    "description": "GitHub webhook events toolset for .NET",
+    "fork": true,
+    "url": "https://api.github.com/repos/Laxynium/webhooks.net",
+    "forks_url": "https://api.github.com/repos/Laxynium/webhooks.net/forks",
+    "keys_url": "https://api.github.com/repos/Laxynium/webhooks.net/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/Laxynium/webhooks.net/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/Laxynium/webhooks.net/teams",
+    "hooks_url": "https://api.github.com/repos/Laxynium/webhooks.net/hooks",
+    "issue_events_url": "https://api.github.com/repos/Laxynium/webhooks.net/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/Laxynium/webhooks.net/events",
+    "assignees_url": "https://api.github.com/repos/Laxynium/webhooks.net/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/Laxynium/webhooks.net/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/Laxynium/webhooks.net/tags",
+    "blobs_url": "https://api.github.com/repos/Laxynium/webhooks.net/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/Laxynium/webhooks.net/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/Laxynium/webhooks.net/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/Laxynium/webhooks.net/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/Laxynium/webhooks.net/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/Laxynium/webhooks.net/languages",
+    "stargazers_url": "https://api.github.com/repos/Laxynium/webhooks.net/stargazers",
+    "contributors_url": "https://api.github.com/repos/Laxynium/webhooks.net/contributors",
+    "subscribers_url": "https://api.github.com/repos/Laxynium/webhooks.net/subscribers",
+    "subscription_url": "https://api.github.com/repos/Laxynium/webhooks.net/subscription",
+    "commits_url": "https://api.github.com/repos/Laxynium/webhooks.net/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/Laxynium/webhooks.net/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/Laxynium/webhooks.net/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/Laxynium/webhooks.net/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/Laxynium/webhooks.net/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/Laxynium/webhooks.net/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/Laxynium/webhooks.net/merges",
+    "archive_url": "https://api.github.com/repos/Laxynium/webhooks.net/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/Laxynium/webhooks.net/downloads",
+    "issues_url": "https://api.github.com/repos/Laxynium/webhooks.net/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/Laxynium/webhooks.net/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/Laxynium/webhooks.net/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/Laxynium/webhooks.net/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/Laxynium/webhooks.net/labels{/name}",
+    "releases_url": "https://api.github.com/repos/Laxynium/webhooks.net/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/Laxynium/webhooks.net/deployments",
+    "created_at": "2023-10-25T15:57:59Z",
+    "updated_at": "2023-10-25T15:58:00Z",
+    "pushed_at": "2023-10-25T16:00:12Z",
+    "git_url": "git://github.com/Laxynium/webhooks.net.git",
+    "ssh_url": "git@github.com:Laxynium/webhooks.net.git",
+    "clone_url": "https://github.com/Laxynium/webhooks.net.git",
+    "svn_url": "https://github.com/Laxynium/webhooks.net",
+    "homepage": "",
+    "size": 1605,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": null,
+    "has_issues": false,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": false,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 0,
+    "license": {
+      "key": "mit",
+      "name": "MIT License",
+      "spdx_id": "MIT",
+      "url": "https://api.github.com/licenses/mit",
+      "node_id": "MDc6TGljZW5zZTEz"
+    },
+    "allow_forking": true,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "topics": [],
+    "visibility": "public",
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 0,
+    "default_branch": "main"
+  },
+  "sender": {
+    "login": "Laxynium",
+    "id": 22114978,
+    "node_id": "MDQ6VXNlcjIyMTE0OTc4",
+    "avatar_url": "https://avatars.githubusercontent.com/u/22114978?v\u003d4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/Laxynium",
+    "html_url": "https://github.com/Laxynium",
+    "followers_url": "https://api.github.com/users/Laxynium/followers",
+    "following_url": "https://api.github.com/users/Laxynium/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Laxynium/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Laxynium/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Laxynium/subscriptions",
+    "organizations_url": "https://api.github.com/users/Laxynium/orgs",
+    "repos_url": "https://api.github.com/users/Laxynium/repos",
+    "events_url": "https://api.github.com/users/Laxynium/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Laxynium/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
