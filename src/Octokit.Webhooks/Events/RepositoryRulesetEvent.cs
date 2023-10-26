@@ -1,5 +1,12 @@
-﻿namespace Octokit.Webhooks.Events;
+﻿using Octokit.Webhooks.Models.RepositoryRulesetEvent;
+
+namespace Octokit.Webhooks.Events;
 
 [PublicAPI]
 [WebhookEventType(WebhookEventType.RepositoryRuleset)]
-public abstract record RepositoryRulesetEvent : WebhookEvent;
+[JsonConverter(typeof(WebhookConverter<RepositoryRulesetEvent>))]
+public abstract record RepositoryRulesetEvent : WebhookEvent
+{
+    [JsonPropertyName("repository_ruleset")]
+    public Models.RepositoryRulesetEvent.RepositoryRuleset? RepositoryRuleset { get; init; }
+}
