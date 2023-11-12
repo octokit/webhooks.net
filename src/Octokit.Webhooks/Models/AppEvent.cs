@@ -5,6 +5,8 @@ public enum AppEvent
 {
     [EnumMember(Value = "*")]
     All,
+    [EnumMember(Value = "branch_protection_configuration")]
+    BranchProtectionConfiguration,
     [EnumMember(Value = "branch_protection_rule")]
     BranchProtectionRule,
     [EnumMember(Value = "check_run")]
