@@ -19,12 +19,8 @@ using Microsoft.Extensions.Primitives;
 /// <summary>
 /// A class containing an Azure Function that processes GitHub webhooks.
 /// </summary>
-public sealed partial class GitHubWebhooksHttpFunction
+public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOptions> options)
 {
-    private readonly IOptions<GitHubWebhooksOptions> options;
-
-    public GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOptions> options) => this.options = options;
-
     [Function(nameof(MapGitHubWebhooksAsync))]
     public async Task<HttpResponseData?> MapGitHubWebhooksAsync(
         [HttpTrigger(AuthorizationLevel.Anonymous, "POST", Route = "github/webhooks")] HttpRequestData req,
@@ -43,7 +39,7 @@ public sealed partial class GitHubWebhooksHttpFunction
         var body = await GetBodyAsync(req).ConfigureAwait(false);
 
         // Verify signature
-        if (!VerifySignature(req, this.options.Value.Secret, body))
+        if (!VerifySignature(req, options.Value.Secret, body))
         {
             Log.SignatureValidationFailed(logger);
             return req.CreateResponse(HttpStatusCode.BadRequest);

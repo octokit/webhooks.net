@@ -16,6 +16,4 @@
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
   </ItemGroup>
 
-
-
 </Project>
