@@ -1,0 +1,12 @@
+{
+  "name": "Octokit.Webhooks",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:7.0",
+  "postCreateCommand": "dotnet restore",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit"
+      ]
+    }
+  }
+}
