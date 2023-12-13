@@ -9,6 +9,8 @@ public static class WebhookEventType
     public const string CommitComment = "commit_comment";
     public const string ContentReference = "content_reference";
     public const string Create = "create";
+    public const string CustomProperty = "custom_property";
+    public const string CustomPropertyValues = "custom_property_values";
     public const string Delete = "delete";
     public const string DependabotAlert = "dependabot_alert";
     public const string Deployment = "deployment";
