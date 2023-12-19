@@ -9,6 +9,8 @@ using Octokit.Webhooks.Events.CheckSuite;
 using Octokit.Webhooks.Events.CodeScanningAlert;
 using Octokit.Webhooks.Events.CommitComment;
 using Octokit.Webhooks.Events.ContentReference;
+using Octokit.Webhooks.Events.CustomProperty;
+using Octokit.Webhooks.Events.CustomPropertyValues;
 using Octokit.Webhooks.Events.DependabotAlert;
 using Octokit.Webhooks.Events.DeployKey;
 using Octokit.Webhooks.Events.Deployment;
@@ -83,6 +85,8 @@ public abstract class WebhookEventProcessor
             CommitCommentEvent commitCommentEvent => this.ProcessCommitCommentWebhookAsync(headers, commitCommentEvent),
             ContentReferenceEvent contentReferenceEvent => this.ProcessContentReferenceWebhookAsync(headers, contentReferenceEvent),
             CreateEvent createEvent => this.ProcessCreateWebhookAsync(headers, createEvent),
+            CustomPropertyEvent customPropertyEvent => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent),
+            CustomPropertyValuesEvent customPropertyValuesEvent => this.ProcessCustomPropertyValuesWebhookAsync(headers, customPropertyValuesEvent),
             DeleteEvent deleteEvent => this.ProcessDeleteWebhookAsync(headers, deleteEvent),
             DependabotAlertEvent dependabotAlertEvent => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent),
             DeployKeyEvent deployKeyEvent => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent),
@@ -165,6 +169,8 @@ public abstract class WebhookEventProcessor
             WebhookEventType.CommitComment => JsonSerializer.Deserialize<CommitCommentEvent>(body)!,
             WebhookEventType.ContentReference => JsonSerializer.Deserialize<ContentReferenceEvent>(body)!,
             WebhookEventType.Create => JsonSerializer.Deserialize<CreateEvent>(body)!,
+            WebhookEventType.CustomProperty => JsonSerializer.Deserialize<CustomPropertyEvent>(body)!,
+            WebhookEventType.CustomPropertyValues => JsonSerializer.Deserialize<CustomPropertyValuesEvent>(body)!,
             WebhookEventType.Delete => JsonSerializer.Deserialize<DeleteEvent>(body)!,
             WebhookEventType.DependabotAlert => JsonSerializer.Deserialize<DependabotAlertEvent>(body)!,
             WebhookEventType.DeployKey => JsonSerializer.Deserialize<DeployKeyEvent>(body)!,
@@ -329,6 +335,38 @@ public abstract class WebhookEventProcessor
 
     [PublicAPI]
     protected virtual Task ProcessCreateWebhookAsync(WebhookHeaders headers, CreateEvent createEvent) => Task.CompletedTask;
+
+    private Task ProcessCustomPropertyWebhookAsync(WebhookHeaders headers, CustomPropertyEvent customPropertyEvent) =>
+        customPropertyEvent.Action switch
+        {
+            CustomPropertyActionValue.Created
+                => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent, CustomPropertyAction.Created),
+            CustomPropertyActionValue.Deleted
+                => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent, CustomPropertyAction.Deleted),
+            CustomPropertyActionValue.Updated
+                => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent, CustomPropertyAction.Updated),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessCustomPropertyWebhookAsync(
+        WebhookHeaders headers,
+        CustomPropertyEvent hookEvent,
+        CustomPropertyAction action) => Task.CompletedTask;
+
+    private Task ProcessCustomPropertyValuesWebhookAsync(WebhookHeaders headers, CustomPropertyValuesEvent customPropertyValuesEvent) =>
+        customPropertyValuesEvent.Action switch
+        {
+            CustomPropertyValuesActionValue.Updated
+                => this.ProcessCustomPropertyValuesWebhookAsync(headers, customPropertyValuesEvent, CustomPropertyValuesAction.Updated),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessCustomPropertyValuesWebhookAsync(
+        WebhookHeaders headers,
+        CustomPropertyValuesEvent hookEvent,
+        CustomPropertyValuesAction action) => Task.CompletedTask;
 
     [PublicAPI]
     protected virtual Task ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent) => Task.CompletedTask;
