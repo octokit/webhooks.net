@@ -46,7 +46,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
 
 ### Azure Functions
 
-**NOTE**: Support is only provided for isolated process Azure Functions.
+**NOTE**: Support is only provided for [isolated process Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide).
 
 1. `dotnet add package Octokit.Webhooks.AzureFunctions`
 2. Create a class that derives from `WebhookEventProcessor` and override any of the virtual methods to handle webhooks from GitHub. For example, to handle Pull Request webhooks:
