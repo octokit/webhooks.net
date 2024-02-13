@@ -7,9 +7,8 @@ using Xunit;
 
 public class StringEnumEnumerableConverterTestsKnownData : TheoryData<string, IEnumerable<StringEnum<HookType>>>
 {
-    public StringEnumEnumerableConverterTestsKnownData() => this.Add(@"[""App"", ""Organization""]", new[]
-    {
+    public StringEnumEnumerableConverterTestsKnownData() => this.Add(@"[""App"", ""Organization""]", [
         new StringEnum<HookType>(HookType.App),
         new StringEnum<HookType>(HookType.Organization),
-    });
+    ]);
 }
