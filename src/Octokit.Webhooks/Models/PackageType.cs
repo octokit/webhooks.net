@@ -11,7 +11,7 @@ public enum PackageType
     RubyGems,
     [EnumMember(Value = "docker")]
     Docker,
-    [EnumMember(Value = "nuget")]
+    [EnumMember(Value = "NUGET")]
     NuGet,
     [EnumMember(Value = "CONTAINER")]
     Container,

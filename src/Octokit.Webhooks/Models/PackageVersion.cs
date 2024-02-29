@@ -69,7 +69,7 @@ public sealed record PackageVersion
     public IDictionary<string, dynamic>? NpmMetadata { get; init; }
 
     [JsonPropertyName("nuget_metadata")]
-    public IDictionary<string, dynamic>? NugetMetadata { get; init; }
+    public IEnumerable<PackageVersionNugetMetadata>? NugetMetadata { get; init; }
 
     [JsonPropertyName("rubygems_metadata")]
     public IDictionary<string, dynamic>? RubygemsMetadata { get; init; }
