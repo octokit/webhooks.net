@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public static partial class GitHubWebhookExtensions
 {
-    public static void MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
+    public static IEndpointConventionBuilder MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
         endpoints.MapPost(path, async context =>
         {
             var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
