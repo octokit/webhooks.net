@@ -291,4 +291,7 @@ public sealed record Repository
 
     [JsonPropertyName("organization")]
     public string? Organization { get; init; }
+
+    [JsonPropertyName("custom_properties")]
+    public IDictionary<string, string>? CustomProperties { get; init; }
 }

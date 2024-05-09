@@ -21,6 +21,10 @@ public enum AppEvent
     ContentReference,
     [EnumMember(Value = "create")]
     Create,
+    [EnumMember(Value = "custom_property")]
+    CustomProperty,
+    [EnumMember(Value = "custom_property_values")]
+    CustomPropertyValues,
     [EnumMember(Value = "delete")]
     Delete,
     [EnumMember(Value = "deploy_key")]

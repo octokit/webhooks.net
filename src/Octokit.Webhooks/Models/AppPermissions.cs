@@ -74,6 +74,10 @@ public sealed record AppPermissions
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
     public StringEnum<AppPermissionsLevel>? OrganizationAdministration { get; init; }
 
+    [JsonPropertyName("organization_custom_properties")]
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? OrganizationCustomProperties { get; init; }
+
     [JsonPropertyName("organization_hooks")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
     public StringEnum<AppPermissionsLevel>? OrganizationHooks { get; init; }
@@ -116,6 +120,10 @@ public sealed record AppPermissions
     [JsonPropertyName("pull_requests")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
     public StringEnum<AppPermissionsLevel>? PullRequests { get; init; }
+
+    [JsonPropertyName("repository_custom_properties")]
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? RepositoryCustomProperties { get; init; }
 
     [JsonPropertyName("repository_hooks")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
