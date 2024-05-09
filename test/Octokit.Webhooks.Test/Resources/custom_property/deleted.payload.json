@@ -1,0 +1,44 @@
+{
+  "action": "deleted",
+  "definition": {
+    "property_name": "dev_platform_test"
+  },
+  "organization": {
+    "login": "Contoso-Inc",
+    "id": 128636122,
+    "node_id": "O_kgDOB6rU2g",
+    "url": "https://api.github.com/orgs/Contoso-Inc",
+    "repos_url": "https://api.github.com/orgs/Contoso-Inc/repos",
+    "events_url": "https://api.github.com/orgs/Contoso-Inc/events",
+    "hooks_url": "https://api.github.com/orgs/Contoso-Inc/hooks",
+    "issues_url": "https://api.github.com/orgs/Contoso-Inc/issues",
+    "members_url": "https://api.github.com/orgs/Contoso-Inc/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/Contoso-Inc/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/128636122?v=4",
+    "description": "Contoso Inc brings you the best of everything. "
+  },
+  "sender": {
+    "login": "colbylwilliams",
+    "id": 1829082,
+    "node_id": "MDQ6VXNldfG4MjkwODI=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1829082?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/colbylwilliams",
+    "html_url": "https://github.com/colbylwilliams",
+    "followers_url": "https://api.github.com/users/colbylwilliams/followers",
+    "following_url": "https://api.github.com/users/colbylwilliams/following{/other_user}",
+    "gists_url": "https://api.github.com/users/colbylwilliams/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/colbylwilliams/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/colbylwilliams/subscriptions",
+    "organizations_url": "https://api.github.com/users/colbylwilliams/orgs",
+    "repos_url": "https://api.github.com/users/colbylwilliams/repos",
+    "events_url": "https://api.github.com/users/colbylwilliams/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/colbylwilliams/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "installation": {
+    "id": 40989628,
+    "node_id": "MDIzOkludGVncmF0aF32SW5zdGFsbGF0aW9uNDA5ODk2Mjg="
+  }
+}
