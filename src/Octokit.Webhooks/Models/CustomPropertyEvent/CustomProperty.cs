@@ -22,7 +22,7 @@ public sealed record CustomProperty
     [JsonPropertyName("allowed_values")]
     public IEnumerable<string>? AllowedValues { get; init; }
 
-    [JsonPropertyName("editable_by")]
+    [JsonPropertyName("values_editable_by")]
     [JsonConverter(typeof(StringEnumConverter<CustomPropertyValuesEditableBy>))]
-    public StringEnum<CustomPropertyValuesEditableBy> EditableBy { get; init; } = null!;
+    public StringEnum<CustomPropertyValuesEditableBy>? ValuesEditableBy { get; init; }
 }
