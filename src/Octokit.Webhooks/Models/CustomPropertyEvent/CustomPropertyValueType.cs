@@ -1,4 +1,4 @@
-namespace Octokit.Webhooks.Models.CustomProperty;
+namespace Octokit.Webhooks.Models.CustomPropertyEvent;
 
 [PublicAPI]
 public enum CustomPropertyValueType
