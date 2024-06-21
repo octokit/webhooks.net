@@ -1,15 +1,17 @@
 {
   "action": "created",
   "definition": {
-    "property_name": "dev_platform_select",
+    "property_name": "test_ss",
     "value_type": "single_select",
     "required": true,
-    "default_value": "option_default",
-    "description": "select description",
+    "default_value": "option_c",
+    "description": "single_select property",
     "allowed_values": [
-      "option_one",
-      "option_two",
-      "option_default"
+      "option_a",
+      "option_b",
+      "option_c",
+      "option_d",
+      "option_e"
     ],
     "values_editable_by": "org_and_repo_actors"
   },

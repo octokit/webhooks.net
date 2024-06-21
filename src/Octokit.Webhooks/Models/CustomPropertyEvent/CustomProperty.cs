@@ -1,5 +1,7 @@
 namespace Octokit.Webhooks.Models.CustomPropertyEvent;
 
+using System.Linq;
+
 [PublicAPI]
 public sealed record CustomProperty
 {
@@ -14,7 +16,25 @@ public sealed record CustomProperty
     public bool Required { get; init; }
 
     [JsonPropertyName("default_value")]
-    public string? DefaultValue { get; init; }
+    public object? Default { get; init; }
+
+    public string? DefaultValue => this.Default switch
+    {
+        string str => str,
+        IEnumerable<string> strings => "[" + string.Join(",", strings) + "]",
+        JsonElement json when json.ValueKind is JsonValueKind.String => json.GetString(),
+        JsonElement json when json.ValueKind is JsonValueKind.Array => "[" + string.Join(",", json.EnumerateArray().Select(e => e.GetString()!)) + "]",
+        _ => null,
+    };
+
+    public IEnumerable<string>? DefaultValues => this.Default switch
+    {
+        string str => [str],
+        IEnumerable<string> strings => strings,
+        JsonElement json when json.ValueKind is JsonValueKind.String => [json.GetString()],
+        JsonElement json when json.ValueKind is JsonValueKind.Array => json.EnumerateArray().Select(e => e.GetString()!),
+        _ => null,
+    };
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
