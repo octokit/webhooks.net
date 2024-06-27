@@ -22,8 +22,8 @@ public sealed record CustomProperty
     {
         string str => str,
         IEnumerable<string> strings => "[" + string.Join(",", strings) + "]",
-        JsonElement json when json.ValueKind is JsonValueKind.String => json.GetString(),
-        JsonElement json when json.ValueKind is JsonValueKind.Array => "[" + string.Join(",", json.EnumerateArray().Select(e => e.GetString()!)) + "]",
+        JsonElement { ValueKind: JsonValueKind.String } json => json.GetString(),
+        JsonElement { ValueKind: JsonValueKind.Array } json => "[" + string.Join(",", json.EnumerateArray().Select(e => e.GetString()!)) + "]",
         _ => null,
     };
 
@@ -31,8 +31,8 @@ public sealed record CustomProperty
     {
         string str => [str],
         IEnumerable<string> strings => strings,
-        JsonElement json when json.ValueKind is JsonValueKind.String => [json.GetString()],
-        JsonElement json when json.ValueKind is JsonValueKind.Array => json.EnumerateArray().Select(e => e.GetString()!),
+        JsonElement { ValueKind: JsonValueKind.String } json => [json.GetString()!],
+        JsonElement { ValueKind: JsonValueKind.Array } json => json.EnumerateArray().Select(e => e.GetString()!),
         _ => null,
     };
 
