@@ -131,6 +131,14 @@
     "open_issues": 2,
     "watchers": 0,
     "default_branch": "master",
+    "custom_properties": {
+      "test_ms": [
+        "option_d",
+        "option_e"
+      ],
+      "test_ss": "option_c",
+      "test_tf": "foo"
+    },
     "is_template": false,
     "topics": [],
     "visibility": "public",

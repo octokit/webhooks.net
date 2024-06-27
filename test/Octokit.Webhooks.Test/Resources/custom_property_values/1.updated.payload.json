@@ -5,7 +5,24 @@
       "property_name": "test_ms",
       "value": [
         "option_c",
-        "option_b"
+        "option_d"
+      ]
+    },
+    {
+      "property_name": "test_ss",
+      "value": "option_b"
+    },
+    {
+      "property_name": "test_tf",
+      "value": "true"
+    }
+  ],
+  "old_property_values": [
+    {
+      "property_name": "test_ms",
+      "value": [
+        "option_b",
+        "option_c"
       ]
     },
     {
@@ -15,20 +32,6 @@
     {
       "property_name": "test_tf",
       "value": "false"
-    }
-  ],
-  "old_property_values": [
-    {
-      "property_name": "test_ms",
-      "value": null
-    },
-    {
-      "property_name": "test_ss",
-      "value": null
-    },
-    {
-      "property_name": "test_tf",
-      "value": null
     }
   ],
   "repository": {

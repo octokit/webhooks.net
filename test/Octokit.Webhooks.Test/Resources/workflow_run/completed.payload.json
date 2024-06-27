@@ -114,6 +114,14 @@
     "watchers": 1,
     "watchers_count": 1,
     "is_template": false,
+    "custom_properties": {
+      "test_ms": [
+        "option_d",
+        "option_e"
+      ],
+      "test_ss": "option_c",
+      "test_tf": "foo"
+    },
     "topics": [],
     "visibility": "public",
     "web_commit_signoff_required": false
@@ -166,7 +174,10 @@
         "email": "matfax@users.noreply.github.com",
         "name": "Matthias Fax"
       },
-      "committer": { "email": "noreply@github.com", "name": "GitHub" },
+      "committer": {
+        "email": "noreply@github.com",
+        "name": "GitHub"
+      },
       "id": "3484a3fb816e0859fd6e1cea078d76385ff50625",
       "message": "build(test): check workflow run event payload",
       "timestamp": "2020-10-05T16:32:07Z",

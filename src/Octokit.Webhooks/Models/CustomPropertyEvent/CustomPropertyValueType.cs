@@ -8,4 +8,10 @@ public enum CustomPropertyValueType
 
     [EnumMember(Value = "single_select")]
     SingleSelect,
+
+    [EnumMember(Value = "multi_select")]
+    MultiSelect,
+
+    [EnumMember(Value = "true_false")]
+    TrueFalse,
 }
