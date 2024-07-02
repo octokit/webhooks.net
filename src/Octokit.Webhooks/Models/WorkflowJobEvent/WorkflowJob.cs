@@ -60,7 +60,8 @@ public sealed record WorkflowJob
     public string? RunnerGroupName { get; init; }
 
     [JsonPropertyName("started_at")]
-    public string StartedAt { get; init; } = null!;
+    [JsonConverter(typeof(DateTimeOffsetConverter))]
+    public DateTimeOffset StartedAt { get; init; }
 
     [JsonPropertyName("completed_at")]
     public string? CompletedAt { get; init; }
@@ -72,5 +73,6 @@ public sealed record WorkflowJob
     public string? HeadBranch { get; init; }
 
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; init; } = null!;
+    [JsonConverter(typeof(DateTimeOffsetConverter))]
+    public DateTimeOffset CreatedAt { get; init; }
 }
