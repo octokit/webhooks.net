@@ -3,6 +3,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/octokit/webhooks.net/build.yml?branch=main&style=for-the-badge)](https://github.com/octokit/webhooks.net/actions/workflows/build.yml?query=branch%3Amain)
 [![Octokit.Webhooks NuGet Package Version](https://img.shields.io/nuget/v/Octokit.Webhooks?style=for-the-badge)](https://www.nuget.org/packages/Octokit.Webhooks/)
 [![Octokit.Webhooks NuGet Package Downloads](https://img.shields.io/nuget/dt/Octokit.Webhooks?style=for-the-badge)](https://www.nuget.org/packages/Octokit.Webhooks/)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/octokit/webhooks.net?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/octokit/webhooks.net)
 
 Libraries to handle GitHub Webhooks in .NET applications.
 
