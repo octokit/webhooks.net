@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 /// <summary>
 /// A class containing extension methods for <see cref="IEndpointRouteBuilder"/>
@@ -19,42 +20,55 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public static partial class GitHubWebhookExtensions
 {
-    public static IEndpointConventionBuilder MapGitHubWebhooks(this IEndpointRouteBuilder endpoints, string path = "/api/github/webhooks", string secret = null!) =>
-        endpoints.MapPost(path, async context =>
-        {
-            var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
-
-            // Verify content type
-            if (!VerifyContentType(context, MediaTypeNames.Application.Json))
+    public static IEndpointConventionBuilder MapGitHubWebhooks(
+        this IEndpointRouteBuilder endpoints,
+        string path = "/api/github/webhooks",
+        string? secret = null)
+    {
+        var options = endpoints.ServiceProvider.GetService<IOptionsMonitor<GitHubWebhookOptions>>();
+        return endpoints.MapPost(
+            path,
+            async context =>
             {
-                Log.IncorrectContentType(logger);
-                return;
-            }
+                var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
 
-            // Get body
-            var body = await GetBodyAsync(context).ConfigureAwait(false);
+                // Verify content type
+                if (!VerifyContentType(context, MediaTypeNames.Application.Json))
+                {
+                    Log.IncorrectContentType(logger);
+                    return;
+                }
 
-            // Verify signature
-            if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
-            {
-                Log.SignatureValidationFailed(logger);
-                return;
-            }
+                // Get body
+                var body = await GetBodyAsync(context).ConfigureAwait(false);
 
-            // Process body
-            try
-            {
-                var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                await service.ProcessWebhookAsync(context.Request.Headers, body)
-                    .ConfigureAwait(false);
-                context.Response.StatusCode = 200;
-            }
-            catch (Exception ex)
-            {
-                Log.ProcessingFailed(logger, ex);
-                context.Response.StatusCode = 500;
-            }
-        });
+                if (secret is null && options is not null)
+                {
+                    secret = options.CurrentValue.Secret;
+                }
+
+                // Verify signature
+                if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
+                {
+                    Log.SignatureValidationFailed(logger);
+                    return;
+                }
+
+                // Process body
+                try
+                {
+                    var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
+                    await service.ProcessWebhookAsync(context.Request.Headers, body)
+                        .ConfigureAwait(false);
+                    context.Response.StatusCode = 200;
+                }
+                catch (Exception ex)
+                {
+                    Log.ProcessingFailed(logger, ex);
+                    context.Response.StatusCode = 500;
+                }
+            });
+    }
 
     private static bool VerifyContentType(HttpContext context, string expectedContentType)
     {
@@ -79,7 +93,7 @@ public static partial class GitHubWebhookExtensions
         return await reader.ReadToEndAsync().ConfigureAwait(false);
     }
 
-    private static async Task<bool> VerifySignatureAsync(HttpContext context, string secret, string body)
+    private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, string body)
     {
         _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
 
@@ -106,7 +120,7 @@ public static partial class GitHubWebhookExtensions
             return false;
         }
 
-        var keyBytes = Encoding.UTF8.GetBytes(secret);
+        var keyBytes = Encoding.UTF8.GetBytes(secret!);
         var bodyBytes = Encoding.UTF8.GetBytes(body);
 
         var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
