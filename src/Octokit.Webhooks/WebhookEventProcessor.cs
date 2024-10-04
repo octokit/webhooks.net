@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks;
+namespace Octokit.Webhooks;
 
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
@@ -1292,6 +1292,8 @@ public abstract class WebhookEventProcessor
         {
             WorkflowRunActionValue.Completed
                 => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.Completed),
+            WorkflowRunActionValue.InProgress
+                => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.InProgress),
             WorkflowRunActionValue.Requested
                 => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.Requested),
             _ => Task.CompletedTask,
