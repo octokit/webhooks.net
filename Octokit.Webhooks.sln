@@ -31,9 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E1B24F25-B
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{26F71F5B-2940-4FB0-9681-A76060CBCEF9}"
-ProjectSection(SolutionItems) = preProject
-	images\Icon.png = images\Icon.png
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		images\Icon.png = images\Icon.png
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{566DF0E2-1288-4083-9B55-4C8B69BB1432}"
 	ProjectSection(SolutionItems) = preProject
@@ -70,6 +70,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions", "samples\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octokit.Webhooks.AzureFunctions", "src\Octokit.Webhooks.AzureFunctions\Octokit.Webhooks.AzureFunctions.csproj", "{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octokit.Webhooks.AzureFunctions.Test", "test\Octokit.Webhooks.AzureFunctions.Test\Octokit.Webhooks.AzureFunctions.Test.csproj", "{7B30ABC3-C016-4EA5-81C1-A51C28580D36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B30ABC3-C016-4EA5-81C1-A51C28580D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B30ABC3-C016-4EA5-81C1-A51C28580D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B30ABC3-C016-4EA5-81C1-A51C28580D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B30ABC3-C016-4EA5-81C1-A51C28580D36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{48EB4752-1A23-4DD2-AF86-21ED12475F8B} = {E1B24F25-B8A4-46EE-B7EB-7803DCFC543F}
 		{8731AAA1-8F8D-441A-BD61-6CA3A16A805B} = {174C8B3B-E8D3-4845-AE7C-8C0DEC43354F}
 		{E7A3E0C8-CE8E-434D-8E97-723F9D5206FA} = {719809C2-A551-4C4A-9EFD-B10FB5E35BC0}
+		{7B30ABC3-C016-4EA5-81C1-A51C28580D36} = {E1B24F25-B8A4-46EE-B7EB-7803DCFC543F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73F36209-F8D6-4066-8951-D97729F773CF}
