@@ -25,5 +25,5 @@ public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
         return DateTimeOffset.Parse(stringValue, CultureInfo.InvariantCulture);
     }
 
-    private static DateTimeOffset HandleNumber(Utf8JsonReader reader) => DateTimeOffset.FromUnixTimeSeconds(reader.GetInt32());
+    private static DateTimeOffset HandleNumber(Utf8JsonReader reader) => DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64());
 }
