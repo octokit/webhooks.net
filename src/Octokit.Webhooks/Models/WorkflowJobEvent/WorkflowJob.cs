@@ -60,11 +60,12 @@ public sealed record WorkflowJob
     public string? RunnerGroupName { get; init; }
 
     [JsonPropertyName("started_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
-    public DateTimeOffset StartedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? StartedAt { get; init; }
 
     [JsonPropertyName("completed_at")]
-    public string? CompletedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? CompletedAt { get; init; }
 
     [JsonPropertyName("workflow_name")]
     public string? WorkflowName { get; init; }

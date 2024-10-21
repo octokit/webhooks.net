@@ -18,8 +18,8 @@ public sealed record WorkflowJobStep
     public long Number { get; init; }
 
     [JsonPropertyName("started_at")]
-    [JsonConverter(typeof(DateTimeOffsetConverter))]
-    public DateTimeOffset StartedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? StartedAt { get; init; }
 
     [JsonPropertyName("completed_at")]
     [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
