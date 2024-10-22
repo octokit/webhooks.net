@@ -41,8 +41,10 @@ public sealed record RepositoryRuleset
     public IReadOnlyCollection<Rule>? Rules { get; init; }
 
     [JsonPropertyName("created_at")]
-    public string? CreatedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? CreatedAt { get; init; }
 
     [JsonPropertyName("updated_at")]
-    public string? UpdatedAt { get; init; }
+    [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
+    public DateTimeOffset? UpdatedAt { get; init; }
 }
