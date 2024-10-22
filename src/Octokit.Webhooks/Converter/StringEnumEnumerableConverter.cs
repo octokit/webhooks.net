@@ -33,13 +33,13 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                returnValue.Add((StringEnum<TEnum>)JsonSerializer.Deserialize(ref reader, typeof(StringEnum<TEnum>), Options)!);
+                returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)!);
             }
 
-            reader.Read();
+            _ = reader.Read();
         }
 
-        return returnValue!;
+        return returnValue;
     }
 
     private static void WriteInternal(Utf8JsonWriter writer, IEnumerable<StringEnum<TEnum>> value)
