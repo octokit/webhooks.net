@@ -10,8 +10,12 @@ public class WebhookEventProcessorTests
 
     [Theory]
     [ClassData(typeof(WebhookEventProcessorTestsData))]
-    public void CanDeserialize(WebhookHeaders headers, string payload, Type expectedType)
+    public void CanDeserialize(string @event, string payload, Type expectedType)
     {
+        var headers = new WebhookHeaders
+        {
+            Event = @event,
+        };
         var result = this.webhookEventProcessor.DeserializeWebhookEvent(headers, payload);
         result.Should().BeAssignableTo(expectedType);
     }
