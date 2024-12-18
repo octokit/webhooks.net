@@ -1,7 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup Label="Build">
-    <TargetFramework>net9.0</TargetFramework>
-  </PropertyGroup>
-
-</Project>
+<Project Sdk="Microsoft.NET.Sdk"/>
