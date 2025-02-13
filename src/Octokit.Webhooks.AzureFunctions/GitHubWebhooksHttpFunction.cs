@@ -51,7 +51,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             var service = ctx.InstanceServices.GetRequiredService<WebhookEventProcessor>();
             var headers = req.Headers.ToDictionary(
                 kv => kv.Key,
-                kv => new StringValues(kv.Value.ToArray()),
+                kv => new StringValues([.. kv.Value]),
                 StringComparer.OrdinalIgnoreCase);
             await service.ProcessWebhookAsync(headers, body)
                 .ConfigureAwait(false);
