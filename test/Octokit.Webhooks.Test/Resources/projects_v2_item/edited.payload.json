@@ -33,7 +33,21 @@
   "changes": {
     "field_value": {
       "field_node_id": "PVTF_lADOAWcTxs07G84AAali",
-      "field_type": "single_select"
+      "field_type": "single_select",
+      "field_name": "Status",
+      "project_number": 18,
+      "from": {
+        "id": "f75ad846",
+        "name": "Todo",
+        "color": "GREEN",
+        "description": "This item hasn't been started"
+      },
+      "to": {
+        "id": "47fc9ee4",
+        "name": "In Progress",
+        "color": "YELLOW",
+        "description": "This is actively being worked on"
+      }
     }
   },
   "organization": {
