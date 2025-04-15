@@ -54,6 +54,7 @@ public static class WebhookEventType
     public const string RegistryPackage = "registry_package";
     public const string Release = "release";
     public const string Repository = "repository";
+    public const string RepositoryAdvisory = "repository_advisory";
     public const string RepositoryDispatch = "repository_dispatch";
     public const string RepositoryImport = "repository_import";
     public const string RepositoryRuleset = "repository_ruleset";
