@@ -1,0 +1,210 @@
+{
+    "action": "reported",
+    "repository_advisory": {
+      "ghsa_id": "GHSA-hv58-4hqr-7vxj",
+      "cve_id": null,
+      "url": "https://api.github.com/repos/pi-hole/land_of_confusion/security-advisories/GHSA-hv58-4hqr-7vxj",
+      "html_url": "https://github.com/pi-hole/land_of_confusion/security/advisories/GHSA-hv58-4hqr-7vxj",
+      "summary": "Test",
+      "description": "Testing from an account that doesn't have write access",
+      "severity": "low",
+      "author": null,
+      "publisher": null,
+      "identifiers": [
+        {
+          "value": "GHSA-hv58-4hqr-7vxj",
+          "type": "GHSA"
+        }
+      ],
+      "state": "triage",
+      "created_at": null,
+      "updated_at": "2025-04-15T17:22:36Z",
+      "published_at": null,
+      "closed_at": null,
+      "withdrawn_at": null,
+      "submission": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "",
+            "name": ""
+          },
+          "vulnerable_version_range": "<0",
+          "patched_versions": ">0",
+          "vulnerable_functions": [
+  
+          ]
+        }
+      ],
+      "cvss_severities": {
+        "cvss_v3": {
+          "vector_string": null,
+          "score": null
+        },
+        "cvss_v4": {
+          "vector_string": null,
+          "score": null
+        }
+      },
+      "cwes": [
+  
+      ],
+      "cwe_ids": [
+  
+      ],
+      "credits": [
+  
+      ],
+      "credits_detailed": [
+  
+      ],
+      "collaborating_users": null,
+      "collaborating_teams": null,
+      "private_fork": null,
+      "cvss": {
+        "vector_string": null,
+        "score": null
+      }
+    },
+    "repository": {
+      "id": 256280292,
+      "node_id": "MDEwOlJlcG9zaXRvcnkyNTYyODAyOTI=",
+      "name": "land_of_confusion",
+      "full_name": "pi-hole/land_of_confusion",
+      "private": false,
+      "owner": {
+        "login": "pi-hole",
+        "id": 16827203,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjE2ODI3MjAz",
+        "avatar_url": "https://avatars.githubusercontent.com/u/16827203?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/pi-hole",
+        "html_url": "https://github.com/pi-hole",
+        "followers_url": "https://api.github.com/users/pi-hole/followers",
+        "following_url": "https://api.github.com/users/pi-hole/following{/other_user}",
+        "gists_url": "https://api.github.com/users/pi-hole/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/pi-hole/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/pi-hole/subscriptions",
+        "organizations_url": "https://api.github.com/users/pi-hole/orgs",
+        "repos_url": "https://api.github.com/users/pi-hole/repos",
+        "events_url": "https://api.github.com/users/pi-hole/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/pi-hole/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/pi-hole/land_of_confusion",
+      "description": "Test it, break it, see what happens.",
+      "fork": false,
+      "url": "https://api.github.com/repos/pi-hole/land_of_confusion",
+      "forks_url": "https://api.github.com/repos/pi-hole/land_of_confusion/forks",
+      "keys_url": "https://api.github.com/repos/pi-hole/land_of_confusion/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/pi-hole/land_of_confusion/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/pi-hole/land_of_confusion/teams",
+      "hooks_url": "https://api.github.com/repos/pi-hole/land_of_confusion/hooks",
+      "issue_events_url": "https://api.github.com/repos/pi-hole/land_of_confusion/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/pi-hole/land_of_confusion/events",
+      "assignees_url": "https://api.github.com/repos/pi-hole/land_of_confusion/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/pi-hole/land_of_confusion/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/pi-hole/land_of_confusion/tags",
+      "blobs_url": "https://api.github.com/repos/pi-hole/land_of_confusion/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/pi-hole/land_of_confusion/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/pi-hole/land_of_confusion/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/pi-hole/land_of_confusion/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/pi-hole/land_of_confusion/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/pi-hole/land_of_confusion/languages",
+      "stargazers_url": "https://api.github.com/repos/pi-hole/land_of_confusion/stargazers",
+      "contributors_url": "https://api.github.com/repos/pi-hole/land_of_confusion/contributors",
+      "subscribers_url": "https://api.github.com/repos/pi-hole/land_of_confusion/subscribers",
+      "subscription_url": "https://api.github.com/repos/pi-hole/land_of_confusion/subscription",
+      "commits_url": "https://api.github.com/repos/pi-hole/land_of_confusion/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/pi-hole/land_of_confusion/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/pi-hole/land_of_confusion/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/pi-hole/land_of_confusion/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/pi-hole/land_of_confusion/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/pi-hole/land_of_confusion/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/pi-hole/land_of_confusion/merges",
+      "archive_url": "https://api.github.com/repos/pi-hole/land_of_confusion/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/pi-hole/land_of_confusion/downloads",
+      "issues_url": "https://api.github.com/repos/pi-hole/land_of_confusion/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/pi-hole/land_of_confusion/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/pi-hole/land_of_confusion/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/pi-hole/land_of_confusion/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/pi-hole/land_of_confusion/labels{/name}",
+      "releases_url": "https://api.github.com/repos/pi-hole/land_of_confusion/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/pi-hole/land_of_confusion/deployments",
+      "created_at": "2020-04-16T17:12:48Z",
+      "updated_at": "2025-04-15T17:09:40Z",
+      "pushed_at": "2024-06-15T10:53:47Z",
+      "git_url": "git://github.com/pi-hole/land_of_confusion.git",
+      "ssh_url": "git@github.com:pi-hole/land_of_confusion.git",
+      "clone_url": "https://github.com/pi-hole/land_of_confusion.git",
+      "svn_url": "https://github.com/pi-hole/land_of_confusion",
+      "homepage": null,
+      "size": 114,
+      "stargazers_count": 0,
+      "watchers_count": 0,
+      "language": null,
+      "has_issues": true,
+      "has_projects": true,
+      "has_downloads": true,
+      "has_wiki": true,
+      "has_pages": false,
+      "has_discussions": true,
+      "forks_count": 0,
+      "mirror_url": null,
+      "archived": false,
+      "disabled": false,
+      "open_issues_count": 9,
+      "license": null,
+      "allow_forking": true,
+      "is_template": false,
+      "web_commit_signoff_required": true,
+      "topics": [
+  
+      ],
+      "visibility": "public",
+      "forks": 0,
+      "open_issues": 9,
+      "watchers": 0,
+      "default_branch": "master",
+      "custom_properties": {
+  
+      }
+    },
+    "organization": {
+      "login": "pi-hole",
+      "id": 16827203,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjE2ODI3MjAz",
+      "url": "https://api.github.com/orgs/pi-hole",
+      "repos_url": "https://api.github.com/orgs/pi-hole/repos",
+      "events_url": "https://api.github.com/orgs/pi-hole/events",
+      "hooks_url": "https://api.github.com/orgs/pi-hole/hooks",
+      "issues_url": "https://api.github.com/orgs/pi-hole/issues",
+      "members_url": "https://api.github.com/orgs/pi-hole/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/pi-hole/public_members{/member}",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16827203?v=4",
+      "description": "A black hole for Internet advertisements"
+    },
+    "sender": {
+      "login": "promofaux2",
+      "id": 207756468,
+      "node_id": "U_kgDODGIctA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/207756468?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/promofaux2",
+      "html_url": "https://github.com/promofaux2",
+      "followers_url": "https://api.github.com/users/promofaux2/followers",
+      "following_url": "https://api.github.com/users/promofaux2/following{/other_user}",
+      "gists_url": "https://api.github.com/users/promofaux2/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/promofaux2/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/promofaux2/subscriptions",
+      "organizations_url": "https://api.github.com/users/promofaux2/orgs",
+      "repos_url": "https://api.github.com/users/promofaux2/repos",
+      "events_url": "https://api.github.com/users/promofaux2/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/promofaux2/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    }
+  }

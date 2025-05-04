@@ -46,6 +46,7 @@ using Octokit.Webhooks.Events.PullRequestReviewThread;
 using Octokit.Webhooks.Events.RegistryPackage;
 using Octokit.Webhooks.Events.Release;
 using Octokit.Webhooks.Events.Repository;
+using Octokit.Webhooks.Events.RepositoryAdvisory;
 using Octokit.Webhooks.Events.RepositoryDispatch;
 using Octokit.Webhooks.Events.RepositoryRuleset;
 using Octokit.Webhooks.Events.RepositoryVulnerabilityAlert;
@@ -135,6 +136,7 @@ public abstract class WebhookEventProcessor
             ReleaseEvent releaseEvent => this.ProcessReleaseWebhookAsync(headers, releaseEvent),
             RegistryPackageEvent registryPackageEvent => this.ProcessRegistryPackageWebhookAsync(headers, registryPackageEvent),
             RepositoryEvent repositoryEvent => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent),
+            RepositoryAdvisoryEvent repositoryAdvisoryEvent => this.ProcessRepositoryAdvisoryWebhookAsync(headers, repositoryAdvisoryEvent),
             RepositoryDispatchEvent repositoryDispatchEvent
                 => this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent),
             RepositoryImportEvent repositoryImportEvent => this.ProcessRepositoryImportWebhookAsync(headers, repositoryImportEvent),
@@ -214,6 +216,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.Release => JsonSerializer.Deserialize<ReleaseEvent>(body)!,
             WebhookEventType.RegistryPackage => JsonSerializer.Deserialize<RegistryPackageEvent>(body)!,
             WebhookEventType.Repository => JsonSerializer.Deserialize<RepositoryEvent>(body)!,
+            WebhookEventType.RepositoryAdvisory => JsonSerializer.Deserialize<RepositoryAdvisoryEvent>(body)!,
             WebhookEventType.RepositoryDispatch => JsonSerializer.Deserialize<RepositoryDispatchEvent>(body)!,
             WebhookEventType.RepositoryImport => JsonSerializer.Deserialize<RepositoryImportEvent>(body)!,
             WebhookEventType.RepositoryRuleset => JsonSerializer.Deserialize<RepositoryRulesetEvent>(body)!,
@@ -1071,6 +1074,26 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         RepositoryEvent repositoryEvent,
         RepositoryAction action) => Task.CompletedTask;
+
+    private Task ProcessRepositoryAdvisoryWebhookAsync(WebhookHeaders headers, RepositoryAdvisoryEvent repositoryAdvisoryEvent) =>
+        repositoryAdvisoryEvent.Action switch
+        {
+            RepositoryAdvisoryActionValue.Reported => this.ProcessRepositoryAdvisoryWebhookAsync(
+                headers,
+                repositoryAdvisoryEvent,
+                RepositoryAdvisoryAction.Reported),
+            RepositoryAdvisoryActionValue.Published => this.ProcessRepositoryAdvisoryWebhookAsync(
+                headers,
+                repositoryAdvisoryEvent,
+                RepositoryAdvisoryAction.Published),
+            _ => Task.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual Task ProcessRepositoryAdvisoryWebhookAsync(
+        WebhookHeaders headers,
+        RepositoryAdvisoryEvent repositoryAdvisoryEvent,
+        RepositoryAdvisoryAction action) => Task.CompletedTask;
 
     private Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent) =>
         repositoryDispatchEvent.Action switch
