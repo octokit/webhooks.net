@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" PrivateAssets="all" />
     <PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Primitives" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="9.0.5" />
   </ItemGroup>
 
 </Project>
