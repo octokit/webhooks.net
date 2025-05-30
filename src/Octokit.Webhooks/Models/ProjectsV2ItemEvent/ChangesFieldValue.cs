@@ -9,4 +9,16 @@ public sealed record ChangesFieldValue
 
     [JsonPropertyName("field_node_id")]
     public string FieldNodeId { get; init; } = null!;
+
+    [JsonPropertyName("field_name")]
+    public string FieldName { get; init; } = null!;
+
+    [JsonPropertyName("project_number")]
+    public long ProjectNumber { get; init; }
+
+    [JsonPropertyName("from")]
+    public ChangesFieldValueChange From { get; init; } = null!;
+
+    [JsonPropertyName("to")]
+    public ChangesFieldValueChange To { get; init; } = null!;
 }
