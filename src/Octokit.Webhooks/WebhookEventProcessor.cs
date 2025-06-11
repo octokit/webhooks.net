@@ -645,10 +645,12 @@ public abstract class WebhookEventProcessor
             IssuesActionValue.Pinned => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Pinned),
             IssuesActionValue.Reopened => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Reopened),
             IssuesActionValue.Transferred => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Transferred),
+            IssuesActionValue.Typed => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Typed),
             IssuesActionValue.Unassigned => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unassigned),
             IssuesActionValue.Unlabeled => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unlabeled),
             IssuesActionValue.Unlocked => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unlocked),
             IssuesActionValue.Unpinned => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unpinned),
+            IssuesActionValue.Untyped => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Untyped),
             _ => Task.CompletedTask,
         };
 
