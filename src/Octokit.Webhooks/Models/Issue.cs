@@ -92,4 +92,7 @@ public sealed record Issue
 
     [JsonPropertyName("state_reason")]
     public string? StateReason { get; init; }
+
+    [JsonPropertyName("type")]
+    public IssueType? Type { get; init; }
 }

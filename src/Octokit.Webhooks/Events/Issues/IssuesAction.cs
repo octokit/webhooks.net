@@ -27,6 +27,8 @@ public sealed record IssuesAction : WebhookEventAction
 
     public static readonly IssuesAction Transferred = new(IssuesActionValue.Transferred);
 
+    public static readonly IssuesAction Typed = new(IssuesActionValue.Typed);
+
     public static readonly IssuesAction Unassigned = new(IssuesActionValue.Unassigned);
 
     public static readonly IssuesAction Unlabeled = new(IssuesActionValue.Unlabeled);
@@ -34,6 +36,8 @@ public sealed record IssuesAction : WebhookEventAction
     public static readonly IssuesAction Unlocked = new(IssuesActionValue.Unlocked);
 
     public static readonly IssuesAction Unpinned = new(IssuesActionValue.Unpinned);
+
+    public static readonly IssuesAction Untyped = new(IssuesActionValue.Untyped);
 
     private IssuesAction(string value)
         : base(value)

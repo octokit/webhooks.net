@@ -26,6 +26,8 @@ public static class IssuesActionValue
 
     public const string Transferred = "transferred";
 
+    public const string Typed = "typed";
+
     public const string Unassigned = "unassigned";
 
     public const string Unlabeled = "unlabeled";
@@ -33,4 +35,6 @@ public static class IssuesActionValue
     public const string Unlocked = "unlocked";
 
     public const string Unpinned = "unpinned";
+
+    public const string Untyped = "untyped";
 }
