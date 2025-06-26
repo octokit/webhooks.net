@@ -15,8 +15,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\repository_advisory\" />
-  </ItemGroup>
-
 </Project>
