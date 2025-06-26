@@ -84,7 +84,7 @@ public sealed record PullRequestReviewComment
     public StringEnum<Side> Side { get; init; } = null!;
 
     [JsonPropertyName("in_reply_to_id")]
-    public int? InReplyToId { get; init; }
+    public long? InReplyToId { get; init; }
 
     [JsonPropertyName("subject_type")]
     [JsonConverter(typeof(StringEnumConverter<PullRequestReviewCommentSubjectType>))]
