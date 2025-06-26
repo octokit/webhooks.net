@@ -39,6 +39,7 @@ using Octokit.Webhooks.Events.Package;
 using Octokit.Webhooks.Events.Project;
 using Octokit.Webhooks.Events.ProjectCard;
 using Octokit.Webhooks.Events.ProjectColumn;
+using Octokit.Webhooks.Events.ProjectsV2Item;
 using Octokit.Webhooks.Events.PullRequest;
 using Octokit.Webhooks.Events.PullRequestReview;
 using Octokit.Webhooks.Events.PullRequestReviewComment;
@@ -125,6 +126,7 @@ public abstract class WebhookEventProcessor
             ProjectEvent projectEvent => this.ProcessProjectWebhookAsync(headers, projectEvent),
             ProjectCardEvent projectCardEvent => this.ProcessProjectCardWebhookAsync(headers, projectCardEvent),
             ProjectColumnEvent projectColumnEvent => this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent),
+            ProjectsV2ItemEvent projectsV2ItemEvent => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent),
             PublicEvent publicEvent => this.ProcessPublicWebhookAsync(headers, publicEvent),
             PullRequestEvent pullRequestEvent => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent),
             PullRequestReviewEvent pullRequestReviewEvent => this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent),
@@ -887,6 +889,23 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         ProjectColumnEvent projectColumnEvent,
         ProjectColumnAction action) => Task.CompletedTask;
+
+    [PublicAPI]
+    protected virtual Task ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent, ProjectsV2ItemAction action)
+        => Task.CompletedTask;
+
+    private Task ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent) =>
+        projectsV2ItemEvent.Action switch
+        {
+            ProjectsV2ItemActionValue.Created => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Created),
+            ProjectsV2ItemActionValue.Deleted => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Deleted),
+            ProjectsV2ItemActionValue.Edited => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Edited),
+            ProjectsV2ItemActionValue.Archived => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Archived),
+            ProjectsV2ItemActionValue.Converted => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Converted),
+            ProjectsV2ItemActionValue.Restored => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Restored),
+            ProjectsV2ItemActionValue.Reordered => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Reordered),
+            _ => Task.CompletedTask,
+        };
 
     [PublicAPI]
     protected virtual Task ProcessPublicWebhookAsync(WebhookHeaders headers, PublicEvent publicEvent) => Task.CompletedTask;
