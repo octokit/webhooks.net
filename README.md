@@ -17,7 +17,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     ```C#
     public sealed class MyWebhookEventProcessor : WebhookEventProcessor
     {
-        protected override Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) 
+        protected override ValueTask ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action) 
         {
             ...
         }
@@ -41,14 +41,15 @@ Libraries to handle GitHub Webhooks in .NET applications.
     });
     ```
 
-`MapGitHubWebhooks()` takes two optional parameters:
+`MapGitHubWebhooks()` takes three optional parameters:
 
 * `path`. Defaults to `/api/github/webhooks`, the URL of the endpoint to use for GitHub.
 * `secret`. The secret you have configured in GitHub, if you have set this up.
+* `cancelOnRequestAborted`. Defaults to `false`, indicates whether the processing of the webhook should be cancelled if the request is aborted.
 
 ### Azure Functions
 
-**NOTE**: Support is only provided for [isolated process Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide).
+**NOTE**: Support is only provided for [isolated process Azure Functions](https://learn.microsoft.com/azure/azure-functions/dotnet-isolated-process-guide).
 
 1. `dotnet add package Octokit.Webhooks.AzureFunctions`
 2. Create a class that derives from `WebhookEventProcessor` and override any of the virtual methods to handle webhooks from GitHub. For example, to handle Pull Request webhooks:
@@ -56,7 +57,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     ```C#
     public sealed class MyWebhookEventProcessor : WebhookEventProcessor
     {
-        protected override Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action, CancellationToken cancellationToken = default) 
+        protected override ValueTask ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action, CancellationToken cancellationToken = default) 
         {
             ...
         }
