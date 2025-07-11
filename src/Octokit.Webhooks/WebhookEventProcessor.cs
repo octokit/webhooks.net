@@ -65,7 +65,7 @@ using Octokit.Webhooks.Events.WorkflowRun;
 public abstract class WebhookEventProcessor
 {
     [PublicAPI]
-    public virtual Task ProcessWebhookAsync(IDictionary<string, StringValues> headers, string body, CancellationToken cancellationToken = default)
+    public virtual ValueTask ProcessWebhookAsync(IDictionary<string, StringValues> headers, string body, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(headers);
         ArgumentNullException.ThrowIfNull(body);
@@ -77,7 +77,7 @@ public abstract class WebhookEventProcessor
     }
 
     [PublicAPI]
-    public virtual Task ProcessWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent, CancellationToken cancellationToken = default) =>
+    public virtual ValueTask ProcessWebhookAsync(WebhookHeaders headers, WebhookEvent webhookEvent, CancellationToken cancellationToken = default) =>
         webhookEvent switch
         {
             BranchProtectionRuleEvent branchProtectionRuleEvent
@@ -160,7 +160,7 @@ public abstract class WebhookEventProcessor
             WorkflowDispatchEvent workflowDispatchEvent => this.ProcessWorkflowDispatchWebhookAsync(headers, workflowDispatchEvent, cancellationToken),
             WorkflowJobEvent workflowJobEvent => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, cancellationToken),
             WorkflowRunEvent workflowRunEvent => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
@@ -238,7 +238,7 @@ public abstract class WebhookEventProcessor
             _ => throw new JsonException("Unable to deserialize event"),
         };
 
-    private Task ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, CancellationToken cancellationToken = default) =>
         branchProtectionRuleEvent.Action switch
         {
             BranchProtectionRuleActionValue.Created
@@ -247,17 +247,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Deleted, cancellationToken),
             BranchProtectionRuleActionValue.Edited
                 => this.ProcessBranchProtectionRuleWebhookAsync(headers, branchProtectionRuleEvent, BranchProtectionRuleAction.Edited, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessBranchProtectionRuleWebhookAsync(
+    protected virtual ValueTask ProcessBranchProtectionRuleWebhookAsync(
         WebhookHeaders headers,
         BranchProtectionRuleEvent branchProtectionRuleEvent,
         BranchProtectionRuleAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CancellationToken cancellationToken = default) =>
         checkRunEvent.Action switch
         {
             CheckRunActionValue.Completed => this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.Completed, cancellationToken),
@@ -265,31 +265,31 @@ public abstract class WebhookEventProcessor
             CheckRunActionValue.RequestedAction
                 => this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.RequestedAction, cancellationToken),
             CheckRunActionValue.Rerequested => this.ProcessCheckRunWebhookAsync(headers, checkRunEvent, CheckRunAction.Rerequested, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CheckRunAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessCheckRunWebhookAsync(WebhookHeaders headers, CheckRunEvent checkRunEvent, CheckRunAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCheckSuiteWebhookAsync(WebhookHeaders headers, CheckSuiteEvent checkSuiteEvent, CancellationToken cancellationToken = default) =>
         checkSuiteEvent.Action switch
         {
             CheckSuiteActionValue.Completed => this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Completed, cancellationToken),
             CheckSuiteActionValue.Requested => this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Requested, cancellationToken),
             CheckSuiteActionValue.Rerequested
                 => this.ProcessCheckSuiteWebhookAsync(headers, checkSuiteEvent, CheckSuiteAction.Rerequested, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCheckSuiteWebhookAsync(
+    protected virtual ValueTask ProcessCheckSuiteWebhookAsync(
         WebhookHeaders headers,
         CheckSuiteEvent checkSuiteEvent,
         CheckSuiteAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCodeScanningAlertWebhookAsync(WebhookHeaders headers, CodeScanningAlertEvent codeScanningAlertEvent, CancellationToken cancellationToken = default) =>
         codeScanningAlertEvent.Action switch
         {
             CodeScanningAlertActionValue.AppearedInBranch
@@ -304,50 +304,50 @@ public abstract class WebhookEventProcessor
                 => this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.Reopened, cancellationToken),
             CodeScanningAlertActionValue.ReopenedByUser
                 => this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.ReopenedByUser, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCodeScanningAlertWebhookAsync(
+    protected virtual ValueTask ProcessCodeScanningAlertWebhookAsync(
         WebhookHeaders headers,
         CodeScanningAlertEvent codeScanningAlertEvent,
         CodeScanningAlertAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessCommitCommentWebhookAsync(WebhookHeaders headers, CommitCommentEvent commitCommentEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCommitCommentWebhookAsync(WebhookHeaders headers, CommitCommentEvent commitCommentEvent, CancellationToken cancellationToken = default) =>
         commitCommentEvent.Action switch
         {
             CommitCommentActionValue.Created
                 => this.ProcessCommitCommentWebhookAsync(headers, commitCommentEvent, CommitCommentAction.Created, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCommitCommentWebhookAsync(
+    protected virtual ValueTask ProcessCommitCommentWebhookAsync(
         WebhookHeaders headers,
         CommitCommentEvent commitCommentEvent,
         CommitCommentAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessContentReferenceWebhookAsync(WebhookHeaders headers, ContentReferenceEvent contentReferenceEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessContentReferenceWebhookAsync(WebhookHeaders headers, ContentReferenceEvent contentReferenceEvent, CancellationToken cancellationToken = default) =>
         contentReferenceEvent.Action switch
         {
             ContentReferenceActionValue.Created
                 => this.ProcessContentReferenceWebhookAsync(headers, contentReferenceEvent, ContentReferenceAction.Created, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessContentReferenceWebhookAsync(
+    protected virtual ValueTask ProcessContentReferenceWebhookAsync(
         WebhookHeaders headers,
         ContentReferenceEvent contentReferenceEvent,
         ContentReferenceAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessCreateWebhookAsync(WebhookHeaders headers, CreateEvent createEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessCreateWebhookAsync(WebhookHeaders headers, CreateEvent createEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessCustomPropertyWebhookAsync(WebhookHeaders headers, CustomPropertyEvent customPropertyEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCustomPropertyWebhookAsync(WebhookHeaders headers, CustomPropertyEvent customPropertyEvent, CancellationToken cancellationToken = default) =>
         customPropertyEvent.Action switch
         {
             CustomPropertyActionValue.Created
@@ -356,35 +356,35 @@ public abstract class WebhookEventProcessor
                 => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent, CustomPropertyAction.Deleted, cancellationToken),
             CustomPropertyActionValue.Updated
                 => this.ProcessCustomPropertyWebhookAsync(headers, customPropertyEvent, CustomPropertyAction.Updated, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCustomPropertyWebhookAsync(
+    protected virtual ValueTask ProcessCustomPropertyWebhookAsync(
         WebhookHeaders headers,
         CustomPropertyEvent hookEvent,
         CustomPropertyAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessCustomPropertyValuesWebhookAsync(WebhookHeaders headers, CustomPropertyValuesEvent customPropertyValuesEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessCustomPropertyValuesWebhookAsync(WebhookHeaders headers, CustomPropertyValuesEvent customPropertyValuesEvent, CancellationToken cancellationToken = default) =>
         customPropertyValuesEvent.Action switch
         {
             CustomPropertyValuesActionValue.Updated
                 => this.ProcessCustomPropertyValuesWebhookAsync(headers, customPropertyValuesEvent, CustomPropertyValuesAction.Updated, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessCustomPropertyValuesWebhookAsync(
+    protected virtual ValueTask ProcessCustomPropertyValuesWebhookAsync(
         WebhookHeaders headers,
         CustomPropertyValuesEvent hookEvent,
         CustomPropertyValuesAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessDeleteWebhookAsync(WebhookHeaders headers, DeleteEvent deleteEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDependabotAlertWebhookAsync(WebhookHeaders headers, DependabotAlertEvent dependabotAlertEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDependabotAlertWebhookAsync(WebhookHeaders headers, DependabotAlertEvent dependabotAlertEvent, CancellationToken cancellationToken = default) =>
         dependabotAlertEvent.Action switch
         {
             DependabotAlertActionValue.Created
@@ -397,60 +397,60 @@ public abstract class WebhookEventProcessor
                 => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reintroduced, cancellationToken),
             DependabotAlertActionValue.Reopened
                 => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reopened, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDependabotAlertWebhookAsync(
+    protected virtual ValueTask ProcessDependabotAlertWebhookAsync(
         WebhookHeaders headers,
         DependabotAlertEvent dependabotAlertEvent,
         DependabotAlertAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDeployKeyWebhookAsync(WebhookHeaders headers, DeployKeyEvent deployKeyEvent, CancellationToken cancellationToken = default) =>
         deployKeyEvent.Action switch
         {
             DeployKeyActionValue.Created => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent, DeployKeyAction.Created, cancellationToken),
             DeployKeyActionValue.Deleted => this.ProcessDeployKeyWebhookAsync(headers, deployKeyEvent, DeployKeyAction.Deleted, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDeployKeyWebhookAsync(
+    protected virtual ValueTask ProcessDeployKeyWebhookAsync(
         WebhookHeaders headers,
         DeployKeyEvent deployKeyEvent,
         DeployKeyAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDeploymentWebhookAsync(WebhookHeaders headers, DeploymentEvent deploymentEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDeploymentWebhookAsync(WebhookHeaders headers, DeploymentEvent deploymentEvent, CancellationToken cancellationToken = default) =>
         deploymentEvent.Action switch
         {
             DeploymentActionValue.Created => this.ProcessDeploymentWebhookAsync(headers, deploymentEvent, DeploymentAction.Created, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDeploymentWebhookAsync(
+    protected virtual ValueTask ProcessDeploymentWebhookAsync(
         WebhookHeaders headers,
         DeploymentEvent deploymentEvent,
         DeploymentAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDeploymentProtectionRuleWebhookAsync(WebhookHeaders headers, DeploymentProtectionRuleEvent deploymentProtectionRuleEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDeploymentProtectionRuleWebhookAsync(WebhookHeaders headers, DeploymentProtectionRuleEvent deploymentProtectionRuleEvent, CancellationToken cancellationToken = default) =>
         deploymentProtectionRuleEvent.Action switch
         {
             DeploymentProtectionRuleActionValue.Requested => this.ProcessDeployProtectionRuleWebhookAsync(headers, deploymentProtectionRuleEvent, DeploymentProtectionRuleAction.Requested, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDeployProtectionRuleWebhookAsync(
+    protected virtual ValueTask ProcessDeployProtectionRuleWebhookAsync(
         WebhookHeaders headers,
         DeploymentProtectionRuleEvent deploymentProtectionRuleEvent,
         DeploymentProtectionRuleAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDeploymentReviewWebhookAsync(WebhookHeaders headers, DeploymentReviewEvent deploymentReviewEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDeploymentReviewWebhookAsync(WebhookHeaders headers, DeploymentReviewEvent deploymentReviewEvent, CancellationToken cancellationToken = default) =>
         deploymentReviewEvent.Action switch
         {
             DeploymentReviewActionValue.Approved => this.ProcessDeploymentReviewWebhookAsync(
@@ -468,32 +468,32 @@ public abstract class WebhookEventProcessor
                 deploymentReviewEvent,
                 DeploymentReviewAction.Requested,
                 cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDeploymentReviewWebhookAsync(
+    protected virtual ValueTask ProcessDeploymentReviewWebhookAsync(
         WebhookHeaders headers,
         DeploymentReviewEvent deploymentReviewEvent,
         DeploymentReviewAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDeploymentStatusWebhookAsync(WebhookHeaders headers, DeploymentStatusEvent deploymentStatusEvent, CancellationToken cancellationToken = default) =>
         deploymentStatusEvent.Action switch
         {
             DeploymentStatusActionValue.Created
                 => this.ProcessDeploymentStatusWebhookAsync(headers, deploymentStatusEvent, DeploymentStatusAction.Created, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDeploymentStatusWebhookAsync(
+    protected virtual ValueTask ProcessDeploymentStatusWebhookAsync(
         WebhookHeaders headers,
         DeploymentStatusEvent deploymentStatusEvent,
         DeploymentStatusAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDiscussionWebhookAsync(WebhookHeaders headers, DiscussionEvent discussionEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDiscussionWebhookAsync(WebhookHeaders headers, DiscussionEvent discussionEvent, CancellationToken cancellationToken = default) =>
         discussionEvent.Action switch
         {
             DiscussionActionValue.Answered => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Answered, cancellationToken),
@@ -512,17 +512,17 @@ public abstract class WebhookEventProcessor
             DiscussionActionValue.Unlabeled => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlabeled, cancellationToken),
             DiscussionActionValue.Unlocked => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlocked, cancellationToken),
             DiscussionActionValue.Unpinned => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unpinned, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDiscussionWebhookAsync(
+    protected virtual ValueTask ProcessDiscussionWebhookAsync(
         WebhookHeaders headers,
         DiscussionEvent discussionEvent,
         DiscussionAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, DiscussionCommentEvent discussionCommentEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessDiscussionCommentWebhookAsync(WebhookHeaders headers, DiscussionCommentEvent discussionCommentEvent, CancellationToken cancellationToken = default) =>
         discussionCommentEvent.Action switch
         {
             DiscussionCommentActionValue.Created
@@ -531,20 +531,20 @@ public abstract class WebhookEventProcessor
                 => this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent, DiscussionCommentAction.Deleted, cancellationToken),
             DiscussionCommentActionValue.Edited
                 => this.ProcessDiscussionCommentWebhookAsync(headers, discussionCommentEvent, DiscussionCommentAction.Edited, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessDiscussionCommentWebhookAsync(
+    protected virtual ValueTask ProcessDiscussionCommentWebhookAsync(
         WebhookHeaders headers,
         DiscussionCommentEvent discussionCommentEvent,
         DiscussionCommentAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessForkWebhookAsync(WebhookHeaders headers, ForkEvent forkEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessForkWebhookAsync(WebhookHeaders headers, ForkEvent forkEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessGithubAppAuthorizationWebhookAsync(
+    private ValueTask ProcessGithubAppAuthorizationWebhookAsync(
         WebhookHeaders headers,
         GithubAppAuthorizationEvent githubAppAuthorizationEvent,
         CancellationToken cancellationToken = default) =>
@@ -556,20 +556,20 @@ public abstract class WebhookEventProcessor
                     githubAppAuthorizationEvent,
                     GithubAppAuthorizationAction.Revoked,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessGithubAppAuthorizationWebhookAsync(
+    protected virtual ValueTask ProcessGithubAppAuthorizationWebhookAsync(
         WebhookHeaders headers,
         GithubAppAuthorizationEvent githubAppAuthorizationEvent,
         GithubAppAuthorizationAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessGollumWebhookAsync(WebhookHeaders headers, GollumEvent gollumEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessGollumWebhookAsync(WebhookHeaders headers, GollumEvent gollumEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessInstallationWebhookAsync(WebhookHeaders headers, InstallationEvent installationEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessInstallationWebhookAsync(WebhookHeaders headers, InstallationEvent installationEvent, CancellationToken cancellationToken = default) =>
         installationEvent.Action switch
         {
             InstallationActionValue.Created
@@ -582,17 +582,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Suspend, cancellationToken),
             InstallationActionValue.Unsuspend
                 => this.ProcessInstallationWebhookAsync(headers, installationEvent, InstallationAction.Unsuspend, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessInstallationWebhookAsync(
+    protected virtual ValueTask ProcessInstallationWebhookAsync(
         WebhookHeaders headers,
         InstallationEvent installationEvent,
         InstallationAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessInstallationRepositoriesWebhookAsync(
+    private ValueTask ProcessInstallationRepositoriesWebhookAsync(
         WebhookHeaders headers,
         InstallationRepositoriesEvent installationRepositoriesEvent,
         CancellationToken cancellationToken = default) =>
@@ -610,17 +610,17 @@ public abstract class WebhookEventProcessor
                     installationRepositoriesEvent,
                     InstallationRepositoriesAction.Removed,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessInstallationTargetWebhookAsync(
+    protected virtual ValueTask ProcessInstallationTargetWebhookAsync(
         WebhookHeaders headers,
         InstallationTargetEvent installationTargetEvent,
         InstallationTargetAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessInstallationTargetWebhookAsync(
+    private ValueTask ProcessInstallationTargetWebhookAsync(
         WebhookHeaders headers,
         InstallationTargetEvent installationTargetEvent,
         CancellationToken cancellationToken = default) =>
@@ -632,17 +632,17 @@ public abstract class WebhookEventProcessor
                     installationTargetEvent,
                     InstallationTargetAction.Renamed,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessInstallationRepositoriesWebhookAsync(
+    protected virtual ValueTask ProcessInstallationRepositoriesWebhookAsync(
         WebhookHeaders headers,
         InstallationRepositoriesEvent installationRepositoriesEvent,
         InstallationRepositoriesAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessIssueCommentWebhookAsync(WebhookHeaders headers, IssueCommentEvent issueCommentEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessIssueCommentWebhookAsync(WebhookHeaders headers, IssueCommentEvent issueCommentEvent, CancellationToken cancellationToken = default) =>
         issueCommentEvent.Action switch
         {
             IssueCommentActionValue.Created
@@ -651,17 +651,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Deleted, cancellationToken),
             IssueCommentActionValue.Edited
                 => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Edited, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessIssueCommentWebhookAsync(
+    protected virtual ValueTask ProcessIssueCommentWebhookAsync(
         WebhookHeaders headers,
         IssueCommentEvent issueCommentEvent,
         IssueCommentAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, CancellationToken cancellationToken = default) =>
         issuesEvent.Action switch
         {
             IssuesActionValue.Assigned => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Assigned, cancellationToken),
@@ -682,27 +682,27 @@ public abstract class WebhookEventProcessor
             IssuesActionValue.Unlocked => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unlocked, cancellationToken),
             IssuesActionValue.Unpinned => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Unpinned, cancellationToken),
             IssuesActionValue.Untyped => this.ProcessIssuesWebhookAsync(headers, issuesEvent, IssuesAction.Untyped, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, IssuesAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessIssuesWebhookAsync(WebhookHeaders headers, IssuesEvent issuesEvent, IssuesAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, CancellationToken cancellationToken = default) =>
         labelEvent.Action switch
         {
             LabelActionValue.Created => this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Created, cancellationToken),
             LabelActionValue.Deleted => this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Deleted, cancellationToken),
             LabelActionValue.Edited => this.ProcessLabelWebhookAsync(headers, labelEvent, LabelAction.Edited, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, LabelAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessLabelWebhookAsync(WebhookHeaders headers, LabelEvent labelEvent, LabelAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMarketplacePurchaseWebhookAsync(WebhookHeaders headers, MarketplacePurchaseEvent marketplacePurchaseEvent, CancellationToken cancellationToken = default) =>
         marketplacePurchaseEvent.Action switch
         {
             MarketplacePurchaseActionValue.Cancelled
@@ -723,59 +723,59 @@ public abstract class WebhookEventProcessor
                     cancellationToken),
             MarketplacePurchaseActionValue.Purchased
                 => this.ProcessMarketplacePurchaseWebhookAsync(headers, marketplacePurchaseEvent, MarketplacePurchaseAction.Purchased, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMarketplacePurchaseWebhookAsync(
+    protected virtual ValueTask ProcessMarketplacePurchaseWebhookAsync(
         WebhookHeaders headers,
         MarketplacePurchaseEvent marketplacePurchaseEvent,
         MarketplacePurchaseAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, CancellationToken cancellationToken = default) =>
         memberEvent.Action switch
         {
             MemberActionValue.Added => this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Added, cancellationToken),
             MemberActionValue.Edited => this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Edited, cancellationToken),
             MemberActionValue.Removed => this.ProcessMemberWebhookAsync(headers, memberEvent, MemberAction.Removed, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, MemberAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessMemberWebhookAsync(WebhookHeaders headers, MemberEvent memberEvent, MemberAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessMembershipWebhookAsync(WebhookHeaders headers, MembershipEvent membershipEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMembershipWebhookAsync(WebhookHeaders headers, MembershipEvent membershipEvent, CancellationToken cancellationToken = default) =>
         membershipEvent.Action switch
         {
             MembershipActionValue.Added => this.ProcessMembershipWebhookAsync(headers, membershipEvent, MembershipAction.Added, cancellationToken),
             MembershipActionValue.Removed => this.ProcessMembershipWebhookAsync(headers, membershipEvent, MembershipAction.Removed, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMembershipWebhookAsync(
+    protected virtual ValueTask ProcessMembershipWebhookAsync(
         WebhookHeaders headers,
         MembershipEvent membershipEvent,
         MembershipAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessMergeGroupWebhookAsync(WebhookHeaders headers, MergeGroupEvent mergeGroupEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMergeGroupWebhookAsync(WebhookHeaders headers, MergeGroupEvent mergeGroupEvent, CancellationToken cancellationToken = default) =>
         mergeGroupEvent.Action switch
         {
             MergeGroupActionValue.ChecksRequested => this.ProcessMergeGroupWebhookAsync(headers, mergeGroupEvent, MergeGroupAction.ChecksRequested, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMergeGroupWebhookAsync(
+    protected virtual ValueTask ProcessMergeGroupWebhookAsync(
         WebhookHeaders headers,
         MergeGroupEvent mergeGroupEvent,
         MergeGroupAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessMergeQueueEntryWebhookAsync(WebhookHeaders headers, MergeQueueEntryEvent mergeQueueEntryEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMergeQueueEntryWebhookAsync(WebhookHeaders headers, MergeQueueEntryEvent mergeQueueEntryEvent, CancellationToken cancellationToken = default) =>
         mergeQueueEntryEvent.Action switch
         {
             MergeQueueEntryActionValue.Created => this.ProcessMergeQueueEntryWebhookAsync(
@@ -788,28 +788,28 @@ public abstract class WebhookEventProcessor
                 mergeQueueEntryEvent,
                 MergeQueueEntryAction.Deleted,
                 cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMergeQueueEntryWebhookAsync(
+    protected virtual ValueTask ProcessMergeQueueEntryWebhookAsync(
         WebhookHeaders headers,
         MergeQueueEntryEvent mergeQueueEntryEvent,
         MergeQueueEntryAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, CancellationToken cancellationToken = default) =>
         metaEvent.Action switch
         {
             MetaActionValue.Deleted => this.ProcessMetaWebhookAsync(headers, metaEvent, MetaAction.Deleted, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, MetaAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessMetaWebhookAsync(WebhookHeaders headers, MetaEvent metaEvent, MetaAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessMilestoneWebhookAsync(WebhookHeaders headers, MilestoneEvent milestoneEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessMilestoneWebhookAsync(WebhookHeaders headers, MilestoneEvent milestoneEvent, CancellationToken cancellationToken = default) =>
         milestoneEvent.Action switch
         {
             MilestoneActionValue.Closed => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Closed, cancellationToken),
@@ -817,29 +817,29 @@ public abstract class WebhookEventProcessor
             MilestoneActionValue.Deleted => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Deleted, cancellationToken),
             MilestoneActionValue.Edited => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Edited, cancellationToken),
             MilestoneActionValue.Opened => this.ProcessMilestoneWebhookAsync(headers, milestoneEvent, MilestoneAction.Opened, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessMilestoneWebhookAsync(
+    protected virtual ValueTask ProcessMilestoneWebhookAsync(
         WebhookHeaders headers,
         MilestoneEvent milestoneEvent,
         MilestoneAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, CancellationToken cancellationToken = default) =>
         orgBlockEvent.Action switch
         {
             OrgBlockActionValue.Blocked => this.ProcessOrgBlockWebhookAsync(headers, orgBlockEvent, OrgBlockAction.Blocked, cancellationToken),
             OrgBlockActionValue.Unblocked => this.ProcessOrgBlockWebhookAsync(headers, orgBlockEvent, OrgBlockAction.Unblocked, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, OrgBlockAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessOrgBlockWebhookAsync(WebhookHeaders headers, OrgBlockEvent orgBlockEvent, OrgBlockAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessOrganizationWebhookAsync(WebhookHeaders headers, OrganizationEvent organizationEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessOrganizationWebhookAsync(WebhookHeaders headers, OrganizationEvent organizationEvent, CancellationToken cancellationToken = default) =>
         organizationEvent.Action switch
         {
             OrganizationActionValue.Deleted
@@ -852,35 +852,35 @@ public abstract class WebhookEventProcessor
                 => this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.MemberRemoved, cancellationToken),
             OrganizationActionValue.Renamed
                 => this.ProcessOrganizationWebhookAsync(headers, organizationEvent, OrganizationAction.Renamed, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessOrganizationWebhookAsync(
+    protected virtual ValueTask ProcessOrganizationWebhookAsync(
         WebhookHeaders headers,
         OrganizationEvent organizationEvent,
         OrganizationAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent, CancellationToken cancellationToken = default) =>
         packageEvent.Action switch
         {
             PackageActionValue.Published => this.ProcessPackageWebhookAsync(headers, packageEvent, PackageAction.Published, cancellationToken),
             PackageActionValue.Updated => this.ProcessPackageWebhookAsync(headers, packageEvent, PackageAction.Updated, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent, PackageAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessPackageWebhookAsync(WebhookHeaders headers, PackageEvent packageEvent, PackageAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessPageBuildWebhookAsync(WebhookHeaders headers, PageBuildEvent pageBuildEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessPageBuildWebhookAsync(WebhookHeaders headers, PageBuildEvent pageBuildEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessPingWebhookAsync(WebhookHeaders headers, PingEvent pingEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessPingWebhookAsync(WebhookHeaders headers, PingEvent pingEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, CancellationToken cancellationToken = default) =>
         projectEvent.Action switch
         {
             ProjectActionValue.Closed => this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Closed, cancellationToken),
@@ -888,14 +888,14 @@ public abstract class WebhookEventProcessor
             ProjectActionValue.Deleted => this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Deleted, cancellationToken),
             ProjectActionValue.Edited => this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Edited, cancellationToken),
             ProjectActionValue.Reopened => this.ProcessProjectWebhookAsync(headers, projectEvent, ProjectAction.Reopened, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, ProjectAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessProjectWebhookAsync(WebhookHeaders headers, ProjectEvent projectEvent, ProjectAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessProjectCardWebhookAsync(WebhookHeaders headers, ProjectCardEvent projectCardEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessProjectCardWebhookAsync(WebhookHeaders headers, ProjectCardEvent projectCardEvent, CancellationToken cancellationToken = default) =>
         projectCardEvent.Action switch
         {
             ProjectCardActionValue.Converted
@@ -904,17 +904,17 @@ public abstract class WebhookEventProcessor
             ProjectCardActionValue.Deleted => this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Deleted, cancellationToken),
             ProjectCardActionValue.Edited => this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Edited, cancellationToken),
             ProjectCardActionValue.Moved => this.ProcessProjectCardWebhookAsync(headers, projectCardEvent, ProjectCardAction.Moved, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessProjectCardWebhookAsync(
+    protected virtual ValueTask ProcessProjectCardWebhookAsync(
         WebhookHeaders headers,
         ProjectCardEvent projectCardEvent,
         ProjectCardAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessProjectColumnWebhookAsync(WebhookHeaders headers, ProjectColumnEvent projectColumnEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessProjectColumnWebhookAsync(WebhookHeaders headers, ProjectColumnEvent projectColumnEvent, CancellationToken cancellationToken = default) =>
         projectColumnEvent.Action switch
         {
             ProjectColumnActionValue.Created
@@ -925,21 +925,21 @@ public abstract class WebhookEventProcessor
                 => this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Edited, cancellationToken),
             ProjectColumnActionValue.Moved
                 => this.ProcessProjectColumnWebhookAsync(headers, projectColumnEvent, ProjectColumnAction.Moved, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessProjectColumnWebhookAsync(
+    protected virtual ValueTask ProcessProjectColumnWebhookAsync(
         WebhookHeaders headers,
         ProjectColumnEvent projectColumnEvent,
         ProjectColumnAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent, ProjectsV2ItemAction action, CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+    protected virtual ValueTask ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent, ProjectsV2ItemAction action, CancellationToken cancellationToken = default)
+        => ValueTask.CompletedTask;
 
-    private Task ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessProjectsV2ItemWebhookAsync(WebhookHeaders headers, ProjectsV2ItemEvent projectsV2ItemEvent, CancellationToken cancellationToken = default) =>
         projectsV2ItemEvent.Action switch
         {
             ProjectsV2ItemActionValue.Created => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Created, cancellationToken),
@@ -949,13 +949,13 @@ public abstract class WebhookEventProcessor
             ProjectsV2ItemActionValue.Converted => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Converted, cancellationToken),
             ProjectsV2ItemActionValue.Restored => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Restored, cancellationToken),
             ProjectsV2ItemActionValue.Reordered => this.ProcessProjectsV2ItemWebhookAsync(headers, projectsV2ItemEvent, ProjectsV2ItemAction.Reordered, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPublicWebhookAsync(WebhookHeaders headers, PublicEvent publicEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessPublicWebhookAsync(WebhookHeaders headers, PublicEvent publicEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, CancellationToken cancellationToken = default) =>
         pullRequestEvent.Action switch
         {
             PullRequestActionValue.Assigned
@@ -994,17 +994,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Unlabeled, cancellationToken),
             PullRequestActionValue.Unlocked
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Unlocked, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPullRequestWebhookAsync(
+    protected virtual ValueTask ProcessPullRequestWebhookAsync(
         WebhookHeaders headers,
         PullRequestEvent pullRequestEvent,
         PullRequestAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessPullRequestReviewWebhookAsync(WebhookHeaders headers, PullRequestReviewEvent pullRequestReviewEvent, CancellationToken cancellationToken = default) =>
         pullRequestReviewEvent.Action switch
         {
             PullRequestReviewActionValue.Dismissed
@@ -1013,17 +1013,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent, PullRequestReviewAction.Edited, cancellationToken),
             PullRequestReviewActionValue.Submitted
                 => this.ProcessPullRequestReviewWebhookAsync(headers, pullRequestReviewEvent, PullRequestReviewAction.Submitted, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPullRequestReviewWebhookAsync(
+    protected virtual ValueTask ProcessPullRequestReviewWebhookAsync(
         WebhookHeaders headers,
         PullRequestReviewEvent pullRequestReviewEvent,
         PullRequestReviewAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessPullRequestReviewCommentWebhookAsync(
+    private ValueTask ProcessPullRequestReviewCommentWebhookAsync(
         WebhookHeaders headers,
         PullRequestReviewCommentEvent pullRequestReviewCommentEvent,
         CancellationToken cancellationToken = default) =>
@@ -1047,17 +1047,17 @@ public abstract class WebhookEventProcessor
                     pullRequestReviewCommentEvent,
                     PullRequestReviewCommentAction.Edited,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPullRequestReviewCommentWebhookAsync(
+    protected virtual ValueTask ProcessPullRequestReviewCommentWebhookAsync(
         WebhookHeaders headers,
         PullRequestReviewCommentEvent pullRequestReviewCommentEvent,
         PullRequestReviewCommentAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessPullRequestReviewThreadWebhookAsync(
+    private ValueTask ProcessPullRequestReviewThreadWebhookAsync(
         WebhookHeaders headers,
         PullRequestReviewThreadEvent pullRequestReviewThreadEvent,
         CancellationToken cancellationToken = default) =>
@@ -1075,20 +1075,20 @@ public abstract class WebhookEventProcessor
                     pullRequestReviewThreadEvent,
                     PullRequestReviewThreadAction.Unresolved,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessPullRequestReviewThreadWebhookAsync(
+    protected virtual ValueTask ProcessPullRequestReviewThreadWebhookAsync(
         WebhookHeaders headers,
         PullRequestReviewThreadEvent pullRequestReviewThreadEvent,
         PullRequestReviewThreadAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessPushWebhookAsync(WebhookHeaders headers, PushEvent pushEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessPushWebhookAsync(WebhookHeaders headers, PushEvent pushEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, CancellationToken cancellationToken = default) =>
         releaseEvent.Action switch
         {
             ReleaseActionValue.Created => this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Created, cancellationToken),
@@ -1098,14 +1098,14 @@ public abstract class WebhookEventProcessor
             ReleaseActionValue.Published => this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Published, cancellationToken),
             ReleaseActionValue.Released => this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Released, cancellationToken),
             ReleaseActionValue.Unpublished => this.ProcessReleaseWebhookAsync(headers, releaseEvent, ReleaseAction.Unpublished, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessReleaseWebhookAsync(WebhookHeaders headers, ReleaseEvent releaseEvent, ReleaseAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessRegistryPackageWebhookAsync(WebhookHeaders headers, RegistryPackageEvent registryPackageEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessRegistryPackageWebhookAsync(WebhookHeaders headers, RegistryPackageEvent registryPackageEvent, CancellationToken cancellationToken = default) =>
         registryPackageEvent.Action switch
         {
             RegistryPackageActionValue.Published => this.ProcessRegistryPackageWebhookAsync(
@@ -1118,17 +1118,17 @@ public abstract class WebhookEventProcessor
                 registryPackageEvent,
                 RegistryPackageAction.Published,
                 cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRegistryPackageWebhookAsync(
+    protected virtual ValueTask ProcessRegistryPackageWebhookAsync(
         WebhookHeaders headers,
         RegistryPackageEvent registryPackageEvent,
         RegistryPackageAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessRepositoryWebhookAsync(WebhookHeaders headers, RepositoryEvent repositoryEvent, CancellationToken cancellationToken = default) =>
         repositoryEvent.Action switch
         {
             RepositoryActionValue.Archived => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Archived, cancellationToken),
@@ -1144,17 +1144,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Transferred, cancellationToken),
             RepositoryActionValue.Unarchived
                 => this.ProcessRepositoryWebhookAsync(headers, repositoryEvent, RepositoryAction.Unarchived, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryWebhookAsync(
+    protected virtual ValueTask ProcessRepositoryWebhookAsync(
         WebhookHeaders headers,
         RepositoryEvent repositoryEvent,
         RepositoryAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessRepositoryAdvisoryWebhookAsync(WebhookHeaders headers, RepositoryAdvisoryEvent repositoryAdvisoryEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessRepositoryAdvisoryWebhookAsync(WebhookHeaders headers, RepositoryAdvisoryEvent repositoryAdvisoryEvent, CancellationToken cancellationToken = default) =>
         repositoryAdvisoryEvent.Action switch
         {
             RepositoryAdvisoryActionValue.Reported => this.ProcessRepositoryAdvisoryWebhookAsync(
@@ -1167,36 +1167,36 @@ public abstract class WebhookEventProcessor
                 repositoryAdvisoryEvent,
                 RepositoryAdvisoryAction.Published,
                 cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryAdvisoryWebhookAsync(
+    protected virtual ValueTask ProcessRepositoryAdvisoryWebhookAsync(
         WebhookHeaders headers,
         RepositoryAdvisoryEvent repositoryAdvisoryEvent,
         RepositoryAdvisoryAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessRepositoryDispatchWebhookAsync(WebhookHeaders headers, RepositoryDispatchEvent repositoryDispatchEvent, CancellationToken cancellationToken = default) =>
         repositoryDispatchEvent.Action switch
         {
             RepositoryDispatchActionValue.OnDemandTest
                 => this.ProcessRepositoryDispatchWebhookAsync(headers, repositoryDispatchEvent, RepositoryDispatchAction.OnDemandTest, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryDispatchWebhookAsync(
+    protected virtual ValueTask ProcessRepositoryDispatchWebhookAsync(
         WebhookHeaders headers,
         RepositoryDispatchEvent repositoryDispatchEvent,
         RepositoryDispatchAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryImportWebhookAsync(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessRepositoryImportWebhookAsync(WebhookHeaders headers, RepositoryImportEvent repositoryImportEvent, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessRepositoryRulesetWebhookAsync(WebhookHeaders headers, RepositoryRulesetEvent repositoryRulesetEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessRepositoryRulesetWebhookAsync(WebhookHeaders headers, RepositoryRulesetEvent repositoryRulesetEvent, CancellationToken cancellationToken = default) =>
         repositoryRulesetEvent.Action switch
         {
             RepositoryRulesetActionValue.Created => this.ProcessRepositoryRulesetWebhookAsync(
@@ -1214,17 +1214,17 @@ public abstract class WebhookEventProcessor
                 repositoryRulesetEvent,
                 RepositoryRulesetAction.Edited,
                 cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryRulesetWebhookAsync(
+    protected virtual ValueTask ProcessRepositoryRulesetWebhookAsync(
         WebhookHeaders headers,
         RepositoryRulesetEvent repositoryRulesetEvent,
         RepositoryRulesetAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessRepositoryVulnerabilityAlertWebhookAsync(
+    private ValueTask ProcessRepositoryVulnerabilityAlertWebhookAsync(
         WebhookHeaders headers,
         RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent,
         CancellationToken cancellationToken = default) =>
@@ -1248,17 +1248,17 @@ public abstract class WebhookEventProcessor
                     repositoryVulnerabilityAlertEvent,
                     RepositoryVulnerabilityAlertAction.Resolve,
                     cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessRepositoryVulnerabilityAlertWebhookAsync(
+    protected virtual ValueTask ProcessRepositoryVulnerabilityAlertWebhookAsync(
         WebhookHeaders headers,
         RepositoryVulnerabilityAlertEvent repositoryVulnerabilityAlertEvent,
         RepositoryVulnerabilityAlertAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessSecretScanningAlertWebhookAsync(WebhookHeaders headers, SecretScanningAlertEvent secretScanningAlertEvent, CancellationToken cancellationToken = default) =>
         secretScanningAlertEvent.Action switch
         {
             SecretScanningAlertActionValue.Created
@@ -1269,32 +1269,32 @@ public abstract class WebhookEventProcessor
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved, cancellationToken),
             SecretScanningAlertActionValue.Revoked
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Revoked, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessSecretScanningAlertWebhookAsync(
+    protected virtual ValueTask ProcessSecretScanningAlertWebhookAsync(
         WebhookHeaders headers,
         SecretScanningAlertEvent secretScanningAlertEvent,
         SecretScanningAlertAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessSecretScanningAlertLocationWebhookAsync(WebhookHeaders headers, SecretScanningAlertLocationEvent secretScanningAlertLocationEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessSecretScanningAlertLocationWebhookAsync(WebhookHeaders headers, SecretScanningAlertLocationEvent secretScanningAlertLocationEvent, CancellationToken cancellationToken = default) =>
         secretScanningAlertLocationEvent.Action switch
         {
             SecretScanningAlertLocationActionValue.Created
                 => this.ProcessSecretScanningAlertLocationWebhookAsync(headers, secretScanningAlertLocationEvent, SecretScanningAlertLocationAction.Created, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessSecretScanningAlertLocationWebhookAsync(
+    protected virtual ValueTask ProcessSecretScanningAlertLocationWebhookAsync(
         WebhookHeaders headers,
         SecretScanningAlertLocationEvent secretScanningAlertLocationEvent,
         SecretScanningAlertLocationAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessSecurityAdvisoryWebhookAsync(WebhookHeaders headers, SecurityAdvisoryEvent securityAdvisoryEvent, CancellationToken cancellationToken = default) =>
         securityAdvisoryEvent.Action switch
         {
             SecurityAdvisoryActionValue.Performed
@@ -1305,17 +1305,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Updated, cancellationToken),
             SecurityAdvisoryActionValue.Withdrawn
                 => this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, SecurityAdvisoryAction.Withdrawn, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessSecurityAdvisoryWebhookAsync(
+    protected virtual ValueTask ProcessSecurityAdvisoryWebhookAsync(
         WebhookHeaders headers,
         SecurityAdvisoryEvent securityAdvisoryEvent,
         SecurityAdvisoryAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, CancellationToken cancellationToken = default) =>
         sponsorshipEvent.Action switch
         {
             SponsorshipActionValue.Cancelled
@@ -1328,32 +1328,32 @@ public abstract class WebhookEventProcessor
                 => this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.PendingTierChange, cancellationToken),
             SponsorshipActionValue.TierChanged
                 => this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, SponsorshipAction.TierChanged, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessSponsorshipWebhookAsync(
+    protected virtual ValueTask ProcessSponsorshipWebhookAsync(
         WebhookHeaders headers,
         SponsorshipEvent sponsorshipEvent,
         SponsorshipAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent, CancellationToken cancellationToken = default) =>
         starEvent.Action switch
         {
             StarActionValue.Created => this.ProcessStarWebhookAsync(headers, starEvent, StarAction.Created, cancellationToken),
             StarActionValue.Deleted => this.ProcessStarWebhookAsync(headers, starEvent, StarAction.Deleted, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent, StarAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessStarWebhookAsync(WebhookHeaders headers, StarEvent starEvent, StarAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessStatusWebhookAsync(WebhookHeaders headers, StatusEvent statusEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessStatusWebhookAsync(WebhookHeaders headers, StatusEvent statusEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, CancellationToken cancellationToken = default) =>
         teamEvent.Action switch
         {
             TeamActionValue.AddedToRepository => this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.AddedToRepository, cancellationToken),
@@ -1361,32 +1361,32 @@ public abstract class WebhookEventProcessor
             TeamActionValue.Deleted => this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.Deleted, cancellationToken),
             TeamActionValue.Edited => this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.Edited, cancellationToken),
             TeamActionValue.RemovedFromRepository => this.ProcessTeamWebhookAsync(headers, teamEvent, TeamAction.RemovedFromRepository, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, TeamAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, TeamAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessTeamAddWebhookAsync(WebhookHeaders headers, TeamAddEvent teamAddEvent, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    protected virtual ValueTask ProcessTeamAddWebhookAsync(WebhookHeaders headers, TeamAddEvent teamAddEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent, CancellationToken cancellationToken = default) =>
         watchEvent.Action switch
         {
             WatchActionValue.Started => this.ProcessWatchWebhookAsync(headers, watchEvent, WatchAction.Started, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent, WatchAction action, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessWatchWebhookAsync(WebhookHeaders headers, WatchEvent watchEvent, WatchAction action, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
     [PublicAPI]
-    protected virtual Task ProcessWorkflowDispatchWebhookAsync(WebhookHeaders headers, WorkflowDispatchEvent workflowDispatchEvent, CancellationToken cancellationToken = default) =>
-        Task.CompletedTask;
+    protected virtual ValueTask ProcessWorkflowDispatchWebhookAsync(WebhookHeaders headers, WorkflowDispatchEvent workflowDispatchEvent, CancellationToken cancellationToken = default) =>
+        ValueTask.CompletedTask;
 
-    private Task ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessWorkflowJobWebhookAsync(WebhookHeaders headers, WorkflowJobEvent workflowJobEvent, CancellationToken cancellationToken = default) =>
         workflowJobEvent.Action switch
         {
             WorkflowJobActionValue.Queued
@@ -1397,17 +1397,17 @@ public abstract class WebhookEventProcessor
                 => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Completed, cancellationToken),
             WorkflowJobActionValue.Waiting
                 => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, WorkflowJobAction.Waiting, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessWorkflowJobWebhookAsync(
+    protected virtual ValueTask ProcessWorkflowJobWebhookAsync(
         WebhookHeaders headers,
         WorkflowJobEvent workflowJobEvent,
         WorkflowJobAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private Task ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent, CancellationToken cancellationToken = default) =>
+    private ValueTask ProcessWorkflowRunWebhookAsync(WebhookHeaders headers, WorkflowRunEvent workflowRunEvent, CancellationToken cancellationToken = default) =>
         workflowRunEvent.Action switch
         {
             WorkflowRunActionValue.Completed
@@ -1416,13 +1416,13 @@ public abstract class WebhookEventProcessor
                 => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.InProgress, cancellationToken),
             WorkflowRunActionValue.Requested
                 => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, WorkflowRunAction.Requested, cancellationToken),
-            _ => Task.CompletedTask,
+            _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual Task ProcessWorkflowRunWebhookAsync(
+    protected virtual ValueTask ProcessWorkflowRunWebhookAsync(
         WebhookHeaders headers,
         WorkflowRunEvent workflowRunEvent,
         WorkflowRunAction action,
-        CancellationToken cancellationToken = default) => Task.CompletedTask;
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 }
