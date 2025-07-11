@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.AspNetCore;
+namespace Octokit.Webhooks.AspNetCore;
 
 using System;
 using System.Globalization;
@@ -58,7 +58,7 @@ public static partial class GitHubWebhookExtensions
                 try
                 {
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    await service.ProcessWebhookAsync(context.Request.Headers, body)
+                    await service.ProcessWebhookAsync(context.Request.Headers, body, context.RequestAborted)
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
