@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.AspNetCore;
+namespace Octokit.Webhooks.AspNetCore;
 
 using System;
 using System.Globalization;
@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +24,8 @@ public static partial class GitHubWebhookExtensions
     public static IEndpointConventionBuilder MapGitHubWebhooks(
         this IEndpointRouteBuilder endpoints,
         string path = "/api/github/webhooks",
-        string? secret = null)
+        string? secret = null,
+        bool cancelOnRequestAborted = false)
     {
         var options = endpoints.ServiceProvider.GetService<IOptionsMonitor<GitHubWebhookOptions>>();
         return endpoints.MapPost(
@@ -58,7 +60,7 @@ public static partial class GitHubWebhookExtensions
                 try
                 {
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    await service.ProcessWebhookAsync(context.Request.Headers, body)
+                    await service.ProcessWebhookAsync(context.Request.Headers, body, cancelOnRequestAborted ? context.RequestAborted : CancellationToken.None)
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
