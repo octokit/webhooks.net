@@ -9,7 +9,11 @@ using Octokit.Webhooks.Events.PullRequest;
 
 public class MyWebhookEventProcessor(ILogger<MyWebhookEventProcessor> logger) : WebhookEventProcessor
 {
-    protected override async Task ProcessPullRequestWebhookAsync(WebhookHeaders headers, PullRequestEvent pullRequestEvent, PullRequestAction action, CancellationToken cancellationToken = default)
+    protected override async Task ProcessPullRequestWebhookAsync(
+        WebhookHeaders headers,
+        PullRequestEvent pullRequestEvent,
+        PullRequestAction action,
+        CancellationToken cancellationToken = default)
     {
         switch (action)
         {

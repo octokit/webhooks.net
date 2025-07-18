@@ -24,8 +24,7 @@ public static partial class GitHubWebhookExtensions
     public static IEndpointConventionBuilder MapGitHubWebhooks(
         this IEndpointRouteBuilder endpoints,
         string path = "/api/github/webhooks",
-        string? secret = null,
-        bool cancelOnRequestAborted = false)
+        string? secret = null)
     {
         var options = endpoints.ServiceProvider.GetService<IOptionsMonitor<GitHubWebhookOptions>>();
         return endpoints.MapPost(
@@ -60,7 +59,7 @@ public static partial class GitHubWebhookExtensions
                 try
                 {
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    await service.ProcessWebhookAsync(context.Request.Headers, body, cancelOnRequestAborted ? context.RequestAborted : CancellationToken.None)
+                    await service.ProcessWebhookAsync(context.Request.Headers, body, context.RequestAborted)
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }

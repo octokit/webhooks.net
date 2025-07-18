@@ -53,7 +53,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
                 kv => kv.Key,
                 kv => new StringValues([.. kv.Value]),
                 StringComparer.OrdinalIgnoreCase);
-            await service.ProcessWebhookAsync(headers, body)
+            await service.ProcessWebhookAsync(headers, body, ctx.CancellationToken)
                 .ConfigureAwait(false);
             return req.CreateResponse(HttpStatusCode.OK);
         }
