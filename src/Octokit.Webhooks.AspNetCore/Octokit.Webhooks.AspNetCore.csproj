@@ -1,9 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup Label="Build">
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
-
   <PropertyGroup Label="Package">
     <Product>Octokit.Webhooks.AspNetCore</Product>
     <Description>GitHub webhook events toolset for .NET</Description>
