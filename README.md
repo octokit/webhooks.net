@@ -17,7 +17,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     ```C#
     public sealed class MyWebhookEventProcessor : WebhookEventProcessor
     {
-        protected override Task ProcessPullRequestWebhookAsync(
+        protected override ValueTask ProcessPullRequestWebhookAsync(
             WebhookHeaders headers,
             PullRequestEvent pullRequestEvent,
             PullRequestAction action,
@@ -60,7 +60,7 @@ Libraries to handle GitHub Webhooks in .NET applications.
     ```C#
     public sealed class MyWebhookEventProcessor : WebhookEventProcessor
     {
-        protected override Task ProcessPullRequestWebhookAsync(
+        protected override ValueTask ProcessPullRequestWebhookAsync(
             WebhookHeaders headers,
             PullRequestEvent pullRequestEvent,
             PullRequestAction action,
