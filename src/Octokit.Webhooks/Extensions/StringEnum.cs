@@ -1,6 +1,7 @@
 namespace Octokit.Webhooks.Extensions;
 
 using System;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,6 +11,8 @@ using JetBrains.Annotations;
 public sealed record StringEnum<TEnum>
     where TEnum : struct
 {
+    private static readonly ConcurrentDictionary<TEnum, string> EnumToStringCache = new();
+    private static readonly ConcurrentDictionary<string, TEnum> StringToEnumCache = new();
     private TEnum? parsedValue;
 
     public StringEnum(string stringValue)
@@ -74,31 +77,44 @@ public sealed record StringEnum<TEnum>
         throw GetArgumentException(this.StringValue);
     }
 
-    private static string ToEnumString(TEnum type)
-    {
-        var enumType = typeof(TEnum);
-        var name = Enum.GetName(enumType, type);
-        if (name is not null)
+    private static string ToEnumString(TEnum type) =>
+        EnumToStringCache.GetOrAdd(type, static enumValue =>
         {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            return enumMemberAttribute.Value!;
-        }
-
-        throw new ArgumentException(type.ToString());
-    }
-
-    private static TEnum ToEnum(string str)
-    {
-        var enumType = typeof(TEnum);
-        foreach (var name in Enum.GetNames(enumType))
-        {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            if (enumMemberAttribute.Value == str)
+            var enumType = typeof(TEnum);
+            var name = Enum.GetName(enumType, enumValue);
+            if (name is not null)
             {
-                return (TEnum)Enum.Parse(enumType, name);
-            }
-        }
+                var field = enumType.GetField(name)!;
+                var enumMemberAttribute = field.GetCustomAttributes(typeof(EnumMemberAttribute), true)
+                    .Cast<EnumMemberAttribute>()
+                    .FirstOrDefault();
 
-        throw new ArgumentException(str);
-    }
+                if (enumMemberAttribute?.Value is not null)
+                {
+                    return enumMemberAttribute.Value;
+                }
+            }
+
+            throw new ArgumentException($"Enum value '{enumValue}' does not have a valid EnumMemberAttribute");
+        });
+
+    private static TEnum ToEnum(string str) =>
+        StringToEnumCache.GetOrAdd(str, static stringValue =>
+        {
+            var enumType = typeof(TEnum);
+            foreach (var name in Enum.GetNames(enumType))
+            {
+                var field = enumType.GetField(name)!;
+                var enumMemberAttribute = field.GetCustomAttributes(typeof(EnumMemberAttribute), true)
+                    .Cast<EnumMemberAttribute>()
+                    .FirstOrDefault();
+
+                if (enumMemberAttribute?.Value == stringValue)
+                {
+                    return (TEnum)Enum.Parse(enumType, name);
+                }
+            }
+
+            throw new ArgumentException($"String value '{stringValue}' is not a valid '{enumType.Name}' enum value");
+        });
 }

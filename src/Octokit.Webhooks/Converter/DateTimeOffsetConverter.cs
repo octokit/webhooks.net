@@ -22,7 +22,13 @@ public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
     {
         var stringValue = reader.GetString() ?? throw new InvalidOperationException("Cannot parse a String JsonToken with a null value");
 
-        return DateTimeOffset.Parse(stringValue, CultureInfo.InvariantCulture);
+        var span = stringValue.AsSpan();
+        if (!DateTimeOffset.TryParse(span, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result))
+        {
+            throw new JsonException($"Unable to parse '{stringValue}' as DateTimeOffset");
+        }
+
+        return result;
     }
 
     private static DateTimeOffset HandleNumber(Utf8JsonReader reader) => DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64());

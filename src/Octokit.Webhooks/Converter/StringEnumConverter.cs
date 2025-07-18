@@ -11,7 +11,12 @@ public sealed class StringEnumConverter<TEnum> : JsonConverter<StringEnum<TEnum>
     public override StringEnum<TEnum> Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
-        JsonSerializerOptions options) => new(reader.GetString()!);
+        JsonSerializerOptions options)
+    {
+        var stringValue = reader.GetString() ?? throw new JsonException("Unexpected null value when deserializing StringEnum.");
+
+        return new(stringValue);
+    }
 
     public override void Write(Utf8JsonWriter writer, StringEnum<TEnum> value, JsonSerializerOptions options) =>
         JsonSerializer.Serialize(writer, value.StringValue, options);

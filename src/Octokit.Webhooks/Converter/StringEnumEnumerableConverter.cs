@@ -27,16 +27,16 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
             throw new JsonException("Unexpected null value.");
         }
 
+        if (reader.TokenType != JsonTokenType.StartArray)
+        {
+            throw new JsonException("Expected JSON array.");
+        }
+
         var returnValue = new List<StringEnum<TEnum>>();
 
-        while (reader.TokenType != JsonTokenType.EndArray)
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
         {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)!);
-            }
-
-            _ = reader.Read();
+            returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)!);
         }
 
         return returnValue;
