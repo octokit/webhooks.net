@@ -2,7 +2,7 @@ namespace Octokit.Webhooks.Test;
 
 using System;
 using System.Linq;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class StringEnumTests

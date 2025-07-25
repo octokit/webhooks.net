@@ -2,7 +2,7 @@ namespace Octokit.Webhooks.Test.Converter;
 
 using System;
 using System.Text.Json;
-using FluentAssertions;
+using AwesomeAssertions;
 using Octokit.Webhooks.Converter;
 using Xunit;
 

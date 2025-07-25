@@ -3,7 +3,7 @@ namespace Octokit.Webhooks.Test.Converter;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using FluentAssertions;
+using AwesomeAssertions;
 using Octokit.Webhooks.Converter;
 using Octokit.Webhooks.Extensions;
 using Octokit.Webhooks.Models.PingEvent;
