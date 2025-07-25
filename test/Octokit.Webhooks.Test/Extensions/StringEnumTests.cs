@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.Test.Extensions;
 
 using System;
-using FluentAssertions;
+using AwesomeAssertions;
 using Octokit.Webhooks.Extensions;
 using Octokit.Webhooks.Models.PingEvent;
 using Xunit;

@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.Test;
 
 using System;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 public class WebhookEventProcessorTests
