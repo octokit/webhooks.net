@@ -28,5 +28,30 @@ public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueC
         }
     }
 
-    public override void Write(Utf8JsonWriter writer, ChangesFieldValueChangeBase value, JsonSerializerOptions options) => throw new NotImplementedException();
+    public override void Write(Utf8JsonWriter writer, ChangesFieldValueChangeBase value, JsonSerializerOptions options)
+    {
+        if (value is ChangesFieldValueScalarChange scalarChange)
+        {
+            if (scalarChange.StringValue is not null)
+            {
+                writer.WriteStringValue(scalarChange.StringValue);
+            }
+            else if (scalarChange.NumericValue is not null)
+            {
+                writer.WriteNumberValue(scalarChange.NumericValue.Value);
+            }
+            else
+            {
+                writer.WriteNullValue();
+            }
+        }
+        else if (value is ChangesFieldValueChange change)
+        {
+            JsonSerializer.Serialize(writer, change, options);
+        }
+        else
+        {
+            writer.WriteNullValue();
+        }
+    }
 }
