@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 [PublicAPI]
-public sealed record ChangesFieldValueChange
+public sealed record ChangesFieldValueChange : ChangesFieldValueChangeBase
 {
     [JsonPropertyName("id")]
     public string Id { get; init; } = null!;
