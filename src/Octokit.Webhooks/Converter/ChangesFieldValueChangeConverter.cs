@@ -10,21 +10,21 @@ public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueC
                 var changeObject = JsonSerializer.Deserialize<ChangesFieldValueChange>(ref reader, options);
                 return changeObject;
             case JsonTokenType.String:
-            case JsonTokenType.True:
-            case JsonTokenType.False:
                 return new ChangesFieldValueScalarChange { StringValue = reader.GetString() };
             case JsonTokenType.Null:
                 return null;
             case JsonTokenType.Number:
                 return new ChangesFieldValueScalarChange { NumericValue = reader.GetDecimal() };
             case JsonTokenType.None:
+            case JsonTokenType.True:
+            case JsonTokenType.False:
             case JsonTokenType.EndObject:
             case JsonTokenType.StartArray:
             case JsonTokenType.EndArray:
             case JsonTokenType.PropertyName:
             case JsonTokenType.Comment:
             default:
-                throw new InvalidOperationException($"Invalid JsonTokenType {reader.TokenType}");
+                throw new JsonException($"Invalid JsonTokenType {reader.TokenType}");
         }
     }
 
