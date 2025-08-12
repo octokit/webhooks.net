@@ -1,4 +1,6 @@
-namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
+namespace Octokit.Webhooks.Converter;
+
+using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueChangeBase>
 {
@@ -30,28 +32,23 @@ public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueC
 
     public override void Write(Utf8JsonWriter writer, ChangesFieldValueChangeBase value, JsonSerializerOptions options)
     {
-        if (value is ChangesFieldValueScalarChange scalarChange)
+		switch (value)
         {
-            if (scalarChange.StringValue is not null)
-            {
+            case ChangesFieldValueScalarChange { StringValue: not null } scalarChange:
                 writer.WriteStringValue(scalarChange.StringValue);
-            }
-            else if (scalarChange.NumericValue is not null)
-            {
+                break;
+            case ChangesFieldValueScalarChange { NumericValue: not null } scalarChange:
                 writer.WriteNumberValue(scalarChange.NumericValue.Value);
-            }
-            else
-            {
+                break;
+            case ChangesFieldValueScalarChange:
                 writer.WriteNullValue();
-            }
-        }
-        else if (value is ChangesFieldValueChange change)
-        {
-            JsonSerializer.Serialize(writer, change, options);
-        }
-        else
-        {
-            writer.WriteNullValue();
+                break;
+            case ChangesFieldValueChange change:
+                JsonSerializer.Serialize(writer, change, options);
+                break;
+            default:
+                writer.WriteNullValue();
+                break;
         }
     }
 }
