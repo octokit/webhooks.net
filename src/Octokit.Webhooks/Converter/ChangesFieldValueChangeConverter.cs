@@ -32,7 +32,7 @@ public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueC
 
     public override void Write(Utf8JsonWriter writer, ChangesFieldValueChangeBase value, JsonSerializerOptions options)
     {
-		switch (value)
+        switch (value)
         {
             case ChangesFieldValueScalarChange { StringValue: not null } scalarChange:
                 writer.WriteStringValue(scalarChange.StringValue);
