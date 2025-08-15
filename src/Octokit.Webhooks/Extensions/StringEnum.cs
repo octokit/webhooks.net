@@ -37,6 +37,23 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static implicit operator StringEnum<TEnum>(TEnum parsedValue) => new(parsedValue);
 
+    public static bool operator ==(StringEnum<TEnum>? left, StringEnum<TEnum>? right)
+    {
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+
+        if (left is null || right is null)
+        {
+            return false;
+        }
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
+
     public bool TryParse(out TEnum value)
     {
         if (this.parsedValue is not null)
@@ -79,7 +96,7 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         // If neither can be parsed, compare string values
         if (!canParseThis && !canParseOther)
         {
-            return this.StringValue.Equals(other.StringValue, StringComparison.Ordinal);
+            return this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase);
         }
 
         // If one can parse and one cannot, they're not equal
@@ -96,6 +113,8 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
         return this.StringValue.GetHashCode();
     }
+
+    public override string ToString() => this.StringValue;
 
     private static ArgumentException GetArgumentException(string? value) => new(string.Format(
         CultureInfo.InvariantCulture,
