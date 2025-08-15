@@ -111,7 +111,7 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             return value.GetHashCode();
         }
 
-        return this.StringValue.GetHashCode();
+        return StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
     }
 
     public override string ToString() => this.StringValue;
