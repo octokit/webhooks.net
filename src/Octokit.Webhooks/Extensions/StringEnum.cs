@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-public sealed record StringEnum<TEnum>
+public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct
 {
     private TEnum? parsedValue;
@@ -37,6 +37,23 @@ public sealed record StringEnum<TEnum>
 
     public static implicit operator StringEnum<TEnum>(TEnum parsedValue) => new(parsedValue);
 
+    public static bool operator ==(StringEnum<TEnum>? left, StringEnum<TEnum>? right)
+    {
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+
+        if (left is null || right is null)
+        {
+            return false;
+        }
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
+
     public bool TryParse(out TEnum value)
     {
         if (this.parsedValue is not null)
@@ -58,21 +75,52 @@ public sealed record StringEnum<TEnum>
         }
     }
 
+    public override bool Equals(object? obj) => this.Equals(obj as StringEnum<TEnum>);
+
+    public bool Equals(StringEnum<TEnum>? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        var canParseThis = this.TryParse(out var thisValue);
+        var canParseOther = other.TryParse(out var otherValue);
+
+        // If both can be parsed to enum values, compare the enum values
+        if (canParseThis && canParseOther)
+        {
+            return thisValue.Equals(otherValue);
+        }
+
+        // If neither can be parsed, compare string values
+        if (!canParseThis && !canParseOther)
+        {
+            return this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase);
+        }
+
+        // If one can parse and one cannot, they're not equal
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        // Use enum value for hash code if it can be parsed, otherwise use string value
+        if (this.TryParse(out var value))
+        {
+            return value.GetHashCode();
+        }
+
+        return StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
+    }
+
+    public override string ToString() => this.StringValue;
+
     private static ArgumentException GetArgumentException(string? value) => new(string.Format(
         CultureInfo.InvariantCulture,
         "Value '{0}' is not a valid '{1}' enum value.",
         value,
         typeof(TEnum).Name));
-
-    private TEnum ParseValue()
-    {
-        if (this.TryParse(out var value))
-        {
-            return value;
-        }
-
-        throw GetArgumentException(this.StringValue);
-    }
 
     private static string ToEnumString(TEnum type)
     {
@@ -100,5 +148,15 @@ public sealed record StringEnum<TEnum>
         }
 
         throw new ArgumentException(str);
+    }
+
+    private TEnum ParseValue()
+    {
+        if (this.TryParse(out var value))
+        {
+            return value;
+        }
+
+        throw GetArgumentException(this.StringValue);
     }
 }
