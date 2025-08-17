@@ -1,21 +1,32 @@
 namespace Octokit.Webhooks.Extensions;
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
+public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct
 {
-    private TEnum? parsedValue;
+    private readonly TEnum? parsedValue;
+    private readonly bool isValidEnum;
 
     public StringEnum(string stringValue)
     {
         this.StringValue = stringValue;
-        this.parsedValue = null;
+        if (TryParseEnum(stringValue, out var enumValue))
+        {
+            this.parsedValue = enumValue;
+            this.isValidEnum = true;
+        }
+        else
+        {
+            this.parsedValue = null;
+            this.isValidEnum = false;
+        }
     }
 
     public StringEnum(TEnum parsedValue)
@@ -27,11 +38,12 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
         this.StringValue = ToEnumString(parsedValue);
         this.parsedValue = parsedValue;
+        this.isValidEnum = true;
     }
 
     public string StringValue { get; }
 
-    public TEnum Value => this.parsedValue ??= this.ParseValue();
+    public TEnum Value => this.parsedValue ?? throw GetArgumentException(this.StringValue);
 
     public static implicit operator StringEnum<TEnum>(string value) => new(value);
 
@@ -39,7 +51,7 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static bool operator ==(StringEnum<TEnum>? left, StringEnum<TEnum>? right)
     {
-        if (ReferenceEquals(left, right))
+        if (left is null && right is null)
         {
             return true;
         }
@@ -49,41 +61,27 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             return false;
         }
 
-        return left.Equals(right);
+        return left.Value.Equals(right.Value);
     }
 
     public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
 
-    public bool TryParse(out TEnum value)
+    public bool TryParse([NotNullWhen(true)] out TEnum value)
     {
-        if (this.parsedValue is not null)
+        if (this.isValidEnum && this.parsedValue is not null)
         {
             value = this.parsedValue.Value;
             return true;
         }
 
-        try
-        {
-            value = ToEnum(this.StringValue);
-            this.parsedValue = value;
-            return true;
-        }
-        catch (ArgumentException)
-        {
-            value = default;
-            return false;
-        }
+        value = default;
+        return false;
     }
 
-    public override bool Equals(object? obj) => this.Equals(obj as StringEnum<TEnum>);
+    public override bool Equals(object? obj) => obj is StringEnum<TEnum> other && this.Equals(other);
 
-    public bool Equals(StringEnum<TEnum>? other)
+    public bool Equals(StringEnum<TEnum> other)
     {
-        if (other is null)
-        {
-            return false;
-        }
-
         var canParseThis = this.TryParse(out var thisValue);
         var canParseOther = other.TryParse(out var otherValue);
 
@@ -115,6 +113,20 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     }
 
     public override string ToString() => this.StringValue;
+
+    private static bool TryParseEnum(string str, out TEnum value)
+    {
+        try
+        {
+            value = ToEnum(str);
+            return true;
+        }
+        catch (ArgumentException)
+        {
+            value = default;
+            return false;
+        }
+    }
 
     private static ArgumentException GetArgumentException(string? value) => new(string.Format(
         CultureInfo.InvariantCulture,
@@ -148,15 +160,5 @@ public sealed class StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         }
 
         throw new ArgumentException(str);
-    }
-
-    private TEnum ParseValue()
-    {
-        if (this.TryParse(out var value))
-        {
-            return value;
-        }
-
-        throw GetArgumentException(this.StringValue);
     }
 }
