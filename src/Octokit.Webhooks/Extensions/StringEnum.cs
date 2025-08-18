@@ -66,7 +66,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
 
-    public bool TryParse([NotNullWhen(true)] out TEnum value)
+    public bool TryParse([NotNullWhen(true)] out TEnum? value)
     {
         if (this.isValidEnum && this.parsedValue is not null)
         {
@@ -74,7 +74,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             return true;
         }
 
-        value = default;
+        value = null;
         return false;
     }
 
@@ -114,7 +114,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public override string ToString() => this.StringValue;
 
-    private static bool TryParseEnum(string str, out TEnum value)
+    private static bool TryParseEnum(string str, [NotNullWhen(true)] out TEnum? value)
     {
         try
         {
@@ -123,7 +123,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         }
         catch (ArgumentException)
         {
-            value = default;
+            value = null;
             return false;
         }
     }
