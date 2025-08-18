@@ -33,7 +33,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     {
         if (!Enum.IsDefined(typeof(TEnum), parsedValue))
         {
-            throw GetArgumentException(parsedValue.ToString());
+            ThrowArgumentException(parsedValue.ToString());
         }
 
         this.StringValue = ToEnumString(parsedValue);
@@ -43,7 +43,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public string StringValue { get; }
 
-    public TEnum Value => this.parsedValue ?? throw GetArgumentException(this.StringValue);
+    public TEnum Value => this.parsedValue ?? ThrowArgumentException(this.StringValue);
 
     public static implicit operator StringEnum<TEnum>(string value) => new(value);
 
@@ -128,7 +128,8 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         }
     }
 
-    private static ArgumentException GetArgumentException(string? value) => new(string.Format(
+    [DoesNotReturn]
+    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(string.Format(
         CultureInfo.InvariantCulture,
         "Value '{0}' is not a valid '{1}' enum value.",
         value,
