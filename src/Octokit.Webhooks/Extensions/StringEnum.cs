@@ -33,7 +33,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     {
         if (!Enum.IsDefined(typeof(TEnum), parsedValue))
         {
-            throw GetArgumentException(parsedValue.ToString());
+            ThrowArgumentException(parsedValue.ToString());
         }
 
         this.StringValue = ToEnumString(parsedValue);
@@ -43,7 +43,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public string StringValue { get; }
 
-    public TEnum Value => this.parsedValue ?? throw GetArgumentException(this.StringValue);
+    public TEnum Value => this.parsedValue ?? ThrowArgumentException(this.StringValue);
 
     public static implicit operator StringEnum<TEnum>(string value) => new(value);
 
@@ -66,7 +66,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
 
-    public bool TryParse([NotNullWhen(true)] out TEnum value)
+    public bool TryParse([NotNullWhen(true)] out TEnum? value)
     {
         if (this.isValidEnum && this.parsedValue is not null)
         {
@@ -74,7 +74,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             return true;
         }
 
-        value = default;
+        value = null;
         return false;
     }
 
@@ -114,7 +114,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public override string ToString() => this.StringValue;
 
-    private static bool TryParseEnum(string str, out TEnum value)
+    private static bool TryParseEnum(string str, [NotNullWhen(true)] out TEnum? value)
     {
         try
         {
@@ -123,12 +123,13 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         }
         catch (ArgumentException)
         {
-            value = default;
+            value = null;
             return false;
         }
     }
 
-    private static ArgumentException GetArgumentException(string? value) => new(string.Format(
+    [DoesNotReturn]
+    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(string.Format(
         CultureInfo.InvariantCulture,
         "Value '{0}' is not a valid '{1}' enum value.",
         value,
