@@ -12,7 +12,7 @@ public class StringEnumTests
     {
         var assembly = typeof(WebhookEvent).Assembly;
         var types = assembly.GetTypes()
-            .Where(type => type.IsClass && type.IsPublic && type.FullName!.StartsWith(assembly.GetName().Name!, StringComparison.Ordinal))
+            .Where(type => type is { IsClass: true, IsPublic: true } && type.FullName!.StartsWith(assembly.GetName().Name!, StringComparison.Ordinal))
             .Select(t => t.GetProperties());
         foreach (var properties in types)
         {
