@@ -10,8 +10,10 @@ public class WebhookEventProcessorTests
 
     [Theory]
     [ClassData(typeof(WebhookEventProcessorTestsData))]
-    public void CanDeserialize(string @event, string payload, Type expectedType)
+    public void CanDeserialize(string @event, string testName, string payload, Type expectedType)
     {
+        // Only used to make it easier to differentiate test cases for the same event without looking at whole payload
+        _ = testName;
         var headers = new WebhookHeaders
         {
             Event = @event,
