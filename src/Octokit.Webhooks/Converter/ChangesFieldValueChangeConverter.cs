@@ -6,25 +6,17 @@ public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueC
 {
     public override ChangesFieldValueChangeBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        switch (reader.TokenType)
+        switch (reader)
         {
-            case JsonTokenType.StartObject:
+            case { TokenType: JsonTokenType.StartObject }:
                 var changeObject = JsonSerializer.Deserialize<ChangesFieldValueChange>(ref reader, options);
                 return changeObject;
-            case JsonTokenType.String:
+            case { TokenType: JsonTokenType.String }:
                 return new ChangesFieldValueScalarChange { StringValue = reader.GetString() };
-            case JsonTokenType.Null:
+            case { TokenType: JsonTokenType.Null }:
                 return null;
-            case JsonTokenType.Number:
+            case { TokenType: JsonTokenType.Number }:
                 return new ChangesFieldValueScalarChange { NumericValue = reader.GetDecimal() };
-            case JsonTokenType.None:
-            case JsonTokenType.True:
-            case JsonTokenType.False:
-            case JsonTokenType.EndObject:
-            case JsonTokenType.StartArray:
-            case JsonTokenType.EndArray:
-            case JsonTokenType.PropertyName:
-            case JsonTokenType.Comment:
             default:
                 throw new JsonException($"Invalid JsonTokenType {reader.TokenType}");
         }
