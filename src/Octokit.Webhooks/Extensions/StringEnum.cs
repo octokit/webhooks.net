@@ -98,16 +98,10 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         };
     }
 
-    public override int GetHashCode()
-    {
-        // Use enum value for hash code if it can be parsed, otherwise use string value
-        if (this.TryParse(out var value))
-        {
-            return value.GetHashCode();
-        }
+    public override int GetHashCode() =>
 
-        return StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
-    }
+        // Use enum value for hash code if it can be parsed, otherwise use string value
+        this.TryParse(out var value) ? value.GetHashCode() : StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
 
     public override string ToString() => this.StringValue;
 
