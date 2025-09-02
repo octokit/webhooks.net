@@ -129,14 +129,10 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     private static string ToEnumString(TEnum type)
     {
         var enumType = typeof(TEnum);
-        var name = Enum.GetName(enumType, type);
-        if (name is not null)
-        {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            return enumMemberAttribute.Value!;
-        }
+        var name = Enum.GetName(enumType, type) ?? throw new ArgumentException(type.ToString());
 
-        throw new ArgumentException(type.ToString());
+        var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+        return enumMemberAttribute.Value!;
     }
 
     private static TEnum ToEnum(string str)
