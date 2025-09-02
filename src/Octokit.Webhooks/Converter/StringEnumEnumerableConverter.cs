@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using Octokit.Webhooks.Extensions;
 
 public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumerable<StringEnum<TEnum>>>
-    where TEnum : struct
+    where TEnum : struct, Enum
 {
     private static readonly JsonSerializerOptions Options = new()
     {

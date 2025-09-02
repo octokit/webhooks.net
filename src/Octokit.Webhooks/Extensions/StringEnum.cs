@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 
 [PublicAPI]
 public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
-    where TEnum : struct
+    where TEnum : struct, Enum
 {
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
@@ -31,7 +31,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public StringEnum(TEnum parsedValue)
     {
-        if (!Enum.IsDefined(typeof(TEnum), parsedValue))
+        if (!Enum.IsDefined(parsedValue))
         {
             _ = ThrowArgumentException(parsedValue.ToString());
         }
