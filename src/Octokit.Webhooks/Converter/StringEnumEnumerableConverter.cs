@@ -11,7 +11,7 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
 {
     private static readonly JsonSerializerOptions Options = new()
     {
-        Converters = { Activator.CreateInstance<StringEnumConverter<TEnum>>() },
+        Converters = { new StringEnumConverter<TEnum>() },
     };
 
     public override IEnumerable<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
