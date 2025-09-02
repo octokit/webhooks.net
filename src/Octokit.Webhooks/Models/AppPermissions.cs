@@ -12,7 +12,8 @@ public sealed record AppPermissions
     public StringEnum<AppPermissionsLevel>? Administration { get; init; }
 
     [JsonPropertyName("blocking")]
-    public AppPermissionsLevel? Blocking { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Blocking { get; init; }
 
     [JsonPropertyName("checks")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
@@ -43,20 +44,24 @@ public sealed record AppPermissions
     public StringEnum<AppPermissionsLevel>? Environments { get; init; }
 
     [JsonPropertyName("followers")]
-    public AppPermissionsLevel? Followers { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Followers { get; init; }
 
     [JsonPropertyName("gpg_keys")]
-    public AppPermissionsLevel? GpgKeys { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? GpgKeys { get; init; }
 
     [JsonPropertyName("interaction_limits")]
-    public AppPermissionsLevel? InteractionLimits { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? InteractionLimits { get; init; }
 
     [JsonPropertyName("issues")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
     public StringEnum<AppPermissionsLevel>? Issues { get; init; }
 
     [JsonPropertyName("keys")]
-    public AppPermissionsLevel? Keys { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Keys { get; init; }
 
     [JsonPropertyName("members")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
@@ -115,7 +120,8 @@ public sealed record AppPermissions
     public StringEnum<AppPermissionsLevel>? Pages { get; init; }
 
     [JsonPropertyName("plan")]
-    public AppPermissionsLevel? Plan { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Plan { get; init; }
 
     [JsonPropertyName("pull_requests")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
@@ -154,7 +160,8 @@ public sealed record AppPermissions
     public StringEnum<AppPermissionsLevel>? SingleFile { get; init; }
 
     [JsonPropertyName("starring")]
-    public AppPermissionsLevel? Starring { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Starring { get; init; }
 
     [JsonPropertyName("statuses")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
@@ -169,7 +176,8 @@ public sealed record AppPermissions
     public StringEnum<AppPermissionsLevel>? VulnerabilityAlerts { get; init; }
 
     [JsonPropertyName("watching")]
-    public AppPermissionsLevel? Watching { get; init; }
+    [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
+    public StringEnum<AppPermissionsLevel>? Watching { get; init; }
 
     [JsonPropertyName("workflows")]
     [JsonConverter(typeof(StringEnumConverter<AppPermissionsLevel>))]
