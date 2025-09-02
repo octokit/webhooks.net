@@ -33,7 +33,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     {
         if (!Enum.IsDefined(typeof(TEnum), parsedValue))
         {
-            ThrowArgumentException(parsedValue.ToString());
+            _ = ThrowArgumentException(parsedValue.ToString());
         }
 
         this.StringValue = ToEnumString(parsedValue);
