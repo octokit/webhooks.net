@@ -147,6 +147,6 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             }
         }
 
-        throw new ArgumentException(str);
+        return ThrowArgumentException(str);
     }
 }
