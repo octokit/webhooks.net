@@ -85,20 +85,17 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         var canParseThis = this.TryParse(out var thisValue);
         var canParseOther = other.TryParse(out var otherValue);
 
-        // If both can be parsed to enum values, compare the enum values
-        if (canParseThis && canParseOther)
+        return canParseThis switch
         {
-            return thisValue.Equals(otherValue);
-        }
+            // If both can be parsed to enum values, compare the enum values
+            true when canParseOther => thisValue.Equals(otherValue),
 
-        // If neither can be parsed, compare string values
-        if (!canParseThis && !canParseOther)
-        {
-            return this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase);
-        }
+            // If neither can be parsed, compare string values
+            false when !canParseOther => this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase),
 
-        // If one can parse and one cannot, they're not equal
-        return false;
+            // If one can parse and one cannot, they're not equal
+            _ => false,
+        };
     }
 
     public override int GetHashCode()
