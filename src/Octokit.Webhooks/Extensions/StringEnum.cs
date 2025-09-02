@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 
 [PublicAPI]
 public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
-    where TEnum : struct
+    where TEnum : struct, Enum
 {
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
@@ -31,9 +31,9 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public StringEnum(TEnum parsedValue)
     {
-        if (!Enum.IsDefined(typeof(TEnum), parsedValue))
+        if (!Enum.IsDefined(parsedValue))
         {
-            throw GetArgumentException(parsedValue.ToString());
+            _ = ThrowArgumentException(parsedValue.ToString());
         }
 
         this.StringValue = ToEnumString(parsedValue);
@@ -43,7 +43,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public string StringValue { get; }
 
-    public TEnum Value => this.parsedValue ?? throw GetArgumentException(this.StringValue);
+    public TEnum Value => this.parsedValue ?? ThrowArgumentException(this.StringValue);
 
     public static implicit operator StringEnum<TEnum>(string value) => new(value);
 
@@ -66,7 +66,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
 
-    public bool TryParse([NotNullWhen(true)] out TEnum value)
+    public bool TryParse([NotNullWhen(true)] out TEnum? value)
     {
         if (this.isValidEnum && this.parsedValue is not null)
         {
@@ -74,7 +74,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             return true;
         }
 
-        value = default;
+        value = null;
         return false;
     }
 
@@ -85,36 +85,27 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         var canParseThis = this.TryParse(out var thisValue);
         var canParseOther = other.TryParse(out var otherValue);
 
-        // If both can be parsed to enum values, compare the enum values
-        if (canParseThis && canParseOther)
+        return canParseThis switch
         {
-            return thisValue.Equals(otherValue);
-        }
+            // If both can be parsed to enum values, compare the enum values
+            true when canParseOther => thisValue.Equals(otherValue),
 
-        // If neither can be parsed, compare string values
-        if (!canParseThis && !canParseOther)
-        {
-            return this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase);
-        }
+            // If neither can be parsed, compare string values
+            false when !canParseOther => this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase),
 
-        // If one can parse and one cannot, they're not equal
-        return false;
+            // If one can parse and one cannot, they're not equal
+            _ => false,
+        };
     }
 
-    public override int GetHashCode()
-    {
+    public override int GetHashCode() =>
+
         // Use enum value for hash code if it can be parsed, otherwise use string value
-        if (this.TryParse(out var value))
-        {
-            return value.GetHashCode();
-        }
-
-        return StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
-    }
+        this.TryParse(out var value) ? value.GetHashCode() : StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
 
     public override string ToString() => this.StringValue;
 
-    private static bool TryParseEnum(string str, out TEnum value)
+    private static bool TryParseEnum(string str, [NotNullWhen(true)] out TEnum? value)
     {
         try
         {
@@ -123,12 +114,13 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         }
         catch (ArgumentException)
         {
-            value = default;
+            value = null;
             return false;
         }
     }
 
-    private static ArgumentException GetArgumentException(string? value) => new(string.Format(
+    [DoesNotReturn]
+    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(string.Format(
         CultureInfo.InvariantCulture,
         "Value '{0}' is not a valid '{1}' enum value.",
         value,
@@ -137,14 +129,10 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     private static string ToEnumString(TEnum type)
     {
         var enumType = typeof(TEnum);
-        var name = Enum.GetName(enumType, type);
-        if (name is not null)
-        {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            return enumMemberAttribute.Value!;
-        }
+        var name = Enum.GetName(enumType, type) ?? throw new ArgumentException(type.ToString());
 
-        throw new ArgumentException(type.ToString());
+        var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+        return enumMemberAttribute.Value!;
     }
 
     private static TEnum ToEnum(string str)
@@ -159,6 +147,6 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             }
         }
 
-        throw new ArgumentException(str);
+        return ThrowArgumentException(str);
     }
 }

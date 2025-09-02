@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using Octokit.Webhooks.Extensions;
 
 public sealed class StringEnumConverter<TEnum> : JsonConverter<StringEnum<TEnum>>
-    where TEnum : struct
+    where TEnum : struct, Enum
 {
     public override StringEnum<TEnum> Read(
         ref Utf8JsonReader reader,

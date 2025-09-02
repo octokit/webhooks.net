@@ -89,4 +89,14 @@ public class StringEnumTests
         var stringEnum = new StringEnum<HookType>(stringValue);
         stringEnum.Should().Be(new StringEnum<HookType>(enumValue));
     }
+
+    [Theory]
+    [InlineData("App", HookType.App)]
+    [InlineData("Organization", HookType.Organization)]
+    [InlineData("Repository", HookType.Repository)]
+    public void CanCompareImplicitlyToEnumValue(string stringValue, HookType enumValue)
+    {
+        var stringEnum = new StringEnum<HookType>(stringValue);
+        stringEnum.Equals(enumValue).Should().BeTrue();
+    }
 }
