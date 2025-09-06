@@ -17,7 +17,7 @@ public sealed record AlertRule
     public string FullDescription { get; init; } = null!;
 
     [JsonPropertyName("tags")]
-    public string Tags { get; init; } = null!;
+    public IEnumerable<string> Tags { get; init; } = null!;
 
     [JsonPropertyName("help")]
     public string Help { get; init; } = null!;
