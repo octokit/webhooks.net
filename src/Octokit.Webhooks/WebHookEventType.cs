@@ -66,6 +66,7 @@ public static class WebhookEventType
     public const string Sponsorship = "sponsorship";
     public const string Star = "star";
     public const string Status = "status";
+    public const string SubIssues = "sub_issues";
     public const string Team = "team";
     public const string TeamAdd = "team_add";
     public const string Watch = "watch";
