@@ -57,6 +57,7 @@ using Octokit.Webhooks.Events.SecretScanningAlertLocation;
 using Octokit.Webhooks.Events.SecurityAdvisory;
 using Octokit.Webhooks.Events.Sponsorship;
 using Octokit.Webhooks.Events.Star;
+using Octokit.Webhooks.Events.SubIssues;
 using Octokit.Webhooks.Events.Team;
 using Octokit.Webhooks.Events.Watch;
 using Octokit.Webhooks.Events.WorkflowJob;
@@ -154,6 +155,7 @@ public abstract class WebhookEventProcessor
             SponsorshipEvent sponsorshipEvent => this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, cancellationToken),
             StarEvent starEvent => this.ProcessStarWebhookAsync(headers, starEvent, cancellationToken),
             StatusEvent statusEvent => this.ProcessStatusWebhookAsync(headers, statusEvent, cancellationToken),
+            SubIssuesEvent subIssuesEvent => this.ProcessSubIssuesWebhookAsync(headers, subIssuesEvent, cancellationToken),
             TeamEvent teamEvent => this.ProcessTeamWebhookAsync(headers, teamEvent, cancellationToken),
             TeamAddEvent teamAddEvent => this.ProcessTeamAddWebhookAsync(headers, teamAddEvent, cancellationToken),
             WatchEvent watchEvent => this.ProcessWatchWebhookAsync(headers, watchEvent, cancellationToken),
@@ -229,6 +231,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.Sponsorship => JsonSerializer.Deserialize<SponsorshipEvent>(body)!,
             WebhookEventType.Star => JsonSerializer.Deserialize<StarEvent>(body)!,
             WebhookEventType.Status => JsonSerializer.Deserialize<StatusEvent>(body)!,
+            WebhookEventType.SubIssues => JsonSerializer.Deserialize<SubIssuesEvent>(body)!,
             WebhookEventType.Team => JsonSerializer.Deserialize<TeamEvent>(body)!,
             WebhookEventType.TeamAdd => JsonSerializer.Deserialize<TeamAddEvent>(body)!,
             WebhookEventType.Watch => JsonSerializer.Deserialize<WatchEvent>(body)!,
@@ -1352,6 +1355,23 @@ public abstract class WebhookEventProcessor
 
     [PublicAPI]
     protected virtual ValueTask ProcessStatusWebhookAsync(WebhookHeaders headers, StatusEvent statusEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessSubIssuesWebhookAsync(WebhookHeaders headers, SubIssuesEvent subIssuesEvent, CancellationToken cancellationToken = default) =>
+        subIssuesEvent.Action switch
+        {
+            SubIssuesActionValue.ParentIssueAdded => this.ProcessSubIssuesWebhookAsync(headers, subIssuesEvent, SubIssuesAction.ParentIssueAdded, cancellationToken),
+            SubIssuesActionValue.ParentIssueRemoved => this.ProcessSubIssuesWebhookAsync(headers, subIssuesEvent, SubIssuesAction.ParentIssueRemoved, cancellationToken),
+            SubIssuesActionValue.SubIssueAdded => this.ProcessSubIssuesWebhookAsync(headers, subIssuesEvent, SubIssuesAction.SubIssueAdded, cancellationToken),
+            SubIssuesActionValue.SubIssueRemoved => this.ProcessSubIssuesWebhookAsync(headers, subIssuesEvent, SubIssuesAction.SubIssueRemoved, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessSubIssuesWebhookAsync(
+        WebhookHeaders headers,
+        SubIssuesEvent subIssuesEvent,
+        SubIssuesAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     private ValueTask ProcessTeamWebhookAsync(WebhookHeaders headers, TeamEvent teamEvent, CancellationToken cancellationToken = default) =>
         teamEvent.Action switch
