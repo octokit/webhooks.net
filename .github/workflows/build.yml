@@ -86,15 +86,22 @@ jobs:
     environment:
       name: 'NuGet'
       url: https://www.nuget.org/packages/Octokit.Webhooks
+    permissions:
+      id-token: write
     runs-on: windows-latest
     steps:
       - name: 'Download artifact'
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           name: 'windows-latest'
+      - name: 'NuGet login'
+        uses: NuGet/login@269a1094e6b6e88a3856400d7171adf9b7a546f7 # v1.1.0
+        id: nuget-login
+        with:
+          user: GitHub
       - name: 'Dotnet NuGet Push'
         run: |
           Get-ChildItem .\ -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
-          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} }
         shell: pwsh
