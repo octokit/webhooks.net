@@ -1,0 +1,49 @@
+<Solution>
+  <Folder Name="/images/">
+    <File Path="images/Icon.png" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/AspNetCore/AspNetCore.csproj" />
+    <Project Path="samples/AzureFunctions/AzureFunctions.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="build.cake" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+    <File Path="Key.snk" />
+    <File Path="LICENSE.md" />
+    <File Path="README.md" />
+    <File Path="renovate.json" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/">
+    <File Path=".github/PULL_REQUEST_TEMPLATE.md" />
+    <File Path=".github/release-drafter.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/ISSUE_TEMPLATE/">
+    <File Path=".github/ISSUE_TEMPLATE/BUG_REPORT.yml" />
+    <File Path=".github/ISSUE_TEMPLATE/FEATURE_REQUEST.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".github/workflows/codeql-analysis.yml" />
+    <File Path=".github/workflows/release-drafter.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/Octokit.Webhooks.AspNetCore/Octokit.Webhooks.AspNetCore.csproj" />
+    <Project Path="src/Octokit.Webhooks.AzureFunctions/Octokit.Webhooks.AzureFunctions.csproj" />
+    <Project Path="src/Octokit.Webhooks/Octokit.Webhooks.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <File Path="test/.editorconfig" />
+    <File Path="test/Directory.Build.props" />
+    <Project Path="test/Octokit.Webhooks.AzureFunctions.Test/Octokit.Webhooks.AzureFunctions.Test.csproj" />
+    <Project Path="test/Octokit.Webhooks.Test/Octokit.Webhooks.Test.csproj" />
+    <Project Path="test/Octokit.Webhooks.TestUtils/Octokit.Webhooks.TestUtils.csproj" />
+  </Folder>
+</Solution>
