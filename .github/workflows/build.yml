@@ -39,17 +39,17 @@ jobs:
           fetch-depth: 0
       - name: 'Install .NET Core SDK'
         uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
-      - name: 'Dotnet Tool Restore'
-        run: dotnet tool restore
+      - name: 'Dotnet Restore'
+        run: dotnet restore
         shell: pwsh
-      - name: 'Dotnet Cake Build'
-        run: dotnet cake --target=Build
+      - name: 'Dotnet Build'
+        run: dotnet build --configuration Release --no-restore
         shell: pwsh
-      - name: 'Dotnet Cake Test'
-        run: dotnet cake --target=Test
+      - name: 'Dotnet Test'
+        run: dotnet test --configuration Release --no-build --no-restore
         shell: pwsh
-      - name: 'Dotnet Cake Pack'
-        run: dotnet cake --target=Pack
+      - name: 'Dotnet Pack'
+        run: dotnet pack --configuration Release --no-build --no-restore --output ./artifacts
         shell: pwsh
       - name: 'Publish artifacts'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
