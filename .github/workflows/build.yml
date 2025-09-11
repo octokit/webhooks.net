@@ -57,28 +57,6 @@ jobs:
           name: ${{matrix.os}}
           path: './artifacts'
 
-  push-github-packages:
-    name: 'Push GitHub Packages'
-    needs: build
-    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
-    environment:
-      name: 'GitHub Packages'
-      url: https://github.com/octokit/webhooks.net/packages
-    permissions:
-      packages: write
-    runs-on: windows-latest
-    steps:
-      - name: 'Download artifact'
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
-        with:
-          name: 'windows-latest'
-      - name: 'Dotnet NuGet Add Source'
-        run: dotnet nuget add source https://nuget.pkg.github.com/octokit/index.json --name GitHub --username octokit --password ${{secrets.GITHUB_TOKEN}}
-        shell: pwsh
-      - name: 'Dotnet NuGet Push'
-        run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
-        shell: pwsh
-
   push-nuget:
     name: 'Push NuGet Packages'
     needs: build
