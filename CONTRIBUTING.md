@@ -25,14 +25,13 @@ Set up the repository locally. Replace `<your account name>` with the name of th
 ```shell
 git clone https://github.com/<your account name>/webhooks.net.git
 cd webhooks.net
-dotnet tool restore
-dotnet cake --target=Build
+dotnet build
 ```
 
 Run the tests before making changes to make sure the local setup is working as expected
 
 ```shell
-dotnet cake --target=Test
+dotnet test
 ```
 
 ## Submitting the Pull Request

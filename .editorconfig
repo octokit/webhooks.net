@@ -68,7 +68,7 @@ indent_style = tab
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/configuration-options#scope
 ##########################################
 
-[*.{cs,csx,cake,vb,vbx}]
+[*.{cs,csx,vb,vbx}]
 # Default Severity for all .NET Code Style rules below
 dotnet_analyzer_diagnostic.severity = warning
 
@@ -79,7 +79,7 @@ dotnet_analyzer_diagnostic.severity = warning
 
 # .NET Style Rules
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/language-rules#net-style-rules
-[*.{cs,csx,cake,vb,vbx}]
+[*.{cs,csx,vb,vbx}]
 # "this." and "Me." qualifiers
 dotnet_style_qualification_for_field = true:warning
 dotnet_style_qualification_for_property = true:warning
@@ -128,7 +128,7 @@ dotnet_diagnostic.IDE0130.severity = suggestion
 
 # C# Style Rules
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/language-rules#c-style-rules
-[*.{cs,csx,cake}]
+[*.{cs,csx}]
 # 'var' preferences
 csharp_style_var_for_built_in_types = true:warning
 csharp_style_var_when_type_is_apparent = true:warning
@@ -177,12 +177,12 @@ csharp_style_namespace_declarations = file_scoped:warning
 ##########################################
 
 # .NET Unnecessary code rules
-[*.{cs,csx,cake,vb,vbx}]
+[*.{cs,csx,vb,vbx}]
 dotnet_code_quality_unused_parameters = all:warning
 dotnet_remove_unnecessary_suppression_exclusions = none:warning
 
 # C# Unnecessary code rules
-[*.{cs,csx,cake}]
+[*.{cs,csx}]
 csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
 dotnet_diagnostic.IDE0058.severity = suggestion
 csharp_style_unused_value_assignment_preference = discard_variable:suggestion
@@ -195,14 +195,14 @@ dotnet_diagnostic.IDE0059.severity = suggestion
 
 # .NET formatting rules
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#net-formatting-rules
-[*.{cs,csx,cake,vb,vbx}]
+[*.{cs,csx,vb,vbx}]
 # Organize using directives
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
 # C# formatting rules
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#c-formatting-rules
-[*.{cs,csx,cake}]
+[*.{cs,csx}]
 # Newline options
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-formatting-conventions#new-line-options
 csharp_new_line_before_open_brace = all
@@ -254,7 +254,7 @@ csharp_preserve_single_line_blocks = true
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/naming-rules
 ##########################################
 
-[*.{cs,csx,cake,vb,vbx}]
+[*.{cs,csx,vb,vbx}]
 
 ##########################################
 # Styles
