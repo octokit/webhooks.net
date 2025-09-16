@@ -23,7 +23,7 @@ public class StringEnumConverterTests
     [InlineData(@"""Organization""", HookType.Organization)]
     public void CanDeserializeKnown(string input, HookType expected)
     {
-        var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options);
+        var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options)!;
         result.Value.Should().Be(expected);
     }
 
@@ -34,7 +34,14 @@ public class StringEnumConverterTests
     [InlineData(@"""Unknown""", "Unknown")]
     public void CanDeserializeUnknown(string input, string expected)
     {
-        var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options);
+        var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options)!;
         result.StringValue.Should().Be(expected);
+    }
+
+    [Fact]
+    public void DeserializeNullReturnsNull()
+    {
+        var result = JsonSerializer.Deserialize<StringEnum<HookType>>("null", this.options);
+        result.Should().BeNull();
     }
 }
