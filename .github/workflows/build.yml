@@ -73,7 +73,7 @@ jobs:
         with:
           name: 'windows-latest'
       - name: 'NuGet login'
-        uses: NuGet/login@035d2cc2260e5666c56c76e25982d1a7d3afacb7 # v1.1.0
+        uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544 # v1.1.0
         id: nuget-login
         with:
           user: ${{ secrets.NUGET_USER }}
