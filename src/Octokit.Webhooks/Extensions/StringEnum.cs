@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
+public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
     private readonly TEnum? parsedValue;
@@ -49,23 +49,6 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public static implicit operator StringEnum<TEnum>(TEnum parsedValue) => new(parsedValue);
 
-    public static bool operator ==(StringEnum<TEnum>? left, StringEnum<TEnum>? right)
-    {
-        if (left is null && right is null)
-        {
-            return true;
-        }
-
-        if (left is null || right is null)
-        {
-            return false;
-        }
-
-        return left.Value.Equals(right.Value);
-    }
-
-    public static bool operator !=(StringEnum<TEnum>? left, StringEnum<TEnum>? right) => !(left == right);
-
     public bool TryParse([NotNullWhen(true)] out TEnum? value)
     {
         if (this.isValidEnum && this.parsedValue is not null)
@@ -78,12 +61,12 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
         return false;
     }
 
-    public override bool Equals(object? obj) => obj is StringEnum<TEnum> other && this.Equals(other);
-
-    public bool Equals(StringEnum<TEnum> other)
+    public bool Equals(StringEnum<TEnum>? other)
     {
         var canParseThis = this.TryParse(out var thisValue);
-        var canParseOther = other.TryParse(out var otherValue);
+
+        TEnum? otherValue = null;
+        var canParseOther = other != null && other.TryParse(out otherValue);
 
         return canParseThis switch
         {
@@ -91,7 +74,7 @@ public readonly struct StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             true when canParseOther => thisValue.Equals(otherValue),
 
             // If neither can be parsed, compare string values
-            false when !canParseOther => this.StringValue.Equals(other.StringValue, StringComparison.OrdinalIgnoreCase),
+            false when !canParseOther => this.StringValue.Equals(other?.StringValue, StringComparison.OrdinalIgnoreCase),
 
             // If one can parse and one cannot, they're not equal
             _ => false,
