@@ -9,7 +9,7 @@
 
   <ItemGroup Label="Package References" Condition="'$(OutputType)' == 'Exe'">
     <PackageReference Include="CaseExtensions" Version="1.1.0"/>
-    <PackageReference Include="coverlet.collector" PrivateAssets="all" Version="6.0.4">
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" Version="8.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="AwesomeAssertions" Version="9.3.0" />
