@@ -24,7 +24,7 @@ public class StringEnumConverterTests
     public void CanDeserializeKnown(string input, HookType expected)
     {
         var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options);
-        result!.Value.Should().Be(expected);
+        result.Value.Should().Be(expected);
     }
 
     [Theory]
@@ -35,6 +35,6 @@ public class StringEnumConverterTests
     public void CanDeserializeUnknown(string input, string expected)
     {
         var result = JsonSerializer.Deserialize<StringEnum<HookType>>(input, this.options);
-        result!.StringValue.Should().Be(expected);
+        result.StringValue.Should().Be(expected);
     }
 }
