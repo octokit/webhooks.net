@@ -33,7 +33,7 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)!);
+                returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options));
             }
 
             _ = reader.Read();
