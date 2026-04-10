@@ -36,7 +36,13 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             return req.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        // Get body and process
+        // Verify event type
+        if (!VerifyEventType(req))
+        {
+            Log.MissingEventType(logger);
+            return req.CreateResponse(HttpStatusCode.BadRequest);
+        }
+
         try
         {
             var body = await GetBodyAsync(req, ctx.CancellationToken).ConfigureAwait(false);
@@ -86,6 +92,17 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
     {
         using var reader = new StreamReader(req.Body);
         return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    private static bool VerifyEventType(HttpRequestData req)
+    {
+        if (!req.Headers.TryGetValues("X-GitHub-Event", out var eventValues))
+        {
+            return false;
+        }
+
+        var values = eventValues.ToList();
+        return values.Count == 1 && !string.IsNullOrWhiteSpace(values[0]);
     }
 
     private static bool VerifySignature(HttpRequestData req, string? secret, string body)
@@ -149,5 +166,11 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             Level = LogLevel.Warning,
             Message = "GitHub event request was cancelled.")]
         public static partial void RequestCancelled(ILogger logger);
+
+        [LoggerMessage(
+            EventId = 5,
+            Level = LogLevel.Error,
+            Message = "GitHub event has a missing or invalid event type header.")]
+        public static partial void MissingEventType(ILogger logger);
     }
 }
