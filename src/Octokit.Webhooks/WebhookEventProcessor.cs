@@ -774,6 +774,7 @@ public abstract class WebhookEventProcessor
         mergeGroupEvent.Action switch
         {
             MergeGroupActionValue.ChecksRequested => this.ProcessMergeGroupWebhookAsync(headers, mergeGroupEvent, MergeGroupAction.ChecksRequested, cancellationToken),
+            MergeGroupActionValue.Destroyed => this.ProcessMergeGroupWebhookAsync(headers, (MergeGroupDestroyedEvent)mergeGroupEvent, MergeGroupAction.Destroyed, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -783,6 +784,13 @@ public abstract class WebhookEventProcessor
         MergeGroupEvent mergeGroupEvent,
         MergeGroupAction action,
         CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessMergeGroupWebhookAsync(
+        WebhookHeaders headers,
+        MergeGroupDestroyedEvent mergeGroupDestroyedEvent,
+        MergeGroupAction action,
+        CancellationToken cancellationToken = default) => this.ProcessMergeGroupWebhookAsync(headers, (MergeGroupEvent)mergeGroupDestroyedEvent, action, cancellationToken);
 
     private ValueTask ProcessMergeQueueEntryWebhookAsync(WebhookHeaders headers, MergeQueueEntryEvent mergeQueueEntryEvent, CancellationToken cancellationToken = default) =>
         mergeQueueEntryEvent.Action switch
