@@ -58,7 +58,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
                 .ConfigureAwait(false);
             return req.CreateResponse(HttpStatusCode.OK);
         }
-        catch (OperationCanceledException)
+        catch (OperationCanceledException) when (ctx.CancellationToken.IsCancellationRequested)
         {
             Log.RequestCancelled(logger);
             return null;

@@ -63,7 +63,7 @@ public static partial class GitHubWebhookExtensions
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
-                catch (OperationCanceledException)
+                catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested)
                 {
                     Log.RequestCancelled(logger);
                 }
