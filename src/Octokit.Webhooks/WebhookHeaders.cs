@@ -16,6 +16,8 @@ public sealed class WebhookHeaders
 
     public string? HookInstallationTargetType { get; init; }
 
+    public string? Signature256 { get; init; }
+
     public static WebhookHeaders Parse(IDictionary<string, StringValues> headers)
     {
         ArgumentNullException.ThrowIfNull(headers);
@@ -26,6 +28,7 @@ public sealed class WebhookHeaders
         headers.TryGetValue("X-GitHub-Hook-ID", out var hookId);
         headers.TryGetValue("X-GitHub-Hook-Installation-Target-ID", out var hookInstallationTargetId);
         headers.TryGetValue("X-GitHub-Hook-Installation-Target-Type", out var hookInstallationTargetType);
+        headers.TryGetValue("X-Hub-Signature-256", out var signature256);
 
         return new WebhookHeaders
         {
@@ -35,6 +38,7 @@ public sealed class WebhookHeaders
             HookId = hookId.ToString(),
             HookInstallationTargetId = hookInstallationTargetId.ToString(),
             HookInstallationTargetType = hookInstallationTargetType.ToString(),
+            Signature256 = signature256.ToString(),
         };
     }
 }

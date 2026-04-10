@@ -1,13 +1,10 @@
 namespace Octokit.Webhooks.AzureFunctions;
 
 using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
@@ -48,10 +45,23 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             var body = await GetBodyAsync(req, ctx.CancellationToken).ConfigureAwait(false);
 
             // Verify signature
-            if (!VerifySignature(req, options.Value.Secret, body))
+            var signatureResult = VerifySignature(req, options.Value.Secret, body);
+            if (signatureResult != WebhookSignatureValidationResult.Valid)
             {
                 Log.SignatureValidationFailed(logger);
-                return req.CreateResponse(HttpStatusCode.BadRequest);
+                var response = req.CreateResponse(HttpStatusCode.BadRequest);
+                var message = signatureResult switch
+                {
+                    WebhookSignatureValidationResult.MissingSignature =>
+                        "Expected an X-Hub-Signature-256 header but none was provided. Configure a webhook secret on the sender, or remove the secret from the receiver.",
+                    WebhookSignatureValidationResult.MissingSecret =>
+                        "Request includes an X-Hub-Signature-256 header but no secret is configured on the receiver.",
+                    WebhookSignatureValidationResult.SignatureMismatch =>
+                        "X-Hub-Signature-256 does not match the expected signature. Verify that the webhook secret matches on both sender and receiver.",
+                    _ => "Signature validation failed.",
+                };
+                await response.WriteStringAsync(message).ConfigureAwait(false);
+                return response;
             }
 
             // Process body
@@ -105,36 +115,12 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         return values.Count == 1 && !string.IsNullOrWhiteSpace(values[0]);
     }
 
-    private static bool VerifySignature(HttpRequestData req, string? secret, string body)
+    private static WebhookSignatureValidationResult VerifySignature(HttpRequestData req, string? secret, string body)
     {
-        var isSigned = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
+        _ = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
         var signature = signatureHeader?.FirstOrDefault();
 
-        var isSignatureExpected = !string.IsNullOrEmpty(secret);
-
-        if (!isSigned && !isSignatureExpected)
-        {
-            // Nothing to do.
-            return true;
-        }
-
-        if (!isSigned && isSignatureExpected)
-        {
-            return false;
-        }
-
-        if (isSigned && !isSignatureExpected)
-        {
-            return false;
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(secret!);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-        return signature == expectedHeader;
+        return WebhookSignatureValidator.Verify(signature, secret, body);
     }
 
     /// <summary>
