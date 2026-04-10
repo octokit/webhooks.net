@@ -130,7 +130,7 @@ public static partial class GitHubWebhookExtensions
                 return false;
             case WebhookSignatureValidationResult.MissingSecret:
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Payload includes a secret, so the webhook receiver must configure a secret.")
+                await context.Response.WriteAsync("Request includes a signature header, so the webhook receiver must configure a secret.")
                     .ConfigureAwait(false);
                 return false;
             case WebhookSignatureValidationResult.SignatureMismatch:

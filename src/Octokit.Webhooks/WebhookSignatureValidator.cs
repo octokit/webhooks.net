@@ -1,7 +1,6 @@
 namespace Octokit.Webhooks;
 
 using System;
-using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,6 +9,8 @@ using System.Text;
 /// </summary>
 public static class WebhookSignatureValidator
 {
+    private const string Prefix = "sha256=";
+
     /// <summary>
     /// Verifies the signature of a GitHub webhook payload.
     /// </summary>
@@ -39,17 +40,33 @@ public static class WebhookSignatureValidator
             return WebhookSignatureValidationResult.MissingSecret;
         }
 
+        if (!signatureHeader!.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase))
+        {
+            return WebhookSignatureValidationResult.SignatureMismatch;
+        }
+
+        var signatureHex = signatureHeader![Prefix.Length..];
+
+        byte[] signatureBytes;
+        try
+        {
+            signatureBytes = Convert.FromHexString(signatureHex);
+        }
+        catch (FormatException)
+        {
+            return WebhookSignatureValidationResult.SignatureMismatch;
+        }
+
+        if (signatureBytes.Length != 32)
+        {
+            return WebhookSignatureValidationResult.SignatureMismatch;
+        }
+
         var keyBytes = Encoding.UTF8.GetBytes(secret!);
         var bodyBytes = Encoding.UTF8.GetBytes(body);
+        var expectedHash = HMACSHA256.HashData(keyBytes, bodyBytes);
 
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-
-        var expectedBytes = Encoding.UTF8.GetBytes(expectedHeader);
-        var actualBytes = Encoding.UTF8.GetBytes(signatureHeader!);
-
-        if (!CryptographicOperations.FixedTimeEquals(expectedBytes, actualBytes))
+        if (!CryptographicOperations.FixedTimeEquals(expectedHash, signatureBytes))
         {
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
