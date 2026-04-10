@@ -40,28 +40,32 @@ public static partial class GitHubWebhookExtensions
                     return;
                 }
 
-                // Get body
-                var body = await GetBodyAsync(context).ConfigureAwait(false);
-
-                if (secret is null && options is not null)
-                {
-                    secret = options.CurrentValue.Secret;
-                }
-
-                // Verify signature
-                if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
-                {
-                    Log.SignatureValidationFailed(logger);
-                    return;
-                }
-
-                // Process body
                 try
                 {
+                    // Get body
+                    var body = await GetBodyAsync(context, context.RequestAborted).ConfigureAwait(false);
+
+                    if (secret is null && options is not null)
+                    {
+                        secret = options.CurrentValue.Secret;
+                    }
+
+                    // Verify signature
+                    if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
+                    {
+                        Log.SignatureValidationFailed(logger);
+                        return;
+                    }
+
+                    // Process body
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
                     await service.ProcessWebhookAsync(context.Request.Headers, body, context.RequestAborted)
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
+                }
+                catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested)
+                {
+                    Log.RequestCancelled(logger);
                 }
                 catch (Exception ex)
                 {
@@ -88,10 +92,10 @@ public static partial class GitHubWebhookExtensions
         return true;
     }
 
-    private static async Task<string> GetBodyAsync(HttpContext context)
+    private static async Task<string> GetBodyAsync(HttpContext context, CancellationToken cancellationToken)
     {
         using var reader = new StreamReader(context.Request.Body);
-        return await reader.ReadToEndAsync().ConfigureAwait(false);
+        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
     }
 
     private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, string body)
@@ -159,5 +163,11 @@ public static partial class GitHubWebhookExtensions
             Level = LogLevel.Error,
             Message = "Exception processing GitHub event.")]
         public static partial void ProcessingFailed(ILogger logger, Exception exception);
+
+        [LoggerMessage(
+            EventId = 4,
+            Level = LogLevel.Warning,
+            Message = "GitHub event request was cancelled.")]
+        public static partial void RequestCancelled(ILogger logger);
     }
 }

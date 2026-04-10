@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -35,19 +36,19 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             return req.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-        // Get body
-        var body = await GetBodyAsync(req).ConfigureAwait(false);
-
-        // Verify signature
-        if (!VerifySignature(req, options.Value.Secret, body))
-        {
-            Log.SignatureValidationFailed(logger);
-            return req.CreateResponse(HttpStatusCode.BadRequest);
-        }
-
-        // Process body
+        // Get body and process
         try
         {
+            var body = await GetBodyAsync(req, ctx.CancellationToken).ConfigureAwait(false);
+
+            // Verify signature
+            if (!VerifySignature(req, options.Value.Secret, body))
+            {
+                Log.SignatureValidationFailed(logger);
+                return req.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            // Process body
             var service = ctx.InstanceServices.GetRequiredService<WebhookEventProcessor>();
             var headers = req.Headers.ToDictionary(
                 kv => kv.Key,
@@ -56,6 +57,11 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             await service.ProcessWebhookAsync(headers, body, ctx.CancellationToken)
                 .ConfigureAwait(false);
             return req.CreateResponse(HttpStatusCode.OK);
+        }
+        catch (OperationCanceledException) when (ctx.CancellationToken.IsCancellationRequested)
+        {
+            Log.RequestCancelled(logger);
+            return null;
         }
         catch (Exception ex)
         {
@@ -76,10 +82,10 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         return contentType.MediaType == expectedContentType;
     }
 
-    private static async Task<string> GetBodyAsync(HttpRequestData req)
+    private static async Task<string> GetBodyAsync(HttpRequestData req, CancellationToken cancellationToken)
     {
         using var reader = new StreamReader(req.Body);
-        return await reader.ReadToEndAsync().ConfigureAwait(false);
+        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
     }
 
     private static bool VerifySignature(HttpRequestData req, string? secret, string body)
@@ -137,5 +143,11 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             Level = LogLevel.Error,
             Message = "Exception processing GitHub event.")]
         public static partial void ProcessingFailed(ILogger logger, Exception exception);
+
+        [LoggerMessage(
+            EventId = 4,
+            Level = LogLevel.Warning,
+            Message = "GitHub event request was cancelled.")]
+        public static partial void RequestCancelled(ILogger logger);
     }
 }
