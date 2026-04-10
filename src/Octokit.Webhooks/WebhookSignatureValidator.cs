@@ -13,8 +13,8 @@ public static class WebhookSignatureValidator
     /// <summary>
     /// Verifies the signature of a GitHub webhook payload.
     /// </summary>
-    /// <param name="signatureHeader">The value of the <c>X-Hub-Signature-256</c> header, or <see langword="null"/> if not present.</param>
-    /// <param name="secret">The configured webhook secret, or <see langword="null"/> if not configured.</param>
+    /// <param name="signatureHeader">The value of the <c>X-Hub-Signature-256</c> header, or <see langword="null"/> or an empty string if not present.</param>
+    /// <param name="secret">The configured webhook secret, or <see langword="null"/> or an empty string if not configured.</param>
     /// <param name="body">The raw request body.</param>
     /// <returns>A <see cref="WebhookSignatureValidationResult"/> indicating the outcome of the validation.</returns>
     public static WebhookSignatureValidationResult Verify(string? signatureHeader, string? secret, string body)
