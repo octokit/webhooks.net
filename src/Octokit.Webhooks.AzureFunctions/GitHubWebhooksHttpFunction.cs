@@ -104,7 +104,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
 
     private static bool VerifySignature(HttpRequestData req, string? secret, string body)
     {
-        var isSigned = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
+        _ = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
         var signature = signatureHeader?.FirstOrDefault();
 
         var result = WebhookSignatureValidator.Verify(signature, secret, body);
