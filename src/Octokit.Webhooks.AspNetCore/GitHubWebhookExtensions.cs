@@ -1,11 +1,8 @@
 namespace Octokit.Webhooks.AspNetCore;
 
 using System;
-using System.Globalization;
 using System.IO;
 using System.Net.Mime;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -122,42 +119,27 @@ public static partial class GitHubWebhookExtensions
     {
         _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
 
-        var isSigned = signatureSha256.Count > 0;
-        var isSignatureExpected = !string.IsNullOrEmpty(secret);
+        var result = WebhookSignatureValidator.Verify(signatureSha256.ToString(), secret, body);
 
-        if (!isSigned && !isSignatureExpected)
+        switch (result)
         {
-            // Nothing to do.
-            return true;
+            case WebhookSignatureValidationResult.Valid:
+                return true;
+            case WebhookSignatureValidationResult.MissingSignature:
+                context.Response.StatusCode = 400;
+                return false;
+            case WebhookSignatureValidationResult.MissingSecret:
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync("Payload includes a secret, so the webhook receiver must configure a secret.")
+                    .ConfigureAwait(false);
+                return false;
+            case WebhookSignatureValidationResult.SignatureMismatch:
+                context.Response.StatusCode = 400;
+                return false;
+            default:
+                context.Response.StatusCode = 400;
+                return false;
         }
-
-        if (!isSigned && isSignatureExpected)
-        {
-            context.Response.StatusCode = 400;
-            return false;
-        }
-
-        if (isSigned && !isSignatureExpected)
-        {
-            context.Response.StatusCode = 400;
-            await context.Response.WriteAsync("Payload includes a secret, so the webhook receiver must configure a secret.")
-                .ConfigureAwait(false);
-            return false;
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(secret!);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-        if (signatureSha256.ToString() != expectedHeader)
-        {
-            context.Response.StatusCode = 400;
-            return false;
-        }
-
-        return true;
     }
 
     /// <summary>

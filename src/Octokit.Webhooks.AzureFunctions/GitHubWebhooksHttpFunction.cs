@@ -1,13 +1,10 @@
 namespace Octokit.Webhooks.AzureFunctions;
 
 using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
@@ -110,31 +107,8 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         var isSigned = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
         var signature = signatureHeader?.FirstOrDefault();
 
-        var isSignatureExpected = !string.IsNullOrEmpty(secret);
-
-        if (!isSigned && !isSignatureExpected)
-        {
-            // Nothing to do.
-            return true;
-        }
-
-        if (!isSigned && isSignatureExpected)
-        {
-            return false;
-        }
-
-        if (isSigned && !isSignatureExpected)
-        {
-            return false;
-        }
-
-        var keyBytes = Encoding.UTF8.GetBytes(secret!);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-
-        var hash = HMACSHA256.HashData(keyBytes, bodyBytes);
-        var hashHex = Convert.ToHexString(hash);
-        var expectedHeader = $"sha256={hashHex.ToLower(CultureInfo.InvariantCulture)}";
-        return signature == expectedHeader;
+        var result = WebhookSignatureValidator.Verify(signature, secret, body);
+        return result == WebhookSignatureValidationResult.Valid;
     }
 
     /// <summary>
