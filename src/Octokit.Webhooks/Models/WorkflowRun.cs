@@ -26,6 +26,9 @@ public sealed record WorkflowRun
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset CreatedAt { get; init; }
 
+    [JsonPropertyName("display_title")]
+    public string DisplayTitle { get; init; } = null!;
+
     [JsonPropertyName("event")]
     public string Event { get; init; } = null!;
 
@@ -58,6 +61,9 @@ public sealed record WorkflowRun
 
     [JsonPropertyName("name")]
     public string Name { get; init; } = null!;
+
+    [JsonPropertyName("path")]
+    public string Path { get; init; } = null!;
 
     [JsonPropertyName("pull_requests")]
     public IEnumerable<WorkflowPullRequest> PullRequests { get; init; } = null!;
