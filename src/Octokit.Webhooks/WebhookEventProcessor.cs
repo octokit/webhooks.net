@@ -72,6 +72,12 @@ public abstract class WebhookEventProcessor
         ArgumentNullException.ThrowIfNull(body);
 
         var webhookHeaders = WebhookHeaders.Parse(headers);
+
+        if (string.IsNullOrWhiteSpace(webhookHeaders.Event))
+        {
+            throw new ArgumentException("X-GitHub-Event header is missing or empty.", nameof(headers));
+        }
+
         var webhookEvent = this.DeserializeWebhookEvent(webhookHeaders, body);
 
         return this.ProcessWebhookAsync(webhookHeaders, webhookEvent, cancellationToken);
@@ -238,7 +244,7 @@ public abstract class WebhookEventProcessor
             WebhookEventType.WorkflowDispatch => JsonSerializer.Deserialize<WorkflowDispatchEvent>(body)!,
             WebhookEventType.WorkflowJob => JsonSerializer.Deserialize<WorkflowJobEvent>(body)!,
             WebhookEventType.WorkflowRun => JsonSerializer.Deserialize<WorkflowRunEvent>(body)!,
-            _ => throw new JsonException("Unable to deserialize event"),
+            _ => throw new JsonException($"Unable to deserialize event: '{headers.Event}'"),
         };
 
     private ValueTask ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, CancellationToken cancellationToken = default) =>
