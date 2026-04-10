@@ -45,10 +45,23 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
             var body = await GetBodyAsync(req, ctx.CancellationToken).ConfigureAwait(false);
 
             // Verify signature
-            if (!VerifySignature(req, options.Value.Secret, body))
+            var signatureResult = VerifySignature(req, options.Value.Secret, body);
+            if (signatureResult != WebhookSignatureValidationResult.Valid)
             {
                 Log.SignatureValidationFailed(logger);
-                return req.CreateResponse(HttpStatusCode.BadRequest);
+                var response = req.CreateResponse(HttpStatusCode.BadRequest);
+                var message = signatureResult switch
+                {
+                    WebhookSignatureValidationResult.MissingSignature =>
+                        "Expected an X-Hub-Signature-256 header but none was provided. Configure a webhook secret on the sender, or remove the secret from the receiver.",
+                    WebhookSignatureValidationResult.MissingSecret =>
+                        "Request includes an X-Hub-Signature-256 header but no secret is configured on the receiver.",
+                    WebhookSignatureValidationResult.SignatureMismatch =>
+                        "X-Hub-Signature-256 does not match the expected signature. Verify that the webhook secret matches on both sender and receiver.",
+                    _ => "Signature validation failed.",
+                };
+                await response.WriteStringAsync(message).ConfigureAwait(false);
+                return response;
             }
 
             // Process body
@@ -102,13 +115,12 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         return values.Count == 1 && !string.IsNullOrWhiteSpace(values[0]);
     }
 
-    private static bool VerifySignature(HttpRequestData req, string? secret, string body)
+    private static WebhookSignatureValidationResult VerifySignature(HttpRequestData req, string? secret, string body)
     {
         _ = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
         var signature = signatureHeader?.FirstOrDefault();
 
-        var result = WebhookSignatureValidator.Verify(signature, secret, body);
-        return result == WebhookSignatureValidationResult.Valid;
+        return WebhookSignatureValidator.Verify(signature, secret, body);
     }
 
     /// <summary>

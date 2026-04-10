@@ -127,14 +127,18 @@ public static partial class GitHubWebhookExtensions
                 return true;
             case WebhookSignatureValidationResult.MissingSignature:
                 context.Response.StatusCode = 400;
+                await context.Response.WriteAsync("Expected an X-Hub-Signature-256 header but none was provided. Configure a webhook secret on the sender, or remove the secret from the receiver.")
+                    .ConfigureAwait(false);
                 return false;
             case WebhookSignatureValidationResult.MissingSecret:
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Request includes a signature header, so the webhook receiver must configure a secret.")
+                await context.Response.WriteAsync("Request includes an X-Hub-Signature-256 header but no secret is configured on the receiver.")
                     .ConfigureAwait(false);
                 return false;
             case WebhookSignatureValidationResult.SignatureMismatch:
                 context.Response.StatusCode = 400;
+                await context.Response.WriteAsync("X-Hub-Signature-256 does not match the expected signature. Verify that the webhook secret matches on both sender and receiver.")
+                    .ConfigureAwait(false);
                 return false;
             default:
                 context.Response.StatusCode = 400;
