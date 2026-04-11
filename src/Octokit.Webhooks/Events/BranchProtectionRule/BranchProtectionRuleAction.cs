@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.BranchProtectionRule;
+namespace Octokit.Webhooks.Events.BranchProtectionRule;
 
 [PublicAPI]
 public sealed record BranchProtectionRuleAction : WebhookEventAction

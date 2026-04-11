@@ -27,4 +27,8 @@ public static class DiscussionActionValue
     public const string Unlocked = "unlocked";
 
     public const string Unpinned = "unpinned";
+
+    public const string Closed = "closed";
+
+    public const string Reopened = "reopened";
 }

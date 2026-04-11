@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.SecretScanningAlertEvent;
+namespace Octokit.Webhooks.Models.SecretScanningAlertEvent;
 
 [PublicAPI]
 public enum AlertResolution

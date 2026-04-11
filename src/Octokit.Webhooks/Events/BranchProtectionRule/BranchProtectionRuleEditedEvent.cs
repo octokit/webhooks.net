@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.BranchProtectionRule;
+namespace Octokit.Webhooks.Events.BranchProtectionRule;
 
 using Octokit.Webhooks.Models.BranchProtectionRuleEvent;
 

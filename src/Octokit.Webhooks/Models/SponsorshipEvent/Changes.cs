@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.SponsorshipEvent;
+namespace Octokit.Webhooks.Models.SponsorshipEvent;
 
 [PublicAPI]
 public sealed record Changes

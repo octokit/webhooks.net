@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.CheckSuiteEvent;
+namespace Octokit.Webhooks.Models.CheckSuiteEvent;
 
 [PublicAPI]
 public enum CheckSuiteConclusion

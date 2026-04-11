@@ -1,10 +1,10 @@
-﻿namespace Octokit.Webhooks.Models;
+namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
 public sealed record MarketplacePurchase
 {
     [JsonPropertyName("account")]
-    public MarkplacePurchaseAccount Account { get; init; } = null!;
+    public MarketplacePurchaseAccount Account { get; init; } = null!;
 
     [JsonPropertyName("billing_cycle")]
     public string BillingCycle { get; init; } = null!;
@@ -22,5 +22,5 @@ public sealed record MarketplacePurchase
     public string? NextBillingDate { get; init; }
 
     [JsonPropertyName("plan")]
-    public MarkplacePurchasePlan Plan { get; init; } = null!;
+    public MarketplacePurchasePlan Plan { get; init; } = null!;
 }

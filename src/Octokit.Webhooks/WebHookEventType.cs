@@ -1,7 +1,8 @@
-﻿namespace Octokit.Webhooks;
+namespace Octokit.Webhooks;
 
 public static class WebhookEventType
 {
+    public const string BranchProtectionConfiguration = "branch_protection_configuration";
     public const string BranchProtectionRule = "branch_protection_rule";
     public const string CheckRun = "check_run";
     public const string CheckSuite = "check_suite";
@@ -10,6 +11,7 @@ public static class WebhookEventType
     public const string ContentReference = "content_reference";
     public const string Create = "create";
     public const string CustomProperty = "custom_property";
+    public const string CustomPropertyPromotedToEnterprise = "custom_property_promoted_to_enterprise";
     public const string CustomPropertyValues = "custom_property_values";
     public const string Delete = "delete";
     public const string DependabotAlert = "dependabot_alert";
@@ -26,6 +28,7 @@ public static class WebhookEventType
     public const string Installation = "installation";
     public const string InstallationRepositories = "installation_repositories";
     public const string InstallationTarget = "installation_target";
+    public const string IssueDependencies = "issue_dependencies";
     public const string Issues = "issues";
     public const string IssueComment = "issue_comment";
     public const string Label = "label";
@@ -40,11 +43,14 @@ public static class WebhookEventType
     public const string OrgBlock = "org_block";
     public const string Package = "package";
     public const string PageBuild = "page_build";
+    public const string PersonalAccessTokenRequest = "personal_access_token_request";
     public const string Ping = "ping";
     public const string Project = "project";
     public const string ProjectsV2Item = "projects_v2_item";
     public const string ProjectCard = "project_card";
     public const string ProjectColumn = "project_column";
+    public const string ProjectsV2Project = "projects_v2_project";
+    public const string ProjectsV2StatusUpdate = "projects_v2_status_update";
     public const string Public = "public";
     public const string PullRequest = "pull_request";
     public const string PullRequestReview = "pull_request_review";
@@ -61,6 +67,7 @@ public static class WebhookEventType
     public const string RepositoryVulnerabilityAlert = "repository_vulnerability_alert";
     public const string SecretScanningAlert = "secret_scanning_alert";
     public const string SecretScanningAlertLocation = "secret_scanning_alert_location";
+    public const string SecretScanningScan = "secret_scanning_scan";
     public const string SecurityAndAnalysis = "security_and_analysis";
     public const string SecurityAdvisory = "security_advisory";
     public const string Sponsorship = "sponsorship";

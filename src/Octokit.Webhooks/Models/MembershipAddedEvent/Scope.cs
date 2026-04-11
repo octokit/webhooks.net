@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.MembershipAddedEvent;
+namespace Octokit.Webhooks.Models.MembershipAddedEvent;
 
 [PublicAPI]
 public enum Scope

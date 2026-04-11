@@ -1,0 +1,30 @@
+{
+  "action": "disabled",
+  "repository": {
+    "id": 123456789,
+    "node_id": "MDEwOlJlcG9zaXRvcnkxMjM0NTY3ODk=",
+    "name": "test-repo",
+    "full_name": "octocat/test-repo",
+    "private": false,
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      "node_id": "MDQ6VXNlcjE=",
+      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+      "url": "https://api.github.com/users/octocat",
+      "type": "User",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/octocat/test-repo",
+    "url": "https://api.github.com/repos/octocat/test-repo"
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "url": "https://api.github.com/users/octocat",
+    "type": "User",
+    "site_admin": false
+  }
+}

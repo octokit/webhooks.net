@@ -9,6 +9,9 @@ public sealed record IssueCommentAction : WebhookEventAction
 
     public static readonly IssueCommentAction Edited = new(IssueCommentActionValue.Edited);
 
+    public static readonly IssueCommentAction Pinned = new(IssueCommentActionValue.Pinned);
+    public static readonly IssueCommentAction Unpinned = new(IssueCommentActionValue.Unpinned);
+
     private IssueCommentAction(string value)
         : base(value)
     {

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks;
+namespace Octokit.Webhooks;
 
 [PublicAPI]
 public abstract record WebhookEventAction

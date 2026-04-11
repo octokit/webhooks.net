@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks;
+namespace Octokit.Webhooks;
 
 using Microsoft.Extensions.Primitives;
 

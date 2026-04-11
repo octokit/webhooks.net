@@ -1,0 +1,28 @@
+{
+  "action": "promote_to_enterprise",
+  "definition": {
+    "property_name": "team",
+    "value_type": "single_select",
+    "required": false,
+    "default_value": null,
+    "description": "Team assignment",
+    "allowed_values": ["frontend", "backend", "platform"],
+    "values_editable_by": "org_actors"
+  },
+  "organization": {
+    "login": "test-org",
+    "id": 100,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjEwMA==",
+    "url": "https://api.github.com/orgs/test-org",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif"
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "url": "https://api.github.com/users/octocat",
+    "type": "User",
+    "site_admin": false
+  }
+}

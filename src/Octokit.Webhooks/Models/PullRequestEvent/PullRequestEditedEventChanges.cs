@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.PullRequestEvent;
+namespace Octokit.Webhooks.Models.PullRequestEvent;
 
 [PublicAPI]
 public sealed record PullRequestEditedEventChanges

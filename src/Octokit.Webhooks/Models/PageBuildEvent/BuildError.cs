@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.PageBuildEvent;
+namespace Octokit.Webhooks.Models.PageBuildEvent;
 
 [PublicAPI]
 public sealed record BuildError

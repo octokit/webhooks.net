@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.LabelEvent;
+namespace Octokit.Webhooks.Models.LabelEvent;
 
 [PublicAPI]
 public sealed record ChangesName

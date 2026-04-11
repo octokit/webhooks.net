@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.DiscussionEvent;
+namespace Octokit.Webhooks.Models.DiscussionEvent;
 
 [PublicAPI]
 public sealed record ChangesCategory

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
+namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 
 [PublicAPI]
 public enum DismissedReason

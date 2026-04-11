@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.ProjectCardEvent;
+namespace Octokit.Webhooks.Models.ProjectCardEvent;
 
 [PublicAPI]
 public sealed record ChangesColumnId

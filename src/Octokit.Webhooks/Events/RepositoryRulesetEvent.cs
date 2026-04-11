@@ -1,4 +1,4 @@
-﻿using Octokit.Webhooks.Models.RepositoryRulesetEvent;
+using Octokit.Webhooks.Models.RepositoryRulesetEvent;
 
 namespace Octokit.Webhooks.Events;
 

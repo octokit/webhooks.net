@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.DiscussionCommentEvent;
+namespace Octokit.Webhooks.Models.DiscussionCommentEvent;
 
 [PublicAPI]
 public sealed record DiscussionCommentChangesBody

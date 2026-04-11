@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.CheckRun;
+namespace Octokit.Webhooks.Events.CheckRun;
 
 [PublicAPI]
 [WebhookActionType(CheckRunActionValue.RequestedAction)]

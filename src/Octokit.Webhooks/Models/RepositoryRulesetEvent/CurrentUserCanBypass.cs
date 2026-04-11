@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.RepositoryRulesetEvent;
+namespace Octokit.Webhooks.Models.RepositoryRulesetEvent;
 
 [PublicAPI]
 public enum CurrentUserCanBypass

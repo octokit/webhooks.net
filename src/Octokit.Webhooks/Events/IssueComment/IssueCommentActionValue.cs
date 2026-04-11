@@ -7,4 +7,8 @@ public static class IssueCommentActionValue
     public const string Deleted = "deleted";
 
     public const string Edited = "edited";
+
+    public const string Pinned = "pinned";
+
+    public const string Unpinned = "unpinned";
 }

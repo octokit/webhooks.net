@@ -1,0 +1,37 @@
+{
+  "action": "completed",
+  "type": "backfill",
+  "source": "git",
+  "started_at": "2024-01-01T00:00:00Z",
+  "completed_at": "2024-01-01T01:00:00Z",
+  "secret_types": ["github_token", "npm_access_token"],
+  "custom_pattern_name": null,
+  "custom_pattern_scope": null,
+  "repository": {
+    "id": 123456789,
+    "node_id": "MDEwOlJlcG9zaXRvcnkxMjM0NTY3ODk=",
+    "name": "Hello-World",
+    "full_name": "octocat/Hello-World",
+    "private": false,
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      "node_id": "MDQ6VXNlcjE=",
+      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+      "url": "https://api.github.com/users/octocat",
+      "type": "User",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/octocat/Hello-World",
+    "url": "https://api.github.com/repos/octocat/Hello-World"
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    "node_id": "MDQ6VXNlcjE=",
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "url": "https://api.github.com/users/octocat",
+    "type": "User",
+    "site_admin": false
+  }
+}

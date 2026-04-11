@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Converter;
+namespace Octokit.Webhooks.Converter;
 
 using System.Linq;
 using System.Reflection;

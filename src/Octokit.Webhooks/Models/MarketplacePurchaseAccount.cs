@@ -1,7 +1,7 @@
-﻿namespace Octokit.Webhooks.Models;
+namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-public sealed record MarkplacePurchaseAccount
+public sealed record MarketplacePurchaseAccount
 {
     [JsonPropertyName("type")]
     public string Type { get; init; } = null!;

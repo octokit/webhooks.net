@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.PullRequest;
+namespace Octokit.Webhooks.Events.PullRequest;
 
 using Octokit.Webhooks.Models.PullRequestEvent;
 

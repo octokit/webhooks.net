@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.MetaEvent;
+namespace Octokit.Webhooks.Models.MetaEvent;
 
 [PublicAPI]
 public enum HookConfigContentType

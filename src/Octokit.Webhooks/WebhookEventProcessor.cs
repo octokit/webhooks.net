@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
 using Octokit.Webhooks.Events;
+using Octokit.Webhooks.Events.BranchProtectionConfiguration;
 using Octokit.Webhooks.Events.BranchProtectionRule;
 using Octokit.Webhooks.Events.CheckRun;
 using Octokit.Webhooks.Events.CheckSuite;
@@ -11,6 +12,7 @@ using Octokit.Webhooks.Events.CodeScanningAlert;
 using Octokit.Webhooks.Events.CommitComment;
 using Octokit.Webhooks.Events.ContentReference;
 using Octokit.Webhooks.Events.CustomProperty;
+using Octokit.Webhooks.Events.CustomPropertyPromotedToEnterprise;
 using Octokit.Webhooks.Events.CustomPropertyValues;
 using Octokit.Webhooks.Events.DependabotAlert;
 using Octokit.Webhooks.Events.DeployKey;
@@ -25,6 +27,7 @@ using Octokit.Webhooks.Events.Installation;
 using Octokit.Webhooks.Events.InstallationRepositories;
 using Octokit.Webhooks.Events.InstallationTarget;
 using Octokit.Webhooks.Events.IssueComment;
+using Octokit.Webhooks.Events.IssueDependencies;
 using Octokit.Webhooks.Events.Issues;
 using Octokit.Webhooks.Events.Label;
 using Octokit.Webhooks.Events.MarketplacePurchase;
@@ -37,10 +40,13 @@ using Octokit.Webhooks.Events.Milestone;
 using Octokit.Webhooks.Events.Organization;
 using Octokit.Webhooks.Events.OrgBlock;
 using Octokit.Webhooks.Events.Package;
+using Octokit.Webhooks.Events.PersonalAccessTokenRequest;
 using Octokit.Webhooks.Events.Project;
 using Octokit.Webhooks.Events.ProjectCard;
 using Octokit.Webhooks.Events.ProjectColumn;
 using Octokit.Webhooks.Events.ProjectsV2Item;
+using Octokit.Webhooks.Events.ProjectsV2Project;
+using Octokit.Webhooks.Events.ProjectsV2StatusUpdate;
 using Octokit.Webhooks.Events.PullRequest;
 using Octokit.Webhooks.Events.PullRequestReview;
 using Octokit.Webhooks.Events.PullRequestReviewComment;
@@ -54,6 +60,7 @@ using Octokit.Webhooks.Events.RepositoryRuleset;
 using Octokit.Webhooks.Events.RepositoryVulnerabilityAlert;
 using Octokit.Webhooks.Events.SecretScanningAlert;
 using Octokit.Webhooks.Events.SecretScanningAlertLocation;
+using Octokit.Webhooks.Events.SecretScanningScan;
 using Octokit.Webhooks.Events.SecurityAdvisory;
 using Octokit.Webhooks.Events.Sponsorship;
 using Octokit.Webhooks.Events.Star;
@@ -168,6 +175,13 @@ public abstract class WebhookEventProcessor
             WorkflowDispatchEvent workflowDispatchEvent => this.ProcessWorkflowDispatchWebhookAsync(headers, workflowDispatchEvent, cancellationToken),
             WorkflowJobEvent workflowJobEvent => this.ProcessWorkflowJobWebhookAsync(headers, workflowJobEvent, cancellationToken),
             WorkflowRunEvent workflowRunEvent => this.ProcessWorkflowRunWebhookAsync(headers, workflowRunEvent, cancellationToken),
+            BranchProtectionConfigurationEvent branchProtectionConfigurationEvent => this.ProcessBranchProtectionConfigurationWebhookAsync(headers, branchProtectionConfigurationEvent, cancellationToken),
+            CustomPropertyPromotedToEnterpriseEvent customPropertyPromotedToEnterpriseEvent => this.ProcessCustomPropertyPromotedToEnterpriseWebhookAsync(headers, customPropertyPromotedToEnterpriseEvent, cancellationToken),
+            IssueDependenciesEvent issueDependenciesEvent => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, cancellationToken),
+            PersonalAccessTokenRequestEvent personalAccessTokenRequestEvent => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, cancellationToken),
+            ProjectsV2ProjectEvent projectsV2ProjectEvent => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, cancellationToken),
+            ProjectsV2StatusUpdateEvent projectsV2StatusUpdateEvent => this.ProcessProjectsV2StatusUpdateWebhookAsync(headers, projectsV2StatusUpdateEvent, cancellationToken),
+            SecretScanningScanEvent secretScanningScanEvent => this.ProcessSecretScanningScanWebhookAsync(headers, secretScanningScanEvent, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -244,6 +258,13 @@ public abstract class WebhookEventProcessor
             WebhookEventType.WorkflowDispatch => JsonSerializer.Deserialize<WorkflowDispatchEvent>(body)!,
             WebhookEventType.WorkflowJob => JsonSerializer.Deserialize<WorkflowJobEvent>(body)!,
             WebhookEventType.WorkflowRun => JsonSerializer.Deserialize<WorkflowRunEvent>(body)!,
+            WebhookEventType.BranchProtectionConfiguration => JsonSerializer.Deserialize<BranchProtectionConfigurationEvent>(body)!,
+            WebhookEventType.CustomPropertyPromotedToEnterprise => JsonSerializer.Deserialize<CustomPropertyPromotedToEnterpriseEvent>(body)!,
+            WebhookEventType.IssueDependencies => JsonSerializer.Deserialize<IssueDependenciesEvent>(body)!,
+            WebhookEventType.PersonalAccessTokenRequest => JsonSerializer.Deserialize<PersonalAccessTokenRequestEvent>(body)!,
+            WebhookEventType.ProjectsV2Project => JsonSerializer.Deserialize<ProjectsV2ProjectEvent>(body)!,
+            WebhookEventType.ProjectsV2StatusUpdate => JsonSerializer.Deserialize<ProjectsV2StatusUpdateEvent>(body)!,
+            WebhookEventType.SecretScanningScan => JsonSerializer.Deserialize<SecretScanningScanEvent>(body)!,
             _ => throw new JsonException($"Unable to deserialize event: '{headers.Event}'"),
         };
 
@@ -313,6 +334,8 @@ public abstract class WebhookEventProcessor
                 => this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.Reopened, cancellationToken),
             CodeScanningAlertActionValue.ReopenedByUser
                 => this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.ReopenedByUser, cancellationToken),
+            CodeScanningAlertActionValue.UpdatedAssignment
+                => this.ProcessCodeScanningAlertWebhookAsync(headers, codeScanningAlertEvent, CodeScanningAlertAction.UpdatedAssignment, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -406,6 +429,12 @@ public abstract class WebhookEventProcessor
                 => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reintroduced, cancellationToken),
             DependabotAlertActionValue.Reopened
                 => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.Reopened, cancellationToken),
+            DependabotAlertActionValue.AssigneesChanged
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.AssigneesChanged, cancellationToken),
+            DependabotAlertActionValue.AutoDismissed
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.AutoDismissed, cancellationToken),
+            DependabotAlertActionValue.AutoReopened
+                => this.ProcessDependabotAlertWebhookAsync(headers, dependabotAlertEvent, DependabotAlertAction.AutoReopened, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -521,6 +550,10 @@ public abstract class WebhookEventProcessor
             DiscussionActionValue.Unlabeled => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlabeled, cancellationToken),
             DiscussionActionValue.Unlocked => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unlocked, cancellationToken),
             DiscussionActionValue.Unpinned => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Unpinned, cancellationToken),
+            DiscussionActionValue.Closed
+                => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Closed, cancellationToken),
+            DiscussionActionValue.Reopened
+                => this.ProcessDiscussionWebhookAsync(headers, discussionEvent, DiscussionAction.Reopened, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -660,6 +693,10 @@ public abstract class WebhookEventProcessor
                 => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Deleted, cancellationToken),
             IssueCommentActionValue.Edited
                 => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Edited, cancellationToken),
+            IssueCommentActionValue.Pinned
+                => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Pinned, cancellationToken),
+            IssueCommentActionValue.Unpinned
+                => this.ProcessIssueCommentWebhookAsync(headers, issueCommentEvent, IssueCommentAction.Unpinned, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -1265,6 +1302,8 @@ public abstract class WebhookEventProcessor
                     repositoryVulnerabilityAlertEvent,
                     RepositoryVulnerabilityAlertAction.Resolve,
                     cancellationToken),
+            RepositoryVulnerabilityAlertActionValue.Reopen
+                => this.ProcessRepositoryVulnerabilityAlertWebhookAsync(headers, repositoryVulnerabilityAlertEvent, RepositoryVulnerabilityAlertAction.Reopen, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -1286,6 +1325,14 @@ public abstract class WebhookEventProcessor
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Resolved, cancellationToken),
             SecretScanningAlertActionValue.Revoked
                 => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Revoked, cancellationToken),
+            SecretScanningAlertActionValue.Assigned
+                => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Assigned, cancellationToken),
+            SecretScanningAlertActionValue.PubliclyLeaked
+                => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.PubliclyLeaked, cancellationToken),
+            SecretScanningAlertActionValue.Unassigned
+                => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Unassigned, cancellationToken),
+            SecretScanningAlertActionValue.Validated
+                => this.ProcessSecretScanningAlertWebhookAsync(headers, secretScanningAlertEvent, SecretScanningAlertAction.Validated, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
@@ -1458,5 +1505,136 @@ public abstract class WebhookEventProcessor
         WebhookHeaders headers,
         WorkflowRunEvent workflowRunEvent,
         WorkflowRunAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessBranchProtectionConfigurationWebhookAsync(WebhookHeaders headers, BranchProtectionConfigurationEvent branchProtectionConfigurationEvent, CancellationToken cancellationToken = default) =>
+        branchProtectionConfigurationEvent.Action switch
+        {
+            BranchProtectionConfigurationActionValue.Disabled
+                => this.ProcessBranchProtectionConfigurationWebhookAsync(headers, branchProtectionConfigurationEvent, BranchProtectionConfigurationAction.Disabled, cancellationToken),
+            BranchProtectionConfigurationActionValue.Enabled
+                => this.ProcessBranchProtectionConfigurationWebhookAsync(headers, branchProtectionConfigurationEvent, BranchProtectionConfigurationAction.Enabled, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessBranchProtectionConfigurationWebhookAsync(
+        WebhookHeaders headers,
+        BranchProtectionConfigurationEvent branchProtectionConfigurationEvent,
+        BranchProtectionConfigurationAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessCustomPropertyPromotedToEnterpriseWebhookAsync(WebhookHeaders headers, CustomPropertyPromotedToEnterpriseEvent customPropertyPromotedToEnterpriseEvent, CancellationToken cancellationToken = default) =>
+        customPropertyPromotedToEnterpriseEvent.Action switch
+        {
+            CustomPropertyPromotedToEnterpriseActionValue.PromoteToEnterprise
+                => this.ProcessCustomPropertyPromotedToEnterpriseWebhookAsync(headers, customPropertyPromotedToEnterpriseEvent, CustomPropertyPromotedToEnterpriseAction.PromoteToEnterprise, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessCustomPropertyPromotedToEnterpriseWebhookAsync(
+        WebhookHeaders headers,
+        CustomPropertyPromotedToEnterpriseEvent customPropertyPromotedToEnterpriseEvent,
+        CustomPropertyPromotedToEnterpriseAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessIssueDependenciesWebhookAsync(WebhookHeaders headers, IssueDependenciesEvent issueDependenciesEvent, CancellationToken cancellationToken = default) =>
+        issueDependenciesEvent.Action switch
+        {
+            IssueDependenciesActionValue.BlockedByAdded
+                => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, IssueDependenciesAction.BlockedByAdded, cancellationToken),
+            IssueDependenciesActionValue.BlockedByRemoved
+                => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, IssueDependenciesAction.BlockedByRemoved, cancellationToken),
+            IssueDependenciesActionValue.BlockingAdded
+                => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, IssueDependenciesAction.BlockingAdded, cancellationToken),
+            IssueDependenciesActionValue.BlockingRemoved
+                => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, IssueDependenciesAction.BlockingRemoved, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessIssueDependenciesWebhookAsync(
+        WebhookHeaders headers,
+        IssueDependenciesEvent issueDependenciesEvent,
+        IssueDependenciesAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessPersonalAccessTokenRequestWebhookAsync(WebhookHeaders headers, PersonalAccessTokenRequestEvent personalAccessTokenRequestEvent, CancellationToken cancellationToken = default) =>
+        personalAccessTokenRequestEvent.Action switch
+        {
+            PersonalAccessTokenRequestActionValue.Approved
+                => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, PersonalAccessTokenRequestAction.Approved, cancellationToken),
+            PersonalAccessTokenRequestActionValue.Cancelled
+                => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, PersonalAccessTokenRequestAction.Cancelled, cancellationToken),
+            PersonalAccessTokenRequestActionValue.Created
+                => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, PersonalAccessTokenRequestAction.Created, cancellationToken),
+            PersonalAccessTokenRequestActionValue.Denied
+                => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, PersonalAccessTokenRequestAction.Denied, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessPersonalAccessTokenRequestWebhookAsync(
+        WebhookHeaders headers,
+        PersonalAccessTokenRequestEvent personalAccessTokenRequestEvent,
+        PersonalAccessTokenRequestAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessProjectsV2ProjectWebhookAsync(WebhookHeaders headers, ProjectsV2ProjectEvent projectsV2ProjectEvent, CancellationToken cancellationToken = default) =>
+        projectsV2ProjectEvent.Action switch
+        {
+            ProjectsV2ProjectActionValue.Closed
+                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Closed, cancellationToken),
+            ProjectsV2ProjectActionValue.Created
+                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Created, cancellationToken),
+            ProjectsV2ProjectActionValue.Deleted
+                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Deleted, cancellationToken),
+            ProjectsV2ProjectActionValue.Edited
+                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Edited, cancellationToken),
+            ProjectsV2ProjectActionValue.Reopened
+                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Reopened, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessProjectsV2ProjectWebhookAsync(
+        WebhookHeaders headers,
+        ProjectsV2ProjectEvent projectsV2ProjectEvent,
+        ProjectsV2ProjectAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessProjectsV2StatusUpdateWebhookAsync(WebhookHeaders headers, ProjectsV2StatusUpdateEvent projectsV2StatusUpdateEvent, CancellationToken cancellationToken = default) =>
+        projectsV2StatusUpdateEvent.Action switch
+        {
+            ProjectsV2StatusUpdateActionValue.Created
+                => this.ProcessProjectsV2StatusUpdateWebhookAsync(headers, projectsV2StatusUpdateEvent, ProjectsV2StatusUpdateAction.Created, cancellationToken),
+            ProjectsV2StatusUpdateActionValue.Deleted
+                => this.ProcessProjectsV2StatusUpdateWebhookAsync(headers, projectsV2StatusUpdateEvent, ProjectsV2StatusUpdateAction.Deleted, cancellationToken),
+            ProjectsV2StatusUpdateActionValue.Edited
+                => this.ProcessProjectsV2StatusUpdateWebhookAsync(headers, projectsV2StatusUpdateEvent, ProjectsV2StatusUpdateAction.Edited, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessProjectsV2StatusUpdateWebhookAsync(
+        WebhookHeaders headers,
+        ProjectsV2StatusUpdateEvent projectsV2StatusUpdateEvent,
+        ProjectsV2StatusUpdateAction action,
+        CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    private ValueTask ProcessSecretScanningScanWebhookAsync(WebhookHeaders headers, SecretScanningScanEvent secretScanningScanEvent, CancellationToken cancellationToken = default) =>
+        secretScanningScanEvent.Action switch
+        {
+            SecretScanningScanActionValue.Completed
+                => this.ProcessSecretScanningScanWebhookAsync(headers, secretScanningScanEvent, SecretScanningScanAction.Completed, cancellationToken),
+            _ => ValueTask.CompletedTask,
+        };
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessSecretScanningScanWebhookAsync(
+        WebhookHeaders headers,
+        SecretScanningScanEvent secretScanningScanEvent,
+        SecretScanningScanAction action,
         CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 }

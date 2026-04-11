@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.MergeQueueEntry;
+namespace Octokit.Webhooks.Events.MergeQueueEntry;
 
 [PublicAPI]
 public sealed record MergeQueueEntryAction : WebhookEventAction
