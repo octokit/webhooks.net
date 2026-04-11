@@ -165,6 +165,7 @@ public abstract class WebhookEventProcessor
             SecretScanningAlertLocationEvent secretScanningAlertLocationEvent
                 => this.ProcessSecretScanningAlertLocationWebhookAsync(headers, secretScanningAlertLocationEvent, cancellationToken),
             SecurityAdvisoryEvent securityAdvisoryEvent => this.ProcessSecurityAdvisoryWebhookAsync(headers, securityAdvisoryEvent, cancellationToken),
+            SecurityAndAnalysisEvent securityAndAnalysisEvent => this.ProcessSecurityAndAnalysisWebhookAsync(headers, securityAndAnalysisEvent, cancellationToken),
             SponsorshipEvent sponsorshipEvent => this.ProcessSponsorshipWebhookAsync(headers, sponsorshipEvent, cancellationToken),
             StarEvent starEvent => this.ProcessStarWebhookAsync(headers, starEvent, cancellationToken),
             StatusEvent statusEvent => this.ProcessStatusWebhookAsync(headers, statusEvent, cancellationToken),
@@ -247,7 +248,9 @@ public abstract class WebhookEventProcessor
             WebhookEventType.RepositoryRuleset => JsonSerializer.Deserialize<RepositoryRulesetEvent>(body)!,
             WebhookEventType.RepositoryVulnerabilityAlert => JsonSerializer.Deserialize<RepositoryVulnerabilityAlertEvent>(body)!,
             WebhookEventType.SecretScanningAlert => JsonSerializer.Deserialize<SecretScanningAlertEvent>(body)!,
+            WebhookEventType.SecretScanningAlertLocation => JsonSerializer.Deserialize<SecretScanningAlertLocationEvent>(body)!,
             WebhookEventType.SecurityAdvisory => JsonSerializer.Deserialize<SecurityAdvisoryEvent>(body)!,
+            WebhookEventType.SecurityAndAnalysis => JsonSerializer.Deserialize<SecurityAndAnalysisEvent>(body)!,
             WebhookEventType.Sponsorship => JsonSerializer.Deserialize<SponsorshipEvent>(body)!,
             WebhookEventType.Star => JsonSerializer.Deserialize<StarEvent>(body)!,
             WebhookEventType.Status => JsonSerializer.Deserialize<StatusEvent>(body)!,
@@ -1378,6 +1381,9 @@ public abstract class WebhookEventProcessor
         SecurityAdvisoryEvent securityAdvisoryEvent,
         SecurityAdvisoryAction action,
         CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
+
+    [PublicAPI]
+    protected virtual ValueTask ProcessSecurityAndAnalysisWebhookAsync(WebhookHeaders headers, SecurityAndAnalysisEvent securityAndAnalysisEvent, CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     private ValueTask ProcessSponsorshipWebhookAsync(WebhookHeaders headers, SponsorshipEvent sponsorshipEvent, CancellationToken cancellationToken = default) =>
         sponsorshipEvent.Action switch

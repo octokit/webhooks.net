@@ -3,11 +3,11 @@ namespace Octokit.Webhooks.Events.PullRequest;
 using Milestone = Octokit.Webhooks.Models.Milestone;
 
 [PublicAPI]
-[WebhookActionType(PullRequestActionValue.Milestoned)]
-public sealed record PullRequestMilestoned : PullRequestEvent
+[WebhookActionType(PullRequestActionValue.Demilestoned)]
+public sealed record PullRequestDemilestonedEvent : PullRequestEvent
 {
     [JsonPropertyName("action")]
-    public override string Action => PullRequestAction.Milestoned;
+    public override string Action => PullRequestAction.Demilestoned;
 
     [JsonPropertyName("milestone")]
     public Milestone Milestone { get; init; } = null!;

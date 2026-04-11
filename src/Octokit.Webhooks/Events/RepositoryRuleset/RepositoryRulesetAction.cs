@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.RepositoryRuleset;
 
+[PublicAPI]
 public sealed record RepositoryRulesetAction : WebhookEventAction
 {
     public static readonly RepositoryRulesetAction Created = new(RepositoryRulesetActionValue.Created);
