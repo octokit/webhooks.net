@@ -9,5 +9,5 @@ public abstract record RepositoryDispatchEvent : WebhookEvent
     public required string Branch { get; init; }
 
     [JsonPropertyName("client_payload")]
-    public required dynamic ClientPayload { get; init; }
+    public required JsonElement ClientPayload { get; init; }
 }

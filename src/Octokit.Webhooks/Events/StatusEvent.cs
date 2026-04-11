@@ -34,8 +34,8 @@ public sealed record StatusEvent : WebhookEvent
     [JsonPropertyName("commit")]
     public required Commit Commit { get; init; }
 
-    [JsonPropertyName("branch")]
-    public IReadOnlyList<Branch>? Branch { get; init; }
+    [JsonPropertyName("branches")]
+    public IReadOnlyList<Branch>? Branches { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
