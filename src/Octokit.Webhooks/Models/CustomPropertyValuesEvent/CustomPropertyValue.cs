@@ -6,7 +6,7 @@ using System.Linq;
 public sealed record CustomPropertyValue
 {
     [JsonPropertyName("property_name")]
-    public string PropertyName { get; init; } = null!;
+    public required string PropertyName { get; init; }
 
     [JsonPropertyName("value")]
     public object? Object { get; init; }

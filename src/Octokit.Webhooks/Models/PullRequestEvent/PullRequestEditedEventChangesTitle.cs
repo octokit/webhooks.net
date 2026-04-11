@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.PullRequestEvent;
 public sealed record PullRequestEditedEventChangesTitle
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

@@ -4,26 +4,26 @@ namespace Octokit.Webhooks.Models;
 public sealed record SimplePullRequestLinks
 {
     [JsonPropertyName("self")]
-    public Link Self { get; init; } = null!;
+    public required Link Self { get; init; }
 
     [JsonPropertyName("html")]
-    public Link Html { get; init; } = null!;
+    public required Link Html { get; init; }
 
     [JsonPropertyName("issue")]
-    public Link Issue { get; init; } = null!;
+    public required Link Issue { get; init; }
 
     [JsonPropertyName("comments")]
-    public Link Comments { get; init; } = null!;
+    public required Link Comments { get; init; }
 
     [JsonPropertyName("review_comments")]
-    public Link ReviewComments { get; init; } = null!;
+    public required Link ReviewComments { get; init; }
 
     [JsonPropertyName("review_comment")]
-    public Link ReviewComment { get; init; } = null!;
+    public required Link ReviewComment { get; init; }
 
     [JsonPropertyName("commits")]
-    public Link Commits { get; init; } = null!;
+    public required Link Commits { get; init; }
 
     [JsonPropertyName("statuses")]
-    public Link Statuses { get; init; } = null!;
+    public required Link Statuses { get; init; }
 }

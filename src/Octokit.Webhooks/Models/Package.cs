@@ -7,23 +7,23 @@ public sealed record Package
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("namespace")]
-    public string Namespace { get; init; } = null!;
+    public required string Namespace { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     [JsonPropertyName("ecosystem")]
-    public string Ecosystem { get; init; } = null!;
+    public required string Ecosystem { get; init; }
 
     [JsonPropertyName("package_type")]
     [JsonConverter(typeof(StringEnumConverter<PackageType>))]
-    public StringEnum<PackageType> PackageType { get; init; } = null!;
+    public required StringEnum<PackageType> PackageType { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -34,11 +34,11 @@ public sealed record Package
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("owner")]
-    public User Owner { get; init; } = null!;
+    public required User Owner { get; init; }
 
     [JsonPropertyName("package_version")]
     public PackageVersion? PackageVersion { get; init; }
 
     [JsonPropertyName("registry")]
-    public PackageRegistry Registry { get; init; } = null!;
+    public required PackageRegistry Registry { get; init; }
 }

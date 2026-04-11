@@ -8,5 +8,5 @@ public sealed record CustomPropertyUpdatedEvent : CustomPropertyEvent
     public override string Action => CustomPropertyAction.Updated;
 
     [JsonPropertyName("definition")]
-    public Models.CustomPropertyEvent.CustomProperty CustomProperty { get; init; } = null!;
+    public required Models.CustomPropertyEvent.CustomProperty CustomProperty { get; init; }
 }

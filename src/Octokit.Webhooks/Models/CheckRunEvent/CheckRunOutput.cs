@@ -16,5 +16,5 @@ public sealed record CheckRunOutput
     public long AnnotationsCount { get; init; }
 
     [JsonPropertyName("annotations_url")]
-    public string AnnotationsUrl { get; init; } = null!;
+    public required string AnnotationsUrl { get; init; }
 }

@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.ProjectCardEvent;
 public sealed record ChangesNote
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

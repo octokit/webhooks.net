@@ -8,5 +8,5 @@ public sealed record DiscussionAnsweredEvent : DiscussionEvent
     public override string Action => DiscussionAction.Answered;
 
     [JsonPropertyName("answer")]
-    public DiscussionAnswer Answer { get; init; } = null!;
+    public required DiscussionAnswer Answer { get; init; }
 }

@@ -7,20 +7,20 @@ public sealed record Installation
     public long Id { get; init; }
 
     [JsonPropertyName("account")]
-    public User Account { get; init; } = null!;
+    public required User Account { get; init; }
 
     [JsonPropertyName("repository_selection")]
     [JsonConverter(typeof(StringEnumConverter<InstallationRepositorySelection>))]
-    public StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; } = null!;
+    public required StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; }
 
     [JsonPropertyName("access_tokens_url")]
-    public string AccessTokensUrl { get; init; } = null!;
+    public required string AccessTokensUrl { get; init; }
 
     [JsonPropertyName("repositories_url")]
-    public string RepositoriesUrl { get; init; } = null!;
+    public required string RepositoriesUrl { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("app_id")]
     public long AppId { get; init; }
@@ -33,7 +33,7 @@ public sealed record Installation
 
     [JsonPropertyName("target_type")]
     [JsonConverter(typeof(StringEnumConverter<InstallationTargetType>))]
-    public StringEnum<InstallationTargetType> TargetType { get; init; } = null!;
+    public required StringEnum<InstallationTargetType> TargetType { get; init; }
 
     [JsonPropertyName("permissions")]
     public AppPermissions? Permissions { get; init; }
@@ -57,7 +57,7 @@ public sealed record Installation
     public bool? HasMultipleSingleFiles { get; init; }
 
     [JsonPropertyName("single_file_paths")]
-    public IEnumerable<string>? SingleFilePaths { get; init; }
+    public IReadOnlyList<string>? SingleFilePaths { get; init; }
 
     [JsonPropertyName("suspended_by")]
     public User? SuspendedBy { get; init; }

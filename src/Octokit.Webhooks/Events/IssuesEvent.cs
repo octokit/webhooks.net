@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record IssuesEvent : WebhookEvent
 {
     [JsonPropertyName("issue")]
-    public Issue Issue { get; init; } = null!;
+    public required Issue Issue { get; init; }
 }

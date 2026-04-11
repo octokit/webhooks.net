@@ -7,16 +7,16 @@ public sealed record ProjectsV2
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("owner")]
-    public User Owner { get; init; } = null!;
+    public required User Owner { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }

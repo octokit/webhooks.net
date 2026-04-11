@@ -9,25 +9,25 @@ public sealed record DeploymentWorkflowRun
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("path")]
     public string? Path { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("head_branch")]
-    public string HeadBranch { get; init; } = null!;
+    public required string HeadBranch { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("run_number")]
     public long RunNumber { get; init; }
 
     [JsonPropertyName("event")]
-    public string Event { get; init; } = null!;
+    public required string Event { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<DeploymentWorkflowRunStatus>))]
@@ -44,16 +44,16 @@ public sealed record DeploymentWorkflowRun
     public long CheckSuiteId { get; init; }
 
     [JsonPropertyName("check_suite_node_id")]
-    public string CheckSuiteNodeId { get; init; } = null!;
+    public required string CheckSuiteNodeId { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<CheckRunPullRequest> PullRequests { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -64,10 +64,10 @@ public sealed record DeploymentWorkflowRun
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("actor")]
-    public User Actor { get; init; } = null!;
+    public required User Actor { get; init; }
 
     [JsonPropertyName("triggering_actor")]
-    public User TriggeringActor { get; init; } = null!;
+    public required User TriggeringActor { get; init; }
 
     [JsonPropertyName("run_attempt")]
     public long RunAttempt { get; init; }
@@ -77,5 +77,5 @@ public sealed record DeploymentWorkflowRun
     public DateTimeOffset RunStartedAt { get; init; }
 
     [JsonPropertyName("referenced_workflows")]
-    public IEnumerable<ReferencedWorkflow> ReferencedWorkflows { get; init; } = null!;
+    public IReadOnlyList<ReferencedWorkflow>? ReferencedWorkflows { get; init; }
 }

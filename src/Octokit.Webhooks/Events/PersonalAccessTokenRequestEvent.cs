@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record PersonalAccessTokenRequestEvent : WebhookEvent
 {
     [JsonPropertyName("personal_access_token_request")]
-    public Models.PersonalAccessTokenRequestEvent.PersonalAccessTokenRequest PersonalAccessTokenRequest { get; init; } = null!;
+    public required Models.PersonalAccessTokenRequestEvent.PersonalAccessTokenRequest PersonalAccessTokenRequest { get; init; }
 }

@@ -13,18 +13,18 @@ public sealed record CheckSuite
     public string? HeadBranch { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<CheckSuiteStatus>))]
-    public StringEnum<CheckSuiteStatus> Status { get; init; } = null!;
+    public required StringEnum<CheckSuiteStatus> Status { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<CheckSuiteConclusion>))]
     public StringEnum<CheckSuiteConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("before")]
     public string? Before { get; init; }
@@ -33,13 +33,13 @@ public sealed record CheckSuite
     public string? After { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<CheckRunPullRequest> PullRequests { get; init; }
 
     [JsonPropertyName("deployment")]
     public Deployment? Deployment { get; init; }
 
     [JsonPropertyName("app")]
-    public App App { get; init; } = null!;
+    public required App App { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

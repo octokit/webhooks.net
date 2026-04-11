@@ -4,21 +4,21 @@ namespace Octokit.Webhooks.Models.SponsorshipEvent;
 public sealed record Sponsorship
 {
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("sponsorable")]
-    public User Sponsorable { get; init; } = null!;
+    public required User Sponsorable { get; init; }
 
     [JsonPropertyName("sponsor")]
-    public User Sponsor { get; init; } = null!;
+    public required User Sponsor { get; init; }
 
     [JsonPropertyName("privacy_level")]
-    public string PrivacyLevel { get; init; } = null!;
+    public required string PrivacyLevel { get; init; }
 
     [JsonPropertyName("tier")]
-    public SponsorshipTier Tier { get; init; } = null!;
+    public required SponsorshipTier Tier { get; init; }
 }

@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models;
 public sealed record SimplePullRequestBase
 {
     [JsonPropertyName("label")]
-    public string Label { get; init; } = null!;
+    public required string Label { get; init; }
 
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("repo")]
-    public Repository Repo { get; init; } = null!;
+    public required Repository Repo { get; init; }
 }

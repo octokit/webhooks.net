@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.BranchProtectionRuleEvent;
 public sealed record ChangesArray
 {
     [JsonPropertyName("from")]
-    public IEnumerable<string>? From { get; init; }
+    public IReadOnlyList<string>? From { get; init; }
 }

@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models.MergeGroupEvent;
 public sealed record MergeGroup
 {
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("head_ref")]
-    public string HeadRef { get; init; } = null!;
+    public required string HeadRef { get; init; }
 
     [JsonPropertyName("base_ref")]
-    public string BaseRef { get; init; } = null!;
+    public required string BaseRef { get; init; }
 
     [JsonPropertyName("base_sha")]
-    public string BaseSha { get; init; } = null!;
+    public required string BaseSha { get; init; }
 
     [JsonPropertyName("head_commit")]
-    public SimpleCommit HeadCommit { get; init; } = null!;
+    public required SimpleCommit HeadCommit { get; init; }
 }

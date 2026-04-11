@@ -7,8 +7,8 @@ public sealed record ContentReference
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("reference")]
-    public string Reference { get; init; } = null!;
+    public required string Reference { get; init; }
 }

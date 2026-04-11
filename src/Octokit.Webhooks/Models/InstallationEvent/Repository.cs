@@ -7,13 +7,13 @@ public sealed record Repository
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("full_name")]
-    public string FullName { get; init; } = null!;
+    public required string FullName { get; init; }
 
     [JsonPropertyName("private")]
     public bool Private { get; init; }

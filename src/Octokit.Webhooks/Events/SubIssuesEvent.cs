@@ -9,16 +9,16 @@ public abstract record SubIssuesEvent : WebhookEvent
     public long ParentIssueId { get; init; }
 
     [JsonPropertyName("parent_issue")]
-    public Issue ParentIssue { get; init; } = null!;
+    public required Issue ParentIssue { get; init; }
 
     [JsonPropertyName("parent_issue_repo")]
-    public Models.Repository? ParentIssueRepo { get; init; } = null!;
+    public Models.Repository? ParentIssueRepo { get; init; }
 
     [JsonPropertyName("sub_issue_id")]
     public long SubIssueId { get; init; }
 
     [JsonPropertyName("sub_issue")]
-    public Issue SubIssue { get; init; } = null!;
+    public required Issue SubIssue { get; init; }
 
     [JsonPropertyName("sub_issue_repo")]
     public Models.Repository? SubIssueRepo { get; init; }

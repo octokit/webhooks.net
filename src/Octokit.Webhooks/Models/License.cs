@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models;
 public sealed record License
 {
     [JsonPropertyName("key")]
-    public string Key { get; init; } = null!;
+    public required string Key { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("spdx_id")]
-    public string SpdxId { get; init; } = null!;
+    public required string SpdxId { get; init; }
 
     [JsonPropertyName("url")]
     public string? Url { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 }

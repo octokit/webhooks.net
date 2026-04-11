@@ -7,10 +7,10 @@ public sealed record DiscussionAnswer
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("parent_id")]
     public int? ParentId { get; init; }
@@ -19,17 +19,17 @@ public sealed record DiscussionAnswer
     public long ChildCommentCount { get; init; }
 
     [JsonPropertyName("repository_url")]
-    public string RepositoryUrl { get; init; } = null!;
+    public required string RepositoryUrl { get; init; }
 
     [JsonPropertyName("discussion_id")]
     public long DiscussionId { get; init; }
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -40,5 +40,5 @@ public sealed record DiscussionAnswer
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("body")]
-    public string Body { get; init; } = null!;
+    public required string Body { get; init; }
 }

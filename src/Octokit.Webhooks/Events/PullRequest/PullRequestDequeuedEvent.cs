@@ -8,5 +8,5 @@ public sealed record PullRequestDequeuedEvent : PullRequestEvent
     public override string Action => PullRequestAction.Dequeued;
 
     [JsonPropertyName("reason")]
-    public string Reason { get; init; } = null!;
+    public required string Reason { get; init; }
 }

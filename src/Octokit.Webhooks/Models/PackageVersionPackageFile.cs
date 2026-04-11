@@ -4,28 +4,28 @@ namespace Octokit.Webhooks.Models;
 public sealed record PackageVersionPackageFile
 {
     [JsonPropertyName("download_url")]
-    public string DownloadUrl { get; init; } = null!;
+    public required string DownloadUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("sha256")]
-    public string Sha256 { get; init; } = null!;
+    public required string Sha256 { get; init; }
 
     [JsonPropertyName("sha1")]
-    public string Sha1 { get; init; } = null!;
+    public required string Sha1 { get; init; }
 
     [JsonPropertyName("md5")]
-    public string Md5 { get; init; } = null!;
+    public required string Md5 { get; init; }
 
     [JsonPropertyName("content_type")]
-    public string ContentType { get; init; } = null!;
+    public required string ContentType { get; init; }
 
     [JsonPropertyName("state")]
-    public string State { get; init; } = null!;
+    public required string State { get; init; }
 
     [JsonPropertyName("size")]
     public long Size { get; init; }

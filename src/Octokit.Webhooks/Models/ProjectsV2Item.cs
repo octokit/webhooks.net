@@ -7,20 +7,20 @@ public sealed record ProjectsV2Item
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("project_node_id")]
-    public string ProjectNodeId { get; init; } = null!;
+    public required string ProjectNodeId { get; init; }
 
     [JsonPropertyName("content_node_id")]
-    public string ContentNodeId { get; init; } = null!;
+    public required string ContentNodeId { get; init; }
 
     [JsonPropertyName("content_type")]
     [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
-    public StringEnum<ProjectsV2ItemContentType> ContentType { get; init; } = null!;
+    public required StringEnum<ProjectsV2ItemContentType> ContentType { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

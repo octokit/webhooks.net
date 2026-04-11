@@ -7,5 +7,5 @@ using Octokit.Webhooks.Models.GollumEvent;
 public sealed record GollumEvent : WebhookEvent
 {
     [JsonPropertyName("pages")]
-    public IEnumerable<Page> Pages { get; init; } = null!;
+    public required IReadOnlyList<Page> Pages { get; init; }
 }

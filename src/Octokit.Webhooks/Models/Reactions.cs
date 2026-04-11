@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models;
 public sealed record Reactions
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("total_count")]
     public long TotalCount { get; init; }

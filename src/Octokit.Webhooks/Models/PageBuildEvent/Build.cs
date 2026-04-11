@@ -4,19 +4,19 @@ namespace Octokit.Webhooks.Models.PageBuildEvent;
 public sealed record Build
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("status")]
-    public string Status { get; init; } = null!;
+    public required string Status { get; init; }
 
     [JsonPropertyName("error")]
-    public BuildError Error { get; init; } = null!;
+    public required BuildError Error { get; init; }
 
     [JsonPropertyName("pusher")]
-    public User Pusher { get; init; } = null!;
+    public required User Pusher { get; init; }
 
     [JsonPropertyName("commit")]
-    public string Commit { get; init; } = null!;
+    public required string Commit { get; init; }
 
     [JsonPropertyName("duration")]
     public long Duration { get; init; }

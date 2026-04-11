@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models;
 public sealed record Membership
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("state")]
-    public string State { get; init; } = null!;
+    public required string State { get; init; }
 
     [JsonPropertyName("role")]
-    public string Role { get; init; } = null!;
+    public required string Role { get; init; }
 
     [JsonPropertyName("organization_url")]
-    public string OrganizationUrl { get; init; } = null!;
+    public required string OrganizationUrl { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 }

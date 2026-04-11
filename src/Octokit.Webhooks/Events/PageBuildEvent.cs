@@ -10,5 +10,5 @@ public sealed record PageBuildEvent : WebhookEvent
     public long Id { get; init; }
 
     [JsonPropertyName("build")]
-    public Build Build { get; init; } = null!;
+    public required Build Build { get; init; }
 }

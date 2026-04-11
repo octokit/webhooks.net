@@ -7,29 +7,29 @@ public sealed record DeploymentCheckRun
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("external_id")]
-    public string ExternalId { get; init; } = null!;
+    public required string ExternalId { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("details_url")]
-    public string DetailsUrl { get; init; } = null!;
+    public required string DetailsUrl { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<DeploymentCheckRunStatus>))]
-    public StringEnum<DeploymentCheckRunStatus> Status { get; init; } = null!;
+    public required StringEnum<DeploymentCheckRunStatus> Status { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<DeploymentCheckRunConclusion>))]

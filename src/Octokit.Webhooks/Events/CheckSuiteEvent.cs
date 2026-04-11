@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record CheckSuiteEvent : WebhookEvent
 {
     [JsonPropertyName("check_suite")]
-    public Models.CheckSuiteEvent.CheckSuite CheckSuite { get; init; } = null!;
+    public required Models.CheckSuiteEvent.CheckSuite CheckSuite { get; init; }
 }

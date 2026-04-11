@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.StatusEvent;
 public sealed record BranchCommit
 {
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 }

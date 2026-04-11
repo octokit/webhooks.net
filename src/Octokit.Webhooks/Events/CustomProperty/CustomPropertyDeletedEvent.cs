@@ -8,5 +8,5 @@ public sealed record CustomPropertyDeletedEvent : CustomPropertyEvent
     public override string Action => CustomPropertyAction.Deleted;
 
     [JsonPropertyName("definition")]
-    public Models.CustomPropertyEvent.CustomPropertyLite CustomProperty { get; init; } = null!;
+    public required Models.CustomPropertyEvent.CustomPropertyLite CustomProperty { get; init; }
 }

@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models;
 public sealed record MarketplacePurchase
 {
     [JsonPropertyName("account")]
-    public MarketplacePurchaseAccount Account { get; init; } = null!;
+    public required MarketplacePurchaseAccount Account { get; init; }
 
     [JsonPropertyName("billing_cycle")]
-    public string BillingCycle { get; init; } = null!;
+    public required string BillingCycle { get; init; }
 
     [JsonPropertyName("unit_count")]
     public long UnitCount { get; init; }
@@ -22,5 +22,5 @@ public sealed record MarketplacePurchase
     public string? NextBillingDate { get; init; }
 
     [JsonPropertyName("plan")]
-    public MarketplacePurchasePlan Plan { get; init; } = null!;
+    public required MarketplacePurchasePlan Plan { get; init; }
 }

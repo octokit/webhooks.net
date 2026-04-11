@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 public sealed record AlertInstance
 {
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("analysis_key")]
-    public string AnalysisKey { get; init; } = null!;
+    public required string AnalysisKey { get; init; }
 
     [JsonPropertyName("environment")]
-    public string Environment { get; init; } = null!;
+    public required string Environment { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<AlertState>))]
-    public StringEnum<AlertState> State { get; init; } = null!;
+    public required StringEnum<AlertState> State { get; init; }
 
     [JsonPropertyName("commit_sha")]
     public string? CommitSha { get; init; }
@@ -26,5 +26,5 @@ public sealed record AlertInstance
     public AlertInstanceLocation? Location { get; init; }
 
     [JsonPropertyName("classifications")]
-    public IEnumerable<string>? Classifications { get; init; }
+    public IReadOnlyList<string>? Classifications { get; init; }
 }

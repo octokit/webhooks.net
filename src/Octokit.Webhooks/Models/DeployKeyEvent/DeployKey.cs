@@ -7,13 +7,13 @@ public sealed record DeployKey
     public long Id { get; init; }
 
     [JsonPropertyName("key")]
-    public string Key { get; init; } = null!;
+    public required string Key { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("verified")]
     public bool Verified { get; init; }

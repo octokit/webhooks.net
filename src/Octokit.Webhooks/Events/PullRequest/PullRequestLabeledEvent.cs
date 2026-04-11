@@ -8,5 +8,5 @@ public sealed record PullRequestLabeledEvent : PullRequestEvent
     public override string Action => PullRequestAction.Labeled;
 
     [JsonPropertyName("label")]
-    public Octokit.Webhooks.Models.Label Label { get; init; } = null!;
+    public required Octokit.Webhooks.Models.Label Label { get; init; }
 }

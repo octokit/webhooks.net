@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.DependabotEvent;
 public sealed record DependabotAlertCwe
 {
     [JsonPropertyName("cwe_id")]
-    public string CweId { get; init; } = null!;
+    public required string CweId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 }

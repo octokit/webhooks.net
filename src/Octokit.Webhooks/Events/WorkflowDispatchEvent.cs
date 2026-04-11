@@ -8,8 +8,8 @@ public sealed record WorkflowDispatchEvent : WebhookEvent
     public dynamic? Inputs { get; init; }
 
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("workflow")]
-    public string Workflow { get; init; } = null!;
+    public required string Workflow { get; init; }
 }

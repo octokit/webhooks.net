@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models.StatusEvent;
 public sealed record Branch
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("commit")]
-    public BranchCommit Commit { get; init; } = null!;
+    public required BranchCommit Commit { get; init; }
 
     [JsonPropertyName("protected")]
     public bool Protected { get; init; }

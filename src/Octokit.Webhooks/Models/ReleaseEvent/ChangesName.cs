@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.ReleaseEvent;
 public sealed record ChangesName
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

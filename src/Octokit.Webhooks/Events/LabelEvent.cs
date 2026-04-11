@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record LabelEvent : WebhookEvent
 {
     [JsonPropertyName("label")]
-    public Models.Label Label { get; init; } = null!;
+    public required Models.Label Label { get; init; }
 }

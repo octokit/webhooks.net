@@ -7,10 +7,10 @@ public sealed record MarketplacePurchasePlan
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("monthly_price_in_cents")]
     public long MonthlyPriceInCents { get; init; }
@@ -19,7 +19,7 @@ public sealed record MarketplacePurchasePlan
     public long YearlyPriceInCents { get; init; }
 
     [JsonPropertyName("price_model")]
-    public string PriceModel { get; init; } = null!;
+    public required string PriceModel { get; init; }
 
     [JsonPropertyName("has_free_trial")]
     public bool HasFreeTrial { get; init; }
@@ -28,5 +28,5 @@ public sealed record MarketplacePurchasePlan
     public string? UnitName { get; init; }
 
     [JsonPropertyName("bullets")]
-    public IEnumerable<string> Bullets { get; init; } = null!;
+    public required IReadOnlyList<string> Bullets { get; init; }
 }

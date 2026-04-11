@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record ProjectsV2ItemEvent : WebhookEvent
 {
     [JsonPropertyName("projects_v2_item")]
-    public Models.ProjectsV2Item ProjectsV2Item { get; init; } = null!;
+    public required Models.ProjectsV2Item ProjectsV2Item { get; init; }
 }

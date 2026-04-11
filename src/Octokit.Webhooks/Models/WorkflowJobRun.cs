@@ -7,18 +7,18 @@ public sealed record WorkflowJobRun
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobRunStatus>))]
-    public StringEnum<WorkflowJobRunStatus> Status { get; init; } = null!;
+    public required StringEnum<WorkflowJobRunStatus> Status { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobRunConclusion>))]
     public StringEnum<WorkflowJobRunConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -29,5 +29,5 @@ public sealed record WorkflowJobRun
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("environment")]
-    public string Environment { get; init; } = null!;
+    public required string Environment { get; init; }
 }

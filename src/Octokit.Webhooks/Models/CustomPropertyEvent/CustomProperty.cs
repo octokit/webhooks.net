@@ -6,11 +6,11 @@ using System.Linq;
 public sealed record CustomProperty
 {
     [JsonPropertyName("property_name")]
-    public string PropertyName { get; init; } = null!;
+    public required string PropertyName { get; init; }
 
     [JsonPropertyName("value_type")]
     [JsonConverter(typeof(StringEnumConverter<CustomPropertyValueType>))]
-    public StringEnum<CustomPropertyValueType> ValueType { get; init; } = null!;
+    public required StringEnum<CustomPropertyValueType> ValueType { get; init; }
 
     [JsonPropertyName("required")]
     public bool Required { get; init; }
@@ -40,7 +40,7 @@ public sealed record CustomProperty
     public string? Description { get; init; }
 
     [JsonPropertyName("allowed_values")]
-    public IEnumerable<string>? AllowedValues { get; init; }
+    public IReadOnlyList<string>? AllowedValues { get; init; }
 
     [JsonPropertyName("values_editable_by")]
     [JsonConverter(typeof(StringEnumConverter<CustomPropertyValuesEditableBy>))]

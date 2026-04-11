@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record BranchProtectionRuleEvent : WebhookEvent
 {
     [JsonPropertyName("rule")]
-    public Models.BranchProtectionRule Rule { get; init; } = null!;
+    public required Models.BranchProtectionRule Rule { get; init; }
 }

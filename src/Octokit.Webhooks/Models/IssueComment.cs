@@ -4,22 +4,22 @@ namespace Octokit.Webhooks.Models;
 public sealed record IssueComment
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("issue_url")]
-    public string IssueUrl { get; init; } = null!;
+    public required string IssueUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -31,10 +31,10 @@ public sealed record IssueComment
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("body")]
-    public string Body { get; init; } = null!;
+    public required string Body { get; init; }
 
     [JsonPropertyName("reactions")]
     public Reactions? Reactions { get; init; }

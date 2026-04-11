@@ -4,22 +4,22 @@ namespace Octokit.Webhooks.Models.CheckRunEvent;
 public sealed record Deployment
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("task")]
-    public string Task { get; init; } = null!;
+    public required string Task { get; init; }
 
     [JsonPropertyName("original_environment")]
-    public string OriginalEnvironment { get; init; } = null!;
+    public required string OriginalEnvironment { get; init; }
 
     [JsonPropertyName("environment")]
-    public string Environment { get; init; } = null!;
+    public required string Environment { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
@@ -33,8 +33,8 @@ public sealed record Deployment
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("statuses_url")]
-    public string StatusesUrl { get; init; } = null!;
+    public required string StatusesUrl { get; init; }
 
     [JsonPropertyName("repository_url")]
-    public string RepositoryUrl { get; init; } = null!;
+    public required string RepositoryUrl { get; init; }
 }

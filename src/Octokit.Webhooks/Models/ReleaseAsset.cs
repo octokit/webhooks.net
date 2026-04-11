@@ -4,29 +4,29 @@ namespace Octokit.Webhooks.Models;
 public sealed record ReleaseAsset
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("browser_download_url")]
-    public string BrowserDownloadUrl { get; init; } = null!;
+    public required string BrowserDownloadUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("label")]
     public string? Label { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<ReleaseAssetState>))]
-    public StringEnum<ReleaseAssetState> State { get; init; } = null!;
+    public required StringEnum<ReleaseAssetState> State { get; init; }
 
     [JsonPropertyName("content_type")]
-    public string ContentType { get; init; } = null!;
+    public required string ContentType { get; init; }
 
     [JsonPropertyName("size")]
     public long Size { get; init; }

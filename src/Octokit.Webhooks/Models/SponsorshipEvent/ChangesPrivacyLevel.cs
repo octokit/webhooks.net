@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.SponsorshipEvent;
 public sealed record ChangesPrivacyLevel
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

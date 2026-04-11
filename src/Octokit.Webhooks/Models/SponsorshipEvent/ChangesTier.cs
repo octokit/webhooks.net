@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.SponsorshipEvent;
 public sealed record ChangesTier
 {
     [JsonPropertyName("from")]
-    public SponsorshipTier From { get; init; } = null!;
+    public required SponsorshipTier From { get; init; }
 }

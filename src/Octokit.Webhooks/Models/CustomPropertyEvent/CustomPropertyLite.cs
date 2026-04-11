@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.CustomPropertyEvent;
 public sealed record CustomPropertyLite
 {
     [JsonPropertyName("property_name")]
-    public string PropertyName { get; init; } = null!;
+    public required string PropertyName { get; init; }
 }

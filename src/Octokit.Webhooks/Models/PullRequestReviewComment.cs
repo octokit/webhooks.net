@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models;
 public sealed record PullRequestReviewComment
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("pull_request_review_id")]
     public long PullRequestReviewId { get; init; }
@@ -13,13 +13,13 @@ public sealed record PullRequestReviewComment
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("diff_hunk")]
-    public string DiffHunk { get; init; } = null!;
+    public required string DiffHunk { get; init; }
 
     [JsonPropertyName("path")]
-    public string Path { get; init; } = null!;
+    public required string Path { get; init; }
 
     [JsonPropertyName("position")]
     public int? Position { get; init; }
@@ -28,16 +28,16 @@ public sealed record PullRequestReviewComment
     public long OriginalPosition { get; init; }
 
     [JsonPropertyName("commit_id")]
-    public string CommitId { get; init; } = null!;
+    public required string CommitId { get; init; }
 
     [JsonPropertyName("original_commit_id")]
-    public string OriginalCommitId { get; init; } = null!;
+    public required string OriginalCommitId { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("body")]
-    public string Body { get; init; } = null!;
+    public required string Body { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -48,20 +48,20 @@ public sealed record PullRequestReviewComment
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("pull_request_url")]
-    public string PullRequestUrl { get; init; } = null!;
+    public required string PullRequestUrl { get; init; }
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("_links")]
-    public PullRequestReviewCommentLinks Links { get; init; } = null!;
+    public required PullRequestReviewCommentLinks Links { get; init; }
 
     [JsonPropertyName("reactions")]
-    public Reactions Reactions { get; init; } = null!;
+    public required Reactions Reactions { get; init; }
 
     [JsonPropertyName("start_line")]
     public int? StartLine { get; init; }
@@ -81,7 +81,7 @@ public sealed record PullRequestReviewComment
 
     [JsonPropertyName("side")]
     [JsonConverter(typeof(StringEnumConverter<Side>))]
-    public StringEnum<Side> Side { get; init; } = null!;
+    public required StringEnum<Side> Side { get; init; }
 
     [JsonPropertyName("in_reply_to_id")]
     public long? InReplyToId { get; init; }

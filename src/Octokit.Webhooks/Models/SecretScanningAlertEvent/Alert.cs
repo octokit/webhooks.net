@@ -7,7 +7,7 @@ public sealed record Alert
     public long Number { get; init; }
 
     [JsonPropertyName("secret_type")]
-    public string SecretType { get; init; } = null!;
+    public required string SecretType { get; init; }
 
     [JsonPropertyName("resolution")]
     [JsonConverter(typeof(StringEnumConverter<AlertResolution>))]

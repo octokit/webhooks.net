@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.SecretScanningAlertLocationEvent;
 public sealed record SecretScanningLocationIssueComment
 {
     [JsonPropertyName("issue_comment_url")]
-    public string IssueCommentUrl { get; init; } = null!;
+    public required string IssueCommentUrl { get; init; }
 }

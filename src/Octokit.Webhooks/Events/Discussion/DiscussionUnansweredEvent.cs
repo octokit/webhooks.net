@@ -8,5 +8,5 @@ public sealed record DiscussionUnansweredEvent : DiscussionEvent
     public override string Action => DiscussionAction.Unanswered;
 
     [JsonPropertyName("old_answer")]
-    public DiscussionAnswer OldAnswer { get; init; } = null!;
+    public required DiscussionAnswer OldAnswer { get; init; }
 }

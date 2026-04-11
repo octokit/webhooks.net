@@ -6,10 +6,10 @@ namespace Octokit.Webhooks.Events;
 public abstract record SecretScanningScanEvent : WebhookEvent
 {
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public required string Type { get; init; }
 
     [JsonPropertyName("source")]
-    public string Source { get; init; } = null!;
+    public required string Source { get; init; }
 
     [JsonPropertyName("started_at")]
     public DateTimeOffset StartedAt { get; init; }
@@ -18,7 +18,7 @@ public abstract record SecretScanningScanEvent : WebhookEvent
     public DateTimeOffset CompletedAt { get; init; }
 
     [JsonPropertyName("secret_types")]
-    public IEnumerable<string>? SecretTypes { get; init; }
+    public IReadOnlyList<string>? SecretTypes { get; init; }
 
     [JsonPropertyName("custom_pattern_name")]
     public string? CustomPatternName { get; init; }

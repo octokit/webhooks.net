@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models;
 public sealed record Link
 {
     [JsonPropertyName("href")]
-    public string Href { get; init; } = null!;
+    public required string Href { get; init; }
 }

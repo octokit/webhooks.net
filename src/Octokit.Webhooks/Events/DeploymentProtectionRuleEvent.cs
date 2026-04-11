@@ -6,17 +6,17 @@ namespace Octokit.Webhooks.Events;
 public abstract record DeploymentProtectionRuleEvent : WebhookEvent
 {
     [JsonPropertyName("environment")]
-    public string Environment { get; init; } = null!;
+    public required string Environment { get; init; }
 
     [JsonPropertyName("event")]
-    public string Event { get; init; } = null!;
+    public required string Event { get; init; }
 
     [JsonPropertyName("deployment_callback_url")]
-    public string DeploymentCallbackUrl { get; init; } = null!;
+    public required string DeploymentCallbackUrl { get; init; }
 
     [JsonPropertyName("deployment")]
-    public Models.DeploymentEvent.Deployment Deployment { get; init; } = null!;
+    public required Models.DeploymentEvent.Deployment Deployment { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<Models.PullRequestEvent.PullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<Models.PullRequestEvent.PullRequest> PullRequests { get; init; }
 }

@@ -10,5 +10,5 @@ public sealed record PullRequestReviewEditedEvent : PullRequestReviewEvent
     public override string Action => PullRequestReviewAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

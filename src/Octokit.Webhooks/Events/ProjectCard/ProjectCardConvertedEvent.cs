@@ -10,5 +10,5 @@ public sealed record ProjectCardConvertedEvent : ProjectCardEvent
     public override string Action => ProjectCardAction.Converted;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

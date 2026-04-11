@@ -15,7 +15,7 @@ public sealed record CheckSuite
     public string? HeadBranch { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<CheckSuiteStatus>))]
@@ -26,19 +26,19 @@ public sealed record CheckSuite
     public StringEnum<CheckSuiteConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("before")]
     public string? Before { get; init; }
 
     [JsonPropertyName("after")]
-    public string After { get; init; } = null!;
+    public required string After { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<CheckRunPullRequest> PullRequests { get; init; }
 
     [JsonPropertyName("app")]
-    public App App { get; init; } = null!;
+    public required App App { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -58,8 +58,8 @@ public sealed record CheckSuite
     public long LatestCheckRunsCount { get; init; }
 
     [JsonPropertyName("check_runs_url")]
-    public string CheckRunsUrl { get; init; } = null!;
+    public required string CheckRunsUrl { get; init; }
 
     [JsonPropertyName("head_commit")]
-    public SimpleCommit HeadCommit { get; init; } = null!;
+    public required SimpleCommit HeadCommit { get; init; }
 }

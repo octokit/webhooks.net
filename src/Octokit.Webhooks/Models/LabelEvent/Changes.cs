@@ -4,11 +4,11 @@ namespace Octokit.Webhooks.Models.LabelEvent;
 public sealed record Changes
 {
     [JsonPropertyName("color")]
-    public ChangesColor Color { get; init; } = null!;
+    public required ChangesColor Color { get; init; }
 
     [JsonPropertyName("name")]
-    public ChangesName Name { get; init; } = null!;
+    public ChangesName? Name { get; init; }
 
     [JsonPropertyName("description")]
-    public ChangesDescription Description { get; init; } = null!;
+    public ChangesDescription? Description { get; init; }
 }

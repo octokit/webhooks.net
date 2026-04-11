@@ -7,33 +7,33 @@ public sealed record TeamParent
     public string? Description { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("slug")]
-    public string Slug { get; init; } = null!;
+    public required string Slug { get; init; }
 
     [JsonPropertyName("privacy")]
     [JsonConverter(typeof(StringEnumConverter<TeamParentPrivacy>))]
-    public StringEnum<TeamParentPrivacy> Privacy { get; init; } = null!;
+    public required StringEnum<TeamParentPrivacy> Privacy { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("members_url")]
-    public string MembersUrl { get; init; } = null!;
+    public required string MembersUrl { get; init; }
 
     [JsonPropertyName("repositories_url")]
-    public string RepositoriesUrl { get; init; } = null!;
+    public required string RepositoriesUrl { get; init; }
 
     [JsonPropertyName("permission")]
-    public string Permission { get; init; } = null!;
+    public required string Permission { get; init; }
 }

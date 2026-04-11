@@ -8,22 +8,22 @@ public sealed record DependabotAlert
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<DependabotAlertState>))]
-    public StringEnum<DependabotAlertState> State { get; init; } = null!;
+    public required StringEnum<DependabotAlertState> State { get; init; }
 
     [JsonPropertyName("dependency")]
-    public DependabotAlertDependency Dependency { get; init; } = null!;
+    public required DependabotAlertDependency Dependency { get; init; }
 
     [JsonPropertyName("security_advisory")]
-    public DependabotAlertSecurityAdvisory SecurityAdvisory { get; init; } = null!;
+    public required DependabotAlertSecurityAdvisory SecurityAdvisory { get; init; }
 
     [JsonPropertyName("security_vulnerability")]
-    public DependabotAlertVulnerability SecurityVulnerability { get; init; } = null!;
+    public required DependabotAlertVulnerability SecurityVulnerability { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

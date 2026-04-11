@@ -7,16 +7,16 @@ public sealed record Review
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("body")]
     public string? Body { get; init; }
 
     [JsonPropertyName("commit_id")]
-    public string CommitId { get; init; } = null!;
+    public required string CommitId { get; init; }
 
     [JsonPropertyName("submitted_at")]
     [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
@@ -27,15 +27,15 @@ public sealed record Review
     public StringEnum<ReviewState>? State { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("pull_request_url")]
-    public string PullRequestUrl { get; init; } = null!;
+    public required string PullRequestUrl { get; init; }
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("_links")]
-    public ReviewLinks Links { get; init; } = null!;
+    public required ReviewLinks Links { get; init; }
 }

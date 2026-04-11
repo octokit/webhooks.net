@@ -7,13 +7,13 @@ using Octokit.Webhooks.Models.PushEvent;
 public sealed record PushEvent : WebhookEvent
 {
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("before")]
-    public string Before { get; init; } = null!;
+    public required string Before { get; init; }
 
     [JsonPropertyName("after")]
-    public string After { get; init; } = null!;
+    public required string After { get; init; }
 
     [JsonPropertyName("created")]
     public bool Created { get; init; }
@@ -28,14 +28,14 @@ public sealed record PushEvent : WebhookEvent
     public string? BaseRef { get; init; }
 
     [JsonPropertyName("compare")]
-    public string Compare { get; init; } = null!;
+    public required string Compare { get; init; }
 
     [JsonPropertyName("commits")]
-    public IEnumerable<Commit> Commits { get; init; } = null!;
+    public required IReadOnlyList<Commit> Commits { get; init; }
 
     [JsonPropertyName("head_commit")]
     public Commit? HeadCommit { get; init; }
 
     [JsonPropertyName("pusher")]
-    public Committer Pusher { get; init; } = null!;
+    public required Committer Pusher { get; init; }
 }

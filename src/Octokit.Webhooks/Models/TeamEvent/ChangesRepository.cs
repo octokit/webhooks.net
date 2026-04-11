@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.TeamEvent;
 public sealed record ChangesRepository
 {
     [JsonPropertyName("permissions")]
-    public ChangesRepositoryPermissions Permissions { get; init; } = null!;
+    public required ChangesRepositoryPermissions Permissions { get; init; }
 }

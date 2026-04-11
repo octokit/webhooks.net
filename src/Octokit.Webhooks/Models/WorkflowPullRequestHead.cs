@@ -4,11 +4,11 @@ namespace Octokit.Webhooks.Models;
 public sealed record WorkflowPullRequestHead
 {
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("repo")]
-    public RepoRef Repo { get; init; } = null!;
+    public required RepoRef Repo { get; init; }
 }

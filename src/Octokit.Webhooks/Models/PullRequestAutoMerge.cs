@@ -4,14 +4,14 @@ namespace Octokit.Webhooks.Models;
 public sealed record PullRequestAutoMerge
 {
     [JsonPropertyName("enabled_by")]
-    public User EnabledBy { get; init; } = null!;
+    public required User EnabledBy { get; init; }
 
     [JsonPropertyName("merge_method")]
-    public string MergeMethod { get; init; } = null!;
+    public required string MergeMethod { get; init; }
 
     [JsonPropertyName("commit_title")]
-    public string CommitTitle { get; init; } = null!;
+    public required string CommitTitle { get; init; }
 
     [JsonPropertyName("commit_message")]
-    public string CommitMessage { get; init; } = null!;
+    public required string CommitMessage { get; init; }
 }

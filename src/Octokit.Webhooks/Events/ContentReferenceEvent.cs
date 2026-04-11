@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record ContentReferenceEvent : WebhookEvent
 {
     [JsonPropertyName("content_reference")]
-    public Models.ContentReferenceEvent.ContentReference ContentReference { get; init; } = null!;
+    public required Models.ContentReferenceEvent.ContentReference ContentReference { get; init; }
 }

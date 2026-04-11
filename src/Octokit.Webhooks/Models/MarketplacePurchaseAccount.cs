@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models;
 public sealed record MarketplacePurchaseAccount
 {
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public required string Type { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("login")]
-    public string Login { get; init; } = null!;
+    public required string Login { get; init; }
 
     [JsonPropertyName("organization_billing_email")]
-    public string OrganizationBillingEmail { get; init; } = null!;
+    public required string OrganizationBillingEmail { get; init; }
 }

@@ -8,8 +8,8 @@ public sealed record CustomPropertyValuesUpdatedEvent : CustomPropertyValuesEven
     public override string Action => CustomPropertyValuesAction.Updated;
 
     [JsonPropertyName("new_property_values")]
-    public IEnumerable<Models.CustomPropertyValuesEvent.CustomPropertyValue> NewPropertyValues { get; init; } = null!;
+    public required IReadOnlyList<Models.CustomPropertyValuesEvent.CustomPropertyValue> NewPropertyValues { get; init; }
 
     [JsonPropertyName("old_property_values")]
-    public IEnumerable<Models.CustomPropertyValuesEvent.CustomPropertyValue> OldPropertyValues { get; init; } = null!;
+    public required IReadOnlyList<Models.CustomPropertyValuesEvent.CustomPropertyValue> OldPropertyValues { get; init; }
 }

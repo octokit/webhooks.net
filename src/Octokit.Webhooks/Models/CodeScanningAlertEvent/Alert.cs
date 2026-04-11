@@ -11,20 +11,20 @@ public sealed record Alert
     public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("instances")]
-    public IEnumerable<AlertInstance> Instances { get; init; } = null!;
+    public required IReadOnlyList<AlertInstance> Instances { get; init; }
 
     [JsonPropertyName("most_recent_instance")]
-    public AlertInstance AlertInstance { get; init; } = null!;
+    public AlertInstance? AlertInstance { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<AlertState>))]
-    public StringEnum<AlertState> State { get; init; } = null!;
+    public required StringEnum<AlertState> State { get; init; }
 
     [JsonPropertyName("dismissed_by")]
     public User? DismissedBy { get; init; }
@@ -41,5 +41,5 @@ public sealed record Alert
     public AlertRule? Rule { get; init; }
 
     [JsonPropertyName("tool")]
-    public AlertTool Tool { get; init; } = null!;
+    public required AlertTool Tool { get; init; }
 }

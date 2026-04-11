@@ -8,8 +8,8 @@ using Octokit.Webhooks.Models.PullRequestReviewEvent;
 public abstract record PullRequestReviewThreadEvent : WebhookEvent
 {
     [JsonPropertyName("review")]
-    public Review Review { get; init; } = null!;
+    public Review? Review { get; init; }
 
     [JsonPropertyName("pull_request")]
-    public SimplePullRequest PullRequest { get; init; } = null!;
+    public required SimplePullRequest PullRequest { get; init; }
 }

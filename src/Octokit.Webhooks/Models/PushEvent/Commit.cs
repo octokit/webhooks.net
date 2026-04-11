@@ -4,35 +4,35 @@ namespace Octokit.Webhooks.Models.PushEvent;
 public sealed record Commit
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; } = null!;
+    public required string Id { get; init; }
 
     [JsonPropertyName("tree_id")]
-    public string TreeId { get; init; } = null!;
+    public required string TreeId { get; init; }
 
     [JsonPropertyName("distinct")]
     public bool Distinct { get; init; }
 
     [JsonPropertyName("message")]
-    public string Message { get; init; } = null!;
+    public required string Message { get; init; }
 
     [JsonPropertyName("timestamp")]
-    public string Timestamp { get; init; } = null!;
+    public required string Timestamp { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("author")]
-    public Committer Author { get; init; } = null!;
+    public required Committer Author { get; init; }
 
     [JsonPropertyName("committer")]
-    public Committer Committer { get; init; } = null!;
+    public required Committer Committer { get; init; }
 
     [JsonPropertyName("added")]
-    public IEnumerable<string> Added { get; init; } = null!;
+    public required IReadOnlyList<string> Added { get; init; }
 
     [JsonPropertyName("modified")]
-    public IEnumerable<string> Modified { get; init; } = null!;
+    public required IReadOnlyList<string> Modified { get; init; }
 
     [JsonPropertyName("removed")]
-    public IEnumerable<string> Removed { get; init; } = null!;
+    public required IReadOnlyList<string> Removed { get; init; }
 }

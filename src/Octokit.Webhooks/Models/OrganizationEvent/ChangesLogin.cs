@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.OrganizationEvent;
 public record ChangesLogin
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

@@ -6,8 +6,8 @@ namespace Octokit.Webhooks.Events;
 public abstract record RepositoryDispatchEvent : WebhookEvent
 {
     [JsonPropertyName("branch")]
-    public string Branch { get; init; } = null!;
+    public required string Branch { get; init; }
 
     [JsonPropertyName("client_payload")]
-    public dynamic ClientPayload { get; init; } = null!;
+    public required dynamic ClientPayload { get; init; }
 }

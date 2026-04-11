@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models.CheckRunEvent;
 public sealed record CheckRunPullRequest
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
@@ -13,8 +13,8 @@ public sealed record CheckRunPullRequest
     public long Number { get; init; }
 
     [JsonPropertyName("head")]
-    public CheckRunPullRequestHead Head { get; init; } = null!;
+    public required CheckRunPullRequestHead Head { get; init; }
 
     [JsonPropertyName("base")]
-    public CheckRunPullRequestBase Base { get; init; } = null!;
+    public required CheckRunPullRequestBase Base { get; init; }
 }

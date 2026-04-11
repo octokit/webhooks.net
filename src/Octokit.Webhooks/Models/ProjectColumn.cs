@@ -4,22 +4,22 @@ namespace Octokit.Webhooks.Models;
 public sealed record ProjectColumn
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("project_url")]
-    public string ProjectUrl { get; init; } = null!;
+    public required string ProjectUrl { get; init; }
 
     [JsonPropertyName("cards_url")]
-    public string CardsUrl { get; init; } = null!;
+    public required string CardsUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

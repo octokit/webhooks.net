@@ -4,28 +4,28 @@ namespace Octokit.Webhooks.Models;
 public sealed record PackageVersionRelease
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("tag_name")]
-    public string TagName { get; init; } = null!;
+    public required string TagName { get; init; }
 
     [JsonPropertyName("target_commitish")]
-    public string TargetCommitish { get; init; } = null!;
+    public required string TargetCommitish { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("draft")]
     public bool Draft { get; init; }
 
     [JsonPropertyName("author")]
-    public User Author { get; init; } = null!;
+    public required User Author { get; init; }
 
     [JsonPropertyName("prerelease")]
     public bool Prerelease { get; init; }

@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.PullRequestReviewCommentEvent;
 public sealed record ChangesBody
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

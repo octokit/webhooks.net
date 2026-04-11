@@ -4,41 +4,41 @@ namespace Octokit.Webhooks.Models;
 public sealed record SimplePullRequest
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("diff_url")]
-    public string DiffUrl { get; init; } = null!;
+    public required string DiffUrl { get; init; }
 
     [JsonPropertyName("patch_url")]
-    public string PatchUrl { get; init; } = null!;
+    public required string PatchUrl { get; init; }
 
     [JsonPropertyName("issue_url")]
-    public string IssueUrl { get; init; } = null!;
+    public required string IssueUrl { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<SimplePullRequestState>))]
-    public StringEnum<SimplePullRequestState> State { get; init; } = null!;
+    public required StringEnum<SimplePullRequestState> State { get; init; }
 
     [JsonPropertyName("locked")]
     public bool Locked { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("body")]
     public string? Body { get; init; }
@@ -66,16 +66,16 @@ public sealed record SimplePullRequest
     public User? Assignee { get; init; }
 
     [JsonPropertyName("assignees")]
-    public IEnumerable<User> Assignees { get; init; } = null!;
+    public required IReadOnlyList<User> Assignees { get; init; }
 
     [JsonPropertyName("requested_reviewers")]
-    public IEnumerable<User> RequestedReviewers { get; init; } = null!;
+    public required IReadOnlyList<User> RequestedReviewers { get; init; }
 
     [JsonPropertyName("requested_teams")]
-    public IEnumerable<Team> RequestedTeams { get; init; } = null!;
+    public required IReadOnlyList<Team> RequestedTeams { get; init; }
 
     [JsonPropertyName("labels")]
-    public IEnumerable<Label> Labels { get; init; } = null!;
+    public required IReadOnlyList<Label> Labels { get; init; }
 
     [JsonPropertyName("milestone")]
     public Milestone? Milestone { get; init; }
@@ -84,32 +84,32 @@ public sealed record SimplePullRequest
     public bool Draft { get; init; }
 
     [JsonPropertyName("commits_url")]
-    public string CommitsUrl { get; init; } = null!;
+    public required string CommitsUrl { get; init; }
 
     [JsonPropertyName("review_comments_url")]
-    public string ReviewCommentsUrl { get; init; } = null!;
+    public required string ReviewCommentsUrl { get; init; }
 
     [JsonPropertyName("review_comment_url")]
-    public string ReviewCommentUrl { get; init; } = null!;
+    public required string ReviewCommentUrl { get; init; }
 
     [JsonPropertyName("comments_url")]
-    public string CommentsUrl { get; init; } = null!;
+    public required string CommentsUrl { get; init; }
 
     [JsonPropertyName("statuses_url")]
-    public string StatusesUrl { get; init; } = null!;
+    public required string StatusesUrl { get; init; }
 
     [JsonPropertyName("head")]
-    public SimplePullRequestHead Head { get; init; } = null!;
+    public required SimplePullRequestHead Head { get; init; }
 
     [JsonPropertyName("base")]
-    public SimplePullRequestBase Base { get; init; } = null!;
+    public required SimplePullRequestBase Base { get; init; }
 
     [JsonPropertyName("_links")]
     public SimplePullRequestLinks? Links { get; init; }
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("auto_merge")]
     public PullRequestAutoMerge? AutoMerge { get; init; }

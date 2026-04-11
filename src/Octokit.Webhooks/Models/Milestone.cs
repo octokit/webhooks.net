@@ -4,31 +4,31 @@ namespace Octokit.Webhooks.Models;
 public sealed record Milestone
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("labels_url")]
-    public string LabelsUrl { get; init; } = null!;
+    public required string LabelsUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("open_issues")]
     public long OpenIssues { get; init; }
@@ -38,7 +38,7 @@ public sealed record Milestone
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<MilestoneState>))]
-    public StringEnum<MilestoneState> State { get; init; } = null!;
+    public required StringEnum<MilestoneState> State { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

@@ -4,11 +4,11 @@ namespace Octokit.Webhooks.Models.WorkflowJobEvent;
 public sealed record WorkflowJobStep
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobStepStatus>))]
-    public StringEnum<WorkflowJobStepStatus> Status { get; init; } = null!;
+    public required StringEnum<WorkflowJobStepStatus> Status { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobStepConclusion>))]

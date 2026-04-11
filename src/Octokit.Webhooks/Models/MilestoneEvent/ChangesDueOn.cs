@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.MilestoneEvent;
 public sealed record ChangesDueOn
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

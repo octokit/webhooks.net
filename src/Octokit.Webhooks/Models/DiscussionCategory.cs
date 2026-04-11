@@ -10,13 +10,13 @@ public sealed record DiscussionCategory
     public long RepositoryId { get; init; }
 
     [JsonPropertyName("emoji")]
-    public string Emoji { get; init; } = null!;
+    public required string Emoji { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -27,7 +27,7 @@ public sealed record DiscussionCategory
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("slug")]
-    public string Slug { get; init; } = null!;
+    public required string Slug { get; init; }
 
     [JsonPropertyName("is_answerable")]
     public bool IsAnswerable { get; init; }

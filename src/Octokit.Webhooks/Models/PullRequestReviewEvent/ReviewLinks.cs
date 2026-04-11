@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.PullRequestReviewEvent;
 public sealed record ReviewLinks
 {
     [JsonPropertyName("html")]
-    public Link Html { get; init; } = null!;
+    public required Link Html { get; init; }
 
     [JsonPropertyName("pull_request")]
-    public Link PullRequest { get; init; } = null!;
+    public required Link PullRequest { get; init; }
 }

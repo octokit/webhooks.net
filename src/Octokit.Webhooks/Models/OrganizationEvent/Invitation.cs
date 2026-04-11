@@ -7,16 +7,16 @@ public sealed record Invitation
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("login")]
-    public string Login { get; init; } = null!;
+    public required string Login { get; init; }
 
     [JsonPropertyName("email")]
     public string? Email { get; init; }
 
     [JsonPropertyName("role")]
-    public string Role { get; init; } = null!;
+    public required string Role { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -30,11 +30,11 @@ public sealed record Invitation
     public string? FailedReason { get; init; }
 
     [JsonPropertyName("inviter")]
-    public User Inviter { get; init; } = null!;
+    public required User Inviter { get; init; }
 
     [JsonPropertyName("team_count")]
     public long TeamCount { get; init; }
 
     [JsonPropertyName("invitation_teams_url")]
-    public string InvitationTeamsUrl { get; init; } = null!;
+    public required string InvitationTeamsUrl { get; init; }
 }

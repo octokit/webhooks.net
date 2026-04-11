@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record SponsorshipEvent : WebhookEvent
 {
     [JsonPropertyName("sponsorship")]
-    public Models.SponsorshipEvent.Sponsorship Sponsorship { get; init; } = null!;
+    public required Models.SponsorshipEvent.Sponsorship Sponsorship { get; init; }
 }

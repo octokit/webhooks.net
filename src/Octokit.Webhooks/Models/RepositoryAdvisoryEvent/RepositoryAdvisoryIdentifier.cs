@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.RepositoryAdvisoryEvent;
 public sealed record RepositoryAdvisoryIdentifier
 {
     [JsonPropertyName("value")]
-    public string Value { get; init; } = null!;
+    public required string Value { get; init; }
 
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public required string Type { get; init; }
 }

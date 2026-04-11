@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.DiscussionEvent;
 public sealed record ChangesCategory
 {
     [JsonPropertyName("from")]
-    public DiscussionCategory From { get; init; } = null!;
+    public required DiscussionCategory From { get; init; }
 }

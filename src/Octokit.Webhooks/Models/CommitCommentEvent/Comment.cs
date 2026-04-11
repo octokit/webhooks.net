@@ -4,19 +4,19 @@ namespace Octokit.Webhooks.Models.CommitCommentEvent;
 public sealed record Comment
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("position")]
     public int? Position { get; init; }
@@ -28,7 +28,7 @@ public sealed record Comment
     public string? Path { get; init; }
 
     [JsonPropertyName("commit_id")]
-    public string CommitId { get; init; } = null!;
+    public required string CommitId { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -40,8 +40,8 @@ public sealed record Comment
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("body")]
-    public string Body { get; init; } = null!;
+    public required string Body { get; init; }
 }

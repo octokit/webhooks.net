@@ -10,5 +10,5 @@ public sealed record ProjectEditedEvent : ProjectEvent
     public override string Action => ProjectAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

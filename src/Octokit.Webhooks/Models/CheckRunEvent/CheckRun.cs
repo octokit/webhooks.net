@@ -7,26 +7,26 @@ public sealed record CheckRun
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public string? NodeId { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("external_id")]
-    public string ExternalId { get; init; } = null!;
+    public required string ExternalId { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("details_url")]
-    public string DetailsUrl { get; init; } = null!;
+    public string? DetailsUrl { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<CheckRunStatus>))]
-    public StringEnum<CheckRunStatus> Status { get; init; } = null!;
+    public required StringEnum<CheckRunStatus> Status { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<CheckRunConclusion>))]
@@ -41,20 +41,20 @@ public sealed record CheckRun
     public DateTimeOffset? CompletedAt { get; init; }
 
     [JsonPropertyName("output")]
-    public CheckRunOutput Output { get; init; } = null!;
+    public required CheckRunOutput Output { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("check_suite")]
-    public CheckSuite CheckSuite { get; init; } = null!;
+    public required CheckSuite CheckSuite { get; init; }
 
     [JsonPropertyName("app")]
-    public App App { get; init; } = null!;
+    public required App App { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<CheckRunPullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<CheckRunPullRequest> PullRequests { get; init; }
 
     [JsonPropertyName("deployment")]
-    public Deployment Deployment { get; init; } = null!;
+    public Deployment? Deployment { get; init; }
 }

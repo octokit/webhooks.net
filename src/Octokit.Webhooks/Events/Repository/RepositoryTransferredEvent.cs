@@ -10,5 +10,5 @@ public sealed record RepositoryTransferredEvent : RepositoryEvent
     public override string Action => RepositoryAction.Transferred;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

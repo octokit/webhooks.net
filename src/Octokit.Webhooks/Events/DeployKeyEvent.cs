@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record DeployKeyEvent : WebhookEvent
 {
     [JsonPropertyName("key")]
-    public Models.DeployKeyEvent.DeployKey Key { get; init; } = null!;
+    public required Models.DeployKeyEvent.DeployKey Key { get; init; }
 }

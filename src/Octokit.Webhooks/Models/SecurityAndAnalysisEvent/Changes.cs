@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.SecurityAndAnalysisEvent;
 public sealed record Changes
 {
     [JsonPropertyName("from")]
-    public ChangesFrom From { get; init; } = null!;
+    public required ChangesFrom From { get; init; }
 }

@@ -16,10 +16,10 @@ public abstract record DeploymentReviewEvent : WebhookEvent
     public WorkflowJobRun? WorkflowJobRun { get; init; }
 
     [JsonPropertyName("workflow_job_runs")]
-    public IEnumerable<WorkflowJobRun>? WorkflowJobRuns { get; init; }
+    public IReadOnlyList<WorkflowJobRun>? WorkflowJobRuns { get; init; }
 
     [JsonPropertyName("reviewers")]
-    public IEnumerable<DeploymentReviewReviewer>? Reviewers { get; init; }
+    public IReadOnlyList<DeploymentReviewReviewer>? Reviewers { get; init; }
 
     [JsonPropertyName("approver")]
     public User? Approver { get; init; }

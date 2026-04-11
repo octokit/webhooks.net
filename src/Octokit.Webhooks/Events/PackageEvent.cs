@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record PackageEvent : WebhookEvent
 {
     [JsonPropertyName("package")]
-    public Models.Package Package { get; init; } = null!;
+    public required Models.Package Package { get; init; }
 }
