@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.PersonalAccessTokenRequestEvent;
+namespace Octokit.Webhooks.Models.PersonalAccessTokenRequestEvent;
 
 [PublicAPI]
 public enum PersonalAccessTokenRequestRepositorySelection
