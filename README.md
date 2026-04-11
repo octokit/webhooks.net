@@ -85,20 +85,20 @@ Libraries to handle GitHub Webhooks in .NET applications.
 4. Configure the webhook function:
 
     ```C#
-    new HostBuilder()
+    var builder = FunctionsApplication.CreateBuilder(args);
     ...
-    .ConfigureGitHubWebhooks()
+    builder.ConfigureGitHubWebhooks();
     ...
-    .Build();
+    builder.Build().Run();
     ```
 
-`ConfigureGitHubWebhooks()` either takes an optional parameter:
+`ConfigureGitHubWebhooks()` takes an optional parameter:
 
 * `secret`. The secret you have configured in GitHub, if you have set this up.
 
-or:
+Alternatively, you can pass a function that resolves the secret from configuration:
 
-* `configure`. A function that takes an IConfiguration instance and expects the secret you have configured in GitHub in return.
+* `configure`. A function that takes an `IConfiguration` instance and returns the secret.
 
 The function is available on the `/api/github/webhooks` endpoint.
 
