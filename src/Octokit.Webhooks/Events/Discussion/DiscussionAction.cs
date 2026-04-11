@@ -29,6 +29,9 @@ public sealed record DiscussionAction : WebhookEventAction
 
     public static readonly DiscussionAction Unpinned = new(DiscussionActionValue.Unpinned);
 
+    public static readonly DiscussionAction Closed = new(DiscussionActionValue.Closed);
+    public static readonly DiscussionAction Reopened = new(DiscussionActionValue.Reopened);
+
     private DiscussionAction(string value)
         : base(value)
     {

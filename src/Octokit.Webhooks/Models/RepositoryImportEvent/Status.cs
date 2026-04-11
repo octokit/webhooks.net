@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.RepositoryImportEvent;
+namespace Octokit.Webhooks.Models.RepositoryImportEvent;
 
 [PublicAPI]
 public enum Status

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.TeamEvent;
+namespace Octokit.Webhooks.Models.TeamEvent;
 
 [PublicAPI]
 public sealed record ChangesPrivacy

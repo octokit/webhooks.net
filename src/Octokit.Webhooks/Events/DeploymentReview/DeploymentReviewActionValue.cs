@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.DeploymentReview;
+namespace Octokit.Webhooks.Events.DeploymentReview;
 
 public static class DeploymentReviewActionValue
 {

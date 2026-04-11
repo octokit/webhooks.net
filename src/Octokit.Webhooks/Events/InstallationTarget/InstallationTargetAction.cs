@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.InstallationTarget;
+namespace Octokit.Webhooks.Events.InstallationTarget;
 
 [PublicAPI]
 public sealed record InstallationTargetAction : WebhookEventAction

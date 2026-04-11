@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.MemberEvent;
+namespace Octokit.Webhooks.Models.MemberEvent;
 
 [PublicAPI]
 public sealed record ChangesPermission

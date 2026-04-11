@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.InstallationTargetEvent;
+namespace Octokit.Webhooks.Models.InstallationTargetEvent;
 
 [PublicAPI]
 public record ChangesLogin

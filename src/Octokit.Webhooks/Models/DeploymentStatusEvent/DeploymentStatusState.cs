@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.DeploymentStatusEvent;
+namespace Octokit.Webhooks.Models.DeploymentStatusEvent;
 
 [PublicAPI]
 public enum DeploymentStatusState

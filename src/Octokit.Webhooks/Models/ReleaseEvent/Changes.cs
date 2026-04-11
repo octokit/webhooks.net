@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.ReleaseEvent;
+namespace Octokit.Webhooks.Models.ReleaseEvent;
 
 [PublicAPI]
 public sealed record Changes

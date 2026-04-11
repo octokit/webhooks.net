@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.DeploymentReview;
+namespace Octokit.Webhooks.Events.DeploymentReview;
 
 [PublicAPI]
 [WebhookActionType(DeploymentReviewActionValue.Approved)]

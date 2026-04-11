@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.MilestoneEvent;
+namespace Octokit.Webhooks.Models.MilestoneEvent;
 
 using Octokit.Webhooks.Models.MemberEvent;
 

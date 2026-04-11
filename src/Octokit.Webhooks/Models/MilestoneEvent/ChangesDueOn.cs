@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.MilestoneEvent;
+namespace Octokit.Webhooks.Models.MilestoneEvent;
 
 [PublicAPI]
 public sealed record ChangesDueOn

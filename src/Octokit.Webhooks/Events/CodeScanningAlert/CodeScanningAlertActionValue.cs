@@ -13,4 +13,6 @@ public static class CodeScanningAlertActionValue
     public const string Reopened = "reopened";
 
     public const string ReopenedByUser = "reopened_by_user";
+
+    public const string UpdatedAssignment = "updated_assignment";
 }

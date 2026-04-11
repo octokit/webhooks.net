@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.InstallationRepositoriesEvent;
+namespace Octokit.Webhooks.Models.InstallationRepositoriesEvent;
 
 [PublicAPI]
 public sealed record Repository

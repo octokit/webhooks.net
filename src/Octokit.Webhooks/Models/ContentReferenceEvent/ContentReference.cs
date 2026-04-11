@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.ContentReferenceEvent;
+namespace Octokit.Webhooks.Models.ContentReferenceEvent;
 
 [PublicAPI]
 public sealed record ContentReference

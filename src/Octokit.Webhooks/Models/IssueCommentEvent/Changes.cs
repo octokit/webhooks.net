@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.IssueCommentEvent;
+namespace Octokit.Webhooks.Models.IssueCommentEvent;
 
 [PublicAPI]
 public sealed record Changes

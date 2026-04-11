@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events;
+namespace Octokit.Webhooks.Events;
 
 [PublicAPI]
 [WebhookEventType(WebhookEventType.Project)]

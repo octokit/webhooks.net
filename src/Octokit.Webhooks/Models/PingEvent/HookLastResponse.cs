@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.PingEvent;
+namespace Octokit.Webhooks.Models.PingEvent;
 
 [PublicAPI]
 public sealed record HookLastResponse

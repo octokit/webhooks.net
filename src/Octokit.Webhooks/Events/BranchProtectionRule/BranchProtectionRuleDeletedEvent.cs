@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.BranchProtectionRule;
+namespace Octokit.Webhooks.Events.BranchProtectionRule;
 
 [PublicAPI]
 [WebhookActionType(BranchProtectionRuleActionValue.Deleted)]

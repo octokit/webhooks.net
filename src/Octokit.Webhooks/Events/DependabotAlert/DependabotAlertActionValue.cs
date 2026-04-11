@@ -11,4 +11,10 @@ public static class DependabotAlertActionValue
     public const string Reintroduced = "reintroduced";
 
     public const string Reopened = "reopened";
+
+    public const string AssigneesChanged = "assignees_changed";
+
+    public const string AutoDismissed = "auto_dismissed";
+
+    public const string AutoReopened = "auto_reopened";
 }

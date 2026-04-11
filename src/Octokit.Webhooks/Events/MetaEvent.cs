@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events;
+namespace Octokit.Webhooks.Events;
 
 using Octokit.Webhooks.Models.MetaEvent;
 

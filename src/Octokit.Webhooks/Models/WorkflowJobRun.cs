@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models;
+namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
 public sealed record WorkflowJobRun

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.GollumEvent;
+namespace Octokit.Webhooks.Models.GollumEvent;
 
 [PublicAPI]
 public enum PageAction

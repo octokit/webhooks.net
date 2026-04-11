@@ -9,4 +9,12 @@ public static class SecretScanningAlertActionValue
     public const string Resolved = "resolved";
 
     public const string Revoked = "revoked";
+
+    public const string Assigned = "assigned";
+
+    public const string PubliclyLeaked = "publicly_leaked";
+
+    public const string Unassigned = "unassigned";
+
+    public const string Validated = "validated";
 }

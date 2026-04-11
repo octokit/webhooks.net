@@ -15,6 +15,8 @@ public sealed record CodeScanningAlertAction : WebhookEventAction
 
     public static readonly CodeScanningAlertAction ReopenedByUser = new(CodeScanningAlertActionValue.ReopenedByUser);
 
+    public static readonly CodeScanningAlertAction UpdatedAssignment = new(CodeScanningAlertActionValue.UpdatedAssignment);
+
     private CodeScanningAlertAction(string value)
         : base(value)
     {

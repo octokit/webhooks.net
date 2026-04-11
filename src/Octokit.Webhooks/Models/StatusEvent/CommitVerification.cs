@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.StatusEvent;
+namespace Octokit.Webhooks.Models.StatusEvent;
 
 [PublicAPI]
 public sealed record CommitVerification

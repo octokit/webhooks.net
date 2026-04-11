@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Events.MergeQueueEntry;
+namespace Octokit.Webhooks.Events.MergeQueueEntry;
 
 [PublicAPI]
 [WebhookActionType(MergeQueueEntryActionValue.Deleted)]

@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.Models.PushEvent;
+namespace Octokit.Webhooks.Models.PushEvent;
 
 [PublicAPI]
 public sealed record Commit
