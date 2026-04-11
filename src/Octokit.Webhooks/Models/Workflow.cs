@@ -26,7 +26,8 @@ public sealed record Workflow
     public string Path { get; init; } = null!;
 
     [JsonPropertyName("state")]
-    public string State { get; init; } = null!;
+    [JsonConverter(typeof(StringEnumConverter<WorkflowState>))]
+    public StringEnum<WorkflowState> State { get; init; } = null!;
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
