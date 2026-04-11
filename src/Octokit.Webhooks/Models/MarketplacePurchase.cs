@@ -22,5 +22,5 @@ public sealed record MarketplacePurchase
     public string? NextBillingDate { get; init; }
 
     [JsonPropertyName("plan")]
-    public MarkplacePurchasePlan Plan { get; init; } = null!;
+    public MarketplacePurchasePlan Plan { get; init; } = null!;
 }

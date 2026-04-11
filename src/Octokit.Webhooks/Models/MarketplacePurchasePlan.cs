@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
-public sealed record MarkplacePurchasePlan
+public sealed record MarketplacePurchasePlan
 {
     [JsonPropertyName("id")]
     public long Id { get; init; }
