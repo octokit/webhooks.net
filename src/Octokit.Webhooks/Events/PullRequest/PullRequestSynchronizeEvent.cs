@@ -8,8 +8,8 @@ public sealed record PullRequestSynchronizeEvent : PullRequestEvent
     public override string Action => PullRequestAction.Synchronize;
 
     [JsonPropertyName("before")]
-    public string Before { get; init; } = null!;
+    public required string Before { get; init; }
 
     [JsonPropertyName("after")]
-    public string After { get; init; } = null!;
+    public required string After { get; init; }
 }

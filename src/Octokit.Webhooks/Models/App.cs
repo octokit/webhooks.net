@@ -10,22 +10,22 @@ public sealed record App
     public string? Slug { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("owner")]
-    public User Owner { get; init; } = null!;
+    public required User Owner { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     [JsonPropertyName("external_url")]
-    public string ExternalUrl { get; init; } = null!;
+    public required string ExternalUrl { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

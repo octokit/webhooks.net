@@ -5,9 +5,9 @@ public sealed record ChangesContentType
 {
     [JsonPropertyName("from")]
     [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
-    public StringEnum<ProjectsV2ItemContentType> From { get; init; } = null!;
+    public required StringEnum<ProjectsV2ItemContentType> From { get; init; }
 
     [JsonPropertyName("to")]
     [JsonConverter(typeof(StringEnumConverter<ProjectsV2ItemContentType>))]
-    public StringEnum<ProjectsV2ItemContentType> To { get; init; } = null!;
+    public required StringEnum<ProjectsV2ItemContentType> To { get; init; }
 }

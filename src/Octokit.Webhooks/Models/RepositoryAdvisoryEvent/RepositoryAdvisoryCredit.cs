@@ -4,9 +4,9 @@ namespace Octokit.Webhooks.Models.RepositoryAdvisoryEvent;
 public sealed record RepositoryAdvisoryCredit
 {
     [JsonPropertyName("login")]
-    public string Login { get; init; } = null!;
+    public required string Login { get; init; }
 
     [JsonPropertyName("type")]
     [JsonConverter(typeof(StringEnumConverter<RepositoryAdvisoryCreditType>))]
-    public StringEnum<RepositoryAdvisoryCreditType> Type { get; init; } = null!;
+    public required StringEnum<RepositoryAdvisoryCreditType> Type { get; init; }
 }

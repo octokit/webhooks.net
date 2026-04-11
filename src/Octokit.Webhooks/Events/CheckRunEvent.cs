@@ -8,7 +8,7 @@ using Octokit.Webhooks.Models.CheckRunEvent;
 public abstract record CheckRunEvent : WebhookEvent
 {
     [JsonPropertyName("check_run")]
-    public Models.CheckRunEvent.CheckRun CheckRun { get; init; } = null!;
+    public required Models.CheckRunEvent.CheckRun CheckRun { get; init; }
 
     [JsonPropertyName("requested_action")]
     public RequestedAction? RequestedAction { get; init; }

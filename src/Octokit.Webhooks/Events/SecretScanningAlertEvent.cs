@@ -8,5 +8,5 @@ using Octokit.Webhooks.Models.SecretScanningAlertEvent;
 public abstract record SecretScanningAlertEvent : WebhookEvent
 {
     [JsonPropertyName("alert")]
-    public Alert Alert { get; init; } = null!;
+    public required Alert Alert { get; init; }
 }

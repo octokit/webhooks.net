@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models;
 public sealed record ReferencedWorkflow
 {
     [JsonPropertyName("path")]
-    public string Path { get; init; } = null!;
+    public required string Path { get; init; }
 
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("ref")]
     public string? Ref { get; init; }

@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.DiscussionCommentEvent;
 public sealed record DiscussionCommentChangesBody
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

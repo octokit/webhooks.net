@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.RepositoryAdvisoryEvent;
 public sealed record RepositoryAdvisoryCwe
 {
     [JsonPropertyName("cwe_id")]
-    public string CweId { get; init; } = null!;
+    public required string CweId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 }

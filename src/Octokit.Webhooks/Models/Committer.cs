@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models;
 public sealed record Committer
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("email")]
     public string? Email { get; init; }

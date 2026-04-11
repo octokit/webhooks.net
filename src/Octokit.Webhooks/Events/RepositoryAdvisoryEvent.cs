@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record RepositoryAdvisoryEvent : WebhookEvent
 {
     [JsonPropertyName("repository_advisory")]
-    public Models.RepositoryAdvisoryEvent.RepositoryAdvisory RepositoryAdvisory { get; init; } = null!;
+    public required Models.RepositoryAdvisoryEvent.RepositoryAdvisory RepositoryAdvisory { get; init; }
 }

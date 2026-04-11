@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record RegistryPackageEvent : WebhookEvent
 {
     [JsonPropertyName("registry_package")]
-    public Models.Package Package { get; init; } = null!;
+    public required Models.Package Package { get; init; }
 }

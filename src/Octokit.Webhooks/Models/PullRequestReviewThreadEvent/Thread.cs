@@ -4,8 +4,8 @@ namespace Octokit.Webhooks.Models.PullRequestReviewThreadEvent;
 public sealed record Thread
 {
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("comments")]
-    public IEnumerable<PullRequestReviewComment> Comments { get; init; } = null!;
+    public required IReadOnlyList<PullRequestReviewComment> Comments { get; init; }
 }

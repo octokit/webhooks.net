@@ -7,13 +7,13 @@ public sealed record ProjectsV2StatusUpdate
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("project_node_id")]
-    public string ProjectNodeId { get; init; } = null!;
+    public required string ProjectNodeId { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("created_at")]
     public DateTimeOffset CreatedAt { get; init; }

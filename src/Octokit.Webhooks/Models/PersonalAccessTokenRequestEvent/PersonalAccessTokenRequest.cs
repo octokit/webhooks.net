@@ -7,26 +7,26 @@ public sealed record PersonalAccessTokenRequest
     public long Id { get; init; }
 
     [JsonPropertyName("owner")]
-    public User Owner { get; init; } = null!;
+    public required User Owner { get; init; }
 
     [JsonPropertyName("permissions_added")]
-    public AppPermissions PermissionsAdded { get; init; } = null!;
+    public required AppPermissions PermissionsAdded { get; init; }
 
     [JsonPropertyName("permissions_upgraded")]
-    public AppPermissions PermissionsUpgraded { get; init; } = null!;
+    public required AppPermissions PermissionsUpgraded { get; init; }
 
     [JsonPropertyName("permissions_result")]
-    public AppPermissions PermissionsResult { get; init; } = null!;
+    public required AppPermissions PermissionsResult { get; init; }
 
     [JsonPropertyName("repository_selection")]
     [JsonConverter(typeof(StringEnumConverter<PersonalAccessTokenRequestRepositorySelection>))]
-    public StringEnum<PersonalAccessTokenRequestRepositorySelection> RepositorySelection { get; init; } = null!;
+    public required StringEnum<PersonalAccessTokenRequestRepositorySelection> RepositorySelection { get; init; }
 
     [JsonPropertyName("repository_count")]
     public long? RepositoryCount { get; init; }
 
     [JsonPropertyName("repositories")]
-    public IEnumerable<RepositoryLite>? Repositories { get; init; }
+    public IReadOnlyList<RepositoryLite>? Repositories { get; init; }
 
     [JsonPropertyName("created_at")]
     public DateTimeOffset CreatedAt { get; init; }

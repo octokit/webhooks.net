@@ -10,5 +10,5 @@ public sealed record ProjectsV2ItemConvertedEvent : ProjectsV2ItemEvent
     public override string Action => ProjectsV2ItemAction.Converted;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

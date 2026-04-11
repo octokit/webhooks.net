@@ -10,5 +10,5 @@ public sealed record MilestoneEditedEvent : MilestoneEvent
     public override string Action => MilestoneAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

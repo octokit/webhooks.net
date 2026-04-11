@@ -7,19 +7,19 @@ public sealed record PackageVersion
     public long Id { get; init; }
 
     [JsonPropertyName("version")]
-    public string Version { get; init; } = null!;
+    public required string Version { get; init; }
 
     [JsonPropertyName("summary")]
-    public string Summary { get; init; } = null!;
+    public required string Summary { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("body")]
-    public dynamic? Body { get; init; }
+    public JsonElement? Body { get; init; }
 
     [JsonPropertyName("body_html")]
     public string? BodyHtml { get; init; }
@@ -31,7 +31,7 @@ public sealed record PackageVersion
     public string? Manifest { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("tag_name")]
     public string? TagName { get; init; }
@@ -57,25 +57,25 @@ public sealed record PackageVersion
     public DateTimeOffset? UpdatedAt { get; init; }
 
     [JsonPropertyName("metadata")]
-    public IEnumerable<dynamic> Metadata { get; init; } = null!;
+    public required IReadOnlyList<JsonElement> Metadata { get; init; }
 
     [JsonPropertyName("container_metadata")]
     public ContainerMetadata? ContainerMetadata { get; init; }
 
     [JsonPropertyName("docker_metadata")]
-    public IEnumerable<dynamic>? DockerMetadata { get; init; }
+    public IReadOnlyList<JsonElement>? DockerMetadata { get; init; }
 
     [JsonPropertyName("npm_metadata")]
-    public IDictionary<string, dynamic>? NpmMetadata { get; init; }
+    public IDictionary<string, JsonElement>? NpmMetadata { get; init; }
 
     [JsonPropertyName("nuget_metadata")]
-    public IEnumerable<PackageVersionNugetMetadata>? NugetMetadata { get; init; }
+    public IReadOnlyList<PackageVersionNugetMetadata>? NugetMetadata { get; init; }
 
     [JsonPropertyName("rubygems_metadata")]
-    public IDictionary<string, dynamic>? RubygemsMetadata { get; init; }
+    public IDictionary<string, JsonElement>? RubygemsMetadata { get; init; }
 
     [JsonPropertyName("package_files")]
-    public IEnumerable<PackageVersionPackageFile> PackageFiles { get; init; } = null!;
+    public required IReadOnlyList<PackageVersionPackageFile> PackageFiles { get; init; }
 
     [JsonPropertyName("package_url")]
     public string? PackageUrl { get; init; }
@@ -87,5 +87,5 @@ public sealed record PackageVersion
     public string? SourceUrl { get; init; }
 
     [JsonPropertyName("installation_command")]
-    public string InstallationCommand { get; init; } = null!;
+    public required string InstallationCommand { get; init; }
 }

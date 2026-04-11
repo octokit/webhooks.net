@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record DependabotAlertEvent : WebhookEvent
 {
     [JsonPropertyName("alert")]
-    public Models.DependabotEvent.DependabotAlert Alert { get; init; } = null!;
+    public required Models.DependabotEvent.DependabotAlert Alert { get; init; }
 }

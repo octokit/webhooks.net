@@ -7,7 +7,7 @@ public sealed record HookLastResponse
     public string? Code { get; init; }
 
     [JsonPropertyName("status")]
-    public string Status { get; init; } = null!;
+    public required string Status { get; init; }
 
     [JsonPropertyName("message")]
     public string? Message { get; init; }

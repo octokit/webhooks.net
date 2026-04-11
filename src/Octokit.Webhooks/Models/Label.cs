@@ -7,19 +7,19 @@ public sealed record Label
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     [JsonPropertyName("color")]
-    public string Color { get; init; } = null!;
+    public required string Color { get; init; }
 
     [JsonPropertyName("default")]
     public bool Default { get; init; }

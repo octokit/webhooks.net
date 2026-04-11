@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models;
 public sealed record WorkflowPullRequest
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
@@ -13,8 +13,8 @@ public sealed record WorkflowPullRequest
     public long Number { get; init; }
 
     [JsonPropertyName("head")]
-    public WorkflowPullRequestHead Head { get; init; } = null!;
+    public required WorkflowPullRequestHead Head { get; init; }
 
     [JsonPropertyName("base")]
-    public WorkflowPullRequestBase Base { get; init; } = null!;
+    public required WorkflowPullRequestBase Base { get; init; }
 }

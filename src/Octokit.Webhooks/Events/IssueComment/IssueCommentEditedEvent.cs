@@ -10,5 +10,5 @@ public sealed record IssueCommentEditedEvent : IssueCommentEvent
     public override string Action => IssueCommentAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

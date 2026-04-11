@@ -10,8 +10,8 @@ public sealed record OrganizationMemberInvitedEvent : OrganizationEvent
     public override string Action => OrganizationAction.MemberInvited;
 
     [JsonPropertyName("invitation")]
-    public Invitation Invitation { get; init; } = null!;
+    public required Invitation Invitation { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 }

@@ -10,13 +10,13 @@ public abstract record InstallationRepositoriesEvent : WebhookEvent
 
     [JsonPropertyName("repository_selection")]
     [JsonConverter(typeof(StringEnumConverter<InstallationRepositorySelection>))]
-    public StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; } = null!;
+    public required StringEnum<InstallationRepositorySelection> RepositorySelection { get; init; }
 
     [JsonPropertyName("repositories_added")]
-    public IEnumerable<Models.InstallationRepositoriesEvent.Repository> RepositoriesAdded { get; init; } = null!;
+    public required IReadOnlyList<Models.InstallationRepositoriesEvent.Repository> RepositoriesAdded { get; init; }
 
     [JsonPropertyName("repositories_removed")]
-    public IEnumerable<Models.InstallationRepositoriesEvent.Repository> RepositoriesRemoved { get; init; } = null!;
+    public required IReadOnlyList<Models.InstallationRepositoriesEvent.Repository> RepositoriesRemoved { get; init; }
 
     [JsonPropertyName("requester")]
     public User? Requester { get; init; }

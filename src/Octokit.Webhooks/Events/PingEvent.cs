@@ -7,11 +7,11 @@ using Octokit.Webhooks.Models.PingEvent;
 public sealed record PingEvent : WebhookEvent
 {
     [JsonPropertyName("zen")]
-    public string Zen { get; init; } = null!;
+    public required string Zen { get; init; }
 
     [JsonPropertyName("hook_id")]
     public long HookId { get; init; }
 
     [JsonPropertyName("hook")]
-    public Hook Hook { get; init; } = null!;
+    public required Hook Hook { get; init; }
 }

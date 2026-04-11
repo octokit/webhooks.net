@@ -4,22 +4,22 @@ namespace Octokit.Webhooks.Models.RepositoryAdvisoryEvent;
 public sealed record RepositoryAdvisory
 {
     [JsonPropertyName("ghsa_id")]
-    public string GhsaId { get; init; } = null!;
+    public required string GhsaId { get; init; }
 
     [JsonPropertyName("cve_id")]
     public string? CveId { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("summary")]
-    public string Summary { get; init; } = null!;
+    public required string Summary { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("severity")]
     [JsonConverter(typeof(StringEnumConverter<RepositoryAdvisorySeverity>))]
@@ -32,11 +32,11 @@ public sealed record RepositoryAdvisory
     public User? Publisher { get; init; }
 
     [JsonPropertyName("identifiers")]
-    public IEnumerable<RepositoryAdvisoryIdentifier> Identifiers { get; init; } = null!;
+    public required IReadOnlyList<RepositoryAdvisoryIdentifier> Identifiers { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<RepositoryAdvisoryState>))]
-    public StringEnum<RepositoryAdvisoryState> State { get; init; } = null!;
+    public required StringEnum<RepositoryAdvisoryState> State { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -62,7 +62,7 @@ public sealed record RepositoryAdvisory
     public RepositoryAdvisorySubmission? Submission { get; init; }
 
     [JsonPropertyName("vulnerabilities")]
-    public IEnumerable<RepositoryAdvisoryVulnerability>? Vulnerabilities { get; init; }
+    public IReadOnlyList<RepositoryAdvisoryVulnerability>? Vulnerabilities { get; init; }
 
     [JsonPropertyName("cvss")]
     public RepositoryAdvisoryCvss? Cvss { get; init; }
@@ -71,22 +71,22 @@ public sealed record RepositoryAdvisory
     public RepositoryAdvisoryCvssSeverities? CvssSeverities { get; init; }
 
     [JsonPropertyName("cwes")]
-    public IEnumerable<RepositoryAdvisoryCwe>? Cwes { get; init; }
+    public IReadOnlyList<RepositoryAdvisoryCwe>? Cwes { get; init; }
 
     [JsonPropertyName("cwe_ids")]
-    public IEnumerable<string>? CweIds { get; init; }
+    public IReadOnlyList<string>? CweIds { get; init; }
 
     [JsonPropertyName("credits")]
-    public IEnumerable<RepositoryAdvisoryCredit>? Credits { get; init; }
+    public IReadOnlyList<RepositoryAdvisoryCredit>? Credits { get; init; }
 
     [JsonPropertyName("credits_detailed")]
-    public IEnumerable<RepositoryAdvisoryCreditDetailed>? CreditsDetailed { get; init; }
+    public IReadOnlyList<RepositoryAdvisoryCreditDetailed>? CreditsDetailed { get; init; }
 
     [JsonPropertyName("collaborating_users")]
-    public IEnumerable<User>? CollaboratingUsers { get; init; }
+    public IReadOnlyList<User>? CollaboratingUsers { get; init; }
 
     [JsonPropertyName("collaborating_teams")]
-    public IEnumerable<Team>? CollaboratingTeams { get; init; }
+    public IReadOnlyList<Team>? CollaboratingTeams { get; init; }
 
     [JsonPropertyName("private_fork")]
     public Repository? PrivateFork { get; init; }

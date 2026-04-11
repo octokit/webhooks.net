@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record ProjectCardEvent : WebhookEvent
 {
     [JsonPropertyName("project_card")]
-    public Models.ProjectCard ProjectCard { get; init; } = null!;
+    public required Models.ProjectCard ProjectCard { get; init; }
 }

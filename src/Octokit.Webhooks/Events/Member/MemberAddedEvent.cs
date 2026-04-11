@@ -10,5 +10,5 @@ public sealed record MemberAddedEvent : MemberEvent
     public override string Action => MemberAction.Added;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public Changes? Changes { get; init; }
 }

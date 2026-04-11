@@ -10,5 +10,5 @@ public sealed record SponsorshipEditedEvent : SponsorshipEvent
     public override string Action => SponsorshipAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

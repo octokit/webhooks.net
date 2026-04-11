@@ -9,11 +9,11 @@ public abstract record MembershipEvent : WebhookEvent
 {
     [JsonPropertyName("scope")]
     [JsonConverter(typeof(StringEnumConverter<Scope>))]
-    public StringEnum<Scope> Scope { get; init; } = null!;
+    public required StringEnum<Scope> Scope { get; init; }
 
     [JsonPropertyName("member")]
-    public User Member { get; init; } = null!;
+    public required User Member { get; init; }
 
     [JsonPropertyName("team")]
-    public Models.Team Team { get; init; } = null!;
+    public required Models.Team Team { get; init; }
 }

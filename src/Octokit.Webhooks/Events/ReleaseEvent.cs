@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record ReleaseEvent : WebhookEvent
 {
     [JsonPropertyName("release")]
-    public Models.Release Release { get; init; } = null!;
+    public required Models.Release Release { get; init; }
 }

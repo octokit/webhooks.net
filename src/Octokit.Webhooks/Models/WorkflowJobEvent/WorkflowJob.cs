@@ -13,39 +13,39 @@ public sealed record WorkflowJob
     public long RunAttempt { get; init; }
 
     [JsonPropertyName("run_url")]
-    public string RunUrl { get; init; } = null!;
+    public required string RunUrl { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("check_run_url")]
-    public string CheckRunUrl { get; init; } = null!;
+    public required string CheckRunUrl { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobStatus>))]
-    public StringEnum<WorkflowJobStatus> Status { get; init; } = null!;
+    public required StringEnum<WorkflowJobStatus> Status { get; init; }
 
     [JsonPropertyName("steps")]
-    public IEnumerable<WorkflowJobStep> Steps { get; init; } = null!;
+    public required IReadOnlyList<WorkflowJobStep> Steps { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowJobConclusion>))]
     public StringEnum<WorkflowJobConclusion>? Conclusion { get; init; }
 
     [JsonPropertyName("labels")]
-    public IEnumerable<string> Labels { get; init; } = null!;
+    public required IReadOnlyList<string> Labels { get; init; }
 
     [JsonPropertyName("runner_id")]
     public int? RunnerId { get; init; }

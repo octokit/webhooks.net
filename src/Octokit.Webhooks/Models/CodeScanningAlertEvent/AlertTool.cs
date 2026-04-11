@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 public sealed record AlertTool
 {
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("version")]
     public string? Version { get; init; }

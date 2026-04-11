@@ -10,12 +10,12 @@ public sealed record InstallationTargetRenamedEvent : InstallationTargetEvent
     public override string Action => InstallationTargetActionValue.Renamed;
 
     [JsonPropertyName("account")]
-    public User Account { get; init; } = null!;
+    public required User Account { get; init; }
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 
     [JsonPropertyName("target_type")]
     [JsonConverter(typeof(StringEnumConverter<InstallationTargetType>))]
-    public StringEnum<InstallationTargetType> TargetType { get; init; } = null!;
+    public required StringEnum<InstallationTargetType> TargetType { get; init; }
 }

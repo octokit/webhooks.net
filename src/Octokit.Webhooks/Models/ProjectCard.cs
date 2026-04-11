@@ -4,13 +4,13 @@ namespace Octokit.Webhooks.Models;
 public sealed record ProjectCard
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("project_url")]
-    public string ProjectUrl { get; init; } = null!;
+    public required string ProjectUrl { get; init; }
 
     [JsonPropertyName("column_url")]
-    public string ColumnUrl { get; init; } = null!;
+    public required string ColumnUrl { get; init; }
 
     [JsonPropertyName("column_id")]
     public long ColumnId { get; init; }
@@ -19,7 +19,7 @@ public sealed record ProjectCard
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("note")]
     public string? Note { get; init; }
@@ -28,7 +28,7 @@ public sealed record ProjectCard
     public bool Archived { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

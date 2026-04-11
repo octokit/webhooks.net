@@ -8,11 +8,11 @@ using Octokit.Webhooks.Models.CodeScanningAlertEvent;
 public abstract record CodeScanningAlertEvent : WebhookEvent
 {
     [JsonPropertyName("alert")]
-    public Alert Alert { get; init; } = null!;
+    public required Alert Alert { get; init; }
 
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("commit_oid")]
-    public string CommitOid { get; init; } = null!;
+    public required string CommitOid { get; init; }
 }

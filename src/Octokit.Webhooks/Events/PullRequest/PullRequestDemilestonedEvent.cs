@@ -10,5 +10,5 @@ public sealed record PullRequestDemilestonedEvent : PullRequestEvent
     public override string Action => PullRequestAction.Demilestoned;
 
     [JsonPropertyName("milestone")]
-    public Milestone Milestone { get; init; } = null!;
+    public required Milestone Milestone { get; init; }
 }

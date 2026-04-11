@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models.SecretScanningAlertLocationEvent;
 public sealed record SecretScanningLocationCommit
 {
     [JsonPropertyName("path")]
-    public string Path { get; init; } = null!;
+    public required string Path { get; init; }
 
     [JsonPropertyName("start_line")]
     public long StartLine { get; init; }
@@ -19,14 +19,14 @@ public sealed record SecretScanningLocationCommit
     public long EndColumn { get; init; }
 
     [JsonPropertyName("blob_sha")]
-    public string BlobSha { get; init; } = null!;
+    public required string BlobSha { get; init; }
 
     [JsonPropertyName("blob_url")]
-    public string BlobUrl { get; init; } = null!;
+    public required string BlobUrl { get; init; }
 
     [JsonPropertyName("commit_sha")]
-    public string CommitSha { get; init; } = null!;
+    public required string CommitSha { get; init; }
 
     [JsonPropertyName("commit_url")]
-    public string CommitUrl { get; init; } = null!;
+    public required string CommitUrl { get; init; }
 }

@@ -6,8 +6,8 @@ namespace Octokit.Webhooks.Events;
 public abstract record IssueCommentEvent : WebhookEvent
 {
     [JsonPropertyName("issue")]
-    public Issue Issue { get; init; } = null!;
+    public required Issue Issue { get; init; }
 
     [JsonPropertyName("comment")]
-    public Models.IssueComment Comment { get; init; } = null!;
+    public required Models.IssueComment Comment { get; init; }
 }

@@ -4,20 +4,20 @@ namespace Octokit.Webhooks.Models;
 public sealed record SimpleCommit
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; } = null!;
+    public required string Id { get; init; }
 
     [JsonPropertyName("tree_id")]
-    public string TreeId { get; init; } = null!;
+    public required string TreeId { get; init; }
 
     [JsonPropertyName("message")]
-    public string Message { get; init; } = null!;
+    public required string Message { get; init; }
 
     [JsonPropertyName("timestamp")]
-    public string Timestamp { get; init; } = null!;
+    public required string Timestamp { get; init; }
 
     [JsonPropertyName("author")]
-    public Committer Author { get; init; } = null!;
+    public required Committer Author { get; init; }
 
     [JsonPropertyName("committer")]
-    public Committer Committer { get; init; } = null!;
+    public required Committer Committer { get; init; }
 }

@@ -8,5 +8,5 @@ using Octokit.Webhooks.Models.CommitCommentEvent;
 public abstract record CommitCommentEvent : WebhookEvent
 {
     [JsonPropertyName("comment")]
-    public Comment Comment { get; init; } = null!;
+    public required Comment Comment { get; init; }
 }

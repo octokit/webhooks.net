@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.RepositoryEvent;
 public sealed record ChangesDefaultBranch
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

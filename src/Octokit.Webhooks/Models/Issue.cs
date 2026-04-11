@@ -4,40 +4,40 @@ namespace Octokit.Webhooks.Models;
 public sealed record Issue
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("repository_url")]
-    public string RepositoryUrl { get; init; } = null!;
+    public required string RepositoryUrl { get; init; }
 
     [JsonPropertyName("labels_url")]
-    public string LabelsUrl { get; init; } = null!;
+    public required string LabelsUrl { get; init; }
 
     [JsonPropertyName("comments_url")]
-    public string CommentsUrl { get; init; } = null!;
+    public required string CommentsUrl { get; init; }
 
     [JsonPropertyName("events_url")]
-    public string EventsUrl { get; init; } = null!;
+    public required string EventsUrl { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("labels")]
-    public IEnumerable<Label> Labels { get; init; } = null!;
+    public IReadOnlyList<Label>? Labels { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<IssueState>))]
@@ -50,7 +50,7 @@ public sealed record Issue
     public User? Assignee { get; init; }
 
     [JsonPropertyName("assignees")]
-    public IEnumerable<User> Assignees { get; init; } = null!;
+    public required IReadOnlyList<User> Assignees { get; init; }
 
     [JsonPropertyName("milestone")]
     public Milestone? Milestone { get; init; }
@@ -72,7 +72,7 @@ public sealed record Issue
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public StringEnum<AuthorAssociation>? AuthorAssociation { get; init; }
 
     [JsonPropertyName("active_lock_reason")]
     [JsonConverter(typeof(StringEnumConverter<ActiveLockReason>))]
@@ -82,13 +82,13 @@ public sealed record Issue
     public App? PerformedViaGithubApp { get; init; }
 
     [JsonPropertyName("pull_request")]
-    public IssuePullRequest PullRequest { get; init; } = null!;
+    public IssuePullRequest? PullRequest { get; init; }
 
     [JsonPropertyName("body")]
     public string? Body { get; init; }
 
     [JsonPropertyName("reactions")]
-    public Reactions Reactions { get; init; } = null!;
+    public Reactions? Reactions { get; init; }
 
     [JsonPropertyName("state_reason")]
     public string? StateReason { get; init; }

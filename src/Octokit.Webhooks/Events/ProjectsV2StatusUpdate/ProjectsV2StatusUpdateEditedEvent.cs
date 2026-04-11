@@ -8,5 +8,5 @@ public sealed record ProjectsV2StatusUpdateEditedEvent : ProjectsV2StatusUpdateE
     public override string Action => ProjectsV2StatusUpdateAction.Edited;
 
     [JsonPropertyName("changes")]
-    public Models.ProjectsV2StatusUpdateEvent.Changes Changes { get; init; } = null!;
+    public required Models.ProjectsV2StatusUpdateEvent.Changes Changes { get; init; }
 }

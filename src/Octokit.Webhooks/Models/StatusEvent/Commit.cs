@@ -4,22 +4,22 @@ namespace Octokit.Webhooks.Models.StatusEvent;
 public sealed record Commit
 {
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("commit")]
-    public CommitDetails CommitDetails { get; init; } = null!;
+    public required CommitDetails CommitDetails { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("comments_url")]
-    public string CommentsUrl { get; init; } = null!;
+    public required string CommentsUrl { get; init; }
 
     [JsonPropertyName("author")]
     public User? Author { get; init; }
@@ -28,5 +28,5 @@ public sealed record Commit
     public User? Committer { get; init; }
 
     [JsonPropertyName("parents")]
-    public IEnumerable<CommitParent> Parents { get; init; } = null!;
+    public required IReadOnlyList<CommitParent> Parents { get; init; }
 }

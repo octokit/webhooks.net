@@ -5,12 +5,12 @@ namespace Octokit.Webhooks.Events;
 public sealed record DeleteEvent : WebhookEvent
 {
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("ref_type")]
     [JsonConverter(typeof(StringEnumConverter<RefType>))]
-    public StringEnum<RefType> RefType { get; init; } = null!;
+    public required StringEnum<RefType> RefType { get; init; }
 
     [JsonPropertyName("pusher_type")]
-    public string PusherType { get; init; } = null!;
+    public required string PusherType { get; init; }
 }

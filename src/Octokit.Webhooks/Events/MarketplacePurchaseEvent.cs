@@ -6,10 +6,10 @@ namespace Octokit.Webhooks.Events;
 public abstract record MarketplacePurchaseEvent : WebhookEvent
 {
     [JsonPropertyName("effective_date")]
-    public string EffectiveDate { get; init; } = null!;
+    public required string EffectiveDate { get; init; }
 
     [JsonPropertyName("marketplace_purchase")]
-    public Models.MarketplacePurchase MarketplacePurchase { get; init; } = null!;
+    public required Models.MarketplacePurchase MarketplacePurchase { get; init; }
 
     [JsonPropertyName("previous_marketplace_purchase")]
     public Models.MarketplacePurchase? PreviousMarketplacePurchase { get; init; }

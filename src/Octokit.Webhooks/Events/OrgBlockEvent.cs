@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record OrgBlockEvent : WebhookEvent
 {
     [JsonPropertyName("blocked_user")]
-    public User BlockedUser { get; init; } = null!;
+    public required User BlockedUser { get; init; }
 }

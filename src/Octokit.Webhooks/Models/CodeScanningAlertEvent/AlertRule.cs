@@ -4,21 +4,21 @@ namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 public sealed record AlertRule
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; } = null!;
+    public required string Id { get; init; }
 
     [JsonPropertyName("severity")]
     [JsonConverter(typeof(StringEnumConverter<AlertRuleSeverity>))]
     public StringEnum<AlertRuleSeverity>? Severity { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("full_description")]
-    public string FullDescription { get; init; } = null!;
+    public string? FullDescription { get; init; }
 
     [JsonPropertyName("tags")]
-    public IEnumerable<string> Tags { get; init; } = null!;
+    public IReadOnlyList<string>? Tags { get; init; }
 
     [JsonPropertyName("help")]
-    public string Help { get; init; } = null!;
+    public string? Help { get; init; }
 }

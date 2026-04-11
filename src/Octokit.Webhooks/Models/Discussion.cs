@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models;
 public sealed record Discussion
 {
     [JsonPropertyName("repository_url")]
-    public string RepositoryUrl { get; init; } = null!;
+    public required string RepositoryUrl { get; init; }
 
     [JsonPropertyName("category")]
-    public DiscussionCategory Category { get; init; } = null!;
+    public required DiscussionCategory Category { get; init; }
 
     [JsonPropertyName("answer_html_url")]
     public string? AnswerHtmlUrl { get; init; }
@@ -20,26 +20,26 @@ public sealed record Discussion
     public User? AnswerChosenBy { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }
 
     [JsonPropertyName("title")]
-    public string Title { get; init; } = null!;
+    public required string Title { get; init; }
 
     [JsonPropertyName("user")]
-    public User User { get; init; } = null!;
+    public required User User { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<DiscussionState>))]
-    public StringEnum<DiscussionState> State { get; init; } = null!;
+    public required StringEnum<DiscussionState> State { get; init; }
 
     [JsonPropertyName("locked")]
     public bool Locked { get; init; }
@@ -57,13 +57,13 @@ public sealed record Discussion
 
     [JsonPropertyName("author_association")]
     [JsonConverter(typeof(StringEnumConverter<AuthorAssociation>))]
-    public StringEnum<AuthorAssociation> AuthorAssociation { get; init; } = null!;
+    public required StringEnum<AuthorAssociation> AuthorAssociation { get; init; }
 
     [JsonPropertyName("active_lock_reason")]
     public string? ActiveLockReason { get; init; }
 
     [JsonPropertyName("body")]
-    public string Body { get; init; } = null!;
+    public required string Body { get; init; }
 
     [JsonPropertyName("reactions")]
     public Reactions? Reactions { get; init; }

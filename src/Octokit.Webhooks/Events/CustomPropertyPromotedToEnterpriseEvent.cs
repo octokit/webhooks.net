@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record CustomPropertyPromotedToEnterpriseEvent : WebhookEvent
 {
     [JsonPropertyName("definition")]
-    public Models.CustomPropertyEvent.CustomProperty Definition { get; init; } = null!;
+    public required Models.CustomPropertyEvent.CustomProperty Definition { get; init; }
 }

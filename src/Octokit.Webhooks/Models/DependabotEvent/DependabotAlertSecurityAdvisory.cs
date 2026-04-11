@@ -4,35 +4,35 @@ namespace Octokit.Webhooks.Models.DependabotEvent;
 public sealed record DependabotAlertSecurityAdvisory
 {
     [JsonPropertyName("ghsa_id")]
-    public string GhsaId { get; init; } = null!;
+    public required string GhsaId { get; init; }
 
     [JsonPropertyName("cve_id")]
     public string? CveId { get; init; }
 
     [JsonPropertyName("summary")]
-    public string Summary { get; init; } = null!;
+    public required string Summary { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("vulnerabilities")]
-    public IEnumerable<DependabotAlertVulnerability> Vulnerabilities { get; init; } = null!;
+    public required IReadOnlyList<DependabotAlertVulnerability> Vulnerabilities { get; init; }
 
     [JsonPropertyName("severity")]
     [JsonConverter(typeof(StringEnumConverter<DependabotAlertSeverity>))]
-    public StringEnum<DependabotAlertSeverity> Severity { get; init; } = null!;
+    public required StringEnum<DependabotAlertSeverity> Severity { get; init; }
 
     [JsonPropertyName("cvss")]
-    public DependabotAlertCvss Cvss { get; init; } = null!;
+    public required DependabotAlertCvss Cvss { get; init; }
 
     [JsonPropertyName("cwes")]
-    public IEnumerable<DependabotAlertCwe> Cwes { get; init; } = null!;
+    public required IReadOnlyList<DependabotAlertCwe> Cwes { get; init; }
 
     [JsonPropertyName("identifiers")]
-    public IEnumerable<DependabotAlertIdentifier> Identifiers { get; init; } = null!;
+    public required IReadOnlyList<DependabotAlertIdentifier> Identifiers { get; init; }
 
     [JsonPropertyName("references")]
-    public IEnumerable<DependabotAlertReference> References { get; init; } = null!;
+    public required IReadOnlyList<DependabotAlertReference> References { get; init; }
 
     [JsonPropertyName("published_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

@@ -4,31 +4,31 @@ namespace Octokit.Webhooks.Models.DeploymentEvent;
 public sealed record Deployment
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("ref")]
-    public string Ref { get; init; } = null!;
+    public required string Ref { get; init; }
 
     [JsonPropertyName("task")]
-    public string Task { get; init; } = null!;
+    public required string Task { get; init; }
 
     [JsonPropertyName("payload")]
-    public dynamic? Payload { get; init; }
+    public JsonElement? Payload { get; init; }
 
     [JsonPropertyName("original_environment")]
-    public string OriginalEnvironment { get; init; } = null!;
+    public required string OriginalEnvironment { get; init; }
 
     [JsonPropertyName("environment")]
-    public string Environment { get; init; } = null!;
+    public required string Environment { get; init; }
 
     [JsonPropertyName("transient_environment")]
     public bool? TransientEnvironment { get; init; }
@@ -40,7 +40,7 @@ public sealed record Deployment
     public string? Description { get; init; }
 
     [JsonPropertyName("creator")]
-    public User Creator { get; init; } = null!;
+    public required User Creator { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -51,10 +51,10 @@ public sealed record Deployment
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("statuses_url")]
-    public string StatusesUrl { get; init; } = null!;
+    public required string StatusesUrl { get; init; }
 
     [JsonPropertyName("repository_url")]
-    public string RepositoryUrl { get; init; } = null!;
+    public required string RepositoryUrl { get; init; }
 
     [JsonPropertyName("performed_via_github_app")]
     public App? PerformedViaGithubApp { get; init; }

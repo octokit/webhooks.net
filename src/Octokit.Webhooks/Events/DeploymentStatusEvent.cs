@@ -6,10 +6,10 @@ namespace Octokit.Webhooks.Events;
 public abstract record DeploymentStatusEvent : WebhookEvent
 {
     [JsonPropertyName("deployment_status")]
-    public Models.DeploymentStatusEvent.DeploymentStatus DeploymentStatus { get; init; } = null!;
+    public required Models.DeploymentStatusEvent.DeploymentStatus DeploymentStatus { get; init; }
 
     [JsonPropertyName("deployment")]
-    public Models.DeploymentStatusEvent.Deployment Deployment { get; init; } = null!;
+    public required Models.DeploymentStatusEvent.Deployment Deployment { get; init; }
 
     [JsonPropertyName("check_run")]
     public Models.DeploymentEvent.DeploymentCheckRun? CheckRun { get; init; }

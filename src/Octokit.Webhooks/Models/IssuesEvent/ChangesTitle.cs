@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.IssuesEvent;
 public sealed record ChangesTitle
 {
     [JsonPropertyName("from")]
-    public string From { get; init; } = null!;
+    public required string From { get; init; }
 }

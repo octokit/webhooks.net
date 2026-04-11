@@ -8,5 +8,5 @@ public sealed record RepositoryImportEvent : WebhookEvent
 {
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<Status>))]
-    public StringEnum<Status> Status { get; init; } = null!;
+    public required StringEnum<Status> Status { get; init; }
 }

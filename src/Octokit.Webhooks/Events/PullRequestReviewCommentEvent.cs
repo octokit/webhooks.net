@@ -6,8 +6,8 @@ namespace Octokit.Webhooks.Events;
 public abstract record PullRequestReviewCommentEvent : WebhookEvent
 {
     [JsonPropertyName("comment")]
-    public Models.PullRequestReviewComment Comment { get; init; } = null!;
+    public required Models.PullRequestReviewComment Comment { get; init; }
 
     [JsonPropertyName("pull_request")]
-    public SimplePullRequest PullRequest { get; init; } = null!;
+    public required SimplePullRequest PullRequest { get; init; }
 }

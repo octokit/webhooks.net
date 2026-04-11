@@ -6,7 +6,7 @@ namespace Octokit.Webhooks.Events;
 public abstract record WorkflowJobEvent : WebhookEvent
 {
     [JsonPropertyName("workflow_job")]
-    public Models.WorkflowJobEvent.WorkflowJob WorkflowJob { get; init; } = null!;
+    public required Models.WorkflowJobEvent.WorkflowJob WorkflowJob { get; init; }
 
     [JsonPropertyName("deployment")]
     public Models.DeploymentEvent.Deployment? Deployment { get; init; }

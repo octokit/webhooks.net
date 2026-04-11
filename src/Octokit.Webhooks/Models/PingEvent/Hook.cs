@@ -5,13 +5,13 @@ public sealed record Hook
 {
     [JsonPropertyName("type")]
     [JsonConverter(typeof(StringEnumConverter<HookType>))]
-    public StringEnum<HookType> Type { get; init; } = null!;
+    public required StringEnum<HookType> Type { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("active")]
     public bool Active { get; init; }
@@ -21,10 +21,10 @@ public sealed record Hook
 
     [JsonPropertyName("events")]
     [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
-    public IEnumerable<StringEnum<AppEvent>> Events { get; init; } = null!;
+    public required IEnumerable<StringEnum<AppEvent>> Events { get; init; }
 
     [JsonPropertyName("config")]
-    public HookConfig Config { get; init; } = null!;
+    public required HookConfig Config { get; init; }
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -35,17 +35,17 @@ public sealed record Hook
     public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("test_url")]
     public string? TestUrl { get; init; }
 
     [JsonPropertyName("ping_url")]
-    public string PingUrl { get; init; } = null!;
+    public required string PingUrl { get; init; }
 
     [JsonPropertyName("deliveries_url")]
-    public string DeliveriesUrl { get; init; } = null!;
+    public required string DeliveriesUrl { get; init; }
 
     [JsonPropertyName("last_response")]
-    public HookLastResponse LastResponse { get; init; } = null!;
+    public HookLastResponse? LastResponse { get; init; }
 }

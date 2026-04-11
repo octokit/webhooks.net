@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models;
 public sealed record ContainerMetadata
 {
     [JsonPropertyName("labels")]
-    public IDictionary<string, dynamic>? Labels { get; init; }
+    public IDictionary<string, JsonElement>? Labels { get; init; }
 
     [JsonPropertyName("manifest")]
-    public IDictionary<string, dynamic>? Manifest { get; init; }
+    public IDictionary<string, JsonElement>? Manifest { get; init; }
 
     [JsonPropertyName("tag")]
     public ContainerMetadataTag? Tag { get; init; }

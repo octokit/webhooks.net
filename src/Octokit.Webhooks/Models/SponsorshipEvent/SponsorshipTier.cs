@@ -4,14 +4,14 @@ namespace Octokit.Webhooks.Models.SponsorshipEvent;
 public sealed record SponsorshipTier
 {
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("monthly_price_in_cents")]
     public long MonthlyPriceInCents { get; init; }
@@ -20,7 +20,7 @@ public sealed record SponsorshipTier
     public long MonthlyPriceInDollars { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("is_one_time")]
     public bool IsOneTime { get; init; }

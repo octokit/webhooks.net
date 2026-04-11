@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record MemberEvent : WebhookEvent
 {
     [JsonPropertyName("member")]
-    public User Member { get; init; } = null!;
+    public required User Member { get; init; }
 }

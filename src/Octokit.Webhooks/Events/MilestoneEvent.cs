@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record MilestoneEvent : WebhookEvent
 {
     [JsonPropertyName("milestone")]
-    public Models.Milestone Milestone { get; init; } = null!;
+    public required Models.Milestone Milestone { get; init; }
 }

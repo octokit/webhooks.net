@@ -5,5 +5,5 @@ namespace Octokit.Webhooks.Events;
 public sealed record SecurityAndAnalysisEvent : WebhookEvent
 {
     [JsonPropertyName("changes")]
-    public Models.SecurityAndAnalysisEvent.Changes Changes { get; init; } = null!;
+    public required Models.SecurityAndAnalysisEvent.Changes Changes { get; init; }
 }

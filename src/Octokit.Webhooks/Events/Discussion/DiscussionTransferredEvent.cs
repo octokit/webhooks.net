@@ -10,5 +10,5 @@ public sealed record DiscussionTransferredEvent : DiscussionEvent
     public override string Action => DiscussionAction.Transferred;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

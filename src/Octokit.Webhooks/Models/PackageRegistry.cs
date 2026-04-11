@@ -4,17 +4,17 @@ namespace Octokit.Webhooks.Models;
 public sealed record PackageRegistry
 {
     [JsonPropertyName("about_url")]
-    public string AboutUrl { get; init; } = null!;
+    public required string AboutUrl { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public required string Type { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("vendor")]
-    public string Vendor { get; init; } = null!;
+    public required string Vendor { get; init; }
 }

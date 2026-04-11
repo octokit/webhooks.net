@@ -4,23 +4,23 @@ namespace Octokit.Webhooks.Models.MetaEvent;
 public sealed record Hook
 {
     [JsonPropertyName("type")]
-    public string Type { get; init; } = null!;
+    public required string Type { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("active")]
     public bool Active { get; init; }
 
     [JsonPropertyName("events")]
     [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
-    public IEnumerable<StringEnum<AppEvent>> Events { get; init; } = null!;
+    public required IEnumerable<StringEnum<AppEvent>> Events { get; init; }
 
     [JsonPropertyName("config")]
-    public HookConfig Config { get; init; } = null!;
+    public required HookConfig Config { get; init; }
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

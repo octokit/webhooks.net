@@ -4,10 +4,10 @@ namespace Octokit.Webhooks.Models.DependabotEvent;
 public sealed record DependabotAlertDependency
 {
     [JsonPropertyName("package")]
-    public DependabotAlertPackage Package { get; init; } = null!;
+    public required DependabotAlertPackage Package { get; init; }
 
     [JsonPropertyName("manifest_path")]
-    public string ManifestPath { get; init; } = null!;
+    public required string ManifestPath { get; init; }
 
     [JsonPropertyName("scope")]
     [JsonConverter(typeof(StringEnumConverter<DependabotAlertDependencyScope>))]

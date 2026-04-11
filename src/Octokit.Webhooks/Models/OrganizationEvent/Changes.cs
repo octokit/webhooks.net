@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.OrganizationEvent;
 public sealed record Changes
 {
     [JsonPropertyName("login")]
-    public ChangesLogin Login { get; init; } = null!;
+    public required ChangesLogin Login { get; init; }
 }

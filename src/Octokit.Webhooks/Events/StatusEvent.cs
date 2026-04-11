@@ -10,10 +10,10 @@ public sealed record StatusEvent : WebhookEvent
     public long Id { get; init; }
 
     [JsonPropertyName("sha")]
-    public string Sha { get; init; } = null!;
+    public required string Sha { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("avatar_url")]
     public string? AvatarUrl { get; init; }
@@ -22,20 +22,20 @@ public sealed record StatusEvent : WebhookEvent
     public string? TargetUrl { get; init; }
 
     [JsonPropertyName("context")]
-    public string Context { get; init; } = null!;
+    public required string Context { get; init; }
 
     [JsonPropertyName("description")]
     public string? Description { get; init; }
 
     [JsonPropertyName("state")]
     [JsonConverter(typeof(StringEnumConverter<StatusState>))]
-    public StringEnum<StatusState> State { get; init; } = null!;
+    public required StringEnum<StatusState> State { get; init; }
 
     [JsonPropertyName("commit")]
-    public Commit Commit { get; init; } = null!;
+    public required Commit Commit { get; init; }
 
-    [JsonPropertyName("branch")]
-    public IEnumerable<Branch> Branch { get; init; } = null!;
+    [JsonPropertyName("branches")]
+    public IReadOnlyList<Branch>? Branches { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]

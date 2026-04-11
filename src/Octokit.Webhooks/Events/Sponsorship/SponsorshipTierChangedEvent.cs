@@ -10,5 +10,5 @@ public sealed record SponsorshipTierChangedEvent : SponsorshipEvent
     public override string Action => SponsorshipAction.TierChanged;
 
     [JsonPropertyName("changes")]
-    public Changes Changes { get; init; } = null!;
+    public required Changes Changes { get; init; }
 }

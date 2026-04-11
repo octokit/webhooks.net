@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.DependabotEvent;
 public class DependabotAlertFirstPatchedVersion
 {
     [JsonPropertyName("identifier")]
-    public string Identifier { get; init; } = null!;
+    public required string Identifier { get; init; }
 }

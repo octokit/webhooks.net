@@ -4,5 +4,5 @@ namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent;
 public sealed record SecurityAdvisoryReference
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 }

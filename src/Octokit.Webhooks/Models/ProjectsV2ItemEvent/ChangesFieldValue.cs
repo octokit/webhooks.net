@@ -5,20 +5,20 @@ public sealed record ChangesFieldValue
 {
     [JsonPropertyName("field_type")]
     [JsonConverter(typeof(StringEnumConverter<FieldType>))]
-    public StringEnum<FieldType> FieldType { get; init; } = null!;
+    public required StringEnum<FieldType> FieldType { get; init; }
 
     [JsonPropertyName("field_node_id")]
-    public string FieldNodeId { get; init; } = null!;
+    public required string FieldNodeId { get; init; }
 
     [JsonPropertyName("field_name")]
-    public string FieldName { get; init; } = null!;
+    public required string FieldName { get; init; }
 
     [JsonPropertyName("project_number")]
     public long ProjectNumber { get; init; }
 
     [JsonPropertyName("from")]
-    public ChangesFieldValueChangeBase From { get; init; } = null!;
+    public required ChangesFieldValueChangeBase From { get; init; }
 
     [JsonPropertyName("to")]
-    public ChangesFieldValueChangeBase To { get; init; } = null!;
+    public required ChangesFieldValueChangeBase To { get; init; }
 }

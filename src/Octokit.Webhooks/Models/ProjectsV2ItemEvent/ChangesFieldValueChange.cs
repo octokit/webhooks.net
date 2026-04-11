@@ -4,14 +4,14 @@ namespace Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 public sealed record ChangesFieldValueChange : ChangesFieldValueChangeBase
 {
     [JsonPropertyName("id")]
-    public string Id { get; init; } = null!;
+    public required string Id { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("color")]
-    public string Color { get; init; } = null!;
+    public required string Color { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 }

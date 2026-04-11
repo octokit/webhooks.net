@@ -8,5 +8,5 @@ public sealed record MergeGroupDestroyedEvent : MergeGroupEvent
     public override string Action => MergeGroupAction.Destroyed;
 
     [JsonPropertyName("reason")]
-    public string Reason { get; init; } = null!;
+    public required string Reason { get; init; }
 }

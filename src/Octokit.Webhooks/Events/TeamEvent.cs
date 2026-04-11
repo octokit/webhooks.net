@@ -6,5 +6,5 @@ namespace Octokit.Webhooks.Events;
 public abstract record TeamEvent : WebhookEvent
 {
     [JsonPropertyName("team")]
-    public Models.Team Team { get; init; } = null!;
+    public required Models.Team Team { get; init; }
 }

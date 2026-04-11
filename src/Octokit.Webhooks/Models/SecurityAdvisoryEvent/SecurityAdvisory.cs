@@ -4,31 +4,31 @@ namespace Octokit.Webhooks.Models.SecurityAdvisoryEvent;
 public sealed record SecurityAdvisory
 {
     [JsonPropertyName("cvss")]
-    public SecurityAdvisoryCvss Cvss { get; init; } = null!;
+    public required SecurityAdvisoryCvss Cvss { get; init; }
 
     [JsonPropertyName("cwes")]
-    public IEnumerable<SecurityAdvisoryCwe> Cwes { get; init; } = null!;
+    public required IReadOnlyList<SecurityAdvisoryCwe> Cwes { get; init; }
 
     [JsonPropertyName("ghsa_id")]
-    public string GhsaId { get; init; } = null!;
+    public required string GhsaId { get; init; }
 
     [JsonPropertyName("cve_id")]
     public string? CveId { get; init; }
 
     [JsonPropertyName("summary")]
-    public string Summary { get; init; } = null!;
+    public required string Summary { get; init; }
 
     [JsonPropertyName("description")]
-    public string Description { get; init; } = null!;
+    public required string Description { get; init; }
 
     [JsonPropertyName("severity")]
-    public string Severity { get; init; } = null!;
+    public required string Severity { get; init; }
 
     [JsonPropertyName("identifiers")]
-    public IEnumerable<SecurityAdvisoryIdentifier> Identifiers { get; init; } = null!;
+    public required IReadOnlyList<SecurityAdvisoryIdentifier> Identifiers { get; init; }
 
     [JsonPropertyName("references")]
-    public IEnumerable<SecurityAdvisoryReference> References { get; init; } = null!;
+    public required IReadOnlyList<SecurityAdvisoryReference> References { get; init; }
 
     [JsonPropertyName("published_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
@@ -43,5 +43,5 @@ public sealed record SecurityAdvisory
     public DateTimeOffset? WithdrawnAt { get; init; }
 
     [JsonPropertyName("vulnerabilities")]
-    public IEnumerable<SecurityAdvisoryVulnerability> Vulnerabilities { get; init; } = null!;
+    public required IReadOnlyList<SecurityAdvisoryVulnerability> Vulnerabilities { get; init; }
 }

@@ -4,19 +4,19 @@ namespace Octokit.Webhooks.Models;
 public sealed record WorkflowRun
 {
     [JsonPropertyName("artifacts_url")]
-    public string ArtifactsUrl { get; init; } = null!;
+    public required string ArtifactsUrl { get; init; }
 
     [JsonPropertyName("cancel_url")]
-    public string CancelUrl { get; init; } = null!;
+    public required string CancelUrl { get; init; }
 
     [JsonPropertyName("check_suite_url")]
-    public string CheckSuiteUrl { get; init; } = null!;
+    public required string CheckSuiteUrl { get; init; }
 
     [JsonPropertyName("check_suite_id")]
     public long CheckSuiteId { get; init; }
 
     [JsonPropertyName("check_suite_node_id")]
-    public string CheckSuiteNodeId { get; init; } = null!;
+    public required string CheckSuiteNodeId { get; init; }
 
     [JsonPropertyName("conclusion")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowRunConclusion>))]
@@ -27,72 +27,72 @@ public sealed record WorkflowRun
     public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("display_title")]
-    public string DisplayTitle { get; init; } = null!;
+    public required string DisplayTitle { get; init; }
 
     [JsonPropertyName("event")]
-    public string Event { get; init; } = null!;
+    public required string Event { get; init; }
 
     [JsonPropertyName("head_branch")]
-    public string HeadBranch { get; init; } = null!;
+    public required string HeadBranch { get; init; }
 
     [JsonPropertyName("head_commit")]
-    public SimpleCommit HeadCommit { get; init; } = null!;
+    public required SimpleCommit HeadCommit { get; init; }
 
     [JsonPropertyName("head_repository")]
-    public RepositoryLite HeadRepository { get; init; } = null!;
+    public required RepositoryLite HeadRepository { get; init; }
 
     [JsonPropertyName("head_sha")]
-    public string HeadSha { get; init; } = null!;
+    public required string HeadSha { get; init; }
 
     [JsonPropertyName("html_url")]
-    public string HtmlUrl { get; init; } = null!;
+    public required string HtmlUrl { get; init; }
 
     [JsonPropertyName("id")]
     public long Id { get; init; }
 
     [JsonPropertyName("jobs_url")]
-    public string JobsUrl { get; init; } = null!;
+    public required string JobsUrl { get; init; }
 
     [JsonPropertyName("logs_url")]
-    public string LogsUrl { get; init; } = null!;
+    public required string LogsUrl { get; init; }
 
     [JsonPropertyName("node_id")]
-    public string NodeId { get; init; } = null!;
+    public required string NodeId { get; init; }
 
     [JsonPropertyName("name")]
-    public string Name { get; init; } = null!;
+    public required string Name { get; init; }
 
     [JsonPropertyName("path")]
-    public string Path { get; init; } = null!;
+    public required string Path { get; init; }
 
     [JsonPropertyName("pull_requests")]
-    public IEnumerable<WorkflowPullRequest> PullRequests { get; init; } = null!;
+    public required IReadOnlyList<WorkflowPullRequest> PullRequests { get; init; }
 
     [JsonPropertyName("repository")]
-    public RepositoryLite Repository { get; init; } = null!;
+    public required RepositoryLite Repository { get; init; }
 
     [JsonPropertyName("rerun_url")]
-    public string RerunUrl { get; init; } = null!;
+    public required string RerunUrl { get; init; }
 
     [JsonPropertyName("run_number")]
     public long RunNumber { get; init; }
 
     [JsonPropertyName("status")]
     [JsonConverter(typeof(StringEnumConverter<WorkflowRunStatus>))]
-    public StringEnum<WorkflowRunStatus> Status { get; init; } = null!;
+    public required StringEnum<WorkflowRunStatus> Status { get; init; }
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(DateTimeOffsetConverter))]
     public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("url")]
-    public string Url { get; init; } = null!;
+    public required string Url { get; init; }
 
     [JsonPropertyName("workflow_id")]
     public long WorkflowId { get; init; }
 
     [JsonPropertyName("workflow_url")]
-    public string WorkflowUrl { get; init; } = null!;
+    public required string WorkflowUrl { get; init; }
 
     [JsonPropertyName("run_attempt")]
     public long RunAttempt { get; init; }
@@ -105,11 +105,11 @@ public sealed record WorkflowRun
     public string? PreviousAttemptUrl { get; init; }
 
     [JsonPropertyName("actor")]
-    public User Actor { get; init; } = null!;
+    public required User Actor { get; init; }
 
     [JsonPropertyName("triggering_actor")]
-    public User TriggeringActor { get; init; } = null!;
+    public required User TriggeringActor { get; init; }
 
     [JsonPropertyName("referenced_workflows")]
-    public IEnumerable<ReferencedWorkflow> ReferencedWorkflows { get; init; } = null!;
+    public IReadOnlyList<ReferencedWorkflow>? ReferencedWorkflows { get; init; }
 }
