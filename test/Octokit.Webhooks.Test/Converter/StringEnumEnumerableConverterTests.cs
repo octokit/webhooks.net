@@ -34,4 +34,11 @@ public class StringEnumEnumerableConverterTests
         var result = JsonSerializer.Deserialize<IEnumerable<StringEnum<HookType>>>(input, this.options);
         result!.Select(r => r.StringValue).Should().BeEquivalentTo(expected.Select(e => e.StringValue));
     }
+
+    [Fact]
+    public void DeserializeThrowsForNullElement()
+    {
+        var act = () => JsonSerializer.Deserialize<IEnumerable<StringEnum<HookType>>>("[null]", this.options);
+        act.Should().Throw<JsonException>();
+    }
 }

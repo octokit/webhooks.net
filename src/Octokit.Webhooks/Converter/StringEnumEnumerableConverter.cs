@@ -33,7 +33,9 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                returnValue.Add(JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options));
+                var item = JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)
+                    ?? throw new JsonException("Unexpected null value in array.");
+                returnValue.Add(item);
             }
 
             _ = reader.Read();
