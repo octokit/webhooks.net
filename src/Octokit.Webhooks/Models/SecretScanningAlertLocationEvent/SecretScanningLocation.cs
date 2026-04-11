@@ -9,5 +9,5 @@ public sealed record SecretScanningLocation
 
     // TODO: type union with SecretScanningLocationCommit, SecretScanningLocationIssueBody, etc.
     [JsonPropertyName("details")]
-    public required dynamic Details { get; init; }
+    public required JsonElement Details { get; init; }
 }

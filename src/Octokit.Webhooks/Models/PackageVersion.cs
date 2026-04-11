@@ -19,7 +19,7 @@ public sealed record PackageVersion
     public required string Description { get; init; }
 
     [JsonPropertyName("body")]
-    public dynamic? Body { get; init; }
+    public JsonElement? Body { get; init; }
 
     [JsonPropertyName("body_html")]
     public string? BodyHtml { get; init; }
@@ -57,22 +57,22 @@ public sealed record PackageVersion
     public DateTimeOffset? UpdatedAt { get; init; }
 
     [JsonPropertyName("metadata")]
-    public required IReadOnlyList<dynamic> Metadata { get; init; }
+    public required IReadOnlyList<JsonElement> Metadata { get; init; }
 
     [JsonPropertyName("container_metadata")]
     public ContainerMetadata? ContainerMetadata { get; init; }
 
     [JsonPropertyName("docker_metadata")]
-    public IReadOnlyList<dynamic>? DockerMetadata { get; init; }
+    public IReadOnlyList<JsonElement>? DockerMetadata { get; init; }
 
     [JsonPropertyName("npm_metadata")]
-    public IDictionary<string, dynamic>? NpmMetadata { get; init; }
+    public IDictionary<string, JsonElement>? NpmMetadata { get; init; }
 
     [JsonPropertyName("nuget_metadata")]
     public IReadOnlyList<PackageVersionNugetMetadata>? NugetMetadata { get; init; }
 
     [JsonPropertyName("rubygems_metadata")]
-    public IDictionary<string, dynamic>? RubygemsMetadata { get; init; }
+    public IDictionary<string, JsonElement>? RubygemsMetadata { get; init; }
 
     [JsonPropertyName("package_files")]
     public required IReadOnlyList<PackageVersionPackageFile> PackageFiles { get; init; }

@@ -22,7 +22,7 @@ public sealed record Deployment
     public required string Task { get; init; }
 
     [JsonPropertyName("payload")]
-    public dynamic? Payload { get; init; }
+    public JsonElement? Payload { get; init; }
 
     [JsonPropertyName("original_environment")]
     public required string OriginalEnvironment { get; init; }

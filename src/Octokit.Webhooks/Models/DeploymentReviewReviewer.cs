@@ -10,5 +10,5 @@ public sealed record DeploymentReviewReviewer
     // TODO: Correctly deserialize this property.
     // See https://github.com/octokit/webhooks.net/issues/278
     [JsonPropertyName("reviewer")]
-    public required dynamic Reviewer { get; init; }
+    public required JsonElement Reviewer { get; init; }
 }

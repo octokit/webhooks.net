@@ -10,5 +10,5 @@ public sealed record PackageVersionNugetMetadata
     public string? Id { get; init; }
 
     [JsonPropertyName("value")]
-    public dynamic? Value { get; init; }
+    public JsonElement? Value { get; init; }
 }

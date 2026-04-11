@@ -5,7 +5,7 @@ namespace Octokit.Webhooks.Events;
 public sealed record WorkflowDispatchEvent : WebhookEvent
 {
     [JsonPropertyName("inputs")]
-    public dynamic? Inputs { get; init; }
+    public JsonElement? Inputs { get; init; }
 
     [JsonPropertyName("ref")]
     public required string Ref { get; init; }
