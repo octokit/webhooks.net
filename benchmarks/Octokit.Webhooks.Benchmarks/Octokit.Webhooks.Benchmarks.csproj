@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="BenchmarkDotNet" />
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\..\src\Octokit.Webhooks\Octokit.Webhooks.csproj" />
+    <ProjectReference Include="..\..\test\Octokit.Webhooks.TestUtils\Octokit.Webhooks.TestUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\test\Octokit.Webhooks.Test\Resources\**">
+      <Link>Resources\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

@@ -25,5 +25,8 @@ artifacts/
 *.coverage
 *.coveragexml
 
+# Benchmark results
+BenchmarkDotNet.Artifacts/
+
 # C# Dev Kit language server cache
 *.lscache
