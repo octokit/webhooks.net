@@ -19,7 +19,8 @@ public sealed record PersonalAccessTokenRequest
     public AppPermissions PermissionsResult { get; init; } = null!;
 
     [JsonPropertyName("repository_selection")]
-    public string RepositorySelection { get; init; } = null!;
+    [JsonConverter(typeof(StringEnumConverter<PersonalAccessTokenRequestRepositorySelection>))]
+    public StringEnum<PersonalAccessTokenRequestRepositorySelection> RepositorySelection { get; init; } = null!;
 
     [JsonPropertyName("repository_count")]
     public long? RepositoryCount { get; init; }

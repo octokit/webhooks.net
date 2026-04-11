@@ -1,4 +1,4 @@
-namespace Octokit.Webhooks.Models.ProjectsV2StatusUpdateEvent;
+﻿namespace Octokit.Webhooks.Models;
 
 [PublicAPI]
 public sealed record ChangesField<T>
