@@ -16,10 +16,10 @@ public sealed record ProjectsV2StatusUpdate
     public User Creator { get; init; } = null!;
 
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; init; } = null!;
+    public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; init; } = null!;
+    public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("status")]
     public string? Status { get; init; }

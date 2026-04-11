@@ -29,14 +29,14 @@ public sealed record PersonalAccessTokenRequest
     public IEnumerable<RepositoryLite>? Repositories { get; init; }
 
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; init; } = null!;
+    public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("token_expired")]
     public bool TokenExpired { get; init; }
 
     [JsonPropertyName("token_expires_at")]
-    public string? TokenExpiresAt { get; init; }
+    public DateTimeOffset? TokenExpiresAt { get; init; }
 
     [JsonPropertyName("token_last_used_at")]
-    public string? TokenLastUsedAt { get; init; }
+    public DateTimeOffset? TokenLastUsedAt { get; init; }
 }

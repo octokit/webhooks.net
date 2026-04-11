@@ -12,10 +12,10 @@ public abstract record SecretScanningScanEvent : WebhookEvent
     public string Source { get; init; } = null!;
 
     [JsonPropertyName("started_at")]
-    public string StartedAt { get; init; } = null!;
+    public DateTimeOffset StartedAt { get; init; }
 
     [JsonPropertyName("completed_at")]
-    public string CompletedAt { get; init; } = null!;
+    public DateTimeOffset CompletedAt { get; init; }
 
     [JsonPropertyName("secret_types")]
     public IEnumerable<string>? SecretTypes { get; init; }

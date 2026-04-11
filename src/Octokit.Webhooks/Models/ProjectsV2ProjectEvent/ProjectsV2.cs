@@ -25,13 +25,13 @@ public sealed record ProjectsV2
     public bool Public { get; init; }
 
     [JsonPropertyName("closed_at")]
-    public string? ClosedAt { get; init; }
+    public DateTimeOffset? ClosedAt { get; init; }
 
     [JsonPropertyName("created_at")]
-    public string CreatedAt { get; init; } = null!;
+    public DateTimeOffset CreatedAt { get; init; }
 
     [JsonPropertyName("updated_at")]
-    public string UpdatedAt { get; init; } = null!;
+    public DateTimeOffset UpdatedAt { get; init; }
 
     [JsonPropertyName("number")]
     public long Number { get; init; }
@@ -40,7 +40,7 @@ public sealed record ProjectsV2
     public string? ShortDescription { get; init; }
 
     [JsonPropertyName("deleted_at")]
-    public string? DeletedAt { get; init; }
+    public DateTimeOffset? DeletedAt { get; init; }
 
     [JsonPropertyName("deleted_by")]
     public User? DeletedBy { get; init; }
