@@ -13,7 +13,7 @@ public sealed record CommitDetails
     public string? Message { get; init; }
 
     [JsonPropertyName("tree")]
-    public CommitDetails? Tree { get; init; }
+    public CommitDetailsTree? Tree { get; init; }
 
     [JsonPropertyName("url")]
     public required string Url { get; init; }
