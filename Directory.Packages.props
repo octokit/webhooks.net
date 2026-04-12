@@ -17,13 +17,11 @@
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.3.0"/>
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.0.7"/>
     <PackageVersion Include="Microsoft.Extensions.Primitives" Version="10.0.5"/>
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.4.0"/>
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.201"/>
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15"/>
     <PackageVersion Include="MinVer" Version="7.0.0"/>
     <PackageVersion Include="Moq" Version="4.20.72"/>
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556"/>
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
     <PackageVersion Include="xunit.v3" Version="3.2.2"/>
   </ItemGroup>
 
