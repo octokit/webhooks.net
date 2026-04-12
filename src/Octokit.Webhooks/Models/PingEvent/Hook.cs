@@ -20,8 +20,8 @@ public sealed record Hook
     public int? AppId { get; init; }
 
     [JsonPropertyName("events")]
-    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
-    public required IEnumerable<StringEnum<AppEvent>> Events { get; init; }
+    [JsonConverter(typeof(StringEnumReadOnlyListConverter<AppEvent>))]
+    public required IReadOnlyList<StringEnum<AppEvent>> Events { get; init; }
 
     [JsonPropertyName("config")]
     public required HookConfig Config { get; init; }

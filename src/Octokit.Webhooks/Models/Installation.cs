@@ -39,8 +39,8 @@ public sealed record Installation
     public AppPermissions? Permissions { get; init; }
 
     [JsonPropertyName("events")]
-    [JsonConverter(typeof(StringEnumEnumerableConverter<AppEvent>))]
-    public IEnumerable<StringEnum<AppEvent>>? Events { get; init; }
+    [JsonConverter(typeof(StringEnumReadOnlyListConverter<AppEvent>))]
+    public IReadOnlyList<StringEnum<AppEvent>>? Events { get; init; }
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(NullableDateTimeOffsetConverter))]
