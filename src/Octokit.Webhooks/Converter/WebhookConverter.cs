@@ -43,8 +43,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var jsonObject = jsonDocument.RootElement.GetRawText();
-        return (T)JsonSerializer.Deserialize(jsonObject, type, options)!;
+        return (T)jsonDocument.RootElement.Deserialize(type, options)!;
     }
 
     public override bool CanConvert(Type typeToConvert) => typeof(WebhookEvent).IsAssignableFrom(typeToConvert);
