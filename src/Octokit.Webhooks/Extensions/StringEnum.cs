@@ -11,11 +11,29 @@ using JetBrains.Annotations;
 public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
-    private static readonly FrozenDictionary<string, TEnum> StringToEnum = BuildStringToEnum();
-    private static readonly FrozenDictionary<TEnum, string> EnumToString = BuildEnumToString();
+    private static readonly FrozenDictionary<string, TEnum> StringToEnum;
+    private static readonly FrozenDictionary<TEnum, string> EnumToString;
 
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
+
+    static StringEnum()
+    {
+        var enumType = typeof(TEnum);
+        var stringToEnum = new Dictionary<string, TEnum>();
+        var enumToString = new Dictionary<TEnum, string>();
+
+        foreach (var name in Enum.GetNames(enumType))
+        {
+            var value = (TEnum)Enum.Parse(enumType, name);
+            var memberValue = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!;
+            stringToEnum[memberValue] = value;
+            enumToString[value] = memberValue;
+        }
+
+        StringToEnum = stringToEnum.ToFrozenDictionary();
+        EnumToString = enumToString.ToFrozenDictionary();
+    }
 
     public StringEnum(string stringValue)
     {
@@ -100,22 +118,4 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     [DoesNotReturn]
     private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(
         $"Value '{value}' is not a valid '{typeof(TEnum).Name}' enum value.");
-
-    private static FrozenDictionary<string, TEnum> BuildStringToEnum()
-    {
-        var enumType = typeof(TEnum);
-        return Enum.GetNames(enumType)
-            .ToFrozenDictionary(
-                name => ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!,
-                name => (TEnum)Enum.Parse(enumType, name));
-    }
-
-    private static FrozenDictionary<TEnum, string> BuildEnumToString()
-    {
-        var enumType = typeof(TEnum);
-        return Enum.GetNames(enumType)
-            .ToFrozenDictionary(
-                name => (TEnum)Enum.Parse(enumType, name),
-                name => ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!);
-    }
 }
