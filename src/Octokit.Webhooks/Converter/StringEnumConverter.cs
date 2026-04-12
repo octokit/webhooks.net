@@ -15,5 +15,5 @@ public sealed class StringEnumConverter<TEnum> : JsonConverter<StringEnum<TEnum>
         JsonSerializerOptions options) => new(reader.GetString()!);
 
     public override void Write(Utf8JsonWriter writer, StringEnum<TEnum> value, JsonSerializerOptions options) =>
-        JsonSerializer.Serialize(writer, value.StringValue, options);
+        writer.WriteStringValue(value.StringValue);
 }

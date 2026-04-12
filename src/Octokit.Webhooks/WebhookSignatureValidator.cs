@@ -63,7 +63,8 @@ public static class WebhookSignatureValidator
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
 
-        var keyBytes = Encoding.UTF8.GetBytes(secret!);
+        Span<byte> keyBytes = stackalloc byte[Encoding.UTF8.GetByteCount(secret!)];
+        Encoding.UTF8.GetBytes(secret!, keyBytes);
         var bodyBytes = Encoding.UTF8.GetBytes(body);
         var expectedHash = HMACSHA256.HashData(keyBytes, bodyBytes);
 
