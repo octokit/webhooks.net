@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.CheckSuite;
 
+[PublicAPI]
 public static class CheckSuiteActionValue
 {
     public const string Completed = "completed";

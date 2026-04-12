@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.PullRequestReview;
 
+[PublicAPI]
 public static class PullRequestReviewActionValue
 {
     public const string Dismissed = "dismissed";

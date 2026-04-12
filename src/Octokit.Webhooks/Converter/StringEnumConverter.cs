@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Octokit.Webhooks.Extensions;
 
+[PublicAPI]
 public sealed class StringEnumConverter<TEnum> : JsonConverter<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {

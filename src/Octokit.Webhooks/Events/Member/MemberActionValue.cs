@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Member;
 
+[PublicAPI]
 public static class MemberActionValue
 {
     public const string Added = "added";

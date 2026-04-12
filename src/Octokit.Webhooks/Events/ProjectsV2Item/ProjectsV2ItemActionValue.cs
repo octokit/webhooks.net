@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.ProjectsV2Item;
 
+[PublicAPI]
 public static class ProjectsV2ItemActionValue
 {
     public const string Archived = "archived";

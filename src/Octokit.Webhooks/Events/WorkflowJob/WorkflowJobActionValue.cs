@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.WorkflowJob;
 
+[PublicAPI]
 public static class WorkflowJobActionValue
 {
     public const string Queued = "queued";

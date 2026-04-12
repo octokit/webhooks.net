@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.CheckRun;
 
+[PublicAPI]
 public static class CheckRunActionValue
 {
     public const string Completed = "completed";

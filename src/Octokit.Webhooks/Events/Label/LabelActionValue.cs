@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Label;
 
+[PublicAPI]
 public static class LabelActionValue
 {
     public const string Created = "created";

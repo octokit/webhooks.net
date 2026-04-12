@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Milestone;
 
+[PublicAPI]
 public static class MilestoneActionValue
 {
     public const string Closed = "closed";

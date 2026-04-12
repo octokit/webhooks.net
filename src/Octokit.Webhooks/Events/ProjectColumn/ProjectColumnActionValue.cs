@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.ProjectColumn;
 
+[PublicAPI]
 public static class ProjectColumnActionValue
 {
     public const string Created = "created";

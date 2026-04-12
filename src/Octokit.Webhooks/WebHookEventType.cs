@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks;
 
+[PublicAPI]
 public static class WebhookEventType
 {
     public const string BranchProtectionConfiguration = "branch_protection_configuration";

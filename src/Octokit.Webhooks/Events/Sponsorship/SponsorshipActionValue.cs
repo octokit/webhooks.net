@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Sponsorship;
 
+[PublicAPI]
 public static class SponsorshipActionValue
 {
     public const string Cancelled = "cancelled";

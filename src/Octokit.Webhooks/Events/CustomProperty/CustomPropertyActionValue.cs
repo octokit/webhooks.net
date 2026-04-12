@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.CustomProperty;
 
+[PublicAPI]
 public static class CustomPropertyActionValue
 {
     public const string Created = "created";

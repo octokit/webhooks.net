@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.SecurityAdvisory;
 
+[PublicAPI]
 public static class SecurityAdvisoryActionValue
 {
     public const string Performed = "performed";

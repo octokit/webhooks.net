@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.SecretScanningAlert;
 
+[PublicAPI]
 public static class SecretScanningAlertActionValue
 {
     public const string Created = "created";

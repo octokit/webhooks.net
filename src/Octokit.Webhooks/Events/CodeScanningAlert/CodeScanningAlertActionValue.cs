@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.CodeScanningAlert;
 
+[PublicAPI]
 public static class CodeScanningAlertActionValue
 {
     public const string AppearedInBranch = "appeared_in_branch";

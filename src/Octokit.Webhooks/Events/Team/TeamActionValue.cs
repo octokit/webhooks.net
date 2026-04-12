@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Team;
 
+[PublicAPI]
 public static class TeamActionValue
 {
     public const string AddedToRepository = "added_to_repository";
