@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using Octokit.Webhooks.Extensions;
 
 [PublicAPI]
-public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumerable<StringEnum<TEnum>>>
+public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IReadOnlyList<StringEnum<TEnum>>>
     where TEnum : struct, Enum
 {
     private static readonly JsonSerializerOptions Options = new()
@@ -15,10 +15,10 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
         Converters = { new StringEnumConverter<TEnum>() },
     };
 
-    public override IEnumerable<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+    public override IReadOnlyList<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
         ReadInternal(ref reader);
 
-    public override void Write(Utf8JsonWriter writer, IEnumerable<StringEnum<TEnum>> value, JsonSerializerOptions options) =>
+    public override void Write(Utf8JsonWriter writer, IReadOnlyList<StringEnum<TEnum>> value, JsonSerializerOptions options) =>
         WriteInternal(writer, value);
 
     private static List<StringEnum<TEnum>> ReadInternal(ref Utf8JsonReader reader)
@@ -45,7 +45,7 @@ public sealed class StringEnumEnumerableConverter<TEnum> : JsonConverter<IEnumer
         return returnValue;
     }
 
-    private static void WriteInternal(Utf8JsonWriter writer, IEnumerable<StringEnum<TEnum>> value)
+    private static void WriteInternal(Utf8JsonWriter writer, IReadOnlyList<StringEnum<TEnum>> value)
     {
         if (value == null)
         {

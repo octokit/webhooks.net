@@ -5,10 +5,11 @@ using Octokit.Webhooks.Extensions;
 using Octokit.Webhooks.Models.PingEvent;
 using Xunit;
 
-public class StringEnumEnumerableConverterTestsKnownData : TheoryData<string, IEnumerable<StringEnum<HookType>>>
+public class StringEnumReadOnlyListConverterTestsUnknownData : TheoryData<string, IReadOnlyList<StringEnum<HookType>>>
 {
-    public StringEnumEnumerableConverterTestsKnownData() => this.Add(@"[""App"", ""Organization""]", [
+    public StringEnumReadOnlyListConverterTestsUnknownData() => this.Add(@"[""App"", ""Organization"", ""Unknown""]", [
         new StringEnum<HookType>(HookType.App),
         new StringEnum<HookType>(HookType.Organization),
+        new StringEnum<HookType>("Unknown"),
     ]);
 }
