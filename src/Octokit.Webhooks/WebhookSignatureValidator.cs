@@ -7,6 +7,7 @@ using System.Text;
 /// <summary>
 /// Provides methods to verify GitHub webhook payload signatures.
 /// </summary>
+[PublicAPI]
 public static class WebhookSignatureValidator
 {
     private const string Prefix = "sha256=";

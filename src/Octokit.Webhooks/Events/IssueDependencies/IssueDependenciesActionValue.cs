@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.IssueDependencies;
 
+[PublicAPI]
 public static class IssueDependenciesActionValue
 {
     public const string BlockedByAdded = "blocked_by_added";

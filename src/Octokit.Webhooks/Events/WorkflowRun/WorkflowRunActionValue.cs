@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.WorkflowRun;
 
+[PublicAPI]
 public static class WorkflowRunActionValue
 {
     public const string Completed = "completed";

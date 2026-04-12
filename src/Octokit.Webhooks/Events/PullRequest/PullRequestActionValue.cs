@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.PullRequest;
 
+[PublicAPI]
 public static class PullRequestActionValue
 {
     public const string Assigned = "assigned";

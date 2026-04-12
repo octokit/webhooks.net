@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Models.RepositoryRulesetEvent;
 
+[PublicAPI]
 public sealed record ChangesConditionsUpdatedChanges
 {
     [JsonPropertyName("condition_type")]

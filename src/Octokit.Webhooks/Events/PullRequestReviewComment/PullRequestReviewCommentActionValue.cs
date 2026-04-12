@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.PullRequestReviewComment;
 
+[PublicAPI]
 public static class PullRequestReviewCommentActionValue
 {
     public const string Created = "created";

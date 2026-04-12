@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Repository;
 
+[PublicAPI]
 public static class RepositoryActionValue
 {
     public const string Archived = "archived";

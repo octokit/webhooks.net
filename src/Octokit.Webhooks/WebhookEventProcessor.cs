@@ -70,6 +70,7 @@ using Octokit.Webhooks.Events.Watch;
 using Octokit.Webhooks.Events.WorkflowJob;
 using Octokit.Webhooks.Events.WorkflowRun;
 
+[PublicAPI]
 public abstract class WebhookEventProcessor
 {
     [PublicAPI]

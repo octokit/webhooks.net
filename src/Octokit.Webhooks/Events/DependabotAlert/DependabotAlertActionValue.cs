@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.DependabotAlert;
 
+[PublicAPI]
 public static class DependabotAlertActionValue
 {
     public const string Created = "created";

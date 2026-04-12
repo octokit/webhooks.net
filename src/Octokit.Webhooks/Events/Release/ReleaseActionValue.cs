@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Release;
 
+[PublicAPI]
 public static class ReleaseActionValue
 {
     public const string Created = "created";

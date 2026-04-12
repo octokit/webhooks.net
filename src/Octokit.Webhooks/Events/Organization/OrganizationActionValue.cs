@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Organization;
 
+[PublicAPI]
 public static class OrganizationActionValue
 {
     public const string Deleted = "deleted";

@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.DiscussionComment;
 
+[PublicAPI]
 public static class DiscussionCommentActionValue
 {
     public const string Created = "created";

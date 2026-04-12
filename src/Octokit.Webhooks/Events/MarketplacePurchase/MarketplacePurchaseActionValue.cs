@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.MarketplacePurchase;
 
+[PublicAPI]
 public static class MarketplacePurchaseActionValue
 {
     public const string Cancelled = "cancelled";

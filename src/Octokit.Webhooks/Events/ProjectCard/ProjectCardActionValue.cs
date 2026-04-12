@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.ProjectCard;
 
+[PublicAPI]
 public static class ProjectCardActionValue
 {
     public const string Converted = "converted";

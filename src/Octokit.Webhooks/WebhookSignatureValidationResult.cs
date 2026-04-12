@@ -3,6 +3,7 @@ namespace Octokit.Webhooks;
 /// <summary>
 /// The result of validating a GitHub webhook signature.
 /// </summary>
+[PublicAPI]
 public enum WebhookSignatureValidationResult
 {
     /// <summary>

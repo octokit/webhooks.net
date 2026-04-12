@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.ProjectsV2StatusUpdate;
 
+[PublicAPI]
 public static class ProjectsV2StatusUpdateActionValue
 {
     public const string Created = "created";

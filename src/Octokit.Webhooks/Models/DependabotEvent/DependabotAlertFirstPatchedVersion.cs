@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.Models.DependabotEvent;
 
 [PublicAPI]
-public class DependabotAlertFirstPatchedVersion
+public sealed record DependabotAlertFirstPatchedVersion
 {
     [JsonPropertyName("identifier")]
     public required string Identifier { get; init; }

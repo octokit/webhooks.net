@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Discussion;
 
+[PublicAPI]
 public static class DiscussionActionValue
 {
     public const string Answered = "answered";

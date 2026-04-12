@@ -1,4 +1,4 @@
-﻿namespace Octokit.Webhooks.AspNetCore;
+namespace Octokit.Webhooks.AspNetCore;
 
 public record GitHubWebhookOptions
 {

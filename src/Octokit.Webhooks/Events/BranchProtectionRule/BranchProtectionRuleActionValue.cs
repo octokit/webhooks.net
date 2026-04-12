@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.BranchProtectionRule;
 
+[PublicAPI]
 public static class BranchProtectionRuleActionValue
 {
     public const string Created = "created";

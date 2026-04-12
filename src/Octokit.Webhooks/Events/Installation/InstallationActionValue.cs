@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Installation;
 
+[PublicAPI]
 public static class InstallationActionValue
 {
     public const string Created = "created";

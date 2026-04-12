@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.SubIssues;
 
+[PublicAPI]
 public static class SubIssuesActionValue
 {
     public const string ParentIssueAdded = "parent_issue_added";

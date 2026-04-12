@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.PersonalAccessTokenRequest;
 
+[PublicAPI]
 public static class PersonalAccessTokenRequestActionValue
 {
     public const string Approved = "approved";

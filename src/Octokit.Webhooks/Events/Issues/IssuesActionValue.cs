@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Events.Issues;
 
+[PublicAPI]
 public static class IssuesActionValue
 {
     public const string Assigned = "assigned";

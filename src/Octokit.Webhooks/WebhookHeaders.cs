@@ -2,6 +2,7 @@ namespace Octokit.Webhooks;
 
 using Microsoft.Extensions.Primitives;
 
+[PublicAPI]
 public sealed class WebhookHeaders
 {
     public string? UserAgent { get; init; }
