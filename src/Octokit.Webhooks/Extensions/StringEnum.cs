@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Extensions;
 
 using System;
+using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
@@ -11,14 +11,35 @@ using JetBrains.Annotations;
 public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
+    private static readonly FrozenDictionary<string, TEnum> StringToEnum;
+    private static readonly FrozenDictionary<TEnum, string> EnumToString;
+
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
+
+    static StringEnum()
+    {
+        var enumType = typeof(TEnum);
+        var stringToEnum = new Dictionary<string, TEnum>();
+        var enumToString = new Dictionary<TEnum, string>();
+
+        foreach (var name in Enum.GetNames(enumType))
+        {
+            var value = (TEnum)Enum.Parse(enumType, name);
+            var memberValue = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!;
+            stringToEnum[memberValue] = value;
+            enumToString[value] = memberValue;
+        }
+
+        StringToEnum = stringToEnum.ToFrozenDictionary();
+        EnumToString = enumToString.ToFrozenDictionary();
+    }
 
     public StringEnum(string stringValue)
     {
         ArgumentNullException.ThrowIfNull(stringValue);
         this.StringValue = stringValue;
-        if (TryParseEnum(stringValue, out var enumValue))
+        if (StringToEnum.TryGetValue(stringValue, out var enumValue))
         {
             this.parsedValue = enumValue;
             this.isValidEnum = true;
@@ -32,12 +53,12 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public StringEnum(TEnum parsedValue)
     {
-        if (!Enum.IsDefined(parsedValue))
+        if (!EnumToString.TryGetValue(parsedValue, out var stringValue))
         {
             _ = ThrowArgumentException(parsedValue.ToString());
         }
 
-        this.StringValue = ToEnumString(parsedValue);
+        this.StringValue = stringValue!;
         this.parsedValue = parsedValue;
         this.isValidEnum = true;
     }
@@ -94,48 +115,7 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public override string ToString() => this.StringValue;
 
-    private static bool TryParseEnum(string str, [NotNullWhen(true)] out TEnum? value)
-    {
-        try
-        {
-            value = ToEnum(str);
-            return true;
-        }
-        catch (ArgumentException)
-        {
-            value = null;
-            return false;
-        }
-    }
-
     [DoesNotReturn]
-    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(string.Format(
-        CultureInfo.InvariantCulture,
-        "Value '{0}' is not a valid '{1}' enum value.",
-        value,
-        typeof(TEnum).Name));
-
-    private static string ToEnumString(TEnum type)
-    {
-        var enumType = typeof(TEnum);
-        var name = Enum.GetName(enumType, type) ?? throw new ArgumentException(type.ToString());
-
-        var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-        return enumMemberAttribute.Value!;
-    }
-
-    private static TEnum ToEnum(string str)
-    {
-        var enumType = typeof(TEnum);
-        foreach (var name in Enum.GetNames(enumType))
-        {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            if (enumMemberAttribute.Value == str)
-            {
-                return (TEnum)Enum.Parse(enumType, name);
-            }
-        }
-
-        return ThrowArgumentException(str);
-    }
+    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(
+        $"Value '{value}' is not a valid '{typeof(TEnum).Name}' enum value.");
 }
