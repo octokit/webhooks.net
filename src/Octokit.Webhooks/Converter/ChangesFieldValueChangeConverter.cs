@@ -2,7 +2,7 @@ namespace Octokit.Webhooks.Converter;
 
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
-public class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueChangeBase>
+public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueChangeBase>
 {
     public override ChangesFieldValueChangeBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
