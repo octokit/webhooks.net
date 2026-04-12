@@ -14,9 +14,9 @@ public sealed record CustomPropertyValue
     public string? Value => this.Object switch
     {
         string str => str,
-        IEnumerable<string> strings => "[" + string.Join(",", strings) + "]",
+        IEnumerable<string> strings => $"[{string.Join(",", strings)}]",
         JsonElement { ValueKind: JsonValueKind.String } json => json.GetString(),
-        JsonElement { ValueKind: JsonValueKind.Array } json => "[" + string.Join(",", json.EnumerateArray().Select(e => e.GetString()!)) + "]",
+        JsonElement { ValueKind: JsonValueKind.Array } json => $"[{string.Join(",", json.EnumerateArray().Select(e => e.GetString()!))}]",
         _ => null,
     };
 
