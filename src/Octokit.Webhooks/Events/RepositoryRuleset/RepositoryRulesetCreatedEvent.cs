@@ -2,7 +2,7 @@ namespace Octokit.Webhooks.Events.RepositoryRuleset;
 
 [PublicAPI]
 [WebhookActionType(RepositoryRulesetActionValue.Created)]
-public record RepositoryRulesetCreatedEvent : RepositoryRulesetEvent
+public sealed record RepositoryRulesetCreatedEvent : RepositoryRulesetEvent
 {
     [JsonPropertyName("action")]
     public override string Action => RepositoryRulesetAction.Created;

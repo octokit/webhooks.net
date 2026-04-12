@@ -1,24 +1,14 @@
 namespace Octokit.Webhooks.Converter;
 
+using System.Collections.Frozen;
 using System.Linq;
 using System.Reflection;
 
 [PublicAPI]
-public class WebhookConverter<T> : JsonConverter<T>
+public sealed class WebhookConverter<T> : JsonConverter<T>
     where T : WebhookEvent
 {
-    private readonly Dictionary<string, Type> types;
-
-    public WebhookConverter()
-    {
-        var type = typeof(T);
-        this.types = this.GetType().Assembly.GetTypes()
-            .Where(x => type.IsAssignableFrom(x) && x is { IsClass: true, IsAbstract: false } &&
-                        x.GetCustomAttribute<WebhookActionTypeAttribute>() is not null)
-            .ToDictionary(
-                y => y.GetCustomAttribute<WebhookActionTypeAttribute>()!.ActionType,
-                y => y);
-    }
+    private static readonly FrozenDictionary<string, Type> Types = BuildTypeMap();
 
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -37,7 +27,7 @@ public class WebhookConverter<T> : JsonConverter<T>
 
         var actionValue = action.GetString();
 
-        if (actionValue is not null && this.types.TryGetValue(actionValue, out var payloadType))
+        if (actionValue is not null && Types.TryGetValue(actionValue, out var payloadType))
         {
             type = payloadType;
         }
@@ -61,4 +51,15 @@ public class WebhookConverter<T> : JsonConverter<T>
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
         JsonSerializer.Serialize(writer, value, options);
+
+    private static FrozenDictionary<string, Type> BuildTypeMap()
+    {
+        var type = typeof(T);
+        return type.Assembly.GetTypes()
+            .Where(x => type.IsAssignableFrom(x) && x is { IsClass: true, IsAbstract: false } &&
+                        x.GetCustomAttribute<WebhookActionTypeAttribute>() is not null)
+            .ToFrozenDictionary(
+                y => y.GetCustomAttribute<WebhookActionTypeAttribute>()!.ActionType,
+                y => y);
+    }
 }

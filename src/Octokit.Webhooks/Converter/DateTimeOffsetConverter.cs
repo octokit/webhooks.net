@@ -1,6 +1,6 @@
 namespace Octokit.Webhooks.Converter;
 
-public class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
+public sealed class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
 {
     public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
         ReadInternal(ref reader);
