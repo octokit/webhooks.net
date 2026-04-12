@@ -1,8 +1,8 @@
 namespace Octokit.Webhooks.Extensions;
 
 using System;
+using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using JetBrains.Annotations;
@@ -11,6 +11,9 @@ using JetBrains.Annotations;
 public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
+    private static readonly FrozenDictionary<string, TEnum> StringToEnum = BuildStringToEnum();
+    private static readonly FrozenDictionary<TEnum, string> EnumToString = BuildEnumToString();
+
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
 
@@ -18,7 +21,7 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
     {
         ArgumentNullException.ThrowIfNull(stringValue);
         this.StringValue = stringValue;
-        if (TryParseEnum(stringValue, out var enumValue))
+        if (StringToEnum.TryGetValue(stringValue, out var enumValue))
         {
             this.parsedValue = enumValue;
             this.isValidEnum = true;
@@ -32,12 +35,12 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public StringEnum(TEnum parsedValue)
     {
-        if (!Enum.IsDefined(parsedValue))
+        if (!EnumToString.TryGetValue(parsedValue, out var stringValue))
         {
             _ = ThrowArgumentException(parsedValue.ToString());
         }
 
-        this.StringValue = ToEnumString(parsedValue);
+        this.StringValue = stringValue!;
         this.parsedValue = parsedValue;
         this.isValidEnum = true;
     }
@@ -94,48 +97,25 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     public override string ToString() => this.StringValue;
 
-    private static bool TryParseEnum(string str, [NotNullWhen(true)] out TEnum? value)
-    {
-        try
-        {
-            value = ToEnum(str);
-            return true;
-        }
-        catch (ArgumentException)
-        {
-            value = null;
-            return false;
-        }
-    }
-
     [DoesNotReturn]
-    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(string.Format(
-        CultureInfo.InvariantCulture,
-        "Value '{0}' is not a valid '{1}' enum value.",
-        value,
-        typeof(TEnum).Name));
+    private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(
+        $"Value '{value}' is not a valid '{typeof(TEnum).Name}' enum value.");
 
-    private static string ToEnumString(TEnum type)
+    private static FrozenDictionary<string, TEnum> BuildStringToEnum()
     {
         var enumType = typeof(TEnum);
-        var name = Enum.GetName(enumType, type) ?? throw new ArgumentException(type.ToString());
-
-        var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-        return enumMemberAttribute.Value!;
+        return Enum.GetNames(enumType)
+            .ToFrozenDictionary(
+                name => ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!,
+                name => (TEnum)Enum.Parse(enumType, name));
     }
 
-    private static TEnum ToEnum(string str)
+    private static FrozenDictionary<TEnum, string> BuildEnumToString()
     {
         var enumType = typeof(TEnum);
-        foreach (var name in Enum.GetNames(enumType))
-        {
-            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
-            if (enumMemberAttribute.Value == str)
-            {
-                return (TEnum)Enum.Parse(enumType, name);
-            }
-        }
-
-        return ThrowArgumentException(str);
+        return Enum.GetNames(enumType)
+            .ToFrozenDictionary(
+                name => (TEnum)Enum.Parse(enumType, name),
+                name => ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!);
     }
 }
