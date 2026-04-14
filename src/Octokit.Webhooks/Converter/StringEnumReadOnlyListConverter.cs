@@ -18,26 +18,31 @@ public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IRead
 
     private static List<StringEnum<TEnum>> ReadInternal(ref Utf8JsonReader reader)
     {
-        if (reader.TokenType == JsonTokenType.Null)
+        if (reader.TokenType != JsonTokenType.StartArray)
         {
-            throw new JsonException("Unexpected null value.");
+            throw new JsonException($"Expected {JsonTokenType.StartArray} but found {reader.TokenType}.");
         }
 
         var returnValue = new List<StringEnum<TEnum>>();
 
-        while (reader.TokenType != JsonTokenType.EndArray)
+        while (reader.Read())
         {
-            if (reader.TokenType != JsonTokenType.StartArray)
+            if (reader.TokenType == JsonTokenType.EndArray)
             {
-                var stringValue = reader.GetString()
-                    ?? throw new JsonException("Unexpected null value in array.");
-                returnValue.Add(new StringEnum<TEnum>(stringValue));
+                return returnValue;
             }
 
-            _ = reader.Read();
+            if (reader.TokenType != JsonTokenType.String)
+            {
+                throw new JsonException($"Expected {JsonTokenType.String} but found {reader.TokenType}.");
+            }
+
+            var stringValue = reader.GetString()
+                ?? throw new JsonException("Unexpected null value in array.");
+            returnValue.Add(new StringEnum<TEnum>(stringValue));
         }
 
-        return returnValue;
+        throw new JsonException("Incomplete JSON array.");
     }
 
     private static void WriteInternal(Utf8JsonWriter writer, IReadOnlyList<StringEnum<TEnum>> value)

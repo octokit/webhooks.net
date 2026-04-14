@@ -97,7 +97,11 @@ public static class WebhookSignatureValidator
         try
         {
             Span<byte> expectedHash = stackalloc byte[32];
-            HMACSHA256.TryHashData(keyBuffer, bodyUtf8, expectedHash, out _);
+            if (!HMACSHA256.TryHashData(keyBuffer, bodyUtf8, expectedHash, out var bytesWritten)
+                || bytesWritten != expectedHash.Length)
+            {
+                return WebhookSignatureValidationResult.SignatureMismatch;
+            }
 
             if (!CryptographicOperations.FixedTimeEquals(expectedHash, signatureBytes))
             {
