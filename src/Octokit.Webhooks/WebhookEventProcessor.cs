@@ -278,7 +278,15 @@ public abstract class WebhookEventProcessor
     [PublicAPI]
     public virtual WebhookEvent DeserializeWebhookEvent(WebhookHeaders headers, string body)
     {
-        if (!EventTypeMap.TryGetValue(headers.Event!, out var type))
+        ArgumentNullException.ThrowIfNull(headers);
+        ArgumentNullException.ThrowIfNull(body);
+
+        if (string.IsNullOrWhiteSpace(headers.Event))
+        {
+            throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
+        }
+
+        if (!EventTypeMap.TryGetValue(headers.Event, out var type))
         {
             throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
         }
@@ -319,7 +327,12 @@ public abstract class WebhookEventProcessor
 
     private ValueTask ProcessWebhookFromBytesAsync(WebhookHeaders webhookHeaders, ReadOnlyMemory<byte> body, CancellationToken cancellationToken)
     {
-        if (!EventTypeMap.TryGetValue(webhookHeaders.Event!, out var type))
+        if (string.IsNullOrWhiteSpace(webhookHeaders.Event))
+        {
+            throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
+        }
+
+        if (!EventTypeMap.TryGetValue(webhookHeaders.Event, out var type))
         {
             throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
         }

@@ -89,11 +89,14 @@ public static class WebhookSignatureValidator
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
 
-        Span<byte> keyBytes = stackalloc byte[Encoding.UTF8.GetByteCount(secret!)];
-        Encoding.UTF8.GetBytes(secret!, keyBytes);
+        var keyByteCount = Encoding.UTF8.GetByteCount(secret!);
+        var keyBuffer = keyByteCount <= 256
+            ? stackalloc byte[keyByteCount]
+            : new byte[keyByteCount];
+        Encoding.UTF8.GetBytes(secret!, keyBuffer);
 
         Span<byte> expectedHash = stackalloc byte[32];
-        HMACSHA256.TryHashData(keyBytes, bodyUtf8, expectedHash, out _);
+        HMACSHA256.TryHashData(keyBuffer, bodyUtf8, expectedHash, out _);
 
         if (!CryptographicOperations.FixedTimeEquals(expectedHash, signatureBytes))
         {
