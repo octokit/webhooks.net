@@ -73,16 +73,15 @@ public static class WebhookSignatureValidator
 
         var signatureHex = signatureHeader![Prefix.Length..];
 
-        Span<byte> signatureBytes = stackalloc byte[32];
+        if (signatureHex.Length != 64)
+        {
+            return WebhookSignatureValidationResult.SignatureMismatch;
+        }
+
+        byte[] signatureBytes;
         try
         {
-            var decoded = Convert.FromHexString(signatureHex);
-            if (decoded.Length != 32)
-            {
-                return WebhookSignatureValidationResult.SignatureMismatch;
-            }
-
-            decoded.CopyTo(signatureBytes);
+            signatureBytes = Convert.FromHexString(signatureHex);
         }
         catch (FormatException)
         {
