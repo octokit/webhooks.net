@@ -318,8 +318,7 @@ public abstract class WebhookEventProcessor
         if (this.HasStringPathOverrides())
         {
             var bodyString = Encoding.UTF8.GetString(body.Span);
-            var webhookEvent = this.DeserializeWebhookEvent(webhookHeaders, bodyString);
-            return this.ProcessWebhookAsync(webhookHeaders, webhookEvent, cancellationToken);
+            return this.ProcessWebhookAsync(headers, bodyString, cancellationToken);
         }
 
         return this.ProcessWebhookFromBytesAsync(webhookHeaders, body, cancellationToken);

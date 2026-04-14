@@ -98,13 +98,6 @@ public static partial class GitHubWebhookExtensions
 
     private static async Task<byte[]> GetBodyBytesAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        if (context.Request.ContentLength is > 0 and long contentLength && contentLength <= int.MaxValue)
-        {
-            var buffer = new byte[(int)contentLength];
-            await context.Request.Body.ReadExactlyAsync(buffer, cancellationToken).ConfigureAwait(false);
-            return buffer;
-        }
-
         using var ms = new MemoryStream();
         await context.Request.Body.CopyToAsync(ms, cancellationToken).ConfigureAwait(false);
         return ms.ToArray();

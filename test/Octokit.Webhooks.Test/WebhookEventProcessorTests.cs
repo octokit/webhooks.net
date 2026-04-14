@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AwesomeAssertions;
 using Microsoft.Extensions.Primitives;
-using Octokit.Webhooks.Events.Issues;
 using Octokit.Webhooks.TestUtils;
 using Xunit;
 
