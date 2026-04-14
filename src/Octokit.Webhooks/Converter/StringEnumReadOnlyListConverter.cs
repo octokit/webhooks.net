@@ -10,11 +10,6 @@ using Octokit.Webhooks.Extensions;
 public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IReadOnlyList<StringEnum<TEnum>>>
     where TEnum : struct, Enum
 {
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        Converters = { new StringEnumConverter<TEnum>() },
-    };
-
     public override IReadOnlyList<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
         ReadInternal(ref reader);
 
@@ -34,9 +29,9 @@ public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IRead
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                var item = JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)
+                var stringValue = reader.GetString()
                     ?? throw new JsonException("Unexpected null value in array.");
-                returnValue.Add(item);
+                returnValue.Add(new StringEnum<TEnum>(stringValue));
             }
 
             _ = reader.Read();
@@ -56,7 +51,7 @@ public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IRead
 
         foreach (var data in value)
         {
-            JsonSerializer.Serialize(writer, data, Options);
+            writer.WriteStringValue(data.StringValue);
         }
 
         writer.WriteEndArray();

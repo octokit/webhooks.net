@@ -46,8 +46,8 @@ public static partial class GitHubWebhookExtensions
 
                 try
                 {
-                    // Get body
-                    var body = await GetBodyAsync(context, context.RequestAborted).ConfigureAwait(false);
+                    // Get body as bytes to avoid string allocation
+                    var body = await GetBodyBytesAsync(context, context.RequestAborted).ConfigureAwait(false);
 
                     if (secret is null && options is not null)
                     {
@@ -63,7 +63,7 @@ public static partial class GitHubWebhookExtensions
 
                     // Process body
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    await service.ProcessWebhookAsync(context.Request.Headers, body, context.RequestAborted)
+                    await service.ProcessWebhookAsync(context.Request.Headers, (ReadOnlyMemory<byte>)body, context.RequestAborted)
                         .ConfigureAwait(false);
                     context.Response.StatusCode = 200;
                 }
@@ -96,10 +96,18 @@ public static partial class GitHubWebhookExtensions
         return true;
     }
 
-    private static async Task<string> GetBodyAsync(HttpContext context, CancellationToken cancellationToken)
+    private static async Task<byte[]> GetBodyBytesAsync(HttpContext context, CancellationToken cancellationToken)
     {
-        using var reader = new StreamReader(context.Request.Body);
-        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+        if (context.Request.ContentLength is > 0 and long contentLength && contentLength <= int.MaxValue)
+        {
+            var buffer = new byte[(int)contentLength];
+            await context.Request.Body.ReadExactlyAsync(buffer, cancellationToken).ConfigureAwait(false);
+            return buffer;
+        }
+
+        using var ms = new MemoryStream();
+        await context.Request.Body.CopyToAsync(ms, cancellationToken).ConfigureAwait(false);
+        return ms.ToArray();
     }
 
     private static bool VerifyEventType(HttpContext context)
@@ -115,11 +123,11 @@ public static partial class GitHubWebhookExtensions
         return true;
     }
 
-    private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, string body)
+    private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, byte[] body)
     {
         _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
 
-        var result = WebhookSignatureValidator.Verify(signatureSha256.ToString(), secret, body);
+        var result = WebhookSignatureValidator.Verify(signatureSha256.ToString(), secret, (ReadOnlySpan<byte>)body);
 
         switch (result)
         {

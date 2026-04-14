@@ -92,7 +92,7 @@ public class WebhookSignatureValidatorTests
     [Fact]
     public void NullBody_ThrowsArgumentNullException()
     {
-        var act = () => WebhookSignatureValidator.Verify(null, null, null!);
+        var act = () => WebhookSignatureValidator.Verify(null, null, (string)null!);
 
         act.Should().Throw<ArgumentNullException>().WithMessage("*body*");
     }

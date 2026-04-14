@@ -42,7 +42,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
 
         try
         {
-            var body = await GetBodyAsync(req, ctx.CancellationToken).ConfigureAwait(false);
+            var body = await GetBodyBytesAsync(req, ctx.CancellationToken).ConfigureAwait(false);
 
             // Verify signature
             var signatureResult = VerifySignature(req, options.Value.Secret, body);
@@ -70,7 +70,7 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
                 kv => kv.Key,
                 kv => new StringValues([.. kv.Value]),
                 StringComparer.OrdinalIgnoreCase);
-            await service.ProcessWebhookAsync(headers, body, ctx.CancellationToken)
+            await service.ProcessWebhookAsync(headers, (ReadOnlyMemory<byte>)body, ctx.CancellationToken)
                 .ConfigureAwait(false);
             return req.CreateResponse(HttpStatusCode.OK);
         }
@@ -98,10 +98,11 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         return contentType.MediaType == expectedContentType;
     }
 
-    private static async Task<string> GetBodyAsync(HttpRequestData req, CancellationToken cancellationToken)
+    private static async Task<byte[]> GetBodyBytesAsync(HttpRequestData req, CancellationToken cancellationToken)
     {
-        using var reader = new StreamReader(req.Body);
-        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+        using var ms = new MemoryStream();
+        await req.Body.CopyToAsync(ms, cancellationToken).ConfigureAwait(false);
+        return ms.ToArray();
     }
 
     private static bool VerifyEventType(HttpRequestData req)
@@ -115,12 +116,12 @@ public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOp
         return values.Count == 1 && !string.IsNullOrWhiteSpace(values[0]);
     }
 
-    private static WebhookSignatureValidationResult VerifySignature(HttpRequestData req, string? secret, string body)
+    private static WebhookSignatureValidationResult VerifySignature(HttpRequestData req, string? secret, byte[] body)
     {
         _ = req.Headers.TryGetValues("X-Hub-Signature-256", out var signatureHeader);
         var signature = signatureHeader?.FirstOrDefault();
 
-        return WebhookSignatureValidator.Verify(signature, secret, body);
+        return WebhookSignatureValidator.Verify(signature, secret, (ReadOnlySpan<byte>)body);
     }
 
     /// <summary>

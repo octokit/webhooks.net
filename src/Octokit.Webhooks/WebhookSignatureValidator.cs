@@ -1,6 +1,7 @@
 namespace Octokit.Webhooks;
 
 using System;
+using System.Buffers;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -23,6 +24,30 @@ public static class WebhookSignatureValidator
     {
         ArgumentNullException.ThrowIfNull(body);
 
+        var bodyByteCount = Encoding.UTF8.GetByteCount(body);
+        var bodyBytesArray = ArrayPool<byte>.Shared.Rent(bodyByteCount);
+        try
+        {
+            var bodyBytes = bodyBytesArray.AsSpan(0, bodyByteCount);
+            Encoding.UTF8.GetBytes(body, bodyBytes);
+            return Verify(signatureHeader, secret, bodyBytes);
+        }
+        finally
+        {
+            bodyBytesArray.AsSpan(0, bodyByteCount).Clear();
+            ArrayPool<byte>.Shared.Return(bodyBytesArray);
+        }
+    }
+
+    /// <summary>
+    /// Verifies the signature of a GitHub webhook payload from raw UTF-8 bytes.
+    /// </summary>
+    /// <param name="signatureHeader">The value of the <c>X-Hub-Signature-256</c> header, or <see langword="null"/> or an empty string if not present.</param>
+    /// <param name="secret">The configured webhook secret, or <see langword="null"/> or an empty string if not configured.</param>
+    /// <param name="bodyUtf8">The raw request body as UTF-8 bytes.</param>
+    /// <returns>A <see cref="WebhookSignatureValidationResult"/> indicating the outcome of the validation.</returns>
+    public static WebhookSignatureValidationResult Verify(string? signatureHeader, string? secret, ReadOnlySpan<byte> bodyUtf8)
+    {
         var isSigned = !string.IsNullOrEmpty(signatureHeader);
         var isSignatureExpected = !string.IsNullOrEmpty(secret);
 
@@ -48,25 +73,27 @@ public static class WebhookSignatureValidator
 
         var signatureHex = signatureHeader![Prefix.Length..];
 
-        byte[] signatureBytes;
+        Span<byte> signatureBytes = stackalloc byte[32];
         try
         {
-            signatureBytes = Convert.FromHexString(signatureHex);
+            var decoded = Convert.FromHexString(signatureHex);
+            if (decoded.Length != 32)
+            {
+                return WebhookSignatureValidationResult.SignatureMismatch;
+            }
+
+            decoded.CopyTo(signatureBytes);
         }
         catch (FormatException)
         {
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
 
-        if (signatureBytes.Length != 32)
-        {
-            return WebhookSignatureValidationResult.SignatureMismatch;
-        }
-
         Span<byte> keyBytes = stackalloc byte[Encoding.UTF8.GetByteCount(secret!)];
         Encoding.UTF8.GetBytes(secret!, keyBytes);
-        var bodyBytes = Encoding.UTF8.GetBytes(body);
-        var expectedHash = HMACSHA256.HashData(keyBytes, bodyBytes);
+
+        Span<byte> expectedHash = stackalloc byte[32];
+        HMACSHA256.TryHashData(keyBytes, bodyUtf8, expectedHash, out _);
 
         if (!CryptographicOperations.FixedTimeEquals(expectedHash, signatureBytes))
         {
