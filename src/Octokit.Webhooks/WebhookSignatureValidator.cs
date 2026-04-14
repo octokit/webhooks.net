@@ -92,13 +92,14 @@ public static class WebhookSignatureValidator
         var keyBuffer = keyByteCount <= 256
             ? stackalloc byte[keyByteCount]
             : new byte[keyByteCount];
-        if (Encoding.UTF8.GetBytes(secret!, keyBuffer) != keyByteCount)
-        {
-            return WebhookSignatureValidationResult.SignatureMismatch;
-        }
 
         try
         {
+            if (Encoding.UTF8.GetBytes(secret!, keyBuffer) != keyByteCount)
+            {
+                return WebhookSignatureValidationResult.SignatureMismatch;
+            }
+
             Span<byte> expectedHash = stackalloc byte[32];
             if (!HMACSHA256.TryHashData(keyBuffer, bodyUtf8, expectedHash, out var bytesWritten)
                 || bytesWritten != expectedHash.Length)
