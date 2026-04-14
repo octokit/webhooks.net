@@ -17,15 +17,9 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        using var jsonDocument = JsonDocument.ParseValue(ref reader);
-        if (!jsonDocument.RootElement.TryGetProperty("action", out var action))
-        {
-            throw new JsonException();
-        }
+        var actionValue = PeekAction(reader);
 
         Type? type = null;
-
-        var actionValue = action.GetString();
 
         if (actionValue is not null && Types.TryGetValue(actionValue, out var payloadType))
         {
@@ -43,13 +37,34 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        return (T)jsonDocument.RootElement.Deserialize(type, options)!;
+        return (T)JsonSerializer.Deserialize(ref reader, type, options)!;
     }
 
     public override bool CanConvert(Type typeToConvert) => typeof(WebhookEvent).IsAssignableFrom(typeToConvert);
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
         JsonSerializer.Serialize(writer, value, options);
+
+    private static string? PeekAction(Utf8JsonReader reader)
+    {
+        // Use a copy of the reader to scan for the "action" property
+        // without advancing the original reader past StartObject.
+        while (reader.Read())
+        {
+            if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals("action"u8))
+            {
+                return reader.Read() ? reader.GetString() : null;
+            }
+
+            // Skip nested objects/arrays at the root level
+            if (reader.TokenType is JsonTokenType.StartObject or JsonTokenType.StartArray)
+            {
+                reader.Skip();
+            }
+        }
+
+        throw new JsonException("Missing required 'action' property.");
+    }
 
     private static FrozenDictionary<string, Type> BuildTypeMap()
     {

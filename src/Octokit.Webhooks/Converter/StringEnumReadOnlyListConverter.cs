@@ -10,11 +10,6 @@ using Octokit.Webhooks.Extensions;
 public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IReadOnlyList<StringEnum<TEnum>>>
     where TEnum : struct, Enum
 {
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        Converters = { new StringEnumConverter<TEnum>() },
-    };
-
     public override IReadOnlyList<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
         ReadInternal(ref reader);
 
@@ -23,26 +18,31 @@ public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IRead
 
     private static List<StringEnum<TEnum>> ReadInternal(ref Utf8JsonReader reader)
     {
-        if (reader.TokenType == JsonTokenType.Null)
+        if (reader.TokenType != JsonTokenType.StartArray)
         {
-            throw new JsonException("Unexpected null value.");
+            throw new JsonException($"Expected {JsonTokenType.StartArray} but found {reader.TokenType}.");
         }
 
         var returnValue = new List<StringEnum<TEnum>>();
 
-        while (reader.TokenType != JsonTokenType.EndArray)
+        while (reader.Read())
         {
-            if (reader.TokenType != JsonTokenType.StartArray)
+            if (reader.TokenType == JsonTokenType.EndArray)
             {
-                var item = JsonSerializer.Deserialize<StringEnum<TEnum>>(ref reader, Options)
-                    ?? throw new JsonException("Unexpected null value in array.");
-                returnValue.Add(item);
+                return returnValue;
             }
 
-            _ = reader.Read();
+            if (reader.TokenType != JsonTokenType.String)
+            {
+                throw new JsonException($"Expected {JsonTokenType.String} but found {reader.TokenType}.");
+            }
+
+            var stringValue = reader.GetString()
+                ?? throw new JsonException("Unexpected null value in array.");
+            returnValue.Add(new StringEnum<TEnum>(stringValue));
         }
 
-        return returnValue;
+        throw new JsonException("Incomplete JSON array.");
     }
 
     private static void WriteInternal(Utf8JsonWriter writer, IReadOnlyList<StringEnum<TEnum>> value)
@@ -56,7 +56,7 @@ public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IRead
 
         foreach (var data in value)
         {
-            JsonSerializer.Serialize(writer, data, Options);
+            writer.WriteStringValue(data.StringValue);
         }
 
         writer.WriteEndArray();

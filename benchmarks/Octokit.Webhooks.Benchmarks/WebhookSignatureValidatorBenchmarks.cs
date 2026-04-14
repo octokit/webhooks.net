@@ -13,27 +13,39 @@ public class WebhookSignatureValidatorBenchmarks
 
     private string smallBody = null!;
     private string smallSignature = null!;
+    private byte[] smallBodyBytes = null!;
 
     private string largeBody = null!;
     private string largeSignature = null!;
+    private byte[] largeBodyBytes = null!;
 
     [GlobalSetup]
     public void Setup()
     {
         this.smallBody = ResourceUtils.ReadResource("issues/opened.payload.json");
+        this.smallBodyBytes = Encoding.UTF8.GetBytes(this.smallBody);
         this.smallSignature = ComputeSignature(Secret, this.smallBody);
 
         this.largeBody = ResourceUtils.ReadResource("pull_request/opened.payload.json");
+        this.largeBodyBytes = Encoding.UTF8.GetBytes(this.largeBody);
         this.largeSignature = ComputeSignature(Secret, this.largeBody);
     }
 
-    [Benchmark(Description = "Verify (small payload)")]
+    [Benchmark(Description = "Verify string (small payload)")]
     public WebhookSignatureValidationResult VerifySmallPayload()
         => WebhookSignatureValidator.Verify(this.smallSignature, Secret, this.smallBody);
 
-    [Benchmark(Description = "Verify (large payload)")]
+    [Benchmark(Description = "Verify string (large payload)")]
     public WebhookSignatureValidationResult VerifyLargePayload()
         => WebhookSignatureValidator.Verify(this.largeSignature, Secret, this.largeBody);
+
+    [Benchmark(Description = "Verify bytes (small payload)")]
+    public WebhookSignatureValidationResult VerifySmallPayloadBytes()
+        => WebhookSignatureValidator.Verify(this.smallSignature, Secret, (ReadOnlySpan<byte>)this.smallBodyBytes);
+
+    [Benchmark(Description = "Verify bytes (large payload)")]
+    public WebhookSignatureValidationResult VerifyLargePayloadBytes()
+        => WebhookSignatureValidator.Verify(this.largeSignature, Secret, (ReadOnlySpan<byte>)this.largeBodyBytes);
 
     private static string ComputeSignature(string secret, string body)
     {
