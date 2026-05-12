@@ -48,8 +48,8 @@ using Octokit.Webhooks.Events.PersonalAccessTokenRequest;
 using Octokit.Webhooks.Events.Project;
 using Octokit.Webhooks.Events.ProjectCard;
 using Octokit.Webhooks.Events.ProjectColumn;
+using Octokit.Webhooks.Events.ProjectsV2;
 using Octokit.Webhooks.Events.ProjectsV2Item;
-using Octokit.Webhooks.Events.ProjectsV2Project;
 using Octokit.Webhooks.Events.ProjectsV2StatusUpdate;
 using Octokit.Webhooks.Events.PullRequest;
 using Octokit.Webhooks.Events.PullRequestReview;
@@ -126,7 +126,7 @@ public abstract class WebhookEventProcessor
         [WebhookEventType.ProjectCard] = typeof(ProjectCardEvent),
         [WebhookEventType.ProjectColumn] = typeof(ProjectColumnEvent),
         [WebhookEventType.ProjectsV2Item] = typeof(ProjectsV2ItemEvent),
-        [WebhookEventType.ProjectsV2Project] = typeof(ProjectsV2ProjectEvent),
+        [WebhookEventType.ProjectsV2] = typeof(ProjectsV2Event),
         [WebhookEventType.ProjectsV2StatusUpdate] = typeof(ProjectsV2StatusUpdateEvent),
         [WebhookEventType.Public] = typeof(PublicEvent),
         [WebhookEventType.PullRequest] = typeof(PullRequestEvent),
@@ -269,7 +269,7 @@ public abstract class WebhookEventProcessor
             CustomPropertyPromotedToEnterpriseEvent customPropertyPromotedToEnterpriseEvent => this.ProcessCustomPropertyPromotedToEnterpriseWebhookAsync(headers, customPropertyPromotedToEnterpriseEvent, cancellationToken),
             IssueDependenciesEvent issueDependenciesEvent => this.ProcessIssueDependenciesWebhookAsync(headers, issueDependenciesEvent, cancellationToken),
             PersonalAccessTokenRequestEvent personalAccessTokenRequestEvent => this.ProcessPersonalAccessTokenRequestWebhookAsync(headers, personalAccessTokenRequestEvent, cancellationToken),
-            ProjectsV2ProjectEvent projectsV2ProjectEvent => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, cancellationToken),
+            ProjectsV2Event projectsV2Event => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, cancellationToken),
             ProjectsV2StatusUpdateEvent projectsV2StatusUpdateEvent => this.ProcessProjectsV2StatusUpdateWebhookAsync(headers, projectsV2StatusUpdateEvent, cancellationToken),
             SecretScanningScanEvent secretScanningScanEvent => this.ProcessSecretScanningScanWebhookAsync(headers, secretScanningScanEvent, cancellationToken),
             _ => ValueTask.CompletedTask,
@@ -1682,27 +1682,27 @@ public abstract class WebhookEventProcessor
         PersonalAccessTokenRequestAction action,
         CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
-    private ValueTask ProcessProjectsV2ProjectWebhookAsync(WebhookHeaders headers, ProjectsV2ProjectEvent projectsV2ProjectEvent, CancellationToken cancellationToken = default) =>
-        projectsV2ProjectEvent.Action switch
+    private ValueTask ProcessProjectsV2WebhookAsync(WebhookHeaders headers, ProjectsV2Event projectsV2Event, CancellationToken cancellationToken = default) =>
+        projectsV2Event.Action switch
         {
-            ProjectsV2ProjectActionValue.Closed
-                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Closed, cancellationToken),
-            ProjectsV2ProjectActionValue.Created
-                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Created, cancellationToken),
-            ProjectsV2ProjectActionValue.Deleted
-                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Deleted, cancellationToken),
-            ProjectsV2ProjectActionValue.Edited
-                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Edited, cancellationToken),
-            ProjectsV2ProjectActionValue.Reopened
-                => this.ProcessProjectsV2ProjectWebhookAsync(headers, projectsV2ProjectEvent, ProjectsV2ProjectAction.Reopened, cancellationToken),
+            ProjectsV2ActionValue.Closed
+                => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, ProjectsV2Action.Closed, cancellationToken),
+            ProjectsV2ActionValue.Created
+                => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, ProjectsV2Action.Created, cancellationToken),
+            ProjectsV2ActionValue.Deleted
+                => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, ProjectsV2Action.Deleted, cancellationToken),
+            ProjectsV2ActionValue.Edited
+                => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, ProjectsV2Action.Edited, cancellationToken),
+            ProjectsV2ActionValue.Reopened
+                => this.ProcessProjectsV2WebhookAsync(headers, projectsV2Event, ProjectsV2Action.Reopened, cancellationToken),
             _ => ValueTask.CompletedTask,
         };
 
     [PublicAPI]
-    protected virtual ValueTask ProcessProjectsV2ProjectWebhookAsync(
+    protected virtual ValueTask ProcessProjectsV2WebhookAsync(
         WebhookHeaders headers,
-        ProjectsV2ProjectEvent projectsV2ProjectEvent,
-        ProjectsV2ProjectAction action,
+        ProjectsV2Event projectsV2Event,
+        ProjectsV2Action action,
         CancellationToken cancellationToken = default) => ValueTask.CompletedTask;
 
     private ValueTask ProcessProjectsV2StatusUpdateWebhookAsync(WebhookHeaders headers, ProjectsV2StatusUpdateEvent projectsV2StatusUpdateEvent, CancellationToken cancellationToken = default) =>

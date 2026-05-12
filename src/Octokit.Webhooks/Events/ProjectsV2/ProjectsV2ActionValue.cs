@@ -1,7 +1,7 @@
-namespace Octokit.Webhooks.Events.ProjectsV2Project;
+namespace Octokit.Webhooks.Events.ProjectsV2;
 
 [PublicAPI]
-public static class ProjectsV2ProjectActionValue
+public static class ProjectsV2ActionValue
 {
     public const string Closed = "closed";
 

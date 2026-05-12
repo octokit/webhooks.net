@@ -50,7 +50,7 @@ public static class WebhookEventType
     public const string ProjectsV2Item = "projects_v2_item";
     public const string ProjectCard = "project_card";
     public const string ProjectColumn = "project_column";
-    public const string ProjectsV2Project = "projects_v2_project";
+    public const string ProjectsV2 = "projects_v2";
     public const string ProjectsV2StatusUpdate = "projects_v2_status_update";
     public const string Public = "public";
     public const string PullRequest = "pull_request";
