@@ -25,6 +25,10 @@ public sealed record SponsorshipTier
     [JsonPropertyName("is_one_time")]
     public bool IsOneTime { get; init; }
 
-    [JsonPropertyName("is_custom_ammount")]
-    public bool IsCustomAmmount { get; init; }
+    [JsonPropertyName("is_custom_amount")]
+    public bool IsCustomAmount { get; init; }
+
+    [JsonIgnore]
+    [Obsolete("The property name is misspelled. Use IsCustomAmount instead.")]
+    public bool IsCustomAmmount { get => this.IsCustomAmount; init => this.IsCustomAmount = value; }
 }
