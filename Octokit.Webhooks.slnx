@@ -40,6 +40,8 @@
     <File Path="src/Directory.Build.props" />
     <Project Path="src/Octokit.Webhooks.AspNetCore/Octokit.Webhooks.AspNetCore.csproj" />
     <Project Path="src/Octokit.Webhooks.AzureFunctions/Octokit.Webhooks.AzureFunctions.csproj" />
+    <Project Path="src/Octokit.Webhooks.CodeFixes/Octokit.Webhooks.CodeFixes.csproj" />
+    <Project Path="src/Octokit.Webhooks.SourceGenerator/Octokit.Webhooks.SourceGenerator.csproj" />
     <Project Path="src/Octokit.Webhooks/Octokit.Webhooks.csproj" />
   </Folder>
   <Folder Name="/test/">
