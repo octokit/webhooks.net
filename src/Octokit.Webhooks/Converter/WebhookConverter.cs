@@ -3,6 +3,7 @@ namespace Octokit.Webhooks.Converter;
 using System.Collections.Frozen;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json.Serialization.Metadata;
 
 [PublicAPI]
 public sealed class WebhookConverter<T> : JsonConverter<T>
@@ -37,13 +38,18 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        return (T)JsonSerializer.Deserialize(ref reader, type, options)!;
+        var jsonTypeInfo = ((IJsonTypeInfoResolver)WebhookEventJsonSerializerContext.Default).GetTypeInfo(type, options) ?? throw new JsonException();
+
+        return (T)JsonSerializer.Deserialize(ref reader, jsonTypeInfo)!;
     }
 
     public override bool CanConvert(Type typeToConvert) => typeof(WebhookEvent).IsAssignableFrom(typeToConvert);
 
-    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options) =>
-        JsonSerializer.Serialize(writer, value, options);
+    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+    {
+        var jsonTypeInfo = ((IJsonTypeInfoResolver)WebhookEventJsonSerializerContext.Default).GetTypeInfo(value.GetType(), options) ?? throw new JsonException();
+        JsonSerializer.Serialize(writer, value, jsonTypeInfo);
+    }
 
     private static string? PeekAction(Utf8JsonReader reader)
     {
@@ -66,14 +72,19 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         throw new JsonException("Missing required 'action' property.");
     }
 
-    private static FrozenDictionary<string, Type> BuildTypeMap()
-    {
-        var type = typeof(T);
-        return type.Assembly.GetTypes()
-            .Where(x => type.IsAssignableFrom(x) && x is { IsClass: true, IsAbstract: false } &&
-                        x.GetCustomAttribute<WebhookActionTypeAttribute>() is not null)
-            .ToFrozenDictionary(
-                y => y.GetCustomAttribute<WebhookActionTypeAttribute>()!.ActionType,
-                y => y);
-    }
+    private static FrozenDictionary<string, Type> BuildTypeMap() => WebhookConverter.GetActionTypes()
+        .Where(x => typeof(T).IsAssignableFrom(x.Type))
+        .ToFrozenDictionary(x => x.ActionType, x => x.Type);
+}
+
+/// <summary>
+/// The non-generic static class for <see cref="WebhookConverter{T}"/>.
+/// </summary>
+internal static partial class WebhookConverter
+{
+    /// <summary>
+    /// This method is implemented by the source generator to return a list of all types decorated with the <see cref="WebhookActionTypeAttribute"/>, along with their corresponding action type string.
+    /// </summary>
+    /// <returns>An enumerable of tuples containing the type and its corresponding action type string.</returns>
+    internal static partial IEnumerable<(Type Type, string ActionType)> GetActionTypes();
 }
