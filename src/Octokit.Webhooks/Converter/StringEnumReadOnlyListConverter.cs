@@ -2,12 +2,13 @@ namespace Octokit.Webhooks.Converter;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Octokit.Webhooks.Extensions;
 
 [PublicAPI]
-public sealed class StringEnumReadOnlyListConverter<TEnum> : JsonConverter<IReadOnlyList<StringEnum<TEnum>>>
+public sealed class StringEnumReadOnlyListConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum> : JsonConverter<IReadOnlyList<StringEnum<TEnum>>>
     where TEnum : struct, Enum
 {
     public override IReadOnlyList<StringEnum<TEnum>> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>

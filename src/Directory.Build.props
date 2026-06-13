@@ -4,6 +4,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFramework>net8.0</TargetFramework>
+    <IsAotCompatible>true</IsAotCompatible>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
