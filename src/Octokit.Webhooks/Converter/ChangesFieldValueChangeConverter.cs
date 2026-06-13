@@ -10,7 +10,7 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
         switch (reader)
         {
             case { TokenType: JsonTokenType.StartObject }:
-                var changeObject = JsonSerializer.Deserialize<ChangesFieldValueChange>(ref reader, options);
+                var changeObject = JsonSerializer.Deserialize(ref reader, new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(options)).ChangesFieldValueChange);
                 return changeObject;
             case { TokenType: JsonTokenType.String }:
                 return new ChangesFieldValueScalarChange { StringValue = reader.GetString() };
@@ -37,7 +37,7 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
                 writer.WriteNullValue();
                 break;
             case ChangesFieldValueChange change:
-                JsonSerializer.Serialize(writer, change, options);
+                JsonSerializer.Serialize(writer, change, new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(options)).ChangesFieldValueChange);
                 break;
             default:
                 writer.WriteNullValue();
