@@ -1,0 +1,163 @@
+{
+  "action": "created",
+  "alert": {
+    "number": 1,
+    "created_at": "2026-06-26T03:52:44Z",
+    "updated_at": "2026-06-26T03:52:44Z",
+    "url": "https://api.github.com/repos/example-org/example-repository/code-scanning/alerts/1",
+    "html_url": "https://github.com/example-org/example-repository/security/code-scanning/1",
+    "state": null,
+    "fixed_at": null,
+    "dismissed_by": null,
+    "dismissed_at": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "rule": {
+      "id": "CVE-2026-42496",
+      "severity": "warning",
+      "description": "perl-archive-tar: perl-archive-tar: Path traversal via crafted symlinks allows arbitrary file access",
+      "name": "OsPackageVulnerability",
+      "tags": [
+        "MEDIUM",
+        "security",
+        "vulnerability"
+      ],
+      "full_description": "Archive::Tar versions before 3.08 for Perl extract symlinks with attacker controlled targets outside the extraction directory.\n\n_make_special_file() passes the tar header's linkname to symlink() without validating it against absolute paths or .. segments. The secure-extract mode check that guards regular file extraction does not cover the symlink target.\n\nA subsequent open through the extracted name reads or writes the attacker chosen path.",
+      "help": "**Vulnerability CVE-2026-42496**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|perl-base|5.38.2-3.2ubuntu0.3|[CVE-2026-42496](https://avd.aquasec.com/nvd/cve-2026-42496)|\n\nArchive::Tar versions before 3.08 for Perl extract symlinks with attacker controlled targets outside the extraction directory.\n\n_make_special_file() passes the tar header's linkname to symlink() without validating it against absolute paths or .. segments. The secure-extract mode check that guards regular file extraction does not cover the symlink target.\n\nA subsequent open through the extracted name reads or writes the attacker chosen path.",
+      "help_uri": "https://avd.aquasec.com/nvd/cve-2026-42496",
+      "security_severity_level": "medium"
+    },
+    "tool": {
+      "name": "Trivy (docker)",
+      "guid": null,
+      "version": "0.71.2"
+    },
+    "most_recent_instance": {
+      "ref": "refs/pull/1/merge",
+      "analysis_key": ".github/workflows/sast.yml:analyse",
+      "environment": "{}",
+      "category": ".github/workflows/sast.yml:analyse",
+      "state": "open",
+      "commit_sha": "abc123def456789",
+      "message": {
+        "text": "Package: perl-base\nInstalled Version: 5.38.2-3.2ubuntu0.2\nVulnerability CVE-2026-42496\nSeverity: MEDIUM\nFixed Version: 5.38.2-3.2ubuntu0.3\nLink: [CVE-2026-42496](https://avd.aquasec.com/nvd/cve-2026-42496)"
+      },
+      "location": {
+        "path": "artifact/container-ExampleService.Api-0.1.0-PullRequest.1-1-merge-abc123d-0001.tar",
+        "start_line": 1,
+        "end_line": 1,
+        "start_column": 1,
+        "end_column": 1
+      },
+      "classifications": [
+        "library"
+      ]
+    },
+    "instances_url": "https://api.github.com/repos/example-org/example-repository/code-scanning/alerts/1/instances",
+    "dismissal_approved_by": null,
+    "assignees": []
+  },
+  "ref": "refs/pull/1/merge",
+  "commit_oid": "abc123def456789",
+  "repository": {
+    "id": 123456789,
+    "node_id": "R_kgDOExampleId",
+    "name": "example-repository",
+    "full_name": "example-org/example-repository",
+    "private": true,
+    "owner": {
+      "login": "example-org",
+      "id": 123456789,
+      "node_id": "O_kgDOExampleId",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123456789?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/example-org",
+      "html_url": "https://github.com/example-org",
+      "type": "Organization",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/example-org/example-repository",
+    "description": "Example repository description",
+    "fork": false,
+    "url": "https://api.github.com/repos/example-org/example-repository",
+    "created_at": "2026-01-01T00:00:00Z",
+    "updated_at": "2026-06-24T23:51:03Z",
+    "pushed_at": "2026-06-26T03:21:47Z",
+    "git_url": "git://github.com/example-org/example-repository.git",
+    "ssh_url": "git@github.com:example-org/example-repository.git",
+    "clone_url": "https://github.com/example-org/example-repository.git",
+    "svn_url": "https://github.com/example-org/example-repository",
+    "homepage": "",
+    "size": 27602,
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "language": "C#",
+    "has_issues": false,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "has_discussions": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 16,
+    "license": null,
+    "allow_forking": false,
+    "is_template": false,
+    "web_commit_signoff_required": false,
+    "has_pull_requests": true,
+    "pull_request_creation_policy": "all",
+    "topics": [],
+    "visibility": "internal",
+    "forks": 0,
+    "open_issues": 16,
+    "watchers": 1,
+    "default_branch": "develop",
+    "custom_properties": {
+      "Allow-Copilot-PR-reviews": "true",
+      "Automated-Permissions": "true",
+      "Conventional-Commits": "false",
+      "FileUpdater-Gitattributes-Sync": "true",
+      "FileUpdater-SAST-Sync": "true",
+      "ForcePRSquashing": "true",
+      "RepositoryType": "System",
+      "Strict-Git-Rules": "true",
+      "Strict-PR-Approvals": "false"
+    }
+  },
+  "organization": {
+    "login": "example-org",
+    "id": 123456789,
+    "node_id": "O_kgDOExampleId",
+    "url": "https://api.github.com/orgs/example-org",
+    "avatar_url": "https://avatars.githubusercontent.com/u/123456789?v=4",
+    "description": ""
+  },
+  "enterprise": {
+    "id": 1,
+    "slug": "example-enterprise",
+    "name": "Example Enterprise",
+    "node_id": "E_kgDOExampleId",
+    "avatar_url": "https://avatars.githubusercontent.com/b/1?v=4",
+    "description": "",
+    "website_url": "",
+    "html_url": "https://github.com/enterprises/example-enterprise",
+    "created_at": "2026-01-01T00:00:00Z",
+    "updated_at": "2026-06-01T00:00:00Z"
+  },
+  "sender": {
+    "login": "github",
+    "id": 1,
+    "node_id": "MDEyOk9yZ2FuaXphdGlvbjE=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/github",
+    "html_url": "https://github.com/github",
+    "type": "Organization",
+    "user_view_type": "public",
+    "site_admin": false
+  }
+}

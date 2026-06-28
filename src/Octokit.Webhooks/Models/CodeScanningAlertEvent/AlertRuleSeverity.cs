@@ -4,7 +4,7 @@ namespace Octokit.Webhooks.Models.CodeScanningAlertEvent;
 public enum AlertRuleSeverity
 {
     [EnumMember(Value = "none")]
-    Open,
+    None,
     [EnumMember(Value = "note")]
     Note,
     [EnumMember(Value = "warning")]
