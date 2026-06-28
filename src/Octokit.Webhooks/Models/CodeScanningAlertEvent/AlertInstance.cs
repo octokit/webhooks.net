@@ -9,6 +9,9 @@ public sealed record AlertInstance
     [JsonPropertyName("analysis_key")]
     public required string AnalysisKey { get; init; }
 
+    [JsonPropertyName("category")]
+    public string? Category { get; init; }
+
     [JsonPropertyName("environment")]
     public required string Environment { get; init; }
 
