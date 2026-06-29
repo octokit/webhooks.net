@@ -19,12 +19,8 @@ public abstract record WebhookEvent
     public User? Sender { get; init; }
 
     /// <summary>
-    /// Gets any additional properties that were not mapped to a strongly-typed property on the event.
+    /// Gets or sets any additional properties that were not mapped to a strongly-typed property on the event.
     /// </summary>
-    [JsonIgnore]
-    public IDictionary<string, JsonElement>? AdditionalProperties { get => this.ExtensionData; init => this.ExtensionData = value; }
-
-    // https://github.com/dotnet/runtime/issues/69123
     [JsonExtensionData]
-    private IDictionary<string, JsonElement>? ExtensionData { get; set; }
+    public IDictionary<string, JsonElement>? AdditionalProperties { get; set; }
 }
