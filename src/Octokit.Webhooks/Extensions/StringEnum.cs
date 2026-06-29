@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using JetBrains.Annotations;
 
 [PublicAPI]
-public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
+public sealed record StringEnum<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
     private static readonly FrozenDictionary<string, TEnum> StringToEnum;
@@ -19,14 +19,13 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
 
     static StringEnum()
     {
-        var enumType = typeof(TEnum);
         var stringToEnum = new Dictionary<string, TEnum>();
         var enumToString = new Dictionary<TEnum, string>();
 
-        foreach (var name in Enum.GetNames(enumType))
+        foreach (var name in Enum.GetNames<TEnum>())
         {
-            var value = (TEnum)Enum.Parse(enumType, name);
-            var memberValue = ((EnumMemberAttribute[])enumType.GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!;
+            var value = Enum.Parse<TEnum>(name);
+            var memberValue = ((EnumMemberAttribute[])typeof(TEnum).GetField(name)!.GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single().Value!;
             stringToEnum[memberValue] = value;
             enumToString[value] = memberValue;
         }
@@ -58,7 +57,7 @@ public sealed record StringEnum<TEnum> : IEquatable<StringEnum<TEnum>>
             _ = ThrowArgumentException(parsedValue.ToString());
         }
 
-        this.StringValue = stringValue!;
+        this.StringValue = stringValue;
         this.parsedValue = parsedValue;
         this.isValidEnum = true;
     }
