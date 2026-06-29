@@ -21,13 +21,13 @@ public sealed class WebhookEventTypeGenerator : IIncrementalGenerator
             (context, cancellationToken) =>
             {
                 var typeNode = (TypeDeclarationSyntax)context.TargetNode;
-                var eventType = context.Attributes[0].ConstructorArguments[0].Value as string;
+                var eventType = context.Attributes[0].ConstructorArguments[0].Value as string ?? string.Empty;
 
                 var @namespace = (typeNode.Parent as BaseNamespaceDeclarationSyntax)?.Name.ToString();
                 var name = typeNode.Identifier.Text;
                 var fullName = @namespace is not null ? $"{@namespace}.{name}" : name;
 
-                return (fullName, eventType!);
+                return (fullName, eventType);
             });
         context.RegisterSourceOutput(eventProvider.Collect(), ImplementGetEventTypeInfo);
     }
