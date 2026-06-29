@@ -68,7 +68,16 @@ public sealed class MissingJsonSerializableAttributeFixProvider : CodeFixProvide
         var newAttributeLists = new List<AttributeListSyntax>();
         foreach (var fullName in fullNames)
         {
-            var cleanName = fullName.Replace('.', '_').Replace('+', '_').Replace('<', '_').Replace('>', '_').TrimEnd('_');
+            var cleanName = fullName
+                .Replace('.', '_')
+                .Replace('+', '_')
+                .Replace('<', '_')
+                .Replace('>', '_')
+                .Replace(',', '_')
+                .Replace(' ', '_')
+                .Replace("?", "_Nullable")
+                .Replace("[]", "_Array")
+                .TrimEnd('_');
             var argument1 = SyntaxFactory.AttributeArgument(SyntaxFactory.ParseExpression($"typeof({fullName})"));
             var argument2 = SyntaxFactory.AttributeArgument(SyntaxFactory.ParseExpression($"TypeInfoPropertyName = \"{cleanName}\""));
             var newAttribute = SyntaxFactory.Attribute(SyntaxFactory.ParseName("JsonSerializable")).AddArgumentListArguments(argument1, argument2);

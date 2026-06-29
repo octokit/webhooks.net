@@ -72,39 +72,76 @@ public class WebhookEventSerializationAnalyzer : DiagnosticAnalyzer
         return @namespace != null && @namespace.StartsWith("System", StringComparison.Ordinal);
     }
 
-    private static void AddInstanceProperties(INamedTypeSymbol declaringType, HashSet<INamedTypeSymbol> typesNeedingAttributes)
+    private static void AddTypeToSet(ITypeSymbol type, HashSet<ITypeSymbol> typesNeedingAttributes)
+    {
+        switch (type)
+        {
+            case IArrayTypeSymbol arrayType:
+            {
+                if (typesNeedingAttributes.Add(arrayType))
+                {
+                    AddTypeToSet(arrayType.ElementType, typesNeedingAttributes);
+                }
+
+                break;
+            }
+
+            case INamedTypeSymbol namedType:
+            {
+                if (namedType.Arity is 0)
+                {
+                    if (!IsFromSystemNamespace(namedType) && typesNeedingAttributes.Add(namedType))
+                    {
+                        AddInstanceProperties(namedType, typesNeedingAttributes);
+                    }
+                }
+                else if (typesNeedingAttributes.Add(namedType))
+                {
+                    // Generic types are assumed to be special, like List<>, Dictionary<,>, StringEnum<>, etc.
+                    // We don't need to check the generic type itself, but we do need to check its type arguments.
+                    foreach (var typeArgument in namedType.TypeArguments)
+                    {
+                        AddTypeToSet(typeArgument, typesNeedingAttributes);
+                    }
+                }
+
+                break;
+            }
+
+            default:
+                break;
+        }
+    }
+
+    private static void AddInstanceProperties(INamedTypeSymbol declaringType, HashSet<ITypeSymbol> typesNeedingAttributes)
     {
         foreach (var member in declaringType.GetMembers())
         {
-            if (member is IPropertySymbol { GetMethod.IsStatic: false, Type: INamedTypeSymbol propertyType })
+            if (member is IPropertySymbol { GetMethod.IsStatic: false } property && !HasJsonIgnoreAttribute(property))
             {
-                if (propertyType.Arity is 0 && !IsFromSystemNamespace(propertyType))
-                {
-                    if (typesNeedingAttributes.Add(propertyType))
-                    {
-                        AddInstanceProperties(propertyType, typesNeedingAttributes);
-                    }
-                }
-                else if (propertyType.Arity is 1)
-                {
-                    if (propertyType.TypeArguments[0] is INamedTypeSymbol { Arity: 0 } innerType && !IsFromSystemNamespace(innerType))
-                    {
-                        typesNeedingAttributes.Add(propertyType);
-                        if (typesNeedingAttributes.Add(innerType))
-                        {
-                            AddInstanceProperties(innerType, typesNeedingAttributes);
-                        }
-                    }
-                }
+                AddTypeToSet(property.Type, typesNeedingAttributes);
             }
         }
     }
 
-    private static bool HasJsonConverterAttribute(INamedTypeSymbol type)
+    private static bool HasJsonConverterAttribute(ISymbol symbol)
     {
-        foreach (var attribute in type.GetAttributes())
+        foreach (var attribute in symbol.GetAttributes())
         {
             if (attribute.AttributeClass?.Name is "JsonConverterAttribute" && attribute.AttributeClass.ContainingNamespace?.ToDisplayString() == "System.Text.Json.Serialization")
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool HasJsonIgnoreAttribute(ISymbol symbol)
+    {
+        foreach (var attribute in symbol.GetAttributes())
+        {
+            if (attribute.AttributeClass?.Name is "JsonIgnoreAttribute" && attribute.AttributeClass.ContainingNamespace?.ToDisplayString() == "System.Text.Json.Serialization")
             {
                 return true;
             }
@@ -127,7 +164,7 @@ public class WebhookEventSerializationAnalyzer : DiagnosticAnalyzer
             return;
         }
 
-        var serializedTypes = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        var serializedTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
         foreach (var type in GetAllTypes(context.Compilation.GlobalNamespace))
         {
             if (InheritsFrom(type, webhookEventType))
@@ -141,7 +178,7 @@ public class WebhookEventSerializationAnalyzer : DiagnosticAnalyzer
             }
         }
 
-        var attributedTypes = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        var attributedTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
         foreach (var attribute in serializerType.GetAttributes())
         {
             if (attribute.AttributeClass?.Name is not "JsonSerializableAttribute" || attribute.AttributeClass.ContainingNamespace?.ToDisplayString() is not "System.Text.Json.Serialization")
@@ -150,8 +187,7 @@ public class WebhookEventSerializationAnalyzer : DiagnosticAnalyzer
             }
 
             // The first constructor argument of JsonSerializableAttribute is the type being marked for source generation.
-            var markedType = attribute.ConstructorArguments[0].Value as INamedTypeSymbol;
-            if (markedType is not null)
+            if (attribute.ConstructorArguments[0].Value is ITypeSymbol markedType)
             {
                 attributedTypes.Add(markedType);
             }
