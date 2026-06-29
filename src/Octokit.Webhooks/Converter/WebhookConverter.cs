@@ -38,7 +38,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var jsonTypeInfo = ((IJsonTypeInfoResolver)WebhookEventJsonSerializerContext.Default).GetTypeInfo(type, options) ?? throw new JsonException();
+        var jsonTypeInfo = WebhookEventJsonSerializerContext.Default.GetTypeInfo(type) ?? throw new JsonException();
 
         return (T)JsonSerializer.Deserialize(ref reader, jsonTypeInfo)!;
     }
@@ -47,7 +47,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-        var jsonTypeInfo = ((IJsonTypeInfoResolver)WebhookEventJsonSerializerContext.Default).GetTypeInfo(value.GetType(), options) ?? throw new JsonException();
+        var jsonTypeInfo = WebhookEventJsonSerializerContext.Default.GetTypeInfo(value.GetType()) ?? throw new JsonException();
         JsonSerializer.Serialize(writer, value, jsonTypeInfo);
     }
 
