@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks.Converter;
 
+using System.Diagnostics;
 using System.Text.Json.Serialization.Metadata;
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
@@ -46,7 +47,11 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
         }
     }
 
-    private static JsonTypeInfo<ChangesFieldValueChange> GetTypeInfoForChangesFieldValueChange(JsonSerializerOptions options) => options.TryGetTypeInfo(typeof(ChangesFieldValueChange), out var resolved) && resolved is JsonTypeInfo<ChangesFieldValueChange> typeInfo
+    private static JsonTypeInfo<ChangesFieldValueChange> GetTypeInfoForChangesFieldValueChange(JsonSerializerOptions options)
+    {
+        Debug.Assert(WebhookEventJsonSerializerContext.Default.GetTypeInfo(typeof(ChangesFieldValueChange)) != null, "The internal event serializer context should have a type info for ChangesFieldValueChange, so that this method can use the cached type info.");
+        return options.TryGetTypeInfo(typeof(ChangesFieldValueChange), out var resolved) && resolved is JsonTypeInfo<ChangesFieldValueChange> typeInfo
             ? typeInfo
             : new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(options)).ChangesFieldValueChange;
+    }
 }
