@@ -1,9 +1,9 @@
 namespace Octokit.Webhooks;
 
 using System.Collections.Concurrent;
-using System.Collections.Frozen;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
@@ -74,91 +74,12 @@ using Octokit.Webhooks.Events.Watch;
 using Octokit.Webhooks.Events.WorkflowJob;
 using Octokit.Webhooks.Events.WorkflowRun;
 
+/// <summary>
+/// Base class for processing GitHub webhook events. Derive from this class and override the virtual methods corresponding to the events you want to handle.
+/// </summary>
 [PublicAPI]
-public abstract class WebhookEventProcessor
+public abstract partial class WebhookEventProcessor
 {
-    private static readonly FrozenDictionary<string, Type> EventTypeMap = new Dictionary<string, Type>
-    {
-        [WebhookEventType.BranchProtectionConfiguration] = typeof(BranchProtectionConfigurationEvent),
-        [WebhookEventType.BranchProtectionRule] = typeof(BranchProtectionRuleEvent),
-        [WebhookEventType.CheckRun] = typeof(CheckRunEvent),
-        [WebhookEventType.CheckSuite] = typeof(CheckSuiteEvent),
-        [WebhookEventType.CodeScanningAlert] = typeof(CodeScanningAlertEvent),
-        [WebhookEventType.CommitComment] = typeof(CommitCommentEvent),
-        [WebhookEventType.ContentReference] = typeof(ContentReferenceEvent),
-        [WebhookEventType.Create] = typeof(CreateEvent),
-        [WebhookEventType.CustomProperty] = typeof(CustomPropertyEvent),
-        [WebhookEventType.CustomPropertyPromotedToEnterprise] = typeof(CustomPropertyPromotedToEnterpriseEvent),
-        [WebhookEventType.CustomPropertyValues] = typeof(CustomPropertyValuesEvent),
-        [WebhookEventType.Delete] = typeof(DeleteEvent),
-        [WebhookEventType.DependabotAlert] = typeof(DependabotAlertEvent),
-        [WebhookEventType.DeployKey] = typeof(DeployKeyEvent),
-        [WebhookEventType.Deployment] = typeof(DeploymentEvent),
-        [WebhookEventType.DeploymentProtectionRule] = typeof(DeploymentProtectionRuleEvent),
-        [WebhookEventType.DeploymentReview] = typeof(DeploymentReviewEvent),
-        [WebhookEventType.DeploymentStatus] = typeof(DeploymentStatusEvent),
-        [WebhookEventType.Discussion] = typeof(DiscussionEvent),
-        [WebhookEventType.DiscussionComment] = typeof(DiscussionCommentEvent),
-        [WebhookEventType.Fork] = typeof(ForkEvent),
-        [WebhookEventType.GithubAppAuthorization] = typeof(GithubAppAuthorizationEvent),
-        [WebhookEventType.Gollum] = typeof(GollumEvent),
-        [WebhookEventType.Installation] = typeof(InstallationEvent),
-        [WebhookEventType.InstallationRepositories] = typeof(InstallationRepositoriesEvent),
-        [WebhookEventType.InstallationTarget] = typeof(InstallationTargetEvent),
-        [WebhookEventType.IssueComment] = typeof(IssueCommentEvent),
-        [WebhookEventType.IssueDependencies] = typeof(IssueDependenciesEvent),
-        [WebhookEventType.Issues] = typeof(IssuesEvent),
-        [WebhookEventType.Label] = typeof(LabelEvent),
-        [WebhookEventType.MarketplacePurchase] = typeof(MarketplacePurchaseEvent),
-        [WebhookEventType.Member] = typeof(MemberEvent),
-        [WebhookEventType.Membership] = typeof(MembershipEvent),
-        [WebhookEventType.MergeGroup] = typeof(MergeGroupEvent),
-        [WebhookEventType.MergeQueueEntry] = typeof(MergeQueueEntryEvent),
-        [WebhookEventType.Meta] = typeof(MetaEvent),
-        [WebhookEventType.Milestone] = typeof(MilestoneEvent),
-        [WebhookEventType.OrgBlock] = typeof(OrgBlockEvent),
-        [WebhookEventType.Organization] = typeof(OrganizationEvent),
-        [WebhookEventType.Package] = typeof(PackageEvent),
-        [WebhookEventType.PageBuild] = typeof(PageBuildEvent),
-        [WebhookEventType.PersonalAccessTokenRequest] = typeof(PersonalAccessTokenRequestEvent),
-        [WebhookEventType.Ping] = typeof(PingEvent),
-        [WebhookEventType.Project] = typeof(ProjectEvent),
-        [WebhookEventType.ProjectCard] = typeof(ProjectCardEvent),
-        [WebhookEventType.ProjectColumn] = typeof(ProjectColumnEvent),
-        [WebhookEventType.ProjectsV2Item] = typeof(ProjectsV2ItemEvent),
-        [WebhookEventType.ProjectsV2] = typeof(ProjectsV2Event),
-        [WebhookEventType.ProjectsV2StatusUpdate] = typeof(ProjectsV2StatusUpdateEvent),
-        [WebhookEventType.Public] = typeof(PublicEvent),
-        [WebhookEventType.PullRequest] = typeof(PullRequestEvent),
-        [WebhookEventType.PullRequestReview] = typeof(PullRequestReviewEvent),
-        [WebhookEventType.PullRequestReviewComment] = typeof(PullRequestReviewCommentEvent),
-        [WebhookEventType.PullRequestReviewThread] = typeof(PullRequestReviewThreadEvent),
-        [WebhookEventType.Push] = typeof(PushEvent),
-        [WebhookEventType.RegistryPackage] = typeof(RegistryPackageEvent),
-        [WebhookEventType.Release] = typeof(ReleaseEvent),
-        [WebhookEventType.Repository] = typeof(RepositoryEvent),
-        [WebhookEventType.RepositoryAdvisory] = typeof(RepositoryAdvisoryEvent),
-        [WebhookEventType.RepositoryDispatch] = typeof(RepositoryDispatchEvent),
-        [WebhookEventType.RepositoryImport] = typeof(RepositoryImportEvent),
-        [WebhookEventType.RepositoryRuleset] = typeof(RepositoryRulesetEvent),
-        [WebhookEventType.RepositoryVulnerabilityAlert] = typeof(RepositoryVulnerabilityAlertEvent),
-        [WebhookEventType.SecretScanningAlert] = typeof(SecretScanningAlertEvent),
-        [WebhookEventType.SecretScanningAlertLocation] = typeof(SecretScanningAlertLocationEvent),
-        [WebhookEventType.SecretScanningScan] = typeof(SecretScanningScanEvent),
-        [WebhookEventType.SecurityAdvisory] = typeof(SecurityAdvisoryEvent),
-        [WebhookEventType.SecurityAndAnalysis] = typeof(SecurityAndAnalysisEvent),
-        [WebhookEventType.Sponsorship] = typeof(SponsorshipEvent),
-        [WebhookEventType.Star] = typeof(StarEvent),
-        [WebhookEventType.Status] = typeof(StatusEvent),
-        [WebhookEventType.SubIssues] = typeof(SubIssuesEvent),
-        [WebhookEventType.Team] = typeof(TeamEvent),
-        [WebhookEventType.TeamAdd] = typeof(TeamAddEvent),
-        [WebhookEventType.Watch] = typeof(WatchEvent),
-        [WebhookEventType.WorkflowDispatch] = typeof(WorkflowDispatchEvent),
-        [WebhookEventType.WorkflowJob] = typeof(WorkflowJobEvent),
-        [WebhookEventType.WorkflowRun] = typeof(WorkflowRunEvent),
-    }.ToFrozenDictionary();
-
     private static readonly ConcurrentDictionary<Type, bool> StringPathOverrideCache = new();
 
     [PublicAPI]
@@ -286,12 +207,10 @@ public abstract class WebhookEventProcessor
             throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
         }
 
-        if (!EventTypeMap.TryGetValue(headers.Event, out var type))
-        {
-            throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
-        }
+        var jsonTypeInfo = GetEventTypeInfo(headers.Event)
+            ?? throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
 
-        return (WebhookEvent)JsonSerializer.Deserialize(body, type)!;
+        return (WebhookEvent)JsonSerializer.Deserialize(body, jsonTypeInfo)!;
     }
 
     /// <summary>
@@ -324,6 +243,13 @@ public abstract class WebhookEventProcessor
         return this.ProcessWebhookFromBytesAsync(webhookHeaders, body, cancellationToken);
     }
 
+    /// <summary>
+    /// Gets the <see cref="JsonTypeInfo"/> for the given event type. This method is implemented by source generation based on the types decorated with <see cref="WebhookEventTypeAttribute"/>.
+    /// </summary>
+    /// <param name="eventType">The event type.</param>
+    /// <returns>The <see cref="JsonTypeInfo"/> for the given event type, or <c>null</c> if the event type is not recognized.</returns>
+    private static partial JsonTypeInfo? GetEventTypeInfo(string? eventType);
+
     private ValueTask ProcessWebhookFromBytesAsync(WebhookHeaders webhookHeaders, ReadOnlyMemory<byte> body, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(webhookHeaders.Event))
@@ -331,39 +257,39 @@ public abstract class WebhookEventProcessor
             throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
         }
 
-        if (!EventTypeMap.TryGetValue(webhookHeaders.Event, out var type))
-        {
-            throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
-        }
+        var jsonTypeInfo = GetEventTypeInfo(webhookHeaders.Event)
+            ?? throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
 
-        var webhookEvent = (WebhookEvent)JsonSerializer.Deserialize(body.Span, type)!;
+        var webhookEvent = (WebhookEvent)JsonSerializer.Deserialize(body.Span, jsonTypeInfo)!;
         return this.ProcessWebhookAsync(webhookHeaders, webhookEvent, cancellationToken);
     }
 
     private bool HasStringPathOverrides()
     {
         var concreteType = this.GetType();
-        return StringPathOverrideCache.GetOrAdd(concreteType, static t =>
+        if (!StringPathOverrideCache.TryGetValue(concreteType, out var result))
         {
             var baseType = typeof(WebhookEventProcessor);
 
-            var processMethod = t.GetMethod(
-                "ProcessWebhookAsync",
+            var processMethod = concreteType.GetMethod(
+                nameof(this.ProcessWebhookAsync),
                 BindingFlags.Public | BindingFlags.Instance,
                 null,
                 [typeof(IDictionary<string, StringValues>), typeof(string), typeof(CancellationToken)],
                 null);
 
-            var deserializeMethod = t.GetMethod(
-                "DeserializeWebhookEvent",
+            var deserializeMethod = concreteType.GetMethod(
+                nameof(this.DeserializeWebhookEvent),
                 BindingFlags.Public | BindingFlags.Instance,
                 null,
                 [typeof(WebhookHeaders), typeof(string)],
                 null);
 
-            return (processMethod?.DeclaringType != baseType)
+            StringPathOverrideCache[concreteType] = result = (processMethod?.DeclaringType != baseType)
                 || (deserializeMethod?.DeclaringType != baseType);
-        });
+        }
+
+        return result;
     }
 
     private ValueTask ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, CancellationToken cancellationToken = default) =>

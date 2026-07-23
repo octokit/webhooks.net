@@ -1,5 +1,7 @@
 namespace Octokit.Webhooks.Converter;
 
+using System.Diagnostics;
+using System.Text.Json.Serialization.Metadata;
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 [PublicAPI]
@@ -10,7 +12,7 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
         switch (reader)
         {
             case { TokenType: JsonTokenType.StartObject }:
-                var changeObject = JsonSerializer.Deserialize<ChangesFieldValueChange>(ref reader, options);
+                var changeObject = JsonSerializer.Deserialize(ref reader, GetTypeInfoForChangesFieldValueChange(options));
                 return changeObject;
             case { TokenType: JsonTokenType.String }:
                 return new ChangesFieldValueScalarChange { StringValue = reader.GetString() };
@@ -37,11 +39,19 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
                 writer.WriteNullValue();
                 break;
             case ChangesFieldValueChange change:
-                JsonSerializer.Serialize(writer, change, options);
+                JsonSerializer.Serialize(writer, change, GetTypeInfoForChangesFieldValueChange(options));
                 break;
             default:
                 writer.WriteNullValue();
                 break;
         }
+    }
+
+    private static JsonTypeInfo<ChangesFieldValueChange> GetTypeInfoForChangesFieldValueChange(JsonSerializerOptions options)
+    {
+        Debug.Assert(WebhookEventJsonSerializerContext.Default.GetTypeInfo(typeof(ChangesFieldValueChange)) != null, "The internal event serializer context should have a type info for ChangesFieldValueChange, so that this method can use the cached type info.");
+        return options.TryGetTypeInfo(typeof(ChangesFieldValueChange), out var resolved) && resolved is JsonTypeInfo<ChangesFieldValueChange> typeInfo
+            ? typeInfo
+            : new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(options)).ChangesFieldValueChange;
     }
 }

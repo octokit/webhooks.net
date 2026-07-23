@@ -10,6 +10,12 @@
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="all" />
     <PackageReference Include="Macross.Json.Extensions" />
     <PackageReference Include="Microsoft.Extensions.Primitives" />
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Octokit.Webhooks.CodeFixes\Octokit.Webhooks.CodeFixes.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Octokit.Webhooks.SourceGenerator\Octokit.Webhooks.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>
