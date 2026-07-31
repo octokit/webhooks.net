@@ -269,27 +269,16 @@ public abstract partial class WebhookEventProcessor
         var concreteType = this.GetType();
         if (!StringPathOverrideCache.TryGetValue(concreteType, out var result))
         {
-            var baseType = typeof(WebhookEventProcessor);
-
-            var processMethod = concreteType.GetMethod(
-                nameof(this.ProcessWebhookAsync),
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                [typeof(IDictionary<string, StringValues>), typeof(string), typeof(CancellationToken)],
-                null);
-
-            var deserializeMethod = concreteType.GetMethod(
-                nameof(this.DeserializeWebhookEvent),
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                [typeof(WebhookHeaders), typeof(string)],
-                null);
-
-            StringPathOverrideCache[concreteType] = result = (processMethod?.DeclaringType != baseType)
-                || (deserializeMethod?.DeclaringType != baseType);
+            StringPathOverrideCache[concreteType] = result = IsProcessWebhookAsyncOverridden() || IsDeserializeWebhookEventOverridden();
         }
 
         return result;
+
+        bool IsProcessWebhookAsyncOverridden() =>
+            new Func<IDictionary<string, StringValues>, string, CancellationToken, ValueTask>(this.ProcessWebhookAsync).Method.DeclaringType != typeof(WebhookEventProcessor);
+
+        bool IsDeserializeWebhookEventOverridden() =>
+            new Func<WebhookHeaders, string, WebhookEvent>(this.DeserializeWebhookEvent).Method.DeclaringType != typeof(WebhookEventProcessor);
     }
 
     private ValueTask ProcessBranchProtectionRuleWebhookAsync(WebhookHeaders headers, BranchProtectionRuleEvent branchProtectionRuleEvent, CancellationToken cancellationToken = default) =>
