@@ -13,4 +13,10 @@ public enum FieldType
     Text,
     [EnumMember(Value = "iteration")]
     Iteration,
+    [EnumMember(Value = "assignees")]
+    Assignees,
+    [EnumMember(Value = "reviewers")]
+    Reviewers,
+    [EnumMember(Value = "labels")]
+    Labels,
 }
