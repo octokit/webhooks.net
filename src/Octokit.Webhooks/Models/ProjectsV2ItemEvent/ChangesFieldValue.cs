@@ -17,8 +17,8 @@ public sealed record ChangesFieldValue
     public long ProjectNumber { get; init; }
 
     [JsonPropertyName("from")]
-    public required ChangesFieldValueChangeBase From { get; init; }
+    public ChangesFieldValueChangeBase? From { get; init; }
 
     [JsonPropertyName("to")]
-    public required ChangesFieldValueChangeBase To { get; init; }
+    public ChangesFieldValueChangeBase? To { get; init; }
 }
