@@ -1053,6 +1053,8 @@ public abstract partial class WebhookEventProcessor
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReviewRequestRemoved, cancellationToken),
             PullRequestActionValue.ReviewRequested
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.ReviewRequested, cancellationToken),
+            PullRequestActionValue.Stacked
+                => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Stacked, cancellationToken),
             PullRequestActionValue.Synchronize
                 => this.ProcessPullRequestWebhookAsync(headers, pullRequestEvent, PullRequestAction.Synchronize, cancellationToken),
             PullRequestActionValue.Unassigned

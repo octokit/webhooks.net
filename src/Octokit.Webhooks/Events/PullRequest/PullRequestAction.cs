@@ -37,6 +37,8 @@ public sealed record PullRequestAction : WebhookEventAction
 
     public static readonly PullRequestAction ReviewRequested = new(PullRequestActionValue.ReviewRequested);
 
+    public static readonly PullRequestAction Stacked = new(PullRequestActionValue.Stacked);
+
     public static readonly PullRequestAction Synchronize = new(PullRequestActionValue.Synchronize);
 
     public static readonly PullRequestAction Unassigned = new(PullRequestActionValue.Unassigned);

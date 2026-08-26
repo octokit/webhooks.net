@@ -1,0 +1,121 @@
+{
+  "action": "stacked",
+  "number": 42,
+  "pull_request": {
+    "url": "https://api.github.com/repos/octocat/Hello-World/pulls/42",
+    "id": 1,
+    "node_id": "PR_kwDOExample",
+    "html_url": "https://github.com/octocat/Hello-World/pull/42",
+    "diff_url": "https://github.com/octocat/Hello-World/pull/42.diff",
+    "patch_url": "https://github.com/octocat/Hello-World/pull/42.patch",
+    "issue_url": "https://api.github.com/repos/octocat/Hello-World/issues/42",
+    "number": 42,
+    "state": "open",
+    "locked": false,
+    "title": "Add API routes",
+    "user": {
+      "login": "octocat",
+      "id": 1,
+      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+      "url": "https://api.github.com/users/octocat",
+      "type": "User",
+      "site_admin": false
+    },
+    "created_at": "2026-08-25T12:00:00Z",
+    "updated_at": "2026-08-25T12:05:00Z",
+    "assignees": [],
+    "requested_reviewers": [],
+    "requested_teams": [],
+    "labels": [],
+    "commits_url": "https://api.github.com/repos/octocat/Hello-World/pulls/42/commits",
+    "review_comments_url": "https://api.github.com/repos/octocat/Hello-World/pulls/42/comments",
+    "review_comment_url": "https://api.github.com/repos/octocat/Hello-World/pulls/comments{/number}",
+    "comments_url": "https://api.github.com/repos/octocat/Hello-World/issues/42/comments",
+    "statuses_url": "https://api.github.com/repos/octocat/Hello-World/statuses/abcdef",
+    "head": {
+      "label": "octocat:add-api-routes",
+      "ref": "add-api-routes",
+      "sha": "abcdefabcdefabcdefabcdefabcdefabcdefabcd",
+      "user": {
+        "login": "octocat",
+        "id": 1,
+        "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+        "url": "https://api.github.com/users/octocat",
+        "type": "User",
+        "site_admin": false
+      },
+      "repo": null
+    },
+    "base": {
+      "label": "octocat:auth-layer",
+      "ref": "auth-layer",
+      "sha": "fedcbafedcbafedcbafedcbafedcbafedcbafedc",
+      "user": {
+        "login": "octocat",
+        "id": 1,
+        "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+        "url": "https://api.github.com/users/octocat",
+        "type": "User",
+        "site_admin": false
+      },
+      "repo": null
+    },
+    "stack": {
+      "base": {
+        "ref": "main",
+        "sha": "0123456789abcdef0123456789abcdef01234567"
+      },
+      "size": 5,
+      "position": 2,
+      "id": 123456,
+      "number": 50
+    },
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/pulls/42"
+      },
+      "html": {
+        "href": "https://github.com/octocat/Hello-World/pull/42"
+      },
+      "issue": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/issues/42"
+      },
+      "comments": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/issues/42/comments"
+      },
+      "review_comments": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/pulls/42/comments"
+      },
+      "review_comment": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/pulls/comments{/number}"
+      },
+      "commits": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/pulls/42/commits"
+      },
+      "statuses": {
+        "href": "https://api.github.com/repos/octocat/Hello-World/statuses/abcdef"
+      }
+    },
+    "author_association": "OWNER",
+    "draft": false,
+    "mergeable_state": "clean"
+  },
+  "stack": {
+    "base": {
+      "ref": "main",
+      "sha": "0123456789abcdef0123456789abcdef01234567"
+    },
+    "size": 5,
+    "position": 2,
+    "id": 123456,
+    "number": 50
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+    "url": "https://api.github.com/users/octocat",
+    "type": "User",
+    "site_admin": false
+  }
+}
