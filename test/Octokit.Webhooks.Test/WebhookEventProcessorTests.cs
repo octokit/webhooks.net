@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using AwesomeAssertions;
 using Microsoft.Extensions.Primitives;
+using Octokit.Webhooks.Events;
+using Octokit.Webhooks.Events.PullRequest;
 using Octokit.Webhooks.TestUtils;
 using Xunit;
 
@@ -26,6 +29,33 @@ public class WebhookEventProcessorTests
         };
         var result = this.webhookEventProcessor.DeserializeWebhookEvent(headers, payload);
         result.Should().BeAssignableTo(expectedType);
+    }
+
+    [Fact]
+    public async Task ProcessWebhookAsync_StackedPullRequest_DeserializesAndDispatches()
+    {
+        var processor = new CapturingPullRequestWebhookEventProcessor();
+        var payload = ResourceUtils.ReadResource("pull_request/stacked.payload.json");
+        var headers = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["X-GitHub-Event"] = "pull_request",
+        };
+
+        await processor.ProcessWebhookAsync(headers, payload, TestContext.Current.CancellationToken)
+            .ConfigureAwait(true);
+
+        processor.Event.Should().BeOfType<PullRequestStackedEvent>();
+        processor.Action.Should().Be(PullRequestAction.Stacked);
+
+        var stackedEvent = (PullRequestStackedEvent)processor.Event;
+        stackedEvent.PullRequest.Stack.Should().NotBeNull();
+        stackedEvent.Stack.Should().Be(stackedEvent.PullRequest.Stack);
+        stackedEvent.Stack.Id.Should().Be(123456);
+        stackedEvent.Stack.Number.Should().Be(50);
+        stackedEvent.Stack.Size.Should().Be(5);
+        stackedEvent.Stack.Position.Should().Be(2);
+        stackedEvent.Stack.Base.Ref.Should().Be("main");
+        stackedEvent.Stack.Base.Sha.Should().Be("0123456789abcdef0123456789abcdef01234567");
     }
 
     [Fact]
@@ -141,6 +171,24 @@ public class WebhookEventProcessorTests
         {
             this.StringDeserializeCalled = true;
             return base.DeserializeWebhookEvent(headers, body);
+        }
+    }
+
+    private sealed class CapturingPullRequestWebhookEventProcessor : WebhookEventProcessor
+    {
+        public PullRequestEvent? Event { get; private set; }
+
+        public PullRequestAction? Action { get; private set; }
+
+        protected override ValueTask ProcessPullRequestWebhookAsync(
+            WebhookHeaders headers,
+            PullRequestEvent pullRequestEvent,
+            PullRequestAction action,
+            CancellationToken cancellationToken = default)
+        {
+            this.Event = pullRequestEvent;
+            this.Action = action;
+            return ValueTask.CompletedTask;
         }
     }
 }

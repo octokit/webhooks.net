@@ -37,6 +37,8 @@ public static class PullRequestActionValue
 
     public const string ReviewRequested = "review_requested";
 
+    public const string Stacked = "stacked";
+
     public const string Synchronize = "synchronize";
 
     public const string Unassigned = "unassigned";

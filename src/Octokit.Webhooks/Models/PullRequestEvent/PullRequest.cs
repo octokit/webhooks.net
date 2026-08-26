@@ -101,6 +101,9 @@ public sealed record PullRequest
     [JsonPropertyName("base")]
     public required PullRequestBase Base { get; init; }
 
+    [JsonPropertyName("stack")]
+    public PullRequestStack? Stack { get; init; }
+
     [JsonPropertyName("_links")]
     public required PullRequestLinks Links { get; init; }
 
