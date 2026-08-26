@@ -32,7 +32,7 @@ public class WebhookEventProcessorTests
     }
 
     [Fact]
-    public async Task ProcessWebhookAsync_StackedPullRequest_DeserializesAndDispatches()
+    public async Task ProcessWebhookAsync_StackedPullRequest_DispatchesWithStackMetadata()
     {
         var processor = new CapturingPullRequestWebhookEventProcessor();
         var payload = ResourceUtils.ReadResource("pull_request/stacked.payload.json");
