@@ -47,6 +47,7 @@
   <Folder Name="/test/">
     <File Path="test/.editorconfig" />
     <File Path="test/Directory.Build.props" />
+    <Project Path="test/Octokit.Webhooks.AspNetCore.Test/Octokit.Webhooks.AspNetCore.Test.csproj" />
     <Project Path="test/Octokit.Webhooks.AzureFunctions.Test/Octokit.Webhooks.AzureFunctions.Test.csproj" />
     <Project Path="test/Octokit.Webhooks.Test/Octokit.Webhooks.Test.csproj" />
     <Project Path="test/Octokit.Webhooks.TestUtils/Octokit.Webhooks.TestUtils.csproj" />

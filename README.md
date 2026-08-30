@@ -50,6 +50,29 @@ Libraries to handle GitHub Webhooks in .NET applications.
 * `path`. Defaults to `/api/github/webhooks`, the URL of the endpoint to use for GitHub.
 * `secret`. The secret you have configured in GitHub, if you have set this up.
 
+By default, exceptions thrown while processing a webhook are logged and return
+HTTP 500. Configure `GitHubWebhookOptions.ExceptionHandler` to handle specific
+exceptions and control the response:
+
+```C#
+builder.Services.Configure<GitHubWebhookOptions>(options =>
+{
+    options.ExceptionHandler = (exception, context) =>
+    {
+        if (exception is JsonException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            return ValueTask.FromResult(true);
+        }
+
+        return ValueTask.FromResult(false);
+    };
+});
+```
+
+Returning `true` means the callback has completed the response. Returning
+`false` uses the default HTTP 500 behavior.
+
 ### Azure Functions
 
 **NOTE**: Support is only provided for [isolated process Azure Functions](https://learn.microsoft.com/azure/azure-functions/dotnet-isolated-process-guide).
