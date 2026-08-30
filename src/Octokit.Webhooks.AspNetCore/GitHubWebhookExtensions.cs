@@ -73,6 +73,12 @@ public static partial class GitHubWebhookExtensions
                 }
                 catch (Exception ex)
                 {
+                    if (options?.CurrentValue.ExceptionHandler is { } exceptionHandler
+                        && await exceptionHandler(ex, context).ConfigureAwait(false))
+                    {
+                        return;
+                    }
+
                     Log.ProcessingFailed(logger, ex);
                     context.Response.StatusCode = 500;
                 }
