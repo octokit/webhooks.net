@@ -22,7 +22,7 @@
     <PackageVersion Include="Microsoft.Extensions.Primitives" Version="10.0.12"/>
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="18.7.23"/>
     <PackageVersion Include="MinVer" Version="8.0.0"/>
-    <PackageVersion Include="Moq" Version="4.20.72"/>
+    <PackageVersion Include="Moq" Version="4.21.0"/>
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556"/>
     <PackageVersion Include="System.Text.Json" Version="10.0.12"/>
     <PackageVersion Include="xunit.v3" Version="4.0.1"/>
