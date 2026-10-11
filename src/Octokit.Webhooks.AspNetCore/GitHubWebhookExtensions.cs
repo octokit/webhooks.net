@@ -151,7 +151,8 @@ public static partial class GitHubWebhookExtensions
     {
         // Rent one byte more than the declared Content-Length (up to the cap) so that a well-formed body
         // is read to completion (the final read returning zero) without the buffer ever needing to grow.
-        // If the length is unknown (e.g. chunked), capped, or the body is longer than declared, the buffer grows.
+        // If the length is unknown (e.g. chunked), above the cap, or the body is longer than declared, the
+        // buffer grows in proportion to the bytes actually received, as Content-Length is client-controlled.
         var contentLength = request.ContentLength;
         var initialSize = contentLength > 0 ? (int)Math.Min(contentLength.Value, MaxInitialBufferSize - 1) + 1 : DefaultBufferSize;
         var buffer = ArrayPool<byte>.Shared.Rent(initialSize);
@@ -163,15 +164,12 @@ public static partial class GitHubWebhookExtensions
             {
                 if (length == buffer.Length)
                 {
-                    // Now that as many bytes as were rented have actually arrived, honour a declared
-                    // Content-Length above the initial cap so that the client needs only one grow.
-                    var newSize = checked(buffer.Length * 2);
-                    if (contentLength >= newSize)
+                    if (length >= Array.MaxLength)
                     {
-                        newSize = (int)Math.Min(contentLength.Value, Array.MaxLength - 1) + 1;
+                        throw new InvalidOperationException("The request body is too large to buffer.");
                     }
 
-                    var larger = ArrayPool<byte>.Shared.Rent(newSize);
+                    var larger = ArrayPool<byte>.Shared.Rent((int)Math.Min(2L * length, Array.MaxLength));
                     buffer.AsSpan(0, length).CopyTo(larger);
                     ReturnBuffer(buffer, length);
                     buffer = larger;
@@ -188,7 +186,7 @@ public static partial class GitHubWebhookExtensions
         }
         catch
         {
-            ReturnBuffer(buffer, length);
+            ArrayPool<byte>.Shared.Return(buffer, clearArray: true);
             throw;
         }
     }
