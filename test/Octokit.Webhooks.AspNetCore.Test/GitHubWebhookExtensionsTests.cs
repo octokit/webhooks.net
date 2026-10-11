@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AwesomeAssertions;
@@ -86,15 +88,157 @@ public class GitHubWebhookExtensionsTests
         handlerInvoked.Should().BeFalse();
     }
 
-    private static async Task<DefaultHttpContext> InvokeEndpointAsync(
+    [Theory]
+    [InlineData("application/json")]
+    [InlineData("application/json; charset=utf-8")]
+    [InlineData("Application/JSON")]
+    [InlineData(" application/json ;charset=utf-8")]
+    public async Task ValidRequest_ReturnsOk(string contentType)
+    {
+        var processor = new RecordingWebhookEventProcessor();
+        var body = CreateBody(100);
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                request.ContentType = contentType;
+                SetBody(request, body);
+            },
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status200OK);
+        processor.Bodies.Should().ContainSingle().Which.Should().Be(body);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("text/plain")]
+    [InlineData("application/jsonp")]
+    [InlineData("application/problem+json")]
+    [InlineData("not a content type")]
+    public async Task InvalidContentType_ReturnsBadRequest(string? contentType)
+    {
+        var processor = new RecordingWebhookEventProcessor();
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                request.ContentType = contentType;
+                SetBody(request, CreateBody(100));
+            },
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+        processor.Bodies.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task ValidSignature_ReturnsOk()
+    {
+        const string secret = "my-webhook-secret";
+        var processor = new RecordingWebhookEventProcessor();
+        var body = CreateBody(100);
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                SetBody(request, body);
+                request.Headers["X-Hub-Signature-256"] = ComputeSignature(secret, body);
+            },
+            secret: secret,
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status200OK);
+        processor.Bodies.Should().ContainSingle().Which.Should().Be(body);
+    }
+
+    [Fact]
+    public async Task InvalidSignature_ReturnsBadRequest()
+    {
+        var processor = new RecordingWebhookEventProcessor();
+        var body = CreateBody(100);
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                SetBody(request, body);
+                request.Headers["X-Hub-Signature-256"] = ComputeSignature("wrong-secret", body);
+            },
+            secret: "my-webhook-secret",
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+        processor.Bodies.Should().BeEmpty();
+    }
+
+    [Theory]
+    [InlineData(10)]
+    [InlineData(100_000)]
+    public async Task Body_WithoutContentLength_IsRead(int payloadLength)
+    {
+        var processor = new RecordingWebhookEventProcessor();
+        var body = CreateBody(payloadLength);
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                SetBody(request, body);
+                request.ContentLength = null;
+            },
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status200OK);
+        processor.Bodies.Should().ContainSingle().Which.Should().Be(body);
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(1_000_000)]
+    public async Task Body_WithIncorrectContentLength_IsRead(long contentLength)
+    {
+        var processor = new RecordingWebhookEventProcessor();
+        var body = CreateBody(50_000);
+
+        var context = await InvokeEndpointAsync(
+            processor,
+            request =>
+            {
+                SetBody(request, body);
+                request.ContentLength = contentLength;
+            },
+            cancellationToken: TestContext.Current.CancellationToken).ConfigureAwait(true);
+
+        context.Response.StatusCode.Should().Be(StatusCodes.Status200OK);
+        processor.Bodies.Should().ContainSingle().Which.Should().Be(body);
+    }
+
+    private static Task<DefaultHttpContext> InvokeEndpointAsync(
         Exception exception,
         Func<Exception, HttpContext, ValueTask<bool>>? exceptionHandler = null,
+        CancellationToken cancellationToken = default)
+        => InvokeEndpointAsync(
+            new ThrowingWebhookEventProcessor(exception),
+            request => SetBody(request, "{}"),
+            exceptionHandler,
+            cancellationToken: cancellationToken);
+
+    private static async Task<DefaultHttpContext> InvokeEndpointAsync(
+        WebhookEventProcessor processor,
+        Action<HttpRequest> configureRequest,
+        Func<Exception, HttpContext, ValueTask<bool>>? exceptionHandler = null,
+        string? secret = null,
         CancellationToken cancellationToken = default)
     {
         var services = new ServiceCollection();
         services.AddLogging();
         services.AddRouting();
-        services.AddSingleton<WebhookEventProcessor>(new ThrowingWebhookEventProcessor(exception));
+        services.AddSingleton(processor);
 
         if (exceptionHandler is not null)
         {
@@ -103,7 +247,7 @@ public class GitHubWebhookExtensionsTests
 
         await using var serviceProvider = services.BuildServiceProvider();
         var routeBuilder = new TestEndpointRouteBuilder(serviceProvider);
-        routeBuilder.MapGitHubWebhooks();
+        routeBuilder.MapGitHubWebhooks(secret: secret);
 
         var endpoint = routeBuilder.DataSources
             .SelectMany(dataSource => dataSource.Endpoints)
@@ -116,11 +260,45 @@ public class GitHubWebhookExtensionsTests
         };
         context.Request.ContentType = "application/json";
         context.Request.Headers["X-GitHub-Event"] = "issues";
-        context.Request.Body = new MemoryStream("{}"u8.ToArray());
         context.RequestAborted = cancellationToken;
+        configureRequest(context.Request);
 
         await endpoint.RequestDelegate!(context).ConfigureAwait(true);
         return context;
+    }
+
+    private static void SetBody(HttpRequest request, string body)
+    {
+        var bytes = Encoding.UTF8.GetBytes(body);
+        request.Body = new MemoryStream(bytes);
+        request.ContentLength = bytes.Length;
+    }
+
+    private static string CreateBody(int length)
+    {
+        const string prefix = "{\"action\":\"";
+        const string suffix = "\"}";
+        return prefix + new string('a', Math.Max(0, length - prefix.Length - suffix.Length)) + suffix;
+    }
+
+    private static string ComputeSignature(string secret, string body)
+    {
+        var hash = HMACSHA256.HashData(Encoding.UTF8.GetBytes(secret), Encoding.UTF8.GetBytes(body));
+        return $"sha256={Convert.ToHexString(hash).ToLowerInvariant()}";
+    }
+
+    private sealed class RecordingWebhookEventProcessor : WebhookEventProcessor
+    {
+        public List<string> Bodies { get; } = [];
+
+        public override ValueTask ProcessWebhookAsync(
+            IDictionary<string, StringValues> headers,
+            string body,
+            CancellationToken cancellationToken = default)
+        {
+            this.Bodies.Add(body);
+            return ValueTask.CompletedTask;
+        }
     }
 
     private sealed class ThrowingWebhookEventProcessor(Exception exception) : WebhookEventProcessor
