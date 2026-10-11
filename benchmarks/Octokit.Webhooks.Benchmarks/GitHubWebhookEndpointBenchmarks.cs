@@ -32,7 +32,7 @@ public class GitHubWebhookEndpointBenchmarks
     private DefaultHttpContext pullRequestContext = null!;
 
     [GlobalSetup]
-    public void Setup()
+    public async Task SetupAsync()
     {
         var services = new ServiceCollection();
         services.AddLogging();
@@ -50,9 +50,9 @@ public class GitHubWebhookEndpointBenchmarks
             .Single()
             .RequestDelegate!;
 
-        this.pushContext = this.CreateContext("push", "push/payload.json");
-        this.issuesContext = this.CreateContext("issues", "issues/opened.payload.json");
-        this.pullRequestContext = this.CreateContext("pull_request", "pull_request/opened.payload.json");
+        this.pushContext = await this.CreateContextAsync("push", "push/payload.json").ConfigureAwait(false);
+        this.issuesContext = await this.CreateContextAsync("issues", "issues/opened.payload.json").ConfigureAwait(false);
+        this.pullRequestContext = await this.CreateContextAsync("pull_request", "pull_request/opened.payload.json").ConfigureAwait(false);
     }
 
     [GlobalCleanup]
@@ -80,7 +80,7 @@ public class GitHubWebhookEndpointBenchmarks
         return this.requestDelegate(context);
     }
 
-    private DefaultHttpContext CreateContext(string eventName, string resource)
+    private async Task<DefaultHttpContext> CreateContextAsync(string eventName, string resource)
     {
         var body = Encoding.UTF8.GetBytes(ResourceUtils.ReadResource(resource));
 
@@ -97,6 +97,14 @@ public class GitHubWebhookEndpointBenchmarks
         context.Request.Headers["X-GitHub-Hook-ID"] = "12345";
         context.Request.Headers["X-Hub-Signature-256"] = ComputeSignature(Secret, body);
         context.Request.Body = new MemoryStream(body, writable: false);
+
+        // Verify that the benchmark exercises the happy path rather than an error response
+        await this.InvokeAsync(context).ConfigureAwait(false);
+
+        if (context.Response.StatusCode != StatusCodes.Status200OK)
+        {
+            throw new InvalidOperationException($"The {eventName} benchmark request returned HTTP {context.Response.StatusCode}.");
+        }
 
         return context;
     }
