@@ -38,9 +38,7 @@ public sealed class StringEnumReadOnlyListConverter<[DynamicallyAccessedMembers(
                 throw new JsonException($"Expected {JsonTokenType.String} but found {reader.TokenType}.");
             }
 
-            var stringValue = reader.GetString()
-                ?? throw new JsonException("Unexpected null value in array.");
-            returnValue.Add(new StringEnum<TEnum>(stringValue));
+            returnValue.Add(StringEnum<TEnum>.FromJson(ref reader));
         }
 
         throw new JsonException("Incomplete JSON array.");

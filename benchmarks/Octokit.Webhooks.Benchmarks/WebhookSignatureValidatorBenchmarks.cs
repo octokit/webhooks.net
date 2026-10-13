@@ -11,6 +11,9 @@ public class WebhookSignatureValidatorBenchmarks
 {
     private const string Secret = "benchmark-webhook-secret";
 
+    // The correct length for a SHA-256 signature, but not valid hexadecimal
+    private const string MalformedSignature = "sha256=zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
+
     private string smallBody = null!;
     private string smallSignature = null!;
     private byte[] smallBodyBytes = null!;
@@ -46,6 +49,10 @@ public class WebhookSignatureValidatorBenchmarks
     [Benchmark(Description = "Verify bytes (large payload)")]
     public WebhookSignatureValidationResult VerifyLargePayloadBytes()
         => WebhookSignatureValidator.Verify(this.largeSignature, Secret, (ReadOnlySpan<byte>)this.largeBodyBytes);
+
+    [Benchmark(Description = "Verify bytes (malformed signature)")]
+    public WebhookSignatureValidationResult VerifyMalformedSignatureBytes()
+        => WebhookSignatureValidator.Verify(MalformedSignature, Secret, (ReadOnlySpan<byte>)this.smallBodyBytes);
 
     private static string ComputeSignature(string secret, string body)
     {
