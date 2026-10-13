@@ -1,7 +1,7 @@
 namespace Octokit.Webhooks.AspNetCore;
 
 using System;
-using System.IO;
+using System.Buffers;
 using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 
 /// <summary>
 /// A class containing extension methods for <see cref="IEndpointRouteBuilder"/>
@@ -18,6 +20,13 @@ using Microsoft.Extensions.Options;
 /// </summary>
 public static partial class GitHubWebhookExtensions
 {
+    // The buffer size used to read the request body when Content-Length is unknown.
+    private const int DefaultBufferSize = 16 * 1024;
+
+    // Content-Length is client-controlled, so cap the buffer rented before any of the body has been
+    // received. Bodies that are genuinely larger grow the buffer as bytes actually arrive.
+    private const int MaxInitialBufferSize = 64 * 1024;
+
     public static IEndpointConventionBuilder MapGitHubWebhooks(
         this IEndpointRouteBuilder endpoints,
         string path = "/api/github/webhooks",
@@ -28,48 +37,46 @@ public static partial class GitHubWebhookExtensions
             path,
             async context =>
             {
-                var logger = context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
-
                 // Verify content type
                 if (!VerifyContentType(context, MediaTypeNames.Application.Json))
                 {
-                    Log.IncorrectContentType(logger);
+                    Log.IncorrectContentType(GetLogger(context));
                     return;
                 }
 
                 // Verify event type
                 if (!VerifyEventType(context))
                 {
-                    Log.MissingEventType(logger);
+                    Log.MissingEventType(GetLogger(context));
                     return;
                 }
 
+                byte[]? buffer = null;
+                var length = 0;
                 try
                 {
-                    // Get body as bytes to avoid string allocation
-                    var body = await GetBodyBytesAsync(context, context.RequestAborted).ConfigureAwait(false);
+                    // Read the body into a pooled buffer to avoid per-request array and string allocations
+                    (buffer, length) = await ReadBodyAsync(context.Request, context.RequestAborted).ConfigureAwait(false);
+                    var body = buffer.AsMemory(0, length);
 
-                    if (secret is null && options is not null)
-                    {
-                        secret = options.CurrentValue.Secret;
-                    }
+                    var webhookSecret = secret ?? options?.CurrentValue.Secret;
 
                     // Verify signature
-                    if (!await VerifySignatureAsync(context, secret, body).ConfigureAwait(false))
+                    if (!await VerifySignatureAsync(context, webhookSecret, body).ConfigureAwait(false))
                     {
-                        Log.SignatureValidationFailed(logger);
+                        Log.SignatureValidationFailed(GetLogger(context));
                         return;
                     }
 
                     // Process body
                     var service = context.RequestServices.GetRequiredService<WebhookEventProcessor>();
-                    await service.ProcessWebhookAsync(context.Request.Headers, (ReadOnlyMemory<byte>)body, context.RequestAborted)
+                    await service.ProcessWebhookAsync(context.Request.Headers, body, context.RequestAborted)
                         .ConfigureAwait(false);
-                    context.Response.StatusCode = 200;
+                    context.Response.StatusCode = StatusCodes.Status200OK;
                 }
                 catch (OperationCanceledException) when (context.RequestAborted.IsCancellationRequested)
                 {
-                    Log.RequestCancelled(logger);
+                    Log.RequestCancelled(GetLogger(context));
                 }
                 catch (Exception ex)
                 {
@@ -79,34 +86,116 @@ public static partial class GitHubWebhookExtensions
                         return;
                     }
 
-                    Log.ProcessingFailed(logger, ex);
-                    context.Response.StatusCode = 500;
+                    Log.ProcessingFailed(GetLogger(context), ex);
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                }
+                finally
+                {
+                    if (buffer is not null)
+                    {
+                        ReturnBuffer(buffer, length);
+                    }
                 }
             });
     }
 
-    private static bool VerifyContentType(HttpContext context, string expectedContentType)
-    {
-        if (context.Request.ContentType is null)
-        {
-            return false;
-        }
+    private static ILogger GetLogger(HttpContext context)
+        => context.RequestServices.GetRequiredService<ILogger<WebhookEventProcessor>>();
 
-        var contentType = new ContentType(context.Request.ContentType);
-        if (contentType.MediaType != expectedContentType)
+    private static bool VerifyContentType(HttpContext context, string expectedMediaType)
+    {
+        if (!HasMediaType(context.Request.ContentType, expectedMediaType))
         {
-            context.Response.StatusCode = 400;
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             return false;
         }
 
         return true;
     }
 
-    private static async Task<byte[]> GetBodyBytesAsync(HttpContext context, CancellationToken cancellationToken)
+    private static bool HasMediaType(string? contentType, string expectedMediaType)
     {
-        using var ms = new MemoryStream();
-        await context.Request.Body.CopyToAsync(ms, cancellationToken).ConfigureAwait(false);
-        return ms.ToArray();
+        if (string.IsNullOrEmpty(contentType))
+        {
+            return false;
+        }
+
+        // GitHub sends "application/json" with no parameters, so most requests take this allocation-free path.
+        // Media types are case-insensitive.
+        if (string.Equals(contentType, expectedMediaType, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        // Otherwise fully parse the header so that malformed values, which would have made
+        // System.Net.Mime.ContentType throw, are rejected rather than accepted or causing an HTTP 500.
+        if (!MediaTypeHeaderValue.TryParse(contentType, out var mediaType) ||
+            !mediaType.MediaType.Equals(expectedMediaType, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        // The parser tolerates parameters with no value (e.g. "application/json; charset"), which is not valid syntax.
+        foreach (var parameter in mediaType.Parameters)
+        {
+            if (StringSegment.IsNullOrEmpty(parameter.Value))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static async ValueTask<(byte[] Buffer, int Length)> ReadBodyAsync(HttpRequest request, CancellationToken cancellationToken)
+    {
+        // Rent one byte more than the declared Content-Length (up to the cap) so that a well-formed body
+        // is read to completion (the final read returning zero) without the buffer ever needing to grow.
+        // If the length is unknown (e.g. chunked), above the cap, or the body is longer than declared, the
+        // buffer grows in proportion to the bytes actually received, as Content-Length is client-controlled.
+        var contentLength = request.ContentLength;
+        var initialSize = contentLength > 0 ? (int)Math.Min(contentLength.Value, MaxInitialBufferSize - 1) + 1 : DefaultBufferSize;
+        var buffer = ArrayPool<byte>.Shared.Rent(initialSize);
+        var length = 0;
+
+        try
+        {
+            while (true)
+            {
+                if (length == buffer.Length)
+                {
+                    if (length >= Array.MaxLength)
+                    {
+                        throw new InvalidOperationException("The request body is too large to buffer.");
+                    }
+
+                    var larger = ArrayPool<byte>.Shared.Rent((int)Math.Min(2L * length, Array.MaxLength));
+                    buffer.AsSpan(0, length).CopyTo(larger);
+                    ReturnBuffer(buffer, length);
+                    buffer = larger;
+                }
+
+                var read = await request.Body.ReadAsync(buffer.AsMemory(length), cancellationToken).ConfigureAwait(false);
+                if (read == 0)
+                {
+                    return (buffer, length);
+                }
+
+                length += read;
+            }
+        }
+        catch
+        {
+            ArrayPool<byte>.Shared.Return(buffer, clearArray: true);
+            throw;
+        }
+    }
+
+    private static void ReturnBuffer(byte[] buffer, int length)
+    {
+        // Only the portion that held payload data needs clearing before the buffer is reused.
+        buffer.AsSpan(0, length).Clear();
+        ArrayPool<byte>.Shared.Return(buffer);
     }
 
     private static bool VerifyEventType(HttpContext context)
@@ -115,40 +204,40 @@ public static partial class GitHubWebhookExtensions
             || eventType.Count != 1
             || string.IsNullOrWhiteSpace(eventType.ToString()))
         {
-            context.Response.StatusCode = 400;
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             return false;
         }
 
         return true;
     }
 
-    private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, byte[] body)
+    private static async Task<bool> VerifySignatureAsync(HttpContext context, string? secret, ReadOnlyMemory<byte> body)
     {
         _ = context.Request.Headers.TryGetValue("X-Hub-Signature-256", out var signatureSha256);
 
-        var result = WebhookSignatureValidator.Verify(signatureSha256.ToString(), secret, (ReadOnlySpan<byte>)body);
+        var result = WebhookSignatureValidator.Verify(signatureSha256.ToString(), secret, body.Span);
 
         switch (result)
         {
             case WebhookSignatureValidationResult.Valid:
                 return true;
             case WebhookSignatureValidationResult.MissingSignature:
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("Expected an X-Hub-Signature-256 header but none was provided. Configure a webhook secret on the sender, or remove the secret from the receiver.")
                     .ConfigureAwait(false);
                 return false;
             case WebhookSignatureValidationResult.MissingSecret:
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("Request includes an X-Hub-Signature-256 header but no secret is configured on the receiver.")
                     .ConfigureAwait(false);
                 return false;
             case WebhookSignatureValidationResult.SignatureMismatch:
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("X-Hub-Signature-256 does not match the expected signature. Verify that the webhook secret matches on both sender and receiver.")
                     .ConfigureAwait(false);
                 return false;
             default:
-                context.Response.StatusCode = 400;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 return false;
         }
     }
