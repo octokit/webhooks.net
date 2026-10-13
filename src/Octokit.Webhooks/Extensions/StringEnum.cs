@@ -11,8 +11,17 @@ using JetBrains.Annotations;
 public sealed record StringEnum<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum> : IEquatable<StringEnum<TEnum>>
     where TEnum : struct, Enum
 {
+#if NET9_0_OR_GREATER
+    // Values longer than this fall back to allocating a string to look up
+    private const int MaxLookupLength = 128;
+#endif
+
     private static readonly FrozenDictionary<string, TEnum> StringToEnum;
     private static readonly FrozenDictionary<TEnum, string> EnumToString;
+
+#if NET9_0_OR_GREATER
+    private static readonly FrozenDictionary<string, StringEnum<TEnum>>.AlternateLookup<ReadOnlySpan<char>> KnownValues;
+#endif
 
     private readonly TEnum? parsedValue;
     private readonly bool isValidEnum;
@@ -32,6 +41,13 @@ public sealed record StringEnum<[DynamicallyAccessedMembers(DynamicallyAccessedM
 
         StringToEnum = stringToEnum.ToFrozenDictionary();
         EnumToString = enumToString.ToFrozenDictionary();
+
+#if NET9_0_OR_GREATER
+        // The type is immutable, so a single instance of each known value can be shared
+        KnownValues = StringToEnum.Keys
+            .ToFrozenDictionary(static key => key, static key => new StringEnum<TEnum>(key))
+            .GetAlternateLookup<ReadOnlySpan<char>>();
+#endif
     }
 
     public StringEnum(string stringValue)
@@ -113,6 +129,36 @@ public sealed record StringEnum<[DynamicallyAccessedMembers(DynamicallyAccessedM
         this.TryParse(out var value) ? value.GetHashCode() : StringComparer.OrdinalIgnoreCase.GetHashCode(this.StringValue);
 
     public override string ToString() => this.StringValue;
+
+    /// <summary>
+    /// Reads a <see cref="StringEnum{TEnum}"/> from the current JSON string token.
+    /// </summary>
+    /// <param name="reader">The reader, positioned on the string token.</param>
+    /// <returns>The value read from the reader.</returns>
+    internal static StringEnum<TEnum> FromJson(ref Utf8JsonReader reader)
+    {
+#if NET9_0_OR_GREATER
+        // Look the value up by its characters so that known values do not allocate
+        // a string (or a new instance) for every value that is read.
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            var tokenLength = reader.HasValueSequence ? reader.ValueSequence.Length : reader.ValueSpan.Length;
+
+            // The raw token is never shorter than the characters it decodes to
+            if (tokenLength <= MaxLookupLength)
+            {
+                Span<char> buffer = stackalloc char[MaxLookupLength];
+                var chars = buffer[..reader.CopyString(buffer)];
+
+                return KnownValues.TryGetValue(chars, out var known)
+                    ? known
+                    : new StringEnum<TEnum>(new string(chars));
+            }
+        }
+#endif
+
+        return new StringEnum<TEnum>(reader.GetString()!);
+    }
 
     [DoesNotReturn]
     private static TEnum ThrowArgumentException(string? value) => throw new ArgumentException(
