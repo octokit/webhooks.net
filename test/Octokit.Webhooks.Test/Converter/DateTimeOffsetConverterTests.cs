@@ -64,4 +64,15 @@ public class DateTimeOffsetConverterTests
         var result = JsonSerializer.Serialize(this.expected, this.options);
         result.Should().Be(@"""2019-05-15T15:20:40.0000000\u002B00:00""");
     }
+
+    [Fact]
+    public void CanSerializeWithOffsetAndFractionalSeconds()
+    {
+        var value = new DateTimeOffset(2019, 05, 15, 15, 20, 40, 123, TimeSpan.FromHours(-5)).AddTicks(4567);
+
+        var result = JsonSerializer.Serialize(value, this.options);
+
+        result.Should().Be("\"2019-05-15T15:20:40.1234567-05:00\"");
+        JsonSerializer.Deserialize<DateTimeOffset>(result, this.options).Should().Be(value);
+    }
 }

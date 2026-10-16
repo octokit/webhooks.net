@@ -10,7 +10,9 @@ using System.Text.Json.Serialization.Metadata;
 using Octokit.Webhooks.Converter;
 using Octokit.Webhooks.Events;
 using Octokit.Webhooks.Events.BranchProtectionConfiguration;
+using Octokit.Webhooks.Events.Issues;
 using Octokit.Webhooks.Events.RepositoryDispatch;
+using Octokit.Webhooks.TestUtils;
 using Xunit;
 
 public class WebhookConverterTests
@@ -39,6 +41,45 @@ public class WebhookConverterTests
         Assert.NotNull(deserialized.AdditionalProperties);
         Assert.Contains(key, deserialized.AdditionalProperties.Keys);
         Assert.Equal(value, deserialized.AdditionalProperties[key].GetString());
+    }
+
+    [Theory]
+    [InlineData("opened")]
+    [InlineData("op\\u0065ned")]
+    public void CanDeserializeKnownAction(string action)
+    {
+        var json = ResourceUtils.ReadResource("issues/opened.payload.json")
+            .Replace("\"action\": \"opened\"", $"\"action\": \"{action}\"", StringComparison.Ordinal);
+
+        var options = CreateIssuesOptions();
+
+        var deserialized = JsonSerializer.Deserialize<IssuesEvent>(json, options);
+
+        Assert.IsType<IssuesOpenedEvent>(deserialized);
+        Assert.Equal("opened", deserialized.Action);
+    }
+
+    [Theory]
+    [InlineData("custom", "custom")]
+    [InlineData("cust\\u006fm", "custom")]
+    [InlineData("a-very-long-custom-action-that-is-longer-than-sixty-four-characters-in-total-length", "a-very-long-custom-action-that-is-longer-than-sixty-four-characters-in-total-length")]
+    public void CanDeserializeCustomRepositoryDispatchAction(string action, string expected)
+    {
+        var options = CreateRepositoryDispatchOptions();
+
+        var json = "{\"action\":\"" + action + "\",\"branch\":\"main\",\"client_payload\":{}}";
+        var deserialized = JsonSerializer.Deserialize<RepositoryDispatchEvent>(json, options);
+
+        var repositoryDispatchEvent = Assert.IsType<RepositoryDispatchCustomEvent>(deserialized);
+        Assert.Equal(expected, repositoryDispatchEvent.Action);
+    }
+
+    [Fact]
+    public void ThrowsForUnknownActionOfNonDispatchEvent()
+    {
+        var options = CreateIssuesOptions();
+
+        Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IssuesEvent>("""{"action":"not-an-action"}""", options));
     }
 
     [Fact]
@@ -99,6 +140,15 @@ public class WebhookConverterTests
 
         Assert.True(document.RootElement.TryGetProperty("custom_branch", out _));
         Assert.False(document.RootElement.TryGetProperty("branch", out _));
+    }
+
+    private static JsonSerializerOptions CreateIssuesOptions()
+    {
+#pragma warning disable CA1869 // Cache and reuse 'JsonSerializerOptions' instances
+        var options = new JsonSerializerOptions();
+#pragma warning restore CA1869 // Cache and reuse 'JsonSerializerOptions' instances
+        options.Converters.Add(new WebhookConverter<IssuesEvent>());
+        return options;
     }
 
     private static JsonSerializerOptions CreateRepositoryDispatchOptions()
