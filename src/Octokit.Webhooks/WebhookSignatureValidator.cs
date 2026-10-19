@@ -71,19 +71,21 @@ public static class WebhookSignatureValidator
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
 
-        var signatureHex = signatureHeader![Prefix.Length..];
+        var signatureHex = signatureHeader.AsSpan(Prefix.Length);
 
         if (signatureHex.Length != 64)
         {
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
 
-        byte[] signatureBytes;
-        try
-        {
-            signatureBytes = Convert.FromHexString(signatureHex);
-        }
-        catch (FormatException)
+        Span<byte> signatureBytes = stackalloc byte[32];
+
+#if NET9_0_OR_GREATER
+        if (Convert.FromHexString(signatureHex, signatureBytes, out _, out var bytesDecoded) != OperationStatus.Done ||
+            bytesDecoded != signatureBytes.Length)
+#else
+        if (!TryDecodeHex(signatureHex, signatureBytes))
+#endif
         {
             return WebhookSignatureValidationResult.SignatureMismatch;
         }
@@ -119,4 +121,32 @@ public static class WebhookSignatureValidator
             keyBuffer.Clear();
         }
     }
+
+#if !NET9_0_OR_GREATER
+    private static bool TryDecodeHex(ReadOnlySpan<char> hex, Span<byte> destination)
+    {
+        for (var i = 0; i < destination.Length; i++)
+        {
+            var high = HexValue(hex[2 * i]);
+            var low = HexValue(hex[(2 * i) + 1]);
+
+            if ((high | low) < 0)
+            {
+                return false;
+            }
+
+            destination[i] = (byte)((high << 4) | low);
+        }
+
+        return true;
+    }
+
+    private static int HexValue(char value) => value switch
+    {
+        >= '0' and <= '9' => value - '0',
+        >= 'a' and <= 'f' => value - 'a' + 10,
+        >= 'A' and <= 'F' => value - 'A' + 10,
+        _ => -1,
+    };
+#endif
 }

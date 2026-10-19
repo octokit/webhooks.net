@@ -13,7 +13,7 @@ public sealed class StringEnumConverter<[DynamicallyAccessedMembers(DynamicallyA
     public override StringEnum<TEnum> Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
-        JsonSerializerOptions options) => new(reader.GetString()!);
+        JsonSerializerOptions options) => StringEnum<TEnum>.FromJson(ref reader);
 
     public override void Write(Utf8JsonWriter writer, StringEnum<TEnum> value, JsonSerializerOptions options) =>
         writer.WriteStringValue(value.StringValue);

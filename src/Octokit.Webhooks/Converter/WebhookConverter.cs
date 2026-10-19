@@ -9,7 +9,16 @@ using System.Text.Json.Serialization.Metadata;
 public sealed class WebhookConverter<T> : JsonConverter<T>
     where T : WebhookEvent
 {
+#if NET9_0_OR_GREATER
+    // Actions longer than this fall back to allocating a string to look up
+    private const int MaxActionLength = 64;
+#endif
+
     private static readonly FrozenDictionary<string, Type> Types = BuildTypeMap();
+
+#if NET9_0_OR_GREATER
+    private static readonly FrozenDictionary<string, Type>.AlternateLookup<ReadOnlySpan<char>> TypesByAction = Types.GetAlternateLookup<ReadOnlySpan<char>>();
+#endif
 
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -18,14 +27,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var actionValue = PeekAction(reader);
-
-        Type? type = null;
-
-        if (actionValue is not null && Types.TryGetValue(actionValue, out var payloadType))
-        {
-            type = payloadType;
-        }
+        var type = PeekPayloadType(reader);
 
         // repository_dispatch events can have custom user-defined actions values
         if (type == null && typeToConvert == typeof(Events.RepositoryDispatchEvent))
@@ -51,7 +53,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         JsonSerializer.Serialize(writer, value, jsonTypeInfo);
     }
 
-    private static string? PeekAction(Utf8JsonReader reader)
+    private static Type? PeekPayloadType(Utf8JsonReader reader)
     {
         // Use a copy of the reader to scan for the "action" property
         // without advancing the original reader past StartObject.
@@ -59,7 +61,7 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         {
             if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals("action"u8))
             {
-                return reader.Read() ? reader.GetString() : null;
+                return reader.Read() ? GetPayloadType(ref reader) : null;
             }
 
             // Skip nested objects/arrays at the root level
@@ -70,6 +72,29 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         }
 
         throw new JsonException("Missing required 'action' property.");
+    }
+
+    private static Type? GetPayloadType(ref Utf8JsonReader reader)
+    {
+#if NET9_0_OR_GREATER
+        // Look the action up by its characters to avoid allocating a string for every event
+        if (reader.TokenType == JsonTokenType.String)
+        {
+            var tokenLength = reader.HasValueSequence ? reader.ValueSequence.Length : reader.ValueSpan.Length;
+
+            // The raw token is never shorter than the characters it decodes to
+            if (tokenLength <= MaxActionLength)
+            {
+                Span<char> buffer = stackalloc char[MaxActionLength];
+                var chars = buffer[..reader.CopyString(buffer)];
+
+                return TypesByAction.TryGetValue(chars, out var type) ? type : null;
+            }
+        }
+#endif
+
+        var action = reader.GetString();
+        return action is not null && Types.TryGetValue(action, out var payloadType) ? payloadType : null;
     }
 
     private static FrozenDictionary<string, Type> BuildTypeMap() => WebhookConverter.GetActionTypes()

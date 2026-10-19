@@ -1,12 +1,16 @@
 namespace Octokit.Webhooks.Converter;
 
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization.Metadata;
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
 
 [PublicAPI]
 public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFieldValueChangeBase>
 {
+    // Avoids building a new options instance and serializer context on every call when the caller's options cannot resolve the type
+    private static readonly ConditionalWeakTable<JsonSerializerOptions, JsonTypeInfo<ChangesFieldValueChange>> FallbackTypeInfos = [];
+
     public override ChangesFieldValueChangeBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         switch (reader)
@@ -52,6 +56,6 @@ public sealed class ChangesFieldValueChangeConverter : JsonConverter<ChangesFiel
         Debug.Assert(WebhookEventJsonSerializerContext.Default.GetTypeInfo(typeof(ChangesFieldValueChange)) != null, "The internal event serializer context should have a type info for ChangesFieldValueChange, so that this method can use the cached type info.");
         return options.TryGetTypeInfo(typeof(ChangesFieldValueChange), out var resolved) && resolved is JsonTypeInfo<ChangesFieldValueChange> typeInfo
             ? typeInfo
-            : new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(options)).ChangesFieldValueChange;
+            : FallbackTypeInfos.GetValue(options, static key => new ChangesFieldValueChangeJsonSerializerContext(new JsonSerializerOptions(key)).ChangesFieldValueChange);
     }
 }

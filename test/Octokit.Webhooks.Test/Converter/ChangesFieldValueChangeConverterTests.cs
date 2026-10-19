@@ -1,7 +1,10 @@
 namespace Octokit.Webhooks.Test.Converter;
 
+using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using AwesomeAssertions;
 using Octokit.Webhooks.Converter;
 using Octokit.Webhooks.Models.ProjectsV2ItemEvent;
@@ -56,6 +59,38 @@ public class ChangesFieldValueChangeConverterTests(ITestOutputHelper output)
         changeObject.Description.Should().Be("description");
         changeObject.Id.Should().Be("12345");
         changeObject.Name.Should().Be("Name");
+    }
+
+    [Fact]
+    public void ReadAndWriteWorkWhenOptionsCannotResolveTheType()
+    {
+        var emptyOptions = new JsonSerializerOptions
+        {
+            TypeInfoResolver = JsonTypeInfoResolver.Combine(),
+        };
+
+        var converter = new ChangesFieldValueChangeConverter();
+
+        // Repeat so that any caching of the fallback type info is exercised
+        for (var i = 0; i < 3; i++)
+        {
+            var reader = new Utf8JsonReader("""{"id":"1","name":"Name","color":"red","description":"desc"}"""u8);
+            reader.Read();
+
+            var result = converter.Read(ref reader, typeof(ChangesFieldValueChangeBase), emptyOptions);
+
+            var change = result.Should().BeOfType<ChangesFieldValueChange>().Subject;
+            change.Id.Should().Be("1");
+            change.Name.Should().Be("Name");
+
+            using var stream = new MemoryStream();
+            using (var writer = new Utf8JsonWriter(stream))
+            {
+                converter.Write(writer, change, emptyOptions);
+            }
+
+            Encoding.UTF8.GetString(stream.ToArray()).Should().Contain("\"id\":\"1\"");
+        }
     }
 
     internal sealed class TestObject

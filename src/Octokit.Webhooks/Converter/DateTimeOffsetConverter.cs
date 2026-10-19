@@ -16,8 +16,20 @@ public sealed class DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
         _ => throw new JsonException($"'{reader.TokenType}' is not an allowed token type for the {nameof(DateTimeOffsetConverter)}"),
     };
 
-    internal static void WriteInternal(Utf8JsonWriter writer, DateTimeOffset value) =>
-        writer.WriteStringValue(value.ToString("o"));
+    internal static void WriteInternal(Utf8JsonWriter writer, DateTimeOffset value)
+    {
+        // The "o" format is always 33 characters for a DateTimeOffset
+        Span<byte> buffer = stackalloc byte[33];
+
+        if (value.TryFormat(buffer, out var bytesWritten, "o", CultureInfo.InvariantCulture))
+        {
+            writer.WriteStringValue(buffer[..bytesWritten]);
+        }
+        else
+        {
+            writer.WriteStringValue(value.ToString("o", CultureInfo.InvariantCulture));
+        }
+    }
 
     private static DateTimeOffset HandleString(Utf8JsonReader reader)
     {

@@ -89,6 +89,32 @@ public class WebhookSignatureValidatorTests
         result.Should().Be(WebhookSignatureValidationResult.SignatureMismatch);
     }
 
+    [Theory]
+    [InlineData("sha256=zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")]
+    [InlineData("sha256=000000000000000000000000000000000000000000000000000000000000000g")]
+    [InlineData("sha256=g000000000000000000000000000000000000000000000000000000000000000")]
+    [InlineData("sha256=0000000000000000000000000000000000000000000000000000000000000000")]
+    [InlineData("sha256=000000000000000000000000000000000000000000000000000000000000000")]
+    [InlineData("sha256=00000000000000000000000000000000000000000000000000000000000000000")]
+    [InlineData("sha256=")]
+    public void NonHexOrWrongLengthSignature_ReturnsSignatureMismatch(string signature)
+    {
+        var result = WebhookSignatureValidator.Verify(signature, "my-secret", "{}");
+
+        result.Should().Be(WebhookSignatureValidationResult.SignatureMismatch);
+    }
+
+    [Fact]
+    public void ValidSignatureWithUpperCaseHexAndPrefix_ReturnsValid()
+    {
+        var signature = ComputeSignature("my-secret", "{}");
+        var upperCased = "SHA256=" + signature["sha256=".Length..].ToUpperInvariant();
+
+        var result = WebhookSignatureValidator.Verify(upperCased, "my-secret", "{}");
+
+        result.Should().Be(WebhookSignatureValidationResult.Valid);
+    }
+
     [Fact]
     public void NullBody_ThrowsArgumentNullException()
     {
