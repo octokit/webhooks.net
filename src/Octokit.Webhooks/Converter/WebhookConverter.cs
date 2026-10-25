@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization.Metadata;
 
 [PublicAPI]
-public sealed class WebhookConverter<T> : JsonConverter<T>
+public sealed class WebhookConverter<T> : JsonConverter<T>, IWebhookConverter
     where T : WebhookEvent
 {
 #if NET9_0_OR_GREATER
@@ -27,18 +27,12 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var type = PeekPayloadType(reader);
-
-        // repository_dispatch events can have custom user-defined actions values
-        if (type == null && typeToConvert == typeof(Events.RepositoryDispatchEvent))
+        if (!TryPeekPayloadType(reader, out var type))
         {
-            type = typeof(Events.RepositoryDispatch.RepositoryDispatchCustomEvent);
+            throw new JsonException("Missing required 'action' property.");
         }
 
-        if (type is null)
-        {
-            throw new JsonException();
-        }
+        type = ResolvePayloadType(type, typeToConvert) ?? throw new JsonException();
 
         var jsonTypeInfo = WebhookConverter.GetTypeInfo(type, options);
 
@@ -53,7 +47,53 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         JsonSerializer.Serialize(writer, value, jsonTypeInfo);
     }
 
-    private static Type? PeekPayloadType(Utf8JsonReader reader)
+    /// <inheritdoc />
+    JsonTypeInfo? IWebhookConverter.ResolvePayloadTypeInfo(ReadOnlySpan<byte> utf8Json, JsonSerializerOptions options)
+    {
+        var readerOptions = new JsonReaderOptions
+        {
+            AllowTrailingCommas = options.AllowTrailingCommas,
+            CommentHandling = options.ReadCommentHandling,
+            MaxDepth = options.MaxDepth,
+        };
+
+        Type? type;
+
+        try
+        {
+            var reader = new Utf8JsonReader(utf8Json, readerOptions);
+
+            if (!reader.Read() ||
+                reader.TokenType != JsonTokenType.StartObject ||
+                !TryPeekPayloadType(reader, out type))
+            {
+                return null;
+            }
+        }
+        catch (Exception ex) when (ex is JsonException or InvalidOperationException)
+        {
+            // Malformed JSON, or an action that is not a string, is reported
+            // by the serializer as part of the normal deserialization path.
+            return null;
+        }
+
+        type = ResolvePayloadType(type, typeof(T));
+
+        return type is null ? null : WebhookConverter.GetTypeInfo(type, options);
+    }
+
+    private static Type? ResolvePayloadType(Type? type, Type typeToConvert)
+    {
+        // repository_dispatch events can have custom user-defined actions values
+        if (type is null && typeToConvert == typeof(Events.RepositoryDispatchEvent))
+        {
+            type = typeof(Events.RepositoryDispatch.RepositoryDispatchCustomEvent);
+        }
+
+        return type;
+    }
+
+    private static bool TryPeekPayloadType(Utf8JsonReader reader, out Type? type)
     {
         // Use a copy of the reader to scan for the "action" property
         // without advancing the original reader past StartObject.
@@ -61,7 +101,8 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         {
             if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals("action"u8))
             {
-                return reader.Read() ? GetPayloadType(ref reader) : null;
+                type = reader.Read() ? GetPayloadType(ref reader) : null;
+                return true;
             }
 
             // Skip nested objects/arrays at the root level
@@ -71,7 +112,8 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             }
         }
 
-        throw new JsonException("Missing required 'action' property.");
+        type = null;
+        return false;
     }
 
     private static Type? GetPayloadType(ref Utf8JsonReader reader)
@@ -109,9 +151,14 @@ internal static partial class WebhookConverter
 {
     private static readonly ConditionalWeakTable<JsonSerializerOptions, JsonSerializerOptions> SerializerOptions = [];
 
+    /// <summary>
+    /// Gets the <see cref="JsonSerializerOptions"/> used to deserialize webhook events when no other options are specified.
+    /// </summary>
+    internal static JsonSerializerOptions DefaultSerializerOptions { get; } = GetSerializerOptions(WebhookEventJsonSerializerContext.Default.Options);
+
     internal static JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
-        var serializerOptions = SerializerOptions.GetValue(options, static key => CreateSerializerOptions(key));
+        var serializerOptions = GetSerializerOptions(options);
         var typeInfo = serializerOptions.GetTypeInfo(type);
 
         return !IsWebhookConverter(typeInfo.Converter)
@@ -124,6 +171,17 @@ internal static partial class WebhookConverter
     /// </summary>
     /// <returns>An enumerable of tuples containing the type and its corresponding action type string.</returns>
     internal static partial IEnumerable<(Type Type, string ActionType)> GetActionTypes();
+
+    /// <summary>
+    /// Configures the specified <see cref="JsonTypeInfo"/> so that models with <see langword="init"/>-only or <see langword="required"/>
+    /// properties are deserialized with the default object converter rather than as if they had a parameterized constructor,
+    /// which boxes every property value and allocates argument state for every object. This method is implemented by source generation.
+    /// </summary>
+    /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to configure.</param>
+    internal static partial void ConfigureInitOnlyProperties(JsonTypeInfo jsonTypeInfo);
+
+    private static JsonSerializerOptions GetSerializerOptions(JsonSerializerOptions options)
+        => SerializerOptions.GetValue(options, static key => CreateSerializerOptions(key));
 
     private static JsonSerializerOptions CreateSerializerOptions(JsonSerializerOptions options)
     {
@@ -145,7 +203,7 @@ internal static partial class WebhookConverter
 
         serializerOptions.TypeInfoResolverChain.Clear();
 
-        IJsonTypeInfoResolver generatedResolver = WebhookEventJsonSerializerContext.Default;
+        var generatedResolver = WebhookEventJsonSerializerContext.Default.WithAddedModifier(ConfigureInitOnlyProperties);
         foreach (var modifier in typeInfoResolvers
             .OfType<DefaultJsonTypeInfoResolver>()
             .SelectMany(static resolver => resolver.Modifiers))
@@ -153,13 +211,16 @@ internal static partial class WebhookConverter
             generatedResolver = generatedResolver.WithAddedModifier(modifier);
         }
 
-        foreach (var resolver in typeInfoResolvers.Where(static resolver => resolver is not DefaultJsonTypeInfoResolver))
+        foreach (var resolver in typeInfoResolvers.Where(static resolver => resolver is not (DefaultJsonTypeInfoResolver or WebhookEventJsonSerializerContext)))
         {
             serializerOptions.TypeInfoResolverChain.Add(new NonRecursiveTypeInfoResolver(resolver));
         }
 
         serializerOptions.TypeInfoResolverChain.Add(generatedResolver);
         serializerOptions.MakeReadOnly();
+
+        // The options derived from the caller's options are already configured for webhook events
+        _ = SerializerOptions.TryAdd(serializerOptions, serializerOptions);
 
         return serializerOptions;
     }

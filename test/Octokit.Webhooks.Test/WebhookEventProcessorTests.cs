@@ -12,6 +12,9 @@ using Xunit;
 
 public class WebhookEventProcessorTests
 {
+    // Reflection-based metadata sets init-only properties directly, so it is independent of the generated metadata
+    private static readonly JsonSerializerOptions ReflectionOptions = new();
+
     private readonly TestWebhookEventProcessor webhookEventProcessor = new();
 
     [Theory]
@@ -82,6 +85,49 @@ public class WebhookEventProcessorTests
 
         act.Should().Throw<JsonException>()
             .WithMessage("*'unknown_event_type'*");
+    }
+
+    [Theory]
+    [ClassData(typeof(WebhookEventProcessorTestsData))]
+    public void DeserializeWebhookEvent_MatchesReflectionBasedDeserialization(string @event, string testName, string payload, Type expectedType)
+    {
+        // Only used to make it easier to differentiate test cases for the same event without looking at whole payload
+        _ = testName;
+        _ = expectedType;
+
+        var headers = new WebhookHeaders
+        {
+            Event = @event,
+        };
+
+        var actual = this.webhookEventProcessor.DeserializeWebhookEvent(headers, payload);
+
+        // The source-generated metadata uses generated accessors to set init-only properties, so verify
+        // that produces the same result as deserializing the concrete type with reflection-based metadata
+        var expected = JsonSerializer.Deserialize(payload, actual.GetType(), ReflectionOptions);
+
+        var actualJson = JsonSerializer.Serialize(actual, actual.GetType(), ReflectionOptions);
+        var expectedJson = JsonSerializer.Serialize(expected, actual.GetType(), ReflectionOptions);
+
+        actualJson.Should().Be(expectedJson);
+    }
+
+    [Theory]
+    [InlineData("""{"action":123}""")]
+    [InlineData("""{"action":null}""")]
+    [InlineData("""{"action":{}}""")]
+    [InlineData("""{"action":"opened",""")]
+    public async Task ProcessWebhookBytesAsync_InvalidAction_ThrowsJsonException(string payload)
+    {
+        var bodyBytes = Encoding.UTF8.GetBytes(payload);
+        var headers = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["X-GitHub-Event"] = "issues",
+        };
+
+        var act = () => this.webhookEventProcessor.ProcessWebhookAsync(headers, (ReadOnlyMemory<byte>)bodyBytes, TestContext.Current.CancellationToken).AsTask();
+
+        await act.Should().ThrowAsync<JsonException>().ConfigureAwait(true);
     }
 
     [Fact]
