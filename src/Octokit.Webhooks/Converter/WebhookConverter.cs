@@ -70,9 +70,10 @@ public sealed class WebhookConverter<T> : JsonConverter<T>, IWebhookConverter
                 return null;
             }
         }
-        catch (JsonException)
+        catch (Exception ex) when (ex is JsonException or InvalidOperationException)
         {
-            // Malformed JSON is reported by the serializer as part of the normal deserialization path
+            // Malformed JSON, or an action that is not a string, is reported
+            // by the serializer as part of the normal deserialization path.
             return null;
         }
 

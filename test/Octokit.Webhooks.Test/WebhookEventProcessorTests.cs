@@ -112,6 +112,24 @@ public class WebhookEventProcessorTests
         actualJson.Should().Be(expectedJson);
     }
 
+    [Theory]
+    [InlineData("""{"action":123}""")]
+    [InlineData("""{"action":null}""")]
+    [InlineData("""{"action":{}}""")]
+    [InlineData("""{"action":"opened",""")]
+    public async Task ProcessWebhookBytesAsync_InvalidAction_ThrowsJsonException(string payload)
+    {
+        var bodyBytes = Encoding.UTF8.GetBytes(payload);
+        var headers = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["X-GitHub-Event"] = "issues",
+        };
+
+        var act = () => this.webhookEventProcessor.ProcessWebhookAsync(headers, (ReadOnlyMemory<byte>)bodyBytes, TestContext.Current.CancellationToken).AsTask();
+
+        await act.Should().ThrowAsync<JsonException>().ConfigureAwait(true);
+    }
+
     [Fact]
     public async Task ProcessWebhookBytesAsync_DeserializesKnownEvent()
     {
