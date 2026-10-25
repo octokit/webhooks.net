@@ -1,5 +1,6 @@
 namespace Octokit.Webhooks;
 
+using System.Buffers;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
+using Octokit.Webhooks.Converter;
 using Octokit.Webhooks.Events;
 using Octokit.Webhooks.Events.BranchProtectionConfiguration;
 using Octokit.Webhooks.Events.BranchProtectionRule;
@@ -81,6 +83,9 @@ using Octokit.Webhooks.Events.WorkflowRun;
 public abstract partial class WebhookEventProcessor
 {
     private static readonly ConcurrentDictionary<Type, bool> StringPathOverrideCache = new();
+
+    // Matches JsonSerializer.Deserialize(string), which rejects invalid UTF-16 rather than substituting replacement characters
+    private static readonly UTF8Encoding StrictUtf8 = new(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
 
     [PublicAPI]
     public virtual ValueTask ProcessWebhookAsync(IDictionary<string, StringValues> headers, string body, CancellationToken cancellationToken = default)
@@ -210,7 +215,7 @@ public abstract partial class WebhookEventProcessor
         var jsonTypeInfo = GetEventTypeInfo(headers.Event)
             ?? throw new JsonException($"Unable to deserialize event: '{headers.Event}'");
 
-        return (WebhookEvent)JsonSerializer.Deserialize(body, jsonTypeInfo)!;
+        return DeserializeWebhookEvent(jsonTypeInfo, body);
     }
 
     /// <summary>
@@ -250,6 +255,44 @@ public abstract partial class WebhookEventProcessor
     /// <returns>The <see cref="JsonTypeInfo"/> for the given event type, or <c>null</c> if the event type is not recognized.</returns>
     private static partial JsonTypeInfo? GetEventTypeInfo(string? eventType);
 
+    private static WebhookEvent DeserializeWebhookEvent(JsonTypeInfo jsonTypeInfo, string body)
+    {
+        if (jsonTypeInfo.Converter is not IWebhookConverter)
+        {
+            return (WebhookEvent)JsonSerializer.Deserialize(body, jsonTypeInfo)!;
+        }
+
+        // Transcode the payload once so that the concrete payload type can be resolved from the same
+        // UTF-8 bytes that are then deserialized, rather than the converter having to parse the payload twice.
+        var byteCount = StrictUtf8.GetByteCount(body);
+        var buffer = ArrayPool<byte>.Shared.Rent(byteCount);
+
+        try
+        {
+            var utf8Json = buffer.AsSpan(0, StrictUtf8.GetBytes(body, buffer));
+            return DeserializeWebhookEvent(jsonTypeInfo, utf8Json);
+        }
+        finally
+        {
+            buffer.AsSpan(0, byteCount).Clear();
+            ArrayPool<byte>.Shared.Return(buffer);
+        }
+    }
+
+    private static WebhookEvent DeserializeWebhookEvent(JsonTypeInfo jsonTypeInfo, ReadOnlySpan<byte> utf8Json)
+    {
+        // Events with action-specific payload types are declared with a converter that finds the "action" property
+        // and then deserializes the payload as the concrete type, which parses the payload twice. Resolving the
+        // concrete type up front means the payload is only parsed once. If the type cannot be resolved, the
+        // converter is left to deserialize (and report any problem with) the payload as before.
+        if (jsonTypeInfo.Converter is IWebhookConverter converter)
+        {
+            jsonTypeInfo = converter.ResolvePayloadTypeInfo(utf8Json, jsonTypeInfo.Options) ?? jsonTypeInfo;
+        }
+
+        return (WebhookEvent)JsonSerializer.Deserialize(utf8Json, jsonTypeInfo)!;
+    }
+
     private ValueTask ProcessWebhookFromBytesAsync(WebhookHeaders webhookHeaders, ReadOnlyMemory<byte> body, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(webhookHeaders.Event))
@@ -260,7 +303,7 @@ public abstract partial class WebhookEventProcessor
         var jsonTypeInfo = GetEventTypeInfo(webhookHeaders.Event)
             ?? throw new JsonException($"Unable to deserialize event: '{webhookHeaders.Event}'");
 
-        var webhookEvent = (WebhookEvent)JsonSerializer.Deserialize(body.Span, jsonTypeInfo)!;
+        var webhookEvent = DeserializeWebhookEvent(jsonTypeInfo, body.Span);
         return this.ProcessWebhookAsync(webhookHeaders, webhookEvent, cancellationToken);
     }
 

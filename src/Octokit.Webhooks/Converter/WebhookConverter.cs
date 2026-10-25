@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization.Metadata;
 
 [PublicAPI]
-public sealed class WebhookConverter<T> : JsonConverter<T>
+public sealed class WebhookConverter<T> : JsonConverter<T>, IWebhookConverter
     where T : WebhookEvent
 {
 #if NET9_0_OR_GREATER
@@ -27,18 +27,12 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             throw new JsonException();
         }
 
-        var type = PeekPayloadType(reader);
-
-        // repository_dispatch events can have custom user-defined actions values
-        if (type == null && typeToConvert == typeof(Events.RepositoryDispatchEvent))
+        if (!TryPeekPayloadType(reader, out var type))
         {
-            type = typeof(Events.RepositoryDispatch.RepositoryDispatchCustomEvent);
+            throw new JsonException("Missing required 'action' property.");
         }
 
-        if (type is null)
-        {
-            throw new JsonException();
-        }
+        type = ResolvePayloadType(type, typeToConvert) ?? throw new JsonException();
 
         var jsonTypeInfo = WebhookConverter.GetTypeInfo(type, options);
 
@@ -53,7 +47,52 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         JsonSerializer.Serialize(writer, value, jsonTypeInfo);
     }
 
-    private static Type? PeekPayloadType(Utf8JsonReader reader)
+    /// <inheritdoc />
+    JsonTypeInfo? IWebhookConverter.ResolvePayloadTypeInfo(ReadOnlySpan<byte> utf8Json, JsonSerializerOptions options)
+    {
+        var readerOptions = new JsonReaderOptions
+        {
+            AllowTrailingCommas = options.AllowTrailingCommas,
+            CommentHandling = options.ReadCommentHandling,
+            MaxDepth = options.MaxDepth,
+        };
+
+        Type? type;
+
+        try
+        {
+            var reader = new Utf8JsonReader(utf8Json, readerOptions);
+
+            if (!reader.Read() ||
+                reader.TokenType != JsonTokenType.StartObject ||
+                !TryPeekPayloadType(reader, out type))
+            {
+                return null;
+            }
+        }
+        catch (JsonException)
+        {
+            // Malformed JSON is reported by the serializer as part of the normal deserialization path
+            return null;
+        }
+
+        type = ResolvePayloadType(type, typeof(T));
+
+        return type is null ? null : WebhookConverter.GetTypeInfo(type, options);
+    }
+
+    private static Type? ResolvePayloadType(Type? type, Type typeToConvert)
+    {
+        // repository_dispatch events can have custom user-defined actions values
+        if (type is null && typeToConvert == typeof(Events.RepositoryDispatchEvent))
+        {
+            type = typeof(Events.RepositoryDispatch.RepositoryDispatchCustomEvent);
+        }
+
+        return type;
+    }
+
+    private static bool TryPeekPayloadType(Utf8JsonReader reader, out Type? type)
     {
         // Use a copy of the reader to scan for the "action" property
         // without advancing the original reader past StartObject.
@@ -61,7 +100,8 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
         {
             if (reader.TokenType == JsonTokenType.PropertyName && reader.ValueTextEquals("action"u8))
             {
-                return reader.Read() ? GetPayloadType(ref reader) : null;
+                type = reader.Read() ? GetPayloadType(ref reader) : null;
+                return true;
             }
 
             // Skip nested objects/arrays at the root level
@@ -71,7 +111,8 @@ public sealed class WebhookConverter<T> : JsonConverter<T>
             }
         }
 
-        throw new JsonException("Missing required 'action' property.");
+        type = null;
+        return false;
     }
 
     private static Type? GetPayloadType(ref Utf8JsonReader reader)
