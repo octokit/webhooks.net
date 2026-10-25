@@ -48,7 +48,7 @@ public sealed class WebhookEventTypeGenerator : IIncrementalGenerator
 
         foreach (var (fullName, eventType) in data.Array)
         {
-            sb.AppendLine($"        {SymbolDisplay.FormatLiteral(eventType, true)} => global::Octokit.Webhooks.WebhookEventJsonSerializerContext.Default.GetTypeInfo(typeof(global::{fullName})),");
+            sb.AppendLine($"        {SymbolDisplay.FormatLiteral(eventType, true)} => global::Octokit.Webhooks.Converter.WebhookConverter.DefaultSerializerOptions.GetTypeInfo(typeof(global::{fullName})),");
         }
 
         sb.AppendLine("        _ => null,");

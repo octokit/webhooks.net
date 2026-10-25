@@ -150,9 +150,14 @@ internal static partial class WebhookConverter
 {
     private static readonly ConditionalWeakTable<JsonSerializerOptions, JsonSerializerOptions> SerializerOptions = [];
 
+    /// <summary>
+    /// Gets the <see cref="JsonSerializerOptions"/> used to deserialize webhook events when no other options are specified.
+    /// </summary>
+    internal static JsonSerializerOptions DefaultSerializerOptions { get; } = GetSerializerOptions(WebhookEventJsonSerializerContext.Default.Options);
+
     internal static JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
-        var serializerOptions = SerializerOptions.GetValue(options, static key => CreateSerializerOptions(key));
+        var serializerOptions = GetSerializerOptions(options);
         var typeInfo = serializerOptions.GetTypeInfo(type);
 
         return !IsWebhookConverter(typeInfo.Converter)
@@ -165,6 +170,17 @@ internal static partial class WebhookConverter
     /// </summary>
     /// <returns>An enumerable of tuples containing the type and its corresponding action type string.</returns>
     internal static partial IEnumerable<(Type Type, string ActionType)> GetActionTypes();
+
+    /// <summary>
+    /// Configures the specified <see cref="JsonTypeInfo"/> so that models with <see langword="init"/>-only or <see langword="required"/>
+    /// properties are deserialized with the default object converter rather than as if they had a parameterized constructor,
+    /// which boxes every property value and allocates argument state for every object. This method is implemented by source generation.
+    /// </summary>
+    /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to configure.</param>
+    internal static partial void ConfigureInitOnlyProperties(JsonTypeInfo jsonTypeInfo);
+
+    private static JsonSerializerOptions GetSerializerOptions(JsonSerializerOptions options)
+        => SerializerOptions.GetValue(options, static key => CreateSerializerOptions(key));
 
     private static JsonSerializerOptions CreateSerializerOptions(JsonSerializerOptions options)
     {
@@ -186,7 +202,7 @@ internal static partial class WebhookConverter
 
         serializerOptions.TypeInfoResolverChain.Clear();
 
-        IJsonTypeInfoResolver generatedResolver = WebhookEventJsonSerializerContext.Default;
+        var generatedResolver = WebhookEventJsonSerializerContext.Default.WithAddedModifier(ConfigureInitOnlyProperties);
         foreach (var modifier in typeInfoResolvers
             .OfType<DefaultJsonTypeInfoResolver>()
             .SelectMany(static resolver => resolver.Modifiers))
@@ -194,13 +210,16 @@ internal static partial class WebhookConverter
             generatedResolver = generatedResolver.WithAddedModifier(modifier);
         }
 
-        foreach (var resolver in typeInfoResolvers.Where(static resolver => resolver is not DefaultJsonTypeInfoResolver))
+        foreach (var resolver in typeInfoResolvers.Where(static resolver => resolver is not (DefaultJsonTypeInfoResolver or WebhookEventJsonSerializerContext)))
         {
             serializerOptions.TypeInfoResolverChain.Add(new NonRecursiveTypeInfoResolver(resolver));
         }
 
         serializerOptions.TypeInfoResolverChain.Add(generatedResolver);
         serializerOptions.MakeReadOnly();
+
+        // The options derived from the caller's options are already configured for webhook events
+        _ = SerializerOptions.TryAdd(serializerOptions, serializerOptions);
 
         return serializerOptions;
     }
