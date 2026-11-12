@@ -23,7 +23,7 @@
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="18.12.1"/>
     <PackageVersion Include="MinVer" Version="8.0.0"/>
     <PackageVersion Include="Moq" Version="4.21.0"/>
-    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556"/>
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.3.180"/>
     <PackageVersion Include="System.Text.Json" Version="10.0.15"/>
     <PackageVersion Include="xunit.v3" Version="4.0.3"/>
   </ItemGroup>
