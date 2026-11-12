@@ -17,6 +17,7 @@ using Microsoft.Extensions.Primitives;
 /// <summary>
 /// A class containing an Azure Function that processes GitHub webhooks.
 /// </summary>
+/// <param name="options">The GitHub webhook options.</param>
 public sealed partial class GitHubWebhooksHttpFunction(IOptions<GitHubWebhooksOptions> options)
 {
     [Function(nameof(MapGitHubWebhooksAsync))]
